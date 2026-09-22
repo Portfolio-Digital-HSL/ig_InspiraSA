@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+/fsh-generated
+/input-cache
+/output
+/temp
+/template
+node_modules
+.claude/settings.local.json
+Requirements-fromNarrative.json

@@ -1,0 +1,13 @@
+{
+  "name": "ig-inspirasa",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Guia de Implementação FHIR R4 - InspiraSA",
+  "scripts": {
+    "fsh": "sushi .",
+    "build": "npm run fsh && ./_build.sh nosushi"
+  },
+  "devDependencies": {
+    "fsh-sushi": "3.20.1"
+  }
+}
