@@ -45,7 +45,7 @@ Alias: $BRMedDRA             = https://terminologia.saude.gov.br/fhir/CodeSystem
 // Novos (terminologia/ deste repositório, a publicar no guia de terminologia)
 Alias: $BRAlergenosSNOMEDNacional-vs = https://terminologia.saude.gov.br/fhir/ValueSet/BRAlergenosSNOMEDNacional
 Alias: $BRManifestacaoReacaoSNOMED-vs = https://terminologia.saude.gov.br/fhir/ValueSet/BRManifestacaoReacaoSNOMED
-Alias: $BRProcedimentosSUSSaudeSuplementar-vs = https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosSUSSaudeSuplementar
+Alias: $BRProcedimentosNacionais-vs = https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosNacionais
 
 // ─── Artefatos deste guia ──────────────────────────────────────────────────
 Alias: $inspirasa = http://fhir.hsl.org.br/ig/inspirasa

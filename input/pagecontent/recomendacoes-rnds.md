@@ -6,7 +6,7 @@
 4. **Permitir paciente sem CPF** no br-core-patient (D-03), com a regra "CPF ou CNS", para que o CNS provisório substitua a extensão unidentifiedPatient.
 5. **Status do HL7 com tradução por suplemento.** Descontinuar os CodeSystems nacionais que copiam códigos do HL7 e publicar suplementos pt-BR no guia de terminologia.
 6. **SNOMED CT para alergias e manifestações.** Incluir SNOMED CT (via CBARA) no BRAlergenos; publicar no guia de terminologia o CBARA do OCL (25 códigos com mapeamento para SNOMED CT) e o ConceptMap correspondente; ligar manifestações a SNOMED CT e publicar no guia de terminologia o mapa MedDRA–SNOMED CT que já está no OCL (Source MS/BRMedDRA), completando Angioedema.
-7. **Recompor o `BRProcedimentosNacionais`** com SIGTAP e TUSS 22. A CBHPM é da AMB e paga: não deve entrar em terminologia nacional de uso obrigatório.
+7. **Publicar nova versão do `BRProcedimentosNacionais`** com BRTabelaSUS e TUSS 22 inteiras, sem o BRCBHPMTUSS (a CBHPM é da AMB e paga), e alinhar o conteúdo do guia de terminologia e do OCL.
 8. **Revisar o `br-core-capacidadefuncional`** (D-04): terminologia de funcionalidade (CIF ou SNOMED CT), categoria do HL7 e `subject` só por referência.
 9. **Liberar mais de uma posologia** em `br-core-medicationrequest` (D-05) e remover o binding da fatia `medicationReference` (D-07).
 10. **Enviar o Sumário de Alta como Bundle `document`** assinado, com `identifier` estável e retificação por `relatesTo`.
@@ -16,7 +16,7 @@
 Na pasta `terminologia/` deste repositório, para importação no OCL (org MS) e publicação no guia de terminologia:
 
 - 17 suplementos pt-BR (ver [Terminologia](terminologia.html));
-- ValueSets BRAlergenosSNOMEDNacional, BRManifestacaoReacaoSNOMED e BRProcedimentosSUSSaudeSuplementar;
+- ValueSets BRAlergenosSNOMEDNacional, BRManifestacaoReacaoSNOMED e nova versão do BRProcedimentosNacionais;
 - ConceptMap BRMedDRAParaSNOMED.
 
 ## Extensões

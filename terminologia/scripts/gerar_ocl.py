@@ -28,6 +28,8 @@ import argparse, glob, json, os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://terminologia.saude.gov.br/fhir/"
+# id do recurso FHIR -> id já existente no OCL
+OCL_ID = {"BRProcedimentosNacionais": "BRProcedimentosNacionais-1.0"}
 MAP_TYPE = {"equal": "SAME-AS", "equivalent": "SAME-AS", "wider": "NARROWER-THAN",
             "narrower": "BROADER-THAN", "inexact": "MAPS-TO", "relatedto": "MAPS-TO"}
 
@@ -94,11 +96,12 @@ def main():
                                          "to_source_url": src(g["target"]), "to_concept_code": t["code"],
                                          "extras": {"equivalence": t["equivalence"], "conceptmap": d["url"]}})
         elif rt == "ValueSet":
-            c = {"type": "Collection", "id": d["id"], "short_code": d["id"], "collection_type": "Value Set"}
+            cid = OCL_ID.get(d["id"], d["id"])
+            c = {"type": "Collection", "id": cid, "short_code": cid, "collection_type": "Value Set"}
             c.update(comum(a.owner, d, a.locale))
             c["extras"]["fhir_compose"] = d.get("compose", {})
             colls.append(c)
-            cversions.append(versao("Collection Version", "collection", d["id"], d, a))
+            cversions.append(versao("Collection Version", "collection", cid, d, a))
 
     os.makedirs(os.path.join(RAIZ, "ocl"), exist_ok=True)
     saida = os.path.join(RAIZ, "ocl", "sumario-alta.jsonl")

@@ -1,0 +1,23 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "BRProcedimentosNacionais",
+  "id": "BRProcedimentosNacionais",
+  "title": "BR Procedimentos Nacionais",
+  "description": "Proposta de nova versão do BRProcedimentosNacionais: procedimentos do SUS (Tabela SUS / SIGTAP, BRTabelaSUS) e da saúde suplementar (TUSS 22 da ANS, tabela-22 no OCL). Sai o BRCBHPMTUSS: a CBHPM é da AMB, de uso licenciado e pago. Hoje o mesmo canonical tem dois conteúdos: 1000 códigos TUSS 22 no guia de terminologia e 25 códigos da BRTabelaSUS no OCL (BRProcedimentosNacionais-1.0).",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosNacionais",
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "compose": {
+    "include": [
+      {
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRTabelaSUS"
+      },
+      {
+        "system": "https://fhir.ans.gov.br/CodeSystem/tuss-22"
+      }
+    ]
+  }
+}

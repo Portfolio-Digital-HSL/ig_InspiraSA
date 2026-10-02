@@ -26,11 +26,11 @@ Description: "Manifestações clínicas de reação alérgica ou intolerância. 
 * insert TermoDraft(ValueSet/BRManifestacaoReacaoSNOMED)
 * include codes from system $sct where concept is-a #404684003 "Clinical finding (finding)"
 
-ValueSet: BRProcedimentosSUSSaudeSuplementar
-Id: BRProcedimentosSUSSaudeSuplementar
-Title: "Procedimentos: SIGTAP e TUSS 22"
-Description: "Procedimentos realizados no SUS (Tabela SUS / SIGTAP) e na saúde suplementar (TUSS 22 da ANS). A CBHPM não entra: é da AMB, de uso licenciado e pago. Recompõe o BRProcedimentosNacionais do BR-Core, que hoje enumera só parte da TUSS e não inclui a Tabela SUS."
-* insert TermoDraft(ValueSet/BRProcedimentosSUSSaudeSuplementar)
+ValueSet: BRProcedimentosNacionais
+Id: BRProcedimentosNacionais
+Title: "BR Procedimentos Nacionais"
+Description: "Proposta de nova versão do BRProcedimentosNacionais: procedimentos do SUS (Tabela SUS / SIGTAP, BRTabelaSUS) e da saúde suplementar (TUSS 22 da ANS, tabela-22 no OCL). Sai o BRCBHPMTUSS: a CBHPM é da AMB, de uso licenciado e pago. Hoje o mesmo canonical tem dois conteúdos: 1000 códigos TUSS 22 no guia de terminologia e 25 códigos da BRTabelaSUS no OCL (BRProcedimentosNacionais-1.0)."
+* insert TermoDraft(ValueSet/BRProcedimentosNacionais)
 * include codes from system $BRTabelaSUS
 * include codes from system $tuss-22
 

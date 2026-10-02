@@ -6,7 +6,7 @@
   "title": "Procedimento do Sumário de Alta",
   "status": "draft",
   "experimental": true,
-  "description": "Procedimento realizado na internação. Código da Tabela SUS (SIGTAP) ou da TUSS 22. A função do executante usa performer-role (SNOMED CT), não CBO.",
+  "description": "Procedimento realizado na internação. Código do BRProcedimentosNacionais: Tabela SUS (SIGTAP) ou TUSS 22. A função do executante usa performer-role (SNOMED CT), não CBO.",
   "fhirVersion": "4.0.1",
   "mapping": [
     {
@@ -41,7 +41,7 @@
         "id": "Procedure",
         "path": "Procedure",
         "short": "Procedimento do Sumário de Alta",
-        "definition": "Procedimento realizado na internação. Código da Tabela SUS (SIGTAP) ou da TUSS 22. A função do executante usa performer-role (SNOMED CT), não CBO.",
+        "definition": "Procedimento realizado na internação. Código do BRProcedimentosNacionais: Tabela SUS (SIGTAP) ou TUSS 22. A função do executante usa performer-role (SNOMED CT), não CBO.",
         "min": 0,
         "max": "*",
         "base": {
@@ -853,7 +853,7 @@
         "isSummary": true,
         "binding": {
           "strength": "extensible",
-          "valueSet": "https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosSUSSaudeSuplementar"
+          "valueSet": "https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosNacionais"
         },
         "mapping": [
           {
@@ -2529,7 +2529,7 @@
         "id": "Procedure",
         "path": "Procedure",
         "short": "Procedimento do Sumário de Alta",
-        "definition": "Procedimento realizado na internação. Código da Tabela SUS (SIGTAP) ou da TUSS 22. A função do executante usa performer-role (SNOMED CT), não CBO."
+        "definition": "Procedimento realizado na internação. Código do BRProcedimentosNacionais: Tabela SUS (SIGTAP) ou TUSS 22. A função do executante usa performer-role (SNOMED CT), não CBO."
       },
       {
         "id": "Procedure.contained",
@@ -2552,7 +2552,7 @@
         "mustSupport": true,
         "binding": {
           "strength": "extensible",
-          "valueSet": "https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosSUSSaudeSuplementar"
+          "valueSet": "https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosNacionais"
         }
       },
       {

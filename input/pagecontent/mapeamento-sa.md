@@ -52,7 +52,7 @@ Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/S
 | Condition/AllergyIntolerance/CarePlan/Procedure status | CodeSystems nacionais required | ValueSets HL7 required + suplementos pt-BR |
 | AllergyIntolerance.code | BRAlergenos (URL antiga) | BRAlergenos (BR-Core) + coding SNOMED CT (BRAlergenosSNOMEDNacional) |
 | AllergyIntolerance.reaction.manifestation | MedDRA required, max 1 | SNOMED CT preferred, 0..*, MedDRA como coding adicional |
-| Procedure.code | BRProcedimentosNacionais (URL antiga) | BRProcedimentosSUSSaudeSuplementar (extensible) |
+| Procedure.code | BRProcedimentosNacionais (URL antiga) | BRProcedimentosNacionais, nova versão: BRTabelaSUS + TUSS 22 (extensible) |
 | Procedure.identifier | número de autorização (type AUTH) | identificador do registro; autorização fica na camada financeira |
 | Procedure.performer.function | CBO | performer-role (SNOMED CT) |
 | MedicationRequest.medication[x] | CodeableConcept texto livre (BRPrescricaoNaoEstruturada) | Reference(br-core-medication) (invariante pa-1) |

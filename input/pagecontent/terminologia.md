@@ -45,9 +45,9 @@ O MedDRA é usado pela Anvisa na farmacovigilância; o padrão clínico é o SNO
 
 ## Procedimentos: SIGTAP e TUSS 22
 
-**BRProcedimentosSUSSaudeSuplementar** reúne a Tabela SUS (BRTabelaSUS), e a TUSS 22 da ANS (`https://fhir.ans.gov.br/CodeSystem/tuss-22`), as duas no OCL. Ligado como `extensible` em `Procedure.code`. O `BRProcedimentosNacionais` do guia de terminologia enumera só parte da TUSS e não tem SIGTAP (débito D-08).
+**BRProcedimentosNacionais** (mesmo nome e canonical do guia de terminologia), em nova versão proposta: Tabela SUS inteira (BRTabelaSUS, `MS/BRTabelaSUS` no OCL) e TUSS 22 inteira (`https://fhir.ans.gov.br/CodeSystem/tuss-22`, `ANS/tabela-22` no OCL). Ligado como `extensible` em `Procedure.code`. Hoje o guia de terminologia enumera 1000 códigos TUSS 22 e o OCL (`MS/BRProcedimentosNacionais-1.0`) tem 25 códigos da BRTabelaSUS (débito D-08).
 
-A CBHPM fica de fora: é propriedade da AMB, de uso licenciado e pago, e não está no OCL.
+O BRCBHPMTUSS sai do ValueSet. A CBHPM fica de fora: é propriedade da AMB, de uso licenciado e pago, e não está no OCL.
 
 ## Outras ligações
 
