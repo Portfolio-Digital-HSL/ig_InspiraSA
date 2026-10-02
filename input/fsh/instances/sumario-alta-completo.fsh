@@ -163,7 +163,9 @@ Description: "Exemplo: Capacidade funcional na alta."
 
 RuleSet: Secao(fatia, codigo, titulo, texto)
 * section[{fatia}].title = "{titulo}"
-* section[{fatia}].code = $loinc#{codigo}
+// system conforme o patternUri do br-core-sumarioalta (débito D-02)
+* section[{fatia}].code.coding[0].system = "https://loinc.org/"
+* section[{fatia}].code.coding[0].code = #{codigo}
 * section[{fatia}].text.status = #generated
 * section[{fatia}].text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>{texto}</p></div>"
 

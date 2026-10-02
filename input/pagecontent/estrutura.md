@@ -15,7 +15,7 @@ O Sumário de Alta é enviado como **Bundle `document`**: a [Composition](Struct
 
 ## Seções
 
-O `section` é 7..7. Cada seção é 1..1, identificada pelo código LOINC (discriminador `pattern` em `code`) e DEVE ter `entry` ou `emptyReason` (invariante sa-1).
+O `section` é 7..7. Cada seção é 1..1, identificada pelo código LOINC e DEVE ter `entry` ou `emptyReason` (invariante sa-1).
 
 | Fatia | LOINC | Entradas | Antes, no SA-IG |
 |---|---|---|---|
@@ -44,6 +44,8 @@ A [Internação do Sumário de Alta](StructureDefinition-internacao-sumario-alta
 | Profissional da alta, equipe | `participant.type` (BRResponsabilidadeParticipante) + `participant.individual` |
 | Estabelecimento | `serviceProvider` |
 
-## Pai provisório
+## Herança
 
-O `SumarioAlta` deriva de `br-core-composition` e reproduz as sete seções do `br-core-sumarioalta`. O `br-core-sumarioalta` 1.3.0 não aceita nenhuma instância válida (débitos [D-01 e D-02](debitos-tecnicos.html)). Quando o BR-Core corrigir, basta trocar o `Parent`.
+`SumarioAlta` → `br-core-sumarioalta` → `br-core-composition` → Composition. O SA-IG da RNDS herda do `BRConjuntoMinimoDados` (CMD), fora do BR-Core.
+
+O `br-core-sumarioalta` 1.3.0 não aceita nenhuma instância válida (débitos [D-01 e D-02](debitos-tecnicos.html)): o discriminador `profile` em `section.code` faz cada seção casar com todas as fatias, e o sistema LOINC fixado como `https://loinc.org/` contradiz o binding required `doc-section-codes`. Os exemplos de Composition deste guia seguem o pai e acusam esses erros até a correção no BR-Core.

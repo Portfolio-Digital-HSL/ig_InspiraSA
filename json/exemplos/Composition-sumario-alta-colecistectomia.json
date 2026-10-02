@@ -13,6 +13,14 @@
   ],
   "section": [
     {
+      "code": {
+        "coding": [
+          {
+            "system": "https://loinc.org/",
+            "code": "42347-5"
+          }
+        ]
+      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Calculose da vesícula biliar (K80.2).</p></div>"
@@ -22,28 +30,20 @@
           "reference": "Condition/diagnostico-colelitiase"
         }
       ],
-      "code": {
-        "coding": [
-          {
-            "code": "42347-5",
-            "system": "http://loinc.org"
-          }
-        ]
-      },
       "title": "Diagnósticos da admissão"
     },
     {
-      "text": {
-        "status": "generated",
-        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Nega alergias.</p></div>"
-      },
       "code": {
         "coding": [
           {
-            "code": "48765-2",
-            "system": "http://loinc.org"
+            "system": "https://loinc.org/",
+            "code": "48765-2"
           }
         ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Nega alergias.</p></div>"
       },
       "title": "Alergias e intolerâncias",
       "emptyReason": {
@@ -56,6 +56,14 @@
       }
     },
     {
+      "code": {
+        "coding": [
+          {
+            "system": "https://loinc.org/",
+            "code": "57852-6"
+          }
+        ]
+      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Calculose da vesícula biliar (K80.2) tratada.</p></div>"
@@ -65,17 +73,17 @@
           "reference": "Condition/diagnostico-colelitiase"
         }
       ],
-      "code": {
-        "coding": [
-          {
-            "code": "57852-6",
-            "system": "http://loinc.org"
-          }
-        ]
-      },
       "title": "Diagnósticos avaliados"
     },
     {
+      "code": {
+        "coding": [
+          {
+            "system": "https://loinc.org/",
+            "code": "47519-4"
+          }
+        ]
+      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Colecistectomia videolaparoscópica.</p></div>"
@@ -85,28 +93,20 @@
           "reference": "Procedure/procedimento-colecistectomia"
         }
       ],
-      "code": {
-        "coding": [
-          {
-            "code": "47519-4",
-            "system": "http://loinc.org"
-          }
-        ]
-      },
       "title": "Procedimentos realizados"
     },
     {
-      "text": {
-        "status": "generated",
-        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Sem medicamentos de uso contínuo.</p></div>"
-      },
       "code": {
         "coding": [
           {
-            "code": "8654-6",
-            "system": "http://loinc.org"
+            "system": "https://loinc.org/",
+            "code": "8654-6"
           }
         ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Sem medicamentos de uso contínuo.</p></div>"
       },
       "title": "Prescrição de alta",
       "emptyReason": {
@@ -119,6 +119,14 @@
       }
     },
     {
+      "code": {
+        "coding": [
+          {
+            "system": "https://loinc.org/",
+            "code": "18776-5"
+          }
+        ]
+      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Curativo diário e retorno em 10 dias.</p></div>"
@@ -128,28 +136,20 @@
           "reference": "CarePlan/plano-cuidados-colecistectomia"
         }
       ],
-      "code": {
-        "coding": [
-          {
-            "code": "18776-5",
-            "system": "http://loinc.org"
-          }
-        ]
-      },
       "title": "Plano de cuidados"
     },
     {
-      "text": {
-        "status": "generated",
-        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Não avaliada.</p></div>"
-      },
       "code": {
         "coding": [
           {
-            "code": "54522-8",
-            "system": "http://loinc.org"
+            "system": "https://loinc.org/",
+            "code": "54522-8"
           }
         ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Não avaliada.</p></div>"
       },
       "title": "Capacidade funcional",
       "emptyReason": {

@@ -20,7 +20,7 @@ Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/S
 
 | SA-IG | Este guia / BR-Core | Ação |
 |---|---|---|
-| BRSumarioAlta, BRConjuntoMinimoDados-1.1 | [SumarioAlta](StructureDefinition-sumario-alta.html) sobre br-core-composition | substitui |
+| BRSumarioAlta, BRConjuntoMinimoDados-1.1 | [SumarioAlta](StructureDefinition-sumario-alta.html) sobre br-core-sumarioalta | substitui |
 | BRContatoAssistencial-1.0 | InternacaoSumarioAlta sobre br-core-encounter | substitui |
 | BRProblemaDiagnostico | DiagnosticoSumarioAlta sobre br-core-condition | substitui |
 | BRAlergiaReacaoAdversa-1.0 | AlergiaSumarioAlta sobre br-core-allergyintolerance | substitui |

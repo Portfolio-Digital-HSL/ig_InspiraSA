@@ -9,12 +9,14 @@ Expression: "encounter.exists()"
 Severity: #error
 
 RuleSet: SecaoSA(fatia, codigo, titulo, perfil)
-* section contains {fatia} 1..1 MS
+* section[{fatia}] MS
 * section[{fatia}] obeys sa-1
 * section[{fatia}].title 1..1 MS
 * section[{fatia}].title ^short = "{titulo}"
 * section[{fatia}].code 1..1 MS
-* section[{fatia}].code = $loinc#{codigo}
+* section[{fatia}].code.coding 1..1 MS
+* section[{fatia}].code.coding.code 1..1 MS
+* section[{fatia}].code.coding.code = #{codigo}
 * section[{fatia}].text MS
 * section[{fatia}].entry MS
 * section[{fatia}].entry only Reference({perfil})
@@ -22,20 +24,14 @@ RuleSet: SecaoSA(fatia, codigo, titulo, perfil)
 * section[{fatia}].emptyReason ^comment = "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG."
 
 Profile: SumarioAlta
-Parent: br-core-composition
+Parent: br-core-sumarioalta
 Id: sumario-alta
 Title: "Sumário de Alta"
-Description: "Documento clínico emitido na alta hospitalar. Reproduz as sete seções do br-core-sumarioalta sobre o br-core-composition e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter)."
+Description: "Documento clínico emitido na alta hospitalar. Deriva do br-core-sumarioalta (que deriva do br-core-composition) e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter)."
 * ^status = #draft
 * ^experimental = true
 * obeys sa-2
-* ^purpose = "Pai provisório: br-core-composition. O br-core-sumarioalta 1.3.0 não admite nenhuma instância válida (fatiamento de section por discriminador profile em code e sistema LOINC fixado como https://loinc.org/; ver débitos técnicos D-01 e D-02). Quando o BR-Core corrigir, basta trocar o Parent para br-core-sumarioalta."
-* category 0..1
-* section 7..7
-* section ^slicing.discriminator.type = #pattern
-* section ^slicing.discriminator.path = "code"
-* section ^slicing.rules = #open
-* section ^slicing.description = "Sete seções do br-core-sumarioalta, identificadas pelo código LOINC."
+* ^purpose = "Substitui o BRSumarioAlta do SA-IG, que deriva do BRConjuntoMinimoDados e não do BR-Core. Herda do br-core-sumarioalta 1.3.0 as sete seções e os dois defeitos que hoje impedem qualquer instância válida: discriminador profile em section.code e sistema LOINC fixado como https://loinc.org/ (débitos D-01 e D-02). Os exemplos seguem o pai e só validam quando o BR-Core corrigir."
 * identifier MS
 * status MS
 * status ^comment = "final na emissão; amended para retificação (com relatesTo); entered-in-error para anulação."

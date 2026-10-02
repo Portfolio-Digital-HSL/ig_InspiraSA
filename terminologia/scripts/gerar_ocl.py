@@ -4,7 +4,7 @@ em fhir/ (Sumário de Alta).
 
 Uso:
     python3 scripts/gerar_ocl.py [--owner MS] [--locale pt] [--versao 0.1.0]
-                                 [--sct /orgs/IHTSDO/sources/SNOMED-CT/]
+                                 [--sct /orgs/SNOMED/sources/gps/]
 
 Saída: ocl/sumario-alta.jsonl, na ordem Sources, Concepts, Mappings, Source
 Versions, Collections, References e Collection Versions.
@@ -20,7 +20,8 @@ Regras de conversão
     explícita: a Collection sai sem References e o compose FHIR vai em
     extras.fhir_compose. A expansão fica com o servidor de terminologia
     (ou com References adicionadas depois de carregar a Source SNOMED CT).
-- ConceptMap -> Source própria só com Mappings (equivalent = SAME-AS).
+- ConceptMap -> só os mapeamentos marcados "Proposto" no comentário, gravados
+  na Source de origem (ex.: MS/BRMedDRA, que já tem os demais). equivalent = SAME-AS.
 - released = true só quando o recurso FHIR está active. Tudo aqui é draft.
 """
 import argparse, glob, json, os
@@ -50,7 +51,7 @@ def main():
     ap.add_argument("--owner", default="MS")
     ap.add_argument("--locale", default="pt")
     ap.add_argument("--versao", default="0.1.0")
-    ap.add_argument("--sct", default="/orgs/IHTSDO/sources/SNOMED-CT/",
+    ap.add_argument("--sct", default="/orgs/SNOMED/sources/gps/",
                     help="caminho da Source SNOMED CT no OCL de destino")
     a = ap.parse_args()
     src = lambda canon: (a.sct if canon == "http://snomed.info/sct"
@@ -78,21 +79,20 @@ def main():
                                  "retired": False, "names": nomes})
             sversions.append(versao("Source Version", "source", d["id"], d, a))
         elif rt == "ConceptMap":
-            s = {"type": "Source", "id": d["id"], "short_code": d["id"], "source_type": "Dictionary"}
-            s.update(comum(a.owner, d, a.locale))
-            s["extras"]["fhir_resource"] = "ConceptMap"
-            sources.append(s)
+            # Os mapeamentos já existentes no OCL ficam na Source de origem
+            # (ex.: MS/BRMedDRA). Só os marcados "Proposto" no comentário são
+            # gerados, nessa mesma Source; não se cria Source para o ConceptMap.
             for g in d["group"]:
+                dono = g["source"].rsplit("/", 1)[1]
                 for e in g["element"]:
                     for t in e.get("target", []):
-                        if t["equivalence"] == "unmatched":
+                        if t["equivalence"] == "unmatched" or not t.get("comment", "").startswith("Proposto"):
                             continue
-                        mappings.append({"type": "Mapping", "source": d["id"], "owner": a.owner,
+                        mappings.append({"type": "Mapping", "source": dono, "owner": a.owner,
                                          "owner_type": "Organization", "map_type": MAP_TYPE[t["equivalence"]],
                                          "from_source_url": src(g["source"]), "from_concept_code": e["code"],
                                          "to_source_url": src(g["target"]), "to_concept_code": t["code"],
-                                         "extras": {"equivalence": t["equivalence"]}})
-            sversions.append(versao("Source Version", "source", d["id"], d, a))
+                                         "extras": {"equivalence": t["equivalence"], "conceptmap": d["url"]}})
         elif rt == "ValueSet":
             c = {"type": "Collection", "id": d["id"], "short_code": d["id"], "collection_type": "Value Set"}
             c.update(comum(a.owner, d, a.locale))

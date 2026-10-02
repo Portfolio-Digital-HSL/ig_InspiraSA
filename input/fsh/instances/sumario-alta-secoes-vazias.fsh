@@ -83,7 +83,8 @@ Description: "Exemplo: Plano de cuidados pós-colecistectomia."
 
 RuleSet: SecaoVazia(fatia, codigo, titulo, motivo, texto)
 * section[{fatia}].title = "{titulo}"
-* section[{fatia}].code = $loinc#{codigo}
+* section[{fatia}].code.coding[0].system = "https://loinc.org/"
+* section[{fatia}].code.coding[0].code = #{codigo}
 * section[{fatia}].text.status = #generated
 * section[{fatia}].text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>{texto}</p></div>"
 * section[{fatia}].emptyReason = $list-empty-reason#{motivo}

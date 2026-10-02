@@ -48,11 +48,14 @@ scripts/importar_ocl.ps1         # importação pela API REST (Windows)
 
 - **CBHPM**: fora do ValueSet de procedimentos. É da AMB, de uso licenciado e
   pago, e não está no OCL; o ValueSet usa só BRTabelaSUS e TUSS 22.
-- **BRMedDRAParaSNOMED**: só mapeamentos ilustrativos. O conteúdo completo vem
-  do mapa oficial MedDRA–SNOMED CT (MSSO e SNOMED International), sujeito às
-  licenças das duas terminologias.
-- **CBARA**: `BRAlergenosCBARA` no guia de terminologia tem um único código. O
-  CBARA completo (SNOMED CT + códigos nacionais) precisa ser carregado.
+- **BRMedDRAParaSNOMED**: reproduz os 25 mapeamentos que já estão no OCL
+  (Source MS/BRMedDRA). O JSONL só leva o que falta: Angioedema (10002424) →
+  SNOMED CT 41291007, proposta, gravado na própria Source BRMedDRA.
+- **CBARA**: no OCL, `BRAlergenosCBARA` tem 25 códigos nacionais mapeados
+  (SAME-AS) para SNOMED CT. O mapeamento de `veneno-vespa` aponta para
+  `/orgs/SNOMED/sources/sct/`, que não existe; deve apontar para
+  `/orgs/SNOMED/sources/gps/`. No guia de terminologia o CodeSystem continua
+  `not-present`.
 
 ## Subir no OCL
 
@@ -62,7 +65,8 @@ Collections saem sem References, com o `compose` FHIR em
 `extras.fhir_compose`. A expansão fica com o servidor de terminologia, ou com
 References adicionadas depois que a Source SNOMED CT estiver no OCL.
 
-O mapeamento aponta para a Source SNOMED CT em `/orgs/IHTSDO/sources/SNOMED-CT/`.
+O mapeamento aponta para a Source SNOMED CT do OCL, `/orgs/SNOMED/sources/gps/`
+(canonical `http://snomed.info/sct`), onde estão todos os códigos usados aqui.
 Se no servidor ela estiver em outro caminho, gere de novo:
 
 ```bash

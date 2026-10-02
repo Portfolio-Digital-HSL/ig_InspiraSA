@@ -9,7 +9,7 @@
   "experimental": true,
   "publisher": "Ministério da Saúde",
   "language": "pt-BR",
-  "description": "Mapa das manifestações de reação adversa em MedDRA (BRReacoesAdversasMedDRA) para SNOMED CT. O conteúdo completo deve vir do mapa oficial MedDRA–SNOMED CT (MSSO/SNOMED International), sujeito às licenças das duas terminologias. Os mapeamentos abaixo são ilustrativos.",
+  "description": "Manifestações de reação adversa do BRMedDRA (usado pela Anvisa) para SNOMED CT. Os 25 mapeamentos SAME-AS já existem no OCL, na Source MS/BRMedDRA (alvo /orgs/SNOMED/sources/gps/); este ConceptMap é a forma FHIR deles. Angioedema (10002424) não tem mapeamento no OCL: o alvo 41291007 é proposta deste guia.",
   "sourceCanonical": "https://terminologia.saude.gov.br/fhir/ValueSet/BRReacoesAdversasMedDRA",
   "targetCanonical": "https://terminologia.saude.gov.br/fhir/ValueSet/BRManifestacaoReacaoSNOMED",
   "group": [
@@ -18,12 +18,100 @@
       "target": "http://snomed.info/sct",
       "element": [
         {
-          "code": "10002424",
-          "display": "Angioedema",
+          "code": "10003553",
+          "display": "Asma",
           "target": [
             {
-              "code": "41291007",
-              "display": "Angioedema (disorder)",
+              "code": "195967001",
+              "display": "Asthma (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10003639",
+          "display": "Dermatite atópica",
+          "target": [
+            {
+              "code": "24079001",
+              "display": "Atopic dermatitis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10006482",
+          "display": "Broncoespasmo",
+          "target": [
+            {
+              "code": "4386001",
+              "display": "Bronchospasm (finding)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10007617",
+          "display": "Parada Cardiorespiratória",
+          "target": [
+            {
+              "code": "410429000",
+              "display": "Cardiac arrest (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10010741",
+          "display": "Conjuntivite",
+          "target": [
+            {
+              "code": "9826008",
+              "display": "Conjunctivitis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10011224",
+          "display": "Tosse",
+          "target": [
+            {
+              "code": "49727002",
+              "display": "Cough (finding)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10012441",
+          "display": "Exantema bolhoso",
+          "target": [
+            {
+              "code": "271759003",
+              "display": "Bullous eruption (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10012442",
+          "display": "Dermatite de contato",
+          "target": [
+            {
+              "code": "40275004",
+              "display": "Contact dermatitis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10012735",
+          "display": "Diarréia",
+          "target": [
+            {
+              "code": "62315008",
+              "display": "Diarrhea (finding)",
               "equivalence": "equivalent"
             }
           ]
@@ -51,6 +139,72 @@
           ]
         },
         {
+          "code": "10015218",
+          "display": "Eritema Multiforme",
+          "target": [
+            {
+              "code": "36715001",
+              "display": "Erythema multiforme (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10023845",
+          "display": "Edema de Glote",
+          "target": [
+            {
+              "code": "51599000",
+              "display": "Edema of larynx (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10028116",
+          "display": "Mucosite",
+          "target": [
+            {
+              "code": "95361005",
+              "display": "Inflammatory disease of mucous membrane (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10029117",
+          "display": "Nefrite",
+          "target": [
+            {
+              "code": "52845002",
+              "display": "Nephritis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10034972",
+          "display": "Fotossensibilidade",
+          "target": [
+            {
+              "code": "90128006",
+              "display": "Photosensitivity (finding)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10037087",
+          "display": "Prurido",
+          "target": [
+            {
+              "code": "418363000",
+              "display": "Itching of skin (finding)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
           "code": "10037868",
           "display": "Exantema maculopapular",
           "target": [
@@ -58,6 +212,95 @@
               "code": "247471006",
               "display": "Maculopapular eruption (disorder)",
               "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10039083",
+          "display": "Rinite",
+          "target": [
+            {
+              "code": "70076002",
+              "display": "Rhinitis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10042033",
+          "display": "Síndrome de Stevens-Johnson",
+          "target": [
+            {
+              "code": "73442001",
+              "display": "Stevens-Johnson syndrome (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10044223",
+          "display": "Síndrome de Lyell",
+          "target": [
+            {
+              "code": "768962006",
+              "display": "Lyell syndrome (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10046735",
+          "display": "Urticária",
+          "target": [
+            {
+              "code": "126485001",
+              "display": "Urticaria (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10047115",
+          "display": "Vasculite",
+          "target": [
+            {
+              "code": "31996006",
+              "display": "Vasculitis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10047700",
+          "display": "Vômito",
+          "target": [
+            {
+              "code": "422400008",
+              "display": "Vomiting (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10073508",
+          "display": "Síndrome de DRESS",
+          "target": [
+            {
+              "code": "702809001",
+              "display": "Drug reaction with eosinophilia and systemic symptoms (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10002424",
+          "display": "Angioedema",
+          "target": [
+            {
+              "code": "41291007",
+              "display": "Angioedema (disorder)",
+              "equivalence": "equivalent",
+              "comment": "Proposto: ausente no OCL."
             }
           ]
         }

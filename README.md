@@ -10,7 +10,7 @@ Sumário de Alta hospitalar derivado do BR-Core 1.3.0, substituindo o SA-IG lega
 
 | Perfil | Pai |
 |---|---|
-| SumarioAlta (`sumario-alta`) | br-core-composition (provisório; ver débitos D-01 e D-02) |
+| SumarioAlta (`sumario-alta`) | br-core-sumarioalta (herda os débitos D-01 e D-02) |
 | InternacaoSumarioAlta | br-core-encounter |
 | DiagnosticoSumarioAlta | br-core-condition |
 | AlergiaSumarioAlta | br-core-allergyintolerance |

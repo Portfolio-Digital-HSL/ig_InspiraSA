@@ -6,8 +6,8 @@
   "title": "Sumário de Alta",
   "status": "draft",
   "experimental": true,
-  "description": "Documento clínico emitido na alta hospitalar. Reproduz as sete seções do br-core-sumarioalta sobre o br-core-composition e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter).",
-  "purpose": "Pai provisório: br-core-composition. O br-core-sumarioalta 1.3.0 não admite nenhuma instância válida (fatiamento de section por discriminador profile em code e sistema LOINC fixado como https://loinc.org/; ver débitos técnicos D-01 e D-02). Quando o BR-Core corrigir, basta trocar o Parent para br-core-sumarioalta.",
+  "description": "Documento clínico emitido na alta hospitalar. Deriva do br-core-sumarioalta (que deriva do br-core-composition) e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter).",
+  "purpose": "Substitui o BRSumarioAlta do SA-IG, que deriva do BRConjuntoMinimoDados e não do BR-Core. Herda do br-core-sumarioalta 1.3.0 as sete seções e os dois defeitos que hoje impedem qualquer instância válida: discriminador profile em section.code e sistema LOINC fixado como https://loinc.org/ (débitos D-01 e D-02). Os exemplos seguem o pai e só validam quando o BR-Core corrigir.",
   "fhirVersion": "4.0.1",
   "mapping": [
     {
@@ -39,7 +39,7 @@
   "kind": "resource",
   "abstract": false,
   "type": "Composition",
-  "baseDefinition": "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-composition",
+  "baseDefinition": "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta",
   "derivation": "constraint",
   "snapshot": {
     "element": [
@@ -47,7 +47,7 @@
         "id": "Composition",
         "path": "Composition",
         "short": "Sumário de Alta",
-        "definition": "Documento clínico emitido na alta hospitalar. Reproduz as sete seções do br-core-sumarioalta sobre o br-core-composition e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter).",
+        "definition": "A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).",
         "comment": "While the focus of this specification is on patient-specific clinical statements, this resource can also apply to other healthcare-related statements such as study protocol designs, healthcare invoices and other activities that are not necessarily patient-specific or clinical.",
         "min": 0,
         "max": "*",
@@ -2838,15 +2838,14 @@
         "slicing": {
           "discriminator": [
             {
-              "type": "pattern",
+              "type": "profile",
               "path": "code"
             }
           ],
-          "rules": "open",
-          "description": "Sete seções do br-core-sumarioalta, identificadas pelo código LOINC."
+          "rules": "open"
         },
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seções do sumário de alta",
+        "definition": "Seções do sumário de alta",
         "min": 7,
         "max": "7",
         "base": {
@@ -3505,8 +3504,8 @@
         "id": "Composition.section:diagnosticosAdmissao",
         "path": "Composition.section",
         "sliceName": "diagnosticosAdmissao",
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seção de Resumo de Diagnósticos Admissão",
+        "definition": "Seção de Resumo de Diagnósticos Admissão",
         "min": 1,
         "max": "1",
         "base": {
@@ -3570,7 +3569,7 @@
         "representation": [
           "xmlAttr"
         ],
-        "short": "Identificador exclusivo para referência entre elemento",
+        "short": "Identificador exclusivo para referência entre elementos",
         "definition": "Identificador exclusivo para referência entre elementos",
         "min": 0,
         "max": "1",
@@ -3704,7 +3703,7 @@
         "id": "Composition.section:diagnosticosAdmissao.title",
         "path": "Composition.section.title",
         "short": "Diagnósticos da admissão",
-        "definition": "Título da seção",
+        "definition": "Título da seção - Fixo em 'Diagnósticos Admissão'",
         "comment": "The title identifies the section for a human reader. The title must be consistent with the narrative of the resource that is the target of the section.content reference. Generally, sections SHOULD have titles, but in some documents, it is unnecessary or inappropriate. Typically, this is where a section has subsections that have their own adequately distinguishing title,  or documents that only have a single section. Most Implementation Guides will make section title to be a required element.",
         "requirements": "Section headings are often standardized for different types of documents.  They give guidance to humans on how the document is organized.",
         "alias": [
@@ -3751,8 +3750,8 @@
       {
         "id": "Composition.section:diagnosticosAdmissao.code",
         "path": "Composition.section.code",
-        "short": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
-        "definition": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
+        "short": "Classificação da seção da Composition/Document",
+        "definition": "Classificação da seção da Composition/Document",
         "comment": "The code identifies the section for an automated processor of the document. This is particularly relevant when using profiles to control the structure of the document.   \n\nIf the section has content (instead of sub-sections), the section.code does not change the meaning or interpretation of the resource that is the content of the section in the comments for the section.code.",
         "requirements": "Provides computable standardized labels to topics within the document.",
         "min": 1,
@@ -3767,14 +3766,6 @@
             "code": "CodeableConcept"
           }
         ],
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "42347-5",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
         "constraint": [
           {
             "key": "ele-1",
@@ -3804,10 +3795,534 @@
         ]
       },
       {
+        "id": "Composition.section:diagnosticosAdmissao.code.id",
+        "path": "Composition.section.code.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.extension",
+        "path": "Composition.section.code.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding",
+        "path": "Composition.section.code.coding",
+        "short": "Código definido por uma terminologia",
+        "definition": "Código definido por uma terminologia",
+        "comment": "Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true.",
+        "requirements": "Allows for alternative encodings within a code system, and translations to other code systems.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.coding",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1-8, C*E.10-22"
+          },
+          {
+            "identity": "rim",
+            "map": "union(., ./translation)"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.id",
+        "path": "Composition.section.code.coding.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.extension",
+        "path": "Composition.section.code.coding.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.system",
+        "path": "Composition.section.code.coding.system",
+        "short": "Identificador da terminologia",
+        "definition": "Identidade da terminologia",
+        "comment": "The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously.",
+        "requirements": "Need to be unambiguous about the source of the definition of the symbol.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.system",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "patternUri": "https://loinc.org/",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.3"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystem"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.version",
+        "path": "Composition.section.code.coding.version",
+        "short": "Versão da terminologia - se relevante",
+        "definition": "Versão da terminologia  - se relevante",
+        "comment": "Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.version",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.7"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystemVersion"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "short": "Código do conceito na sintaxe definida pela terminologia",
+        "definition": "Código do conceito na sintaxe definida pela terminologia - fixo em loinc#42347-5 'Admission Diagnosis'",
+        "requirements": "Need to refer to a particular code in the system.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "Coding.code",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "42347-5",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1"
+          },
+          {
+            "identity": "rim",
+            "map": "./code"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.display",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.coding.display",
+        "short": "Descrição conforme definido pela terminologia",
+        "definition": "Representação definida pela terminologia",
+        "requirements": "Need to be able to carry a human-readable meaning of the code for readers that do not know  the system.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.display",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "patternString": "Admission Diagnosis",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.2 - but note this is not well followed"
+          },
+          {
+            "identity": "rim",
+            "map": "CV.displayName"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.userSelected",
+        "path": "Composition.section.code.coding.userSelected",
+        "short": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "definition": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "comment": "Amongst a set of alternatives, a directly chosen code is the most appropriate starting point for new translations. There is some ambiguity about what exactly 'directly chosen' implies, and trading partner agreement may be needed to clarify the use of this element and its consequences more completely.",
+        "requirements": "This has been identified as a clinical safety criterium - that this exact system/code pair was chosen explicitly, rather than inferred by the system based on some rules or language processing.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.userSelected",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "Sometimes implied by being first"
+          },
+          {
+            "identity": "rim",
+            "map": "CD.codingRationale"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\\#true a [     fhir:source \"true\";     fhir:target dt:CDCoding.codingRationale\\#O   ]"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.text",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.text",
+        "short": "Representação em texto do conceito",
+        "definition": "Representação em texto do conceito",
+        "comment": "Very often the text is the same as a displayName of one of the codings.",
+        "requirements": "The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.text",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.9. But note many systems use C*E.2 for this"
+          },
+          {
+            "identity": "rim",
+            "map": "./originalText[mediaType/code=\"text/plain\"]/data"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.text rdfs:subPropertyOf dt:CD.originalText"
+          }
+        ]
+      },
+      {
         "id": "Composition.section:diagnosticosAdmissao.author",
         "path": "Composition.section.author",
-        "short": "Referência à quem e/ou o que foi o autor desta seção",
-        "definition": "Referência à quem e/ou o que foi o autor desta seção",
+        "short": "Quem/o quê foi o autor desta seção",
+        "definition": "Quem/o quê foi o autor desta seção",
         "requirements": "Identifies who is responsible for the content.",
         "min": 0,
         "max": "*",
@@ -3859,8 +4374,8 @@
       {
         "id": "Composition.section:diagnosticosAdmissao.focus",
         "path": "Composition.section.focus",
-        "short": "Referência ao recurso associado desta seção",
-        "definition": "Referência ao recurso associado desta seção",
+        "short": "Referência à recurso associado desta seção",
+        "definition": "Referência à recurso associado desta seção",
         "comment": "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
         "min": 0,
         "max": "1",
@@ -3899,8 +4414,8 @@
       {
         "id": "Composition.section:diagnosticosAdmissao.text",
         "path": "Composition.section.text",
-        "short": "Resumo em texto livre da seção",
-        "definition": "Resumo em texto livre da seção",
+        "short": "Resumo de texto da seção",
+        "definition": "Resumo de texto da seção",
         "comment": "Document profiles may define what content should be represented in the narrative to ensure clinical safety.",
         "min": 0,
         "max": "1",
@@ -3994,8 +4509,8 @@
       {
         "id": "Composition.section:diagnosticosAdmissao.orderedBy",
         "path": "Composition.section.orderedBy",
-        "short": "Ordem dos itens nas section.entry",
-        "definition": "Ordem dos itens nas section.entry",
+        "short": "Ordem dos elementos na seção 'entry'",
+        "definition": "Ordem dos elementos na seção 'entry'",
         "comment": "Applications SHOULD render ordered lists in the order provided, but MAY allow users to re-order based on their own preferences as well. If there is no order specified, the order is unknown, though there may still be some order.",
         "requirements": "Important for presentation and rendering.  Lists may be sorted to place more important information first or to group related entries.",
         "min": 0,
@@ -4040,8 +4555,8 @@
       {
         "id": "Composition.section:diagnosticosAdmissao.entry",
         "path": "Composition.section.entry",
-        "short": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
-        "definition": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
+        "short": "Medicamentos relevantes para o sumário internacional do paciente",
+        "definition": "Medicamentos relevantes para o sumário internacional do paciente",
         "comment": "If there are no entries in the list, an emptyReason SHOULD be provided.",
         "min": 0,
         "max": "*",
@@ -4088,8 +4603,8 @@
       {
         "id": "Composition.section:diagnosticosAdmissao.emptyReason",
         "path": "Composition.section.emptyReason",
-        "short": "Explicação porquê a seção está vazia",
-        "definition": "Explicação porquê a seção está vazia",
+        "short": "Explicação porquê a secção está vazia",
+        "definition": "Explicação porquê a secção está vazia",
         "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
         "requirements": "Allows capturing things like \"none exist\" or \"not asked\" which can be important for most lists.",
         "min": 0,
@@ -4186,8 +4701,8 @@
         "id": "Composition.section:alergiasIntolerancias",
         "path": "Composition.section",
         "sliceName": "alergiasIntolerancias",
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seção de Alergias e Intolerâncias",
+        "definition": "Seção de Alergias e Intolerâncias",
         "min": 1,
         "max": "1",
         "base": {
@@ -4251,7 +4766,7 @@
         "representation": [
           "xmlAttr"
         ],
-        "short": "Identificador exclusivo para referência entre elemento",
+        "short": "Identificador exclusivo para referência entre elementos",
         "definition": "Identificador exclusivo para referência entre elementos",
         "min": 0,
         "max": "1",
@@ -4385,7 +4900,7 @@
         "id": "Composition.section:alergiasIntolerancias.title",
         "path": "Composition.section.title",
         "short": "Alergias e intolerâncias",
-        "definition": "Título da seção",
+        "definition": "Título da seção - Fixo em 'Alergias e Intolerâncias'",
         "comment": "The title identifies the section for a human reader. The title must be consistent with the narrative of the resource that is the target of the section.content reference. Generally, sections SHOULD have titles, but in some documents, it is unnecessary or inappropriate. Typically, this is where a section has subsections that have their own adequately distinguishing title,  or documents that only have a single section. Most Implementation Guides will make section title to be a required element.",
         "requirements": "Section headings are often standardized for different types of documents.  They give guidance to humans on how the document is organized.",
         "alias": [
@@ -4432,8 +4947,8 @@
       {
         "id": "Composition.section:alergiasIntolerancias.code",
         "path": "Composition.section.code",
-        "short": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
-        "definition": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
+        "short": "Classificação da seção da Composition/Document",
+        "definition": "Classificação da seção da Composition/Document",
         "comment": "The code identifies the section for an automated processor of the document. This is particularly relevant when using profiles to control the structure of the document.   \n\nIf the section has content (instead of sub-sections), the section.code does not change the meaning or interpretation of the resource that is the content of the section in the comments for the section.code.",
         "requirements": "Provides computable standardized labels to topics within the document.",
         "min": 1,
@@ -4448,14 +4963,6 @@
             "code": "CodeableConcept"
           }
         ],
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "48765-2",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
         "constraint": [
           {
             "key": "ele-1",
@@ -4485,10 +4992,534 @@
         ]
       },
       {
+        "id": "Composition.section:alergiasIntolerancias.code.id",
+        "path": "Composition.section.code.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.extension",
+        "path": "Composition.section.code.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding",
+        "path": "Composition.section.code.coding",
+        "short": "Código definido por uma terminologia",
+        "definition": "Código definido por uma terminologia",
+        "comment": "Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true.",
+        "requirements": "Allows for alternative encodings within a code system, and translations to other code systems.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.coding",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1-8, C*E.10-22"
+          },
+          {
+            "identity": "rim",
+            "map": "union(., ./translation)"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.id",
+        "path": "Composition.section.code.coding.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.extension",
+        "path": "Composition.section.code.coding.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.system",
+        "path": "Composition.section.code.coding.system",
+        "short": "Identificador da terminologia",
+        "definition": "Identidade da terminologia",
+        "comment": "The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously.",
+        "requirements": "Need to be unambiguous about the source of the definition of the symbol.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.system",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "patternUri": "https://loinc.org/",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.3"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystem"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.version",
+        "path": "Composition.section.code.coding.version",
+        "short": "Versão da terminologia - se relevante",
+        "definition": "Versão da terminologia  - se relevante",
+        "comment": "Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.version",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.7"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystemVersion"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "short": "Código do conceito na sintaxe definida pela terminologia",
+        "definition": "Código do conceito na sintaxe definida pela terminologia - fixo em loinc#42347-5 'Admission Diagnosis'",
+        "requirements": "Need to refer to a particular code in the system.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "Coding.code",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "48765-2",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1"
+          },
+          {
+            "identity": "rim",
+            "map": "./code"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.display",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.coding.display",
+        "short": "Descrição conforme definido pela terminologia",
+        "definition": "Representação definida pela terminologia",
+        "requirements": "Need to be able to carry a human-readable meaning of the code for readers that do not know  the system.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.display",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "patternString": "Allergies and adverse reactions Document",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.2 - but note this is not well followed"
+          },
+          {
+            "identity": "rim",
+            "map": "CV.displayName"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.userSelected",
+        "path": "Composition.section.code.coding.userSelected",
+        "short": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "definition": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "comment": "Amongst a set of alternatives, a directly chosen code is the most appropriate starting point for new translations. There is some ambiguity about what exactly 'directly chosen' implies, and trading partner agreement may be needed to clarify the use of this element and its consequences more completely.",
+        "requirements": "This has been identified as a clinical safety criterium - that this exact system/code pair was chosen explicitly, rather than inferred by the system based on some rules or language processing.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.userSelected",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "Sometimes implied by being first"
+          },
+          {
+            "identity": "rim",
+            "map": "CD.codingRationale"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\\#true a [     fhir:source \"true\";     fhir:target dt:CDCoding.codingRationale\\#O   ]"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.text",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.text",
+        "short": "Representação em texto do conceito",
+        "definition": "Representação em texto do conceito",
+        "comment": "Very often the text is the same as a displayName of one of the codings.",
+        "requirements": "The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.text",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.9. But note many systems use C*E.2 for this"
+          },
+          {
+            "identity": "rim",
+            "map": "./originalText[mediaType/code=\"text/plain\"]/data"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.text rdfs:subPropertyOf dt:CD.originalText"
+          }
+        ]
+      },
+      {
         "id": "Composition.section:alergiasIntolerancias.author",
         "path": "Composition.section.author",
-        "short": "Referência à quem e/ou o que foi o autor desta seção",
-        "definition": "Referência à quem e/ou o que foi o autor desta seção",
+        "short": "Quem/o quê foi o autor desta seção",
+        "definition": "Quem/o quê foi o autor desta seção",
         "requirements": "Identifies who is responsible for the content.",
         "min": 0,
         "max": "*",
@@ -4540,8 +5571,8 @@
       {
         "id": "Composition.section:alergiasIntolerancias.focus",
         "path": "Composition.section.focus",
-        "short": "Referência ao recurso associado desta seção",
-        "definition": "Referência ao recurso associado desta seção",
+        "short": "Referência à recurso associado desta seção",
+        "definition": "Referência à recurso associado desta seção",
         "comment": "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
         "min": 0,
         "max": "1",
@@ -4580,8 +5611,8 @@
       {
         "id": "Composition.section:alergiasIntolerancias.text",
         "path": "Composition.section.text",
-        "short": "Resumo em texto livre da seção",
-        "definition": "Resumo em texto livre da seção",
+        "short": "Resumo de texto da seção",
+        "definition": "Resumo de texto da seção",
         "comment": "Document profiles may define what content should be represented in the narrative to ensure clinical safety.",
         "min": 0,
         "max": "1",
@@ -4675,8 +5706,8 @@
       {
         "id": "Composition.section:alergiasIntolerancias.orderedBy",
         "path": "Composition.section.orderedBy",
-        "short": "Ordem dos itens nas section.entry",
-        "definition": "Ordem dos itens nas section.entry",
+        "short": "Ordem dos elementos na seção 'entry'",
+        "definition": "Ordem dos elementos na seção 'entry'",
         "comment": "Applications SHOULD render ordered lists in the order provided, but MAY allow users to re-order based on their own preferences as well. If there is no order specified, the order is unknown, though there may still be some order.",
         "requirements": "Important for presentation and rendering.  Lists may be sorted to place more important information first or to group related entries.",
         "min": 0,
@@ -4721,8 +5752,8 @@
       {
         "id": "Composition.section:alergiasIntolerancias.entry",
         "path": "Composition.section.entry",
-        "short": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
-        "definition": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
+        "short": "Alergias e Intolerâncias relevantes para o sumário internacional do paciente",
+        "definition": "Alergias e Intolerâncias relevantes para o sumário internacional do paciente",
         "comment": "If there are no entries in the list, an emptyReason SHOULD be provided.",
         "min": 0,
         "max": "*",
@@ -4769,8 +5800,8 @@
       {
         "id": "Composition.section:alergiasIntolerancias.emptyReason",
         "path": "Composition.section.emptyReason",
-        "short": "Explicação porquê a seção está vazia",
-        "definition": "Explicação porquê a seção está vazia",
+        "short": "Explicação porquê a secção está vazia",
+        "definition": "Explicação porquê a secção está vazia",
         "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
         "requirements": "Allows capturing things like \"none exist\" or \"not asked\" which can be important for most lists.",
         "min": 0,
@@ -4867,8 +5898,8 @@
         "id": "Composition.section:diagnosticosAvaliados",
         "path": "Composition.section",
         "sliceName": "diagnosticosAvaliados",
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seção de Resumo de Diagnósticos Avaliados",
+        "definition": "Seção de Resumo de Diagnósticos Avaliados",
         "min": 1,
         "max": "1",
         "base": {
@@ -4932,7 +5963,7 @@
         "representation": [
           "xmlAttr"
         ],
-        "short": "Identificador exclusivo para referência entre elemento",
+        "short": "Identificador exclusivo para referência entre elementos",
         "definition": "Identificador exclusivo para referência entre elementos",
         "min": 0,
         "max": "1",
@@ -5066,7 +6097,7 @@
         "id": "Composition.section:diagnosticosAvaliados.title",
         "path": "Composition.section.title",
         "short": "Diagnósticos avaliados na internação",
-        "definition": "Título da seção",
+        "definition": "Título da seção - Fixo em 'Diagnósticos Avaliados'",
         "comment": "The title identifies the section for a human reader. The title must be consistent with the narrative of the resource that is the target of the section.content reference. Generally, sections SHOULD have titles, but in some documents, it is unnecessary or inappropriate. Typically, this is where a section has subsections that have their own adequately distinguishing title,  or documents that only have a single section. Most Implementation Guides will make section title to be a required element.",
         "requirements": "Section headings are often standardized for different types of documents.  They give guidance to humans on how the document is organized.",
         "alias": [
@@ -5113,8 +6144,8 @@
       {
         "id": "Composition.section:diagnosticosAvaliados.code",
         "path": "Composition.section.code",
-        "short": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
-        "definition": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
+        "short": "Classificação da seção da Composition/Document",
+        "definition": "Classificação da seção da Composition/Document",
         "comment": "The code identifies the section for an automated processor of the document. This is particularly relevant when using profiles to control the structure of the document.   \n\nIf the section has content (instead of sub-sections), the section.code does not change the meaning or interpretation of the resource that is the content of the section in the comments for the section.code.",
         "requirements": "Provides computable standardized labels to topics within the document.",
         "min": 1,
@@ -5129,14 +6160,6 @@
             "code": "CodeableConcept"
           }
         ],
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "57852-6",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
         "constraint": [
           {
             "key": "ele-1",
@@ -5166,10 +6189,534 @@
         ]
       },
       {
+        "id": "Composition.section:diagnosticosAvaliados.code.id",
+        "path": "Composition.section.code.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.extension",
+        "path": "Composition.section.code.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding",
+        "path": "Composition.section.code.coding",
+        "short": "Código definido por uma terminologia",
+        "definition": "Código definido por uma terminologia",
+        "comment": "Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true.",
+        "requirements": "Allows for alternative encodings within a code system, and translations to other code systems.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.coding",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1-8, C*E.10-22"
+          },
+          {
+            "identity": "rim",
+            "map": "union(., ./translation)"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.id",
+        "path": "Composition.section.code.coding.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.extension",
+        "path": "Composition.section.code.coding.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.system",
+        "path": "Composition.section.code.coding.system",
+        "short": "Identificador da terminologia",
+        "definition": "Identidade da terminologia",
+        "comment": "The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously.",
+        "requirements": "Need to be unambiguous about the source of the definition of the symbol.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.system",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "patternUri": "https://loinc.org/",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.3"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystem"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.version",
+        "path": "Composition.section.code.coding.version",
+        "short": "Versão da terminologia - se relevante",
+        "definition": "Versão da terminologia  - se relevante",
+        "comment": "Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.version",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.7"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystemVersion"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "short": "Código do conceito na sintaxe definida pela terminologia",
+        "definition": "Código do conceito na sintaxe definida pela terminologia - fixo em loinc#42347-5 'Admission Diagnosis'",
+        "requirements": "Need to refer to a particular code in the system.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "Coding.code",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "57852-6",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1"
+          },
+          {
+            "identity": "rim",
+            "map": "./code"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.display",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.coding.display",
+        "short": "Descrição conforme definido pela terminologia",
+        "definition": "Representação definida pela terminologia",
+        "requirements": "Need to be able to carry a human-readable meaning of the code for readers that do not know  the system.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.display",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "patternString": "Problem List",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.2 - but note this is not well followed"
+          },
+          {
+            "identity": "rim",
+            "map": "CV.displayName"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.userSelected",
+        "path": "Composition.section.code.coding.userSelected",
+        "short": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "definition": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "comment": "Amongst a set of alternatives, a directly chosen code is the most appropriate starting point for new translations. There is some ambiguity about what exactly 'directly chosen' implies, and trading partner agreement may be needed to clarify the use of this element and its consequences more completely.",
+        "requirements": "This has been identified as a clinical safety criterium - that this exact system/code pair was chosen explicitly, rather than inferred by the system based on some rules or language processing.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.userSelected",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "Sometimes implied by being first"
+          },
+          {
+            "identity": "rim",
+            "map": "CD.codingRationale"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\\#true a [     fhir:source \"true\";     fhir:target dt:CDCoding.codingRationale\\#O   ]"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.text",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.text",
+        "short": "Representação em texto do conceito",
+        "definition": "Representação em texto do conceito",
+        "comment": "Very often the text is the same as a displayName of one of the codings.",
+        "requirements": "The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.text",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.9. But note many systems use C*E.2 for this"
+          },
+          {
+            "identity": "rim",
+            "map": "./originalText[mediaType/code=\"text/plain\"]/data"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.text rdfs:subPropertyOf dt:CD.originalText"
+          }
+        ]
+      },
+      {
         "id": "Composition.section:diagnosticosAvaliados.author",
         "path": "Composition.section.author",
-        "short": "Referência à quem e/ou o que foi o autor desta seção",
-        "definition": "Referência à quem e/ou o que foi o autor desta seção",
+        "short": "Quem/o quê foi o autor desta seção",
+        "definition": "Quem/o quê foi o autor desta seção",
         "requirements": "Identifies who is responsible for the content.",
         "min": 0,
         "max": "*",
@@ -5221,8 +6768,8 @@
       {
         "id": "Composition.section:diagnosticosAvaliados.focus",
         "path": "Composition.section.focus",
-        "short": "Referência ao recurso associado desta seção",
-        "definition": "Referência ao recurso associado desta seção",
+        "short": "Referência à recurso associado desta seção",
+        "definition": "Referência à recurso associado desta seção",
         "comment": "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
         "min": 0,
         "max": "1",
@@ -5261,8 +6808,8 @@
       {
         "id": "Composition.section:diagnosticosAvaliados.text",
         "path": "Composition.section.text",
-        "short": "Resumo em texto livre da seção",
-        "definition": "Resumo em texto livre da seção",
+        "short": "Resumo de texto da seção",
+        "definition": "Resumo de texto da seção",
         "comment": "Document profiles may define what content should be represented in the narrative to ensure clinical safety.",
         "min": 0,
         "max": "1",
@@ -5356,8 +6903,8 @@
       {
         "id": "Composition.section:diagnosticosAvaliados.orderedBy",
         "path": "Composition.section.orderedBy",
-        "short": "Ordem dos itens nas section.entry",
-        "definition": "Ordem dos itens nas section.entry",
+        "short": "Ordem dos elementos na seção 'entry'",
+        "definition": "Ordem dos elementos na seção 'entry'",
         "comment": "Applications SHOULD render ordered lists in the order provided, but MAY allow users to re-order based on their own preferences as well. If there is no order specified, the order is unknown, though there may still be some order.",
         "requirements": "Important for presentation and rendering.  Lists may be sorted to place more important information first or to group related entries.",
         "min": 0,
@@ -5402,8 +6949,8 @@
       {
         "id": "Composition.section:diagnosticosAvaliados.entry",
         "path": "Composition.section.entry",
-        "short": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
-        "definition": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
+        "short": "Diagnósticos relevantes para o sumário internacional do paciente",
+        "definition": "Diagnósticos relevantes para o sumário internacional do paciente",
         "comment": "If there are no entries in the list, an emptyReason SHOULD be provided.",
         "min": 0,
         "max": "*",
@@ -5450,8 +6997,8 @@
       {
         "id": "Composition.section:diagnosticosAvaliados.emptyReason",
         "path": "Composition.section.emptyReason",
-        "short": "Explicação porquê a seção está vazia",
-        "definition": "Explicação porquê a seção está vazia",
+        "short": "Explicação porquê a secção está vazia",
+        "definition": "Explicação porquê a secção está vazia",
         "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
         "requirements": "Allows capturing things like \"none exist\" or \"not asked\" which can be important for most lists.",
         "min": 0,
@@ -5548,8 +7095,8 @@
         "id": "Composition.section:procedimentosRealizados",
         "path": "Composition.section",
         "sliceName": "procedimentosRealizados",
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seção de Resumo de Procedimentos Realizados",
+        "definition": "Seção de Resumo de Procedimentos Realizados",
         "min": 1,
         "max": "1",
         "base": {
@@ -5613,7 +7160,7 @@
         "representation": [
           "xmlAttr"
         ],
-        "short": "Identificador exclusivo para referência entre elemento",
+        "short": "Identificador exclusivo para referência entre elementos",
         "definition": "Identificador exclusivo para referência entre elementos",
         "min": 0,
         "max": "1",
@@ -5747,7 +7294,7 @@
         "id": "Composition.section:procedimentosRealizados.title",
         "path": "Composition.section.title",
         "short": "Procedimentos realizados",
-        "definition": "Título da seção",
+        "definition": "Título da seção - Fixo em 'Procedimentos Realizados'",
         "comment": "The title identifies the section for a human reader. The title must be consistent with the narrative of the resource that is the target of the section.content reference. Generally, sections SHOULD have titles, but in some documents, it is unnecessary or inappropriate. Typically, this is where a section has subsections that have their own adequately distinguishing title,  or documents that only have a single section. Most Implementation Guides will make section title to be a required element.",
         "requirements": "Section headings are often standardized for different types of documents.  They give guidance to humans on how the document is organized.",
         "alias": [
@@ -5794,8 +7341,8 @@
       {
         "id": "Composition.section:procedimentosRealizados.code",
         "path": "Composition.section.code",
-        "short": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
-        "definition": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
+        "short": "Classificação da seção da Composition/Document",
+        "definition": "Classificação da seção da Composition/Document",
         "comment": "The code identifies the section for an automated processor of the document. This is particularly relevant when using profiles to control the structure of the document.   \n\nIf the section has content (instead of sub-sections), the section.code does not change the meaning or interpretation of the resource that is the content of the section in the comments for the section.code.",
         "requirements": "Provides computable standardized labels to topics within the document.",
         "min": 1,
@@ -5810,14 +7357,6 @@
             "code": "CodeableConcept"
           }
         ],
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "47519-4",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
         "constraint": [
           {
             "key": "ele-1",
@@ -5847,10 +7386,534 @@
         ]
       },
       {
+        "id": "Composition.section:procedimentosRealizados.code.id",
+        "path": "Composition.section.code.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.extension",
+        "path": "Composition.section.code.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding",
+        "path": "Composition.section.code.coding",
+        "short": "Código definido por uma terminologia",
+        "definition": "Código definido por uma terminologia",
+        "comment": "Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true.",
+        "requirements": "Allows for alternative encodings within a code system, and translations to other code systems.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.coding",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1-8, C*E.10-22"
+          },
+          {
+            "identity": "rim",
+            "map": "union(., ./translation)"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.id",
+        "path": "Composition.section.code.coding.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.extension",
+        "path": "Composition.section.code.coding.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.system",
+        "path": "Composition.section.code.coding.system",
+        "short": "Identificador da terminologia",
+        "definition": "Identidade da terminologia",
+        "comment": "The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously.",
+        "requirements": "Need to be unambiguous about the source of the definition of the symbol.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.system",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "patternUri": "https://loinc.org/",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.3"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystem"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.version",
+        "path": "Composition.section.code.coding.version",
+        "short": "Versão da terminologia - se relevante",
+        "definition": "Versão da terminologia  - se relevante",
+        "comment": "Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.version",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.7"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystemVersion"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "short": "Código do conceito na sintaxe definida pela terminologia",
+        "definition": "Código do conceito na sintaxe definida pela terminologia - fixo em loinc#42347-5 'Admission Diagnosis'",
+        "requirements": "Need to refer to a particular code in the system.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "Coding.code",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "47519-4",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1"
+          },
+          {
+            "identity": "rim",
+            "map": "./code"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.display",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.coding.display",
+        "short": "Descrição conforme definido pela terminologia",
+        "definition": "Representação definida pela terminologia",
+        "requirements": "Need to be able to carry a human-readable meaning of the code for readers that do not know  the system.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.display",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "patternString": "History of Procedures Document",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.2 - but note this is not well followed"
+          },
+          {
+            "identity": "rim",
+            "map": "CV.displayName"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.userSelected",
+        "path": "Composition.section.code.coding.userSelected",
+        "short": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "definition": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "comment": "Amongst a set of alternatives, a directly chosen code is the most appropriate starting point for new translations. There is some ambiguity about what exactly 'directly chosen' implies, and trading partner agreement may be needed to clarify the use of this element and its consequences more completely.",
+        "requirements": "This has been identified as a clinical safety criterium - that this exact system/code pair was chosen explicitly, rather than inferred by the system based on some rules or language processing.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.userSelected",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "Sometimes implied by being first"
+          },
+          {
+            "identity": "rim",
+            "map": "CD.codingRationale"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\\#true a [     fhir:source \"true\";     fhir:target dt:CDCoding.codingRationale\\#O   ]"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.text",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.text",
+        "short": "Representação em texto do conceito",
+        "definition": "Representação em texto do conceito",
+        "comment": "Very often the text is the same as a displayName of one of the codings.",
+        "requirements": "The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.text",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.9. But note many systems use C*E.2 for this"
+          },
+          {
+            "identity": "rim",
+            "map": "./originalText[mediaType/code=\"text/plain\"]/data"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.text rdfs:subPropertyOf dt:CD.originalText"
+          }
+        ]
+      },
+      {
         "id": "Composition.section:procedimentosRealizados.author",
         "path": "Composition.section.author",
-        "short": "Referência à quem e/ou o que foi o autor desta seção",
-        "definition": "Referência à quem e/ou o que foi o autor desta seção",
+        "short": "Quem/o quê foi o autor desta seção",
+        "definition": "Quem/o quê foi o autor desta seção",
         "requirements": "Identifies who is responsible for the content.",
         "min": 0,
         "max": "*",
@@ -5902,8 +7965,8 @@
       {
         "id": "Composition.section:procedimentosRealizados.focus",
         "path": "Composition.section.focus",
-        "short": "Referência ao recurso associado desta seção",
-        "definition": "Referência ao recurso associado desta seção",
+        "short": "Referência à recurso associado desta seção",
+        "definition": "Referência à recurso associado desta seção",
         "comment": "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
         "min": 0,
         "max": "1",
@@ -5942,8 +8005,8 @@
       {
         "id": "Composition.section:procedimentosRealizados.text",
         "path": "Composition.section.text",
-        "short": "Resumo em texto livre da seção",
-        "definition": "Resumo em texto livre da seção",
+        "short": "Resumo de texto da seção",
+        "definition": "Resumo de texto da seção",
         "comment": "Document profiles may define what content should be represented in the narrative to ensure clinical safety.",
         "min": 0,
         "max": "1",
@@ -6037,8 +8100,8 @@
       {
         "id": "Composition.section:procedimentosRealizados.orderedBy",
         "path": "Composition.section.orderedBy",
-        "short": "Ordem dos itens nas section.entry",
-        "definition": "Ordem dos itens nas section.entry",
+        "short": "Ordem dos elementos na seção 'entry'",
+        "definition": "Ordem dos elementos na seção 'entry'",
         "comment": "Applications SHOULD render ordered lists in the order provided, but MAY allow users to re-order based on their own preferences as well. If there is no order specified, the order is unknown, though there may still be some order.",
         "requirements": "Important for presentation and rendering.  Lists may be sorted to place more important information first or to group related entries.",
         "min": 0,
@@ -6083,8 +8146,8 @@
       {
         "id": "Composition.section:procedimentosRealizados.entry",
         "path": "Composition.section.entry",
-        "short": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
-        "definition": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
+        "short": "Procedimentos realizados relevantes para o sumário internacional do paciente",
+        "definition": "Procedimentos realizados  relevantes para o sumário internacional do paciente",
         "comment": "If there are no entries in the list, an emptyReason SHOULD be provided.",
         "min": 0,
         "max": "*",
@@ -6131,8 +8194,8 @@
       {
         "id": "Composition.section:procedimentosRealizados.emptyReason",
         "path": "Composition.section.emptyReason",
-        "short": "Explicação porquê a seção está vazia",
-        "definition": "Explicação porquê a seção está vazia",
+        "short": "Explicação porquê a secção está vazia",
+        "definition": "Explicação porquê a secção está vazia",
         "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
         "requirements": "Allows capturing things like \"none exist\" or \"not asked\" which can be important for most lists.",
         "min": 0,
@@ -6229,8 +8292,8 @@
         "id": "Composition.section:prescricaoAlta",
         "path": "Composition.section",
         "sliceName": "prescricaoAlta",
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seção de Resumo da Prescrição da Alta",
+        "definition": "Seção de Resumo da Prescrição da Alta",
         "min": 1,
         "max": "1",
         "base": {
@@ -6294,7 +8357,7 @@
         "representation": [
           "xmlAttr"
         ],
-        "short": "Identificador exclusivo para referência entre elemento",
+        "short": "Identificador exclusivo para referência entre elementos",
         "definition": "Identificador exclusivo para referência entre elementos",
         "min": 0,
         "max": "1",
@@ -6428,7 +8491,7 @@
         "id": "Composition.section:prescricaoAlta.title",
         "path": "Composition.section.title",
         "short": "Prescrição de alta",
-        "definition": "Título da seção",
+        "definition": "Título da seção - Fixo em 'Prescrição da Alta'",
         "comment": "The title identifies the section for a human reader. The title must be consistent with the narrative of the resource that is the target of the section.content reference. Generally, sections SHOULD have titles, but in some documents, it is unnecessary or inappropriate. Typically, this is where a section has subsections that have their own adequately distinguishing title,  or documents that only have a single section. Most Implementation Guides will make section title to be a required element.",
         "requirements": "Section headings are often standardized for different types of documents.  They give guidance to humans on how the document is organized.",
         "alias": [
@@ -6475,8 +8538,8 @@
       {
         "id": "Composition.section:prescricaoAlta.code",
         "path": "Composition.section.code",
-        "short": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
-        "definition": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
+        "short": "Classificação da seção da Composition/Document",
+        "definition": "Classificação da seção da Composition/Document",
         "comment": "The code identifies the section for an automated processor of the document. This is particularly relevant when using profiles to control the structure of the document.   \n\nIf the section has content (instead of sub-sections), the section.code does not change the meaning or interpretation of the resource that is the content of the section in the comments for the section.code.",
         "requirements": "Provides computable standardized labels to topics within the document.",
         "min": 1,
@@ -6491,14 +8554,6 @@
             "code": "CodeableConcept"
           }
         ],
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "8654-6",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
         "constraint": [
           {
             "key": "ele-1",
@@ -6528,10 +8583,534 @@
         ]
       },
       {
+        "id": "Composition.section:prescricaoAlta.code.id",
+        "path": "Composition.section.code.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.extension",
+        "path": "Composition.section.code.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding",
+        "path": "Composition.section.code.coding",
+        "short": "Código definido por uma terminologia",
+        "definition": "Código definido por uma terminologia",
+        "comment": "Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true.",
+        "requirements": "Allows for alternative encodings within a code system, and translations to other code systems.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.coding",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1-8, C*E.10-22"
+          },
+          {
+            "identity": "rim",
+            "map": "union(., ./translation)"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.id",
+        "path": "Composition.section.code.coding.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.extension",
+        "path": "Composition.section.code.coding.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.system",
+        "path": "Composition.section.code.coding.system",
+        "short": "Identificador da terminologia",
+        "definition": "Identidade da terminologia",
+        "comment": "The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously.",
+        "requirements": "Need to be unambiguous about the source of the definition of the symbol.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.system",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "patternUri": "https://loinc.org/",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.3"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystem"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.version",
+        "path": "Composition.section.code.coding.version",
+        "short": "Versão da terminologia - se relevante",
+        "definition": "Versão da terminologia  - se relevante",
+        "comment": "Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.version",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.7"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystemVersion"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "short": "Código do conceito na sintaxe definida pela terminologia",
+        "definition": "Código do conceito na sintaxe definida pela terminologia - fixo em loinc#42347-5 'Admission Diagnosis'",
+        "requirements": "Need to refer to a particular code in the system.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "Coding.code",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "8654-6",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1"
+          },
+          {
+            "identity": "rim",
+            "map": "./code"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.display",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.coding.display",
+        "short": "Descrição conforme definido pela terminologia",
+        "definition": "Representação definida pela terminologia",
+        "requirements": "Need to be able to carry a human-readable meaning of the code for readers that do not know  the system.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.display",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "patternString": "Hospital discharge medications",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.2 - but note this is not well followed"
+          },
+          {
+            "identity": "rim",
+            "map": "CV.displayName"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.userSelected",
+        "path": "Composition.section.code.coding.userSelected",
+        "short": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "definition": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "comment": "Amongst a set of alternatives, a directly chosen code is the most appropriate starting point for new translations. There is some ambiguity about what exactly 'directly chosen' implies, and trading partner agreement may be needed to clarify the use of this element and its consequences more completely.",
+        "requirements": "This has been identified as a clinical safety criterium - that this exact system/code pair was chosen explicitly, rather than inferred by the system based on some rules or language processing.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.userSelected",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "Sometimes implied by being first"
+          },
+          {
+            "identity": "rim",
+            "map": "CD.codingRationale"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\\#true a [     fhir:source \"true\";     fhir:target dt:CDCoding.codingRationale\\#O   ]"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.text",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.text",
+        "short": "Representação em texto do conceito",
+        "definition": "Representação em texto do conceito",
+        "comment": "Very often the text is the same as a displayName of one of the codings.",
+        "requirements": "The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.text",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.9. But note many systems use C*E.2 for this"
+          },
+          {
+            "identity": "rim",
+            "map": "./originalText[mediaType/code=\"text/plain\"]/data"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.text rdfs:subPropertyOf dt:CD.originalText"
+          }
+        ]
+      },
+      {
         "id": "Composition.section:prescricaoAlta.author",
         "path": "Composition.section.author",
-        "short": "Referência à quem e/ou o que foi o autor desta seção",
-        "definition": "Referência à quem e/ou o que foi o autor desta seção",
+        "short": "Quem/o quê foi o autor desta seção",
+        "definition": "Quem/o quê foi o autor desta seção",
         "requirements": "Identifies who is responsible for the content.",
         "min": 0,
         "max": "*",
@@ -6583,8 +9162,8 @@
       {
         "id": "Composition.section:prescricaoAlta.focus",
         "path": "Composition.section.focus",
-        "short": "Referência ao recurso associado desta seção",
-        "definition": "Referência ao recurso associado desta seção",
+        "short": "Referência à recurso associado desta seção",
+        "definition": "Referência à recurso associado desta seção",
         "comment": "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
         "min": 0,
         "max": "1",
@@ -6623,8 +9202,8 @@
       {
         "id": "Composition.section:prescricaoAlta.text",
         "path": "Composition.section.text",
-        "short": "Resumo em texto livre da seção",
-        "definition": "Resumo em texto livre da seção",
+        "short": "Resumo de texto da seção",
+        "definition": "Resumo de texto da seção",
         "comment": "Document profiles may define what content should be represented in the narrative to ensure clinical safety.",
         "min": 0,
         "max": "1",
@@ -6718,8 +9297,8 @@
       {
         "id": "Composition.section:prescricaoAlta.orderedBy",
         "path": "Composition.section.orderedBy",
-        "short": "Ordem dos itens nas section.entry",
-        "definition": "Ordem dos itens nas section.entry",
+        "short": "Ordem dos elementos na seção 'entry'",
+        "definition": "Ordem dos elementos na seção 'entry'",
         "comment": "Applications SHOULD render ordered lists in the order provided, but MAY allow users to re-order based on their own preferences as well. If there is no order specified, the order is unknown, though there may still be some order.",
         "requirements": "Important for presentation and rendering.  Lists may be sorted to place more important information first or to group related entries.",
         "min": 0,
@@ -6764,8 +9343,8 @@
       {
         "id": "Composition.section:prescricaoAlta.entry",
         "path": "Composition.section.entry",
-        "short": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
-        "definition": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
+        "short": "Prescrição da alta para o sumário internacional do paciente",
+        "definition": "Prescrição da alta para o sumário internacional do paciente",
         "comment": "If there are no entries in the list, an emptyReason SHOULD be provided.",
         "min": 0,
         "max": "*",
@@ -6812,8 +9391,8 @@
       {
         "id": "Composition.section:prescricaoAlta.emptyReason",
         "path": "Composition.section.emptyReason",
-        "short": "Explicação porquê a seção está vazia",
-        "definition": "Explicação porquê a seção está vazia",
+        "short": "Explicação porquê a secção está vazia",
+        "definition": "Explicação porquê a secção está vazia",
         "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
         "requirements": "Allows capturing things like \"none exist\" or \"not asked\" which can be important for most lists.",
         "min": 0,
@@ -6910,8 +9489,8 @@
         "id": "Composition.section:planoCuidados",
         "path": "Composition.section",
         "sliceName": "planoCuidados",
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seção de Resumo de Planos de Cuidado",
+        "definition": "Seção de Resumo de Planos de Cuidado",
         "min": 1,
         "max": "1",
         "base": {
@@ -6975,7 +9554,7 @@
         "representation": [
           "xmlAttr"
         ],
-        "short": "Identificador exclusivo para referência entre elemento",
+        "short": "Identificador exclusivo para referência entre elementos",
         "definition": "Identificador exclusivo para referência entre elementos",
         "min": 0,
         "max": "1",
@@ -7109,7 +9688,7 @@
         "id": "Composition.section:planoCuidados.title",
         "path": "Composition.section.title",
         "short": "Plano de cuidados",
-        "definition": "Título da seção",
+        "definition": "Título da seção - Fixo em 'Planos de Cuidado'",
         "comment": "The title identifies the section for a human reader. The title must be consistent with the narrative of the resource that is the target of the section.content reference. Generally, sections SHOULD have titles, but in some documents, it is unnecessary or inappropriate. Typically, this is where a section has subsections that have their own adequately distinguishing title,  or documents that only have a single section. Most Implementation Guides will make section title to be a required element.",
         "requirements": "Section headings are often standardized for different types of documents.  They give guidance to humans on how the document is organized.",
         "alias": [
@@ -7156,8 +9735,8 @@
       {
         "id": "Composition.section:planoCuidados.code",
         "path": "Composition.section.code",
-        "short": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
-        "definition": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
+        "short": "Classificação da seção da Composition/Document",
+        "definition": "Classificação da seção da Composition/Document",
         "comment": "The code identifies the section for an automated processor of the document. This is particularly relevant when using profiles to control the structure of the document.   \n\nIf the section has content (instead of sub-sections), the section.code does not change the meaning or interpretation of the resource that is the content of the section in the comments for the section.code.",
         "requirements": "Provides computable standardized labels to topics within the document.",
         "min": 1,
@@ -7172,14 +9751,6 @@
             "code": "CodeableConcept"
           }
         ],
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "18776-5",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
         "constraint": [
           {
             "key": "ele-1",
@@ -7209,10 +9780,534 @@
         ]
       },
       {
+        "id": "Composition.section:planoCuidados.code.id",
+        "path": "Composition.section.code.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.extension",
+        "path": "Composition.section.code.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding",
+        "path": "Composition.section.code.coding",
+        "short": "Código definido por uma terminologia",
+        "definition": "Código definido por uma terminologia",
+        "comment": "Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true.",
+        "requirements": "Allows for alternative encodings within a code system, and translations to other code systems.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.coding",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1-8, C*E.10-22"
+          },
+          {
+            "identity": "rim",
+            "map": "union(., ./translation)"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.id",
+        "path": "Composition.section.code.coding.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.extension",
+        "path": "Composition.section.code.coding.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.system",
+        "path": "Composition.section.code.coding.system",
+        "short": "Identificador da terminologia",
+        "definition": "Identidade da terminologia",
+        "comment": "The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously.",
+        "requirements": "Need to be unambiguous about the source of the definition of the symbol.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.system",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "patternUri": "https://loinc.org/",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.3"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystem"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.version",
+        "path": "Composition.section.code.coding.version",
+        "short": "Versão da terminologia - se relevante",
+        "definition": "Versão da terminologia  - se relevante",
+        "comment": "Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.version",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.7"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystemVersion"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "short": "Código do conceito na sintaxe definida pela terminologia",
+        "definition": "Código do conceito na sintaxe definida pela terminologia - fixo em loinc#42347-5 'Admission Diagnosis'",
+        "requirements": "Need to refer to a particular code in the system.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "Coding.code",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "18776-5",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1"
+          },
+          {
+            "identity": "rim",
+            "map": "./code"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.display",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.coding.display",
+        "short": "Descrição conforme definido pela terminologia",
+        "definition": "Representação definida pela terminologia",
+        "requirements": "Need to be able to carry a human-readable meaning of the code for readers that do not know  the system.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.display",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "patternString": "Plan of care note",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.2 - but note this is not well followed"
+          },
+          {
+            "identity": "rim",
+            "map": "CV.displayName"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.userSelected",
+        "path": "Composition.section.code.coding.userSelected",
+        "short": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "definition": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "comment": "Amongst a set of alternatives, a directly chosen code is the most appropriate starting point for new translations. There is some ambiguity about what exactly 'directly chosen' implies, and trading partner agreement may be needed to clarify the use of this element and its consequences more completely.",
+        "requirements": "This has been identified as a clinical safety criterium - that this exact system/code pair was chosen explicitly, rather than inferred by the system based on some rules or language processing.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.userSelected",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "Sometimes implied by being first"
+          },
+          {
+            "identity": "rim",
+            "map": "CD.codingRationale"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\\#true a [     fhir:source \"true\";     fhir:target dt:CDCoding.codingRationale\\#O   ]"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.text",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.text",
+        "short": "Representação em texto do conceito",
+        "definition": "Representação em texto do conceito",
+        "comment": "Very often the text is the same as a displayName of one of the codings.",
+        "requirements": "The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.text",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.9. But note many systems use C*E.2 for this"
+          },
+          {
+            "identity": "rim",
+            "map": "./originalText[mediaType/code=\"text/plain\"]/data"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.text rdfs:subPropertyOf dt:CD.originalText"
+          }
+        ]
+      },
+      {
         "id": "Composition.section:planoCuidados.author",
         "path": "Composition.section.author",
-        "short": "Referência à quem e/ou o que foi o autor desta seção",
-        "definition": "Referência à quem e/ou o que foi o autor desta seção",
+        "short": "Quem/o quê foi o autor desta seção",
+        "definition": "Quem/o quê foi o autor desta seção",
         "requirements": "Identifies who is responsible for the content.",
         "min": 0,
         "max": "*",
@@ -7264,8 +10359,8 @@
       {
         "id": "Composition.section:planoCuidados.focus",
         "path": "Composition.section.focus",
-        "short": "Referência ao recurso associado desta seção",
-        "definition": "Referência ao recurso associado desta seção",
+        "short": "Referência à recurso associado desta seção",
+        "definition": "Referência à recurso associado desta seção",
         "comment": "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
         "min": 0,
         "max": "1",
@@ -7304,8 +10399,8 @@
       {
         "id": "Composition.section:planoCuidados.text",
         "path": "Composition.section.text",
-        "short": "Resumo em texto livre da seção",
-        "definition": "Resumo em texto livre da seção",
+        "short": "Resumo de texto da seção",
+        "definition": "Resumo de texto da seção",
         "comment": "Document profiles may define what content should be represented in the narrative to ensure clinical safety.",
         "min": 0,
         "max": "1",
@@ -7399,8 +10494,8 @@
       {
         "id": "Composition.section:planoCuidados.orderedBy",
         "path": "Composition.section.orderedBy",
-        "short": "Ordem dos itens nas section.entry",
-        "definition": "Ordem dos itens nas section.entry",
+        "short": "Ordem dos elementos na seção 'entry'",
+        "definition": "Ordem dos elementos na seção 'entry'",
         "comment": "Applications SHOULD render ordered lists in the order provided, but MAY allow users to re-order based on their own preferences as well. If there is no order specified, the order is unknown, though there may still be some order.",
         "requirements": "Important for presentation and rendering.  Lists may be sorted to place more important information first or to group related entries.",
         "min": 0,
@@ -7445,8 +10540,8 @@
       {
         "id": "Composition.section:planoCuidados.entry",
         "path": "Composition.section.entry",
-        "short": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
-        "definition": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
+        "short": "Planos de cuidado relevantes para o sumário internacional do paciente",
+        "definition": "Planos de cuidado relevantes para o sumário internacional do paciente",
         "comment": "If there are no entries in the list, an emptyReason SHOULD be provided.",
         "min": 0,
         "max": "*",
@@ -7493,8 +10588,8 @@
       {
         "id": "Composition.section:planoCuidados.emptyReason",
         "path": "Composition.section.emptyReason",
-        "short": "Explicação porquê a seção está vazia",
-        "definition": "Explicação porquê a seção está vazia",
+        "short": "Explicação porquê a secção está vazia",
+        "definition": "Explicação porquê a secção está vazia",
         "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
         "requirements": "Allows capturing things like \"none exist\" or \"not asked\" which can be important for most lists.",
         "min": 0,
@@ -7591,8 +10686,8 @@
         "id": "Composition.section:capacidadeFuncional",
         "path": "Composition.section",
         "sliceName": "capacidadeFuncional",
-        "short": "A secção inicial da composition a partir da qual as demais seções são definidas",
-        "definition": "A secção inicial da composition a partir da qual as demais seções são definidas",
+        "short": "Seção de Resumo de Capacidade Funcional",
+        "definition": "Seção de Resumo de Capacidade Funcional",
         "min": 1,
         "max": "1",
         "base": {
@@ -7656,7 +10751,7 @@
         "representation": [
           "xmlAttr"
         ],
-        "short": "Identificador exclusivo para referência entre elemento",
+        "short": "Identificador exclusivo para referência entre elementos",
         "definition": "Identificador exclusivo para referência entre elementos",
         "min": 0,
         "max": "1",
@@ -7790,7 +10885,7 @@
         "id": "Composition.section:capacidadeFuncional.title",
         "path": "Composition.section.title",
         "short": "Capacidade funcional",
-        "definition": "Título da seção",
+        "definition": "Título da seção - Fixo em 'Capacidade Funcional'",
         "comment": "The title identifies the section for a human reader. The title must be consistent with the narrative of the resource that is the target of the section.content reference. Generally, sections SHOULD have titles, but in some documents, it is unnecessary or inappropriate. Typically, this is where a section has subsections that have their own adequately distinguishing title,  or documents that only have a single section. Most Implementation Guides will make section title to be a required element.",
         "requirements": "Section headings are often standardized for different types of documents.  They give guidance to humans on how the document is organized.",
         "alias": [
@@ -7837,8 +10932,8 @@
       {
         "id": "Composition.section:capacidadeFuncional.code",
         "path": "Composition.section.code",
-        "short": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
-        "definition": "Um código que identifica o tipo de conteúdo contido dentro da seção. Isso deve ser consistente com o título da seção",
+        "short": "Classificação da seção da Composition/Document",
+        "definition": "Classificação da seção da Composition/Document",
         "comment": "The code identifies the section for an automated processor of the document. This is particularly relevant when using profiles to control the structure of the document.   \n\nIf the section has content (instead of sub-sections), the section.code does not change the meaning or interpretation of the resource that is the content of the section in the comments for the section.code.",
         "requirements": "Provides computable standardized labels to topics within the document.",
         "min": 1,
@@ -7853,14 +10948,6 @@
             "code": "CodeableConcept"
           }
         ],
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "54522-8",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
         "constraint": [
           {
             "key": "ele-1",
@@ -7890,10 +10977,534 @@
         ]
       },
       {
+        "id": "Composition.section:capacidadeFuncional.code.id",
+        "path": "Composition.section.code.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.extension",
+        "path": "Composition.section.code.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding",
+        "path": "Composition.section.code.coding",
+        "short": "Código definido por uma terminologia",
+        "definition": "Código definido por uma terminologia",
+        "comment": "Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true.",
+        "requirements": "Allows for alternative encodings within a code system, and translations to other code systems.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.coding",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1-8, C*E.10-22"
+          },
+          {
+            "identity": "rim",
+            "map": "union(., ./translation)"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.id",
+        "path": "Composition.section.code.coding.id",
+        "representation": [
+          "xmlAttr"
+        ],
+        "short": "Identificador exclusivo para referência entre elementos",
+        "definition": "Identificador exclusivo para referência entre elementos",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Element.id",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "http://hl7.org/fhirpath/System.String",
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+                "valueUrl": "string"
+              }
+            ]
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.extension",
+        "path": "Composition.section.code.coding.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "description": "Extensions are always sliced by (at least) url",
+          "rules": "open"
+        },
+        "short": "Conteúdo adicional definido por implementações",
+        "definition": "Conteúdo adicional definido por implementações",
+        "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "alias": [
+          "extensions",
+          "user content"
+        ],
+        "min": 0,
+        "max": "*",
+        "base": {
+          "path": "Element.extension",
+          "min": 0,
+          "max": "*"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          },
+          {
+            "key": "ext-1",
+            "severity": "error",
+            "human": "Must have either extensions or value[x], not both",
+            "expression": "extension.exists() != value.exists()",
+            "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+            "source": "http://hl7.org/fhir/StructureDefinition/Extension"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": false,
+        "mapping": [
+          {
+            "identity": "rim",
+            "map": "n/a"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.system",
+        "path": "Composition.section.code.coding.system",
+        "short": "Identificador da terminologia",
+        "definition": "Identidade da terminologia",
+        "comment": "The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously.",
+        "requirements": "Need to be unambiguous about the source of the definition of the symbol.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.system",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "patternUri": "https://loinc.org/",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.3"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystem"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.version",
+        "path": "Composition.section.code.coding.version",
+        "short": "Versão da terminologia - se relevante",
+        "definition": "Versão da terminologia  - se relevante",
+        "comment": "Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.version",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.7"
+          },
+          {
+            "identity": "rim",
+            "map": "./codeSystemVersion"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "short": "Código do conceito na sintaxe definida pela terminologia",
+        "definition": "Código do conceito na sintaxe definida pela terminologia - fixo em loinc#42347-5 'Admission Diagnosis'",
+        "requirements": "Need to refer to a particular code in the system.",
+        "min": 1,
+        "max": "1",
+        "base": {
+          "path": "Coding.code",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "54522-8",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "mustSupport": true,
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.1"
+          },
+          {
+            "identity": "rim",
+            "map": "./code"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.display",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.coding.display",
+        "short": "Descrição conforme definido pela terminologia",
+        "definition": "Representação definida pela terminologia",
+        "requirements": "Need to be able to carry a human-readable meaning of the code for readers that do not know  the system.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.display",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "patternString": "Functional status",
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.2 - but note this is not well followed"
+          },
+          {
+            "identity": "rim",
+            "map": "CV.displayName"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.userSelected",
+        "path": "Composition.section.code.coding.userSelected",
+        "short": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "definition": "Se esta codificação foi escolhida diretamente pelo usuário",
+        "comment": "Amongst a set of alternatives, a directly chosen code is the most appropriate starting point for new translations. There is some ambiguity about what exactly 'directly chosen' implies, and trading partner agreement may be needed to clarify the use of this element and its consequences more completely.",
+        "requirements": "This has been identified as a clinical safety criterium - that this exact system/code pair was chosen explicitly, rather than inferred by the system based on some rules or language processing.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "Coding.userSelected",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "Sometimes implied by being first"
+          },
+          {
+            "identity": "rim",
+            "map": "CD.codingRationale"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\\#true a [     fhir:source \"true\";     fhir:target dt:CDCoding.codingRationale\\#O   ]"
+          }
+        ]
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.text",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
+            "valueBoolean": true
+          }
+        ],
+        "path": "Composition.section.code.text",
+        "short": "Representação em texto do conceito",
+        "definition": "Representação em texto do conceito",
+        "comment": "Very often the text is the same as a displayName of one of the codings.",
+        "requirements": "The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source.",
+        "min": 0,
+        "max": "1",
+        "base": {
+          "path": "CodeableConcept.text",
+          "min": 0,
+          "max": "1"
+        },
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "constraint": [
+          {
+            "key": "ele-1",
+            "severity": "error",
+            "human": "All FHIR elements must have a @value or children",
+            "expression": "hasValue() or (children().count() > id.count())",
+            "xpath": "@value|f:*|h:div",
+            "source": "http://hl7.org/fhir/StructureDefinition/Element"
+          }
+        ],
+        "isModifier": false,
+        "isSummary": true,
+        "mapping": [
+          {
+            "identity": "v2",
+            "map": "C*E.9. But note many systems use C*E.2 for this"
+          },
+          {
+            "identity": "rim",
+            "map": "./originalText[mediaType/code=\"text/plain\"]/data"
+          },
+          {
+            "identity": "orim",
+            "map": "fhir:CodeableConcept.text rdfs:subPropertyOf dt:CD.originalText"
+          }
+        ]
+      },
+      {
         "id": "Composition.section:capacidadeFuncional.author",
         "path": "Composition.section.author",
-        "short": "Referência à quem e/ou o que foi o autor desta seção",
-        "definition": "Referência à quem e/ou o que foi o autor desta seção",
+        "short": "Quem/o quê foi o autor desta seção",
+        "definition": "Quem/o quê foi o autor desta seção",
         "requirements": "Identifies who is responsible for the content.",
         "min": 0,
         "max": "*",
@@ -7945,8 +11556,8 @@
       {
         "id": "Composition.section:capacidadeFuncional.focus",
         "path": "Composition.section.focus",
-        "short": "Referência ao recurso associado desta seção",
-        "definition": "Referência ao recurso associado desta seção",
+        "short": "Referência à recurso associado desta seção",
+        "definition": "Referência à recurso associado desta seção",
         "comment": "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
         "min": 0,
         "max": "1",
@@ -7985,8 +11596,8 @@
       {
         "id": "Composition.section:capacidadeFuncional.text",
         "path": "Composition.section.text",
-        "short": "Resumo em texto livre da seção",
-        "definition": "Resumo em texto livre da seção",
+        "short": "Resumo de texto da seção",
+        "definition": "Resumo de texto da seção",
         "comment": "Document profiles may define what content should be represented in the narrative to ensure clinical safety.",
         "min": 0,
         "max": "1",
@@ -8080,8 +11691,8 @@
       {
         "id": "Composition.section:capacidadeFuncional.orderedBy",
         "path": "Composition.section.orderedBy",
-        "short": "Ordem dos itens nas section.entry",
-        "definition": "Ordem dos itens nas section.entry",
+        "short": "Ordem dos elementos na seção 'entry'",
+        "definition": "Ordem dos elementos na seção 'entry'",
         "comment": "Applications SHOULD render ordered lists in the order provided, but MAY allow users to re-order based on their own preferences as well. If there is no order specified, the order is unknown, though there may still be some order.",
         "requirements": "Important for presentation and rendering.  Lists may be sorted to place more important information first or to group related entries.",
         "min": 0,
@@ -8126,8 +11737,8 @@
       {
         "id": "Composition.section:capacidadeFuncional.entry",
         "path": "Composition.section.entry",
-        "short": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
-        "definition": "Uma referência ao recurso a partir do qual a narrativa da seção é derivada",
+        "short": "Capacidade funcional para o sumário internacional do paciente",
+        "definition": "Capacidade funcional para o sumário internacional do paciente",
         "comment": "If there are no entries in the list, an emptyReason SHOULD be provided.",
         "min": 0,
         "max": "*",
@@ -8174,8 +11785,8 @@
       {
         "id": "Composition.section:capacidadeFuncional.emptyReason",
         "path": "Composition.section.emptyReason",
-        "short": "Explicação porquê a seção está vazia",
-        "definition": "Explicação porquê a seção está vazia",
+        "short": "Explicação porquê a secção está vazia",
+        "definition": "Explicação porquê a secção está vazia",
         "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
         "requirements": "Allows capturing things like \"none exist\" or \"not asked\" which can be important for most lists.",
         "min": 0,
@@ -8276,7 +11887,6 @@
         "id": "Composition",
         "path": "Composition",
         "short": "Sumário de Alta",
-        "definition": "Documento clínico emitido na alta hospitalar. Reproduz as sete seções do br-core-sumarioalta sobre o br-core-composition e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter).",
         "constraint": [
           {
             "key": "sa-2",
@@ -8311,11 +11921,6 @@
           ]
         },
         "mustSupport": true
-      },
-      {
-        "id": "Composition.category",
-        "path": "Composition.category",
-        "max": "1"
       },
       {
         "id": "Composition.subject",
@@ -8376,27 +11981,9 @@
         "mustSupport": true
       },
       {
-        "id": "Composition.section",
-        "path": "Composition.section",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "pattern",
-              "path": "code"
-            }
-          ],
-          "rules": "open",
-          "description": "Sete seções do br-core-sumarioalta, identificadas pelo código LOINC."
-        },
-        "min": 7,
-        "max": "7"
-      },
-      {
         "id": "Composition.section:diagnosticosAdmissao",
         "path": "Composition.section",
         "sliceName": "diagnosticosAdmissao",
-        "min": 1,
-        "max": "1",
         "constraint": [
           {
             "key": "sa-1",
@@ -8419,14 +12006,19 @@
         "id": "Composition.section:diagnosticosAdmissao.code",
         "path": "Composition.section.code",
         "min": 1,
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "42347-5",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding",
+        "path": "Composition.section.code.coding",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "min": 1,
         "mustSupport": true
       },
       {
@@ -8457,8 +12049,6 @@
         "id": "Composition.section:alergiasIntolerancias",
         "path": "Composition.section",
         "sliceName": "alergiasIntolerancias",
-        "min": 1,
-        "max": "1",
         "constraint": [
           {
             "key": "sa-1",
@@ -8481,14 +12071,19 @@
         "id": "Composition.section:alergiasIntolerancias.code",
         "path": "Composition.section.code",
         "min": 1,
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "48765-2",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding",
+        "path": "Composition.section.code.coding",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "min": 1,
         "mustSupport": true
       },
       {
@@ -8519,8 +12114,6 @@
         "id": "Composition.section:diagnosticosAvaliados",
         "path": "Composition.section",
         "sliceName": "diagnosticosAvaliados",
-        "min": 1,
-        "max": "1",
         "constraint": [
           {
             "key": "sa-1",
@@ -8543,14 +12136,19 @@
         "id": "Composition.section:diagnosticosAvaliados.code",
         "path": "Composition.section.code",
         "min": 1,
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "57852-6",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding",
+        "path": "Composition.section.code.coding",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "min": 1,
         "mustSupport": true
       },
       {
@@ -8581,8 +12179,6 @@
         "id": "Composition.section:procedimentosRealizados",
         "path": "Composition.section",
         "sliceName": "procedimentosRealizados",
-        "min": 1,
-        "max": "1",
         "constraint": [
           {
             "key": "sa-1",
@@ -8605,14 +12201,19 @@
         "id": "Composition.section:procedimentosRealizados.code",
         "path": "Composition.section.code",
         "min": 1,
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "47519-4",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding",
+        "path": "Composition.section.code.coding",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "min": 1,
         "mustSupport": true
       },
       {
@@ -8643,8 +12244,6 @@
         "id": "Composition.section:prescricaoAlta",
         "path": "Composition.section",
         "sliceName": "prescricaoAlta",
-        "min": 1,
-        "max": "1",
         "constraint": [
           {
             "key": "sa-1",
@@ -8667,14 +12266,19 @@
         "id": "Composition.section:prescricaoAlta.code",
         "path": "Composition.section.code",
         "min": 1,
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "8654-6",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding",
+        "path": "Composition.section.code.coding",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "min": 1,
         "mustSupport": true
       },
       {
@@ -8705,8 +12309,6 @@
         "id": "Composition.section:planoCuidados",
         "path": "Composition.section",
         "sliceName": "planoCuidados",
-        "min": 1,
-        "max": "1",
         "constraint": [
           {
             "key": "sa-1",
@@ -8729,14 +12331,19 @@
         "id": "Composition.section:planoCuidados.code",
         "path": "Composition.section.code",
         "min": 1,
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "18776-5",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding",
+        "path": "Composition.section.code.coding",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "min": 1,
         "mustSupport": true
       },
       {
@@ -8767,8 +12374,6 @@
         "id": "Composition.section:capacidadeFuncional",
         "path": "Composition.section",
         "sliceName": "capacidadeFuncional",
-        "min": 1,
-        "max": "1",
         "constraint": [
           {
             "key": "sa-1",
@@ -8791,14 +12396,19 @@
         "id": "Composition.section:capacidadeFuncional.code",
         "path": "Composition.section.code",
         "min": 1,
-        "patternCodeableConcept": {
-          "coding": [
-            {
-              "code": "54522-8",
-              "system": "http://loinc.org"
-            }
-          ]
-        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding",
+        "path": "Composition.section.code.coding",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code.coding.code",
+        "path": "Composition.section.code.coding.code",
+        "min": 1,
         "mustSupport": true
       },
       {
@@ -8809,14 +12419,6 @@
       {
         "id": "Composition.section:capacidadeFuncional.entry",
         "path": "Composition.section.entry",
-        "type": [
-          {
-            "code": "Reference",
-            "targetProfile": [
-              "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-capacidadefuncional"
-            ]
-          }
-        ],
         "mustSupport": true
       },
       {

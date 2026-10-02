@@ -30,7 +30,7 @@ O sistema emissor envia o código do HL7; o display em português vem do supleme
 
 ## Alergias: SNOMED CT
 
-O CBARA usa SNOMED CT, com códigos nacionais para o que não tem conceito SNOMED. Por isso o agente da alergia é codificado em SNOMED CT:
+O CBARA tem códigos nacionais, cada um mapeado (SAME-AS) para um conceito SNOMED CT no OCL. Por isso o agente da alergia é codificado em SNOMED CT, e o código CBARA pode ir junto:
 
 - **BRAlergenosSNOMEDNacional**: SNOMED CT (descendentes de 105590001 Substance e 373873005 Pharmaceutical / biologic product) + BRAlergenosCBARA + BRMedicamento + BRImunobiologico. Ligado como `preferred` na fatia `code.coding[snomed]`.
 - O BR-Core mantém `AllergyIntolerance.code` required em **BRAlergenos**, que não tem SNOMED CT. Enquanto isso não mudar, envie também um coding de BRAlergenos (BRMedicamento, BRImunobiologico ou CBARA). Ver débito D-06.
@@ -41,7 +41,7 @@ O MedDRA é usado pela Anvisa na farmacovigilância; o padrão clínico é o SNO
 
 - **BRManifestacaoReacaoSNOMED**: SNOMED CT, descendentes de 404684003 Clinical finding. Ligado como `preferred` em `reaction.manifestation` (o BR-Core tem só `example` para MedDRA).
 - MedDRA (BRMedDRA) vai como coding adicional quando o emissor o tiver.
-- **ConceptMap BRMedDRAParaSNOMED**: conversão MedDRA para SNOMED CT. O conteúdo completo vem do mapa oficial MedDRA–SNOMED CT (MSSO e SNOMED International), sujeito às duas licenças; no repositório há só mapeamentos ilustrativos.
+- **ConceptMap BRMedDRAParaSNOMED**: forma FHIR dos 25 mapeamentos SAME-AS que já existem no OCL, na Source MS/BRMedDRA, para SNOMED CT (`/orgs/SNOMED/sources/gps/`). O único código do BRMedDRA sem mapeamento no OCL, Angioedema (10002424), recebe aqui a proposta 41291007 Angioedema.
 
 ## Procedimentos: SIGTAP e TUSS 22
 
