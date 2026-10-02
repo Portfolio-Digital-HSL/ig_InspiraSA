@@ -3,12 +3,33 @@
   "id": "sumario-alta-colecistectomia",
   "meta": {
     "profile": [
-      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta"
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta",
+      "http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-composition"
     ]
   },
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "107903-7",
+          "system": "http://loinc.org",
+          "display": "Clinical note"
+        }
+      ]
+    }
+  ],
   "author": [
     {
       "reference": "Practitioner/medica-alta"
+    }
+  ],
+  "attester": [
+    {
+      "mode": "legal",
+      "time": "2026-09-25T10:30:00-03:00",
+      "party": {
+        "reference": "Practitioner/medica-alta"
+      }
     }
   ],
   "section": [

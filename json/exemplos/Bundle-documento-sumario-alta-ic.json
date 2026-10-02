@@ -1,6 +1,11 @@
 {
   "resourceType": "Bundle",
   "id": "documento-sumario-alta-ic",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-bundle"
+    ]
+  },
   "identifier": {
     "system": "http://fhir.hsl.org.br/ig/inspirasa/sid/documento",
     "value": "SA-2026-000789"
@@ -13,16 +18,37 @@
         "id": "sumario-alta-ic",
         "meta": {
           "profile": [
-            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta",
+            "http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-composition"
           ]
         },
         "identifier": {
           "system": "http://fhir.hsl.org.br/ig/inspirasa/sid/documento",
           "value": "SA-2026-000789"
         },
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "107903-7",
+                "system": "http://loinc.org",
+                "display": "Clinical note"
+              }
+            ]
+          }
+        ],
         "author": [
           {
             "reference": "Practitioner/medica-alta"
+          }
+        ],
+        "attester": [
+          {
+            "mode": "legal",
+            "time": "2026-09-28T11:30:00-03:00",
+            "party": {
+              "reference": "Practitioner/medica-alta"
+            }
           }
         ],
         "section": [

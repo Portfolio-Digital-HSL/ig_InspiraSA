@@ -47,5 +47,9 @@ Alias: $BRAlergenosSNOMEDNacional-vs = https://terminologia.saude.gov.br/fhir/Va
 Alias: $BRManifestacaoReacaoSNOMED-vs = https://terminologia.saude.gov.br/fhir/ValueSet/BRManifestacaoReacaoSNOMED
 Alias: $BRProcedimentosNacionais-vs = https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosNacionais
 
+// ─── FHIR Clinical Documents (hl7.fhir.uv.fhir-clinical-document 1.0.1) ─────
+Alias: $clindoc-bundle      = http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-bundle
+Alias: $clindoc-composition = http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-composition
+
 // ─── Artefatos deste guia ──────────────────────────────────────────────────
 Alias: $inspirasa = http://fhir.hsl.org.br/ig/inspirasa

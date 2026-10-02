@@ -1,12 +1,13 @@
-// Exemplo 3: o Sumário de Alta do exemplo 1 como documento FHIR (Bundle
-// document), forma de envio à RNDS. A Composition é a primeira entrada.
+// Exemplo 3: o Sumário de Alta do exemplo 1 como documento FHIR, conforme ao
+// clinical-document-bundle (FHIR Clinical Documents). A Composition é a
+// primeira entrada; timestamp >= Composition.date.
 
 RuleSet: Entrada(tipo, id)
 * entry[+].fullUrl = "http://fhir.hsl.org.br/ig/inspirasa/{tipo}/{id}"
 * entry[=].resource = {id}
 
 Instance: documento-sumario-alta-ic
-InstanceOf: Bundle
+InstanceOf: $clindoc-bundle
 Usage: #example
 Title: "Documento do Sumário de Alta (insuficiência cardíaca)"
 Description: "Exemplo: Documento do Sumário de Alta (insuficiência cardíaca)."

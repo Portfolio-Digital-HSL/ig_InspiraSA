@@ -9,7 +9,7 @@
 7. **Publicar nova versão do `BRProcedimentosNacionais`** com BRTabelaSUS e TUSS 22 inteiras, sem o BRCBHPMTUSS (a CBHPM é da AMB e paga), e alinhar o conteúdo do guia de terminologia e do OCL.
 8. **Revisar o `br-core-capacidadefuncional`** (D-04): terminologia de funcionalidade (CIF ou SNOMED CT), categoria do HL7 e `subject` só por referência.
 9. **Liberar mais de uma posologia** em `br-core-medicationrequest` (D-05) e remover o binding da fatia `medicationReference` (D-07).
-10. **Enviar o Sumário de Alta como Bundle `document`** assinado, com `identifier` estável e retificação por `relatesTo`.
+10. **Enviar o Sumário de Alta como Bundle `document` conforme ao `clinical-document-bundle`** (FHIR Clinical Documents), assinado, com `identifier` estável e retificação por `relatesTo`.
 
 ## Mudanças propostas ao BR-Core
 
@@ -18,6 +18,8 @@ Regras que este guia hoje só consegue dar como orientação de preenchimento:
 | Perfil | Mudança |
 |---|---|
 | br-core-sumarioalta | `encounter` 1..1; `custodian` 1..1; `type` = LOINC 18842-5; invariante "seção com `entry` ou `emptyReason`"; discriminador `pattern` em `code` e `http://loinc.org` (D-01, D-02) |
+| br-core-composition | compatibilidade declarada com o `clinical-document-composition` (FHIR Clinical Documents): categoria 107903-7 Clinical note, fatias de atestador legal e profissional, extensões de versão e destinatário |
+| (novo) Bundle de documento | adotar o `clinical-document-bundle` do HL7 internacional, sem perfil nacional próprio |
 | br-core-encounter | invariante "internação encerrada tem `period.end`" para uso no Sumário de Alta |
 | br-core-allergyintolerance | incluir SNOMED CT no BRAlergenos; `reaction.manifestation` preferred SNOMED CT |
 | br-core-procedure | `code` extensible ao BRProcedimentosNacionais; `performer.function` preferred performer-role |

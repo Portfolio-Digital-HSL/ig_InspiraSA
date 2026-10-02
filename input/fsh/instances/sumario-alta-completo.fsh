@@ -174,10 +174,14 @@ InstanceOf: br-core-sumarioalta
 Usage: #example
 Title: "Sumário de Alta: insuficiência cardíaca"
 Description: "Exemplo: Sumário de Alta: insuficiência cardíaca."
+// Conforme também ao clinical-document-composition (FHIR Clinical Documents)
+* meta.profile[0] = "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta"
+* meta.profile[1] = $clindoc-composition
 * identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento"
 * identifier.value = "SA-2026-000789"
 * status = #final
 * type = $loinc#18842-5 "Discharge summary"
+* category[0] = $loinc#107903-7 "Clinical note"
 * subject = Reference(paciente-joao)
 * encounter = Reference(internacao-ic)
 * date = "2026-09-28T11:30:00-03:00"
@@ -185,6 +189,9 @@ Description: "Exemplo: Sumário de Alta: insuficiência cardíaca."
 * title = "Sumário de Alta"
 * confidentiality = #N
 * custodian = Reference(hospital-exemplo)
+* attester[0].mode = #legal
+* attester[0].time = "2026-09-28T11:30:00-03:00"
+* attester[0].party = Reference(medica-alta)
 * insert Secao(diagnosticosAdmissao, 42347-5, Diagnósticos da admissão, Insuficiência cardíaca congestiva (I50.0\).)
 * section[diagnosticosAdmissao].entry[0] = Reference(diagnostico-ic)
 * insert Secao(alergiasIntolerancias, 48765-2, Alergias e intolerâncias, Amoxicilina: angioedema (grave\).)

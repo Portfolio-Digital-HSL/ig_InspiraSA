@@ -23,6 +23,12 @@ dependencies:
     id: brcore
     uri: https://br-core.saude.gov.br/fhir/ImplementationGuide/br.gov.saude.br-core.fhir
     version: 1.3.0
+  # FHIR Clinical Documents (HL7 internacional): perfis de Bundle e Composition
+  # de documento clínico, usados onde o BR-Core não tem perfil.
+  hl7.fhir.uv.fhir-clinical-document:
+    id: clindoc
+    uri: http://hl7.org/fhir/uv/fhir-clinical-document/ImplementationGuide/hl7.fhir.uv.fhir-clinical-document
+    version: 1.0.1
 
 # Não habilite i18n-default-lang sem testar: liga a geração multi-idioma
 # (output/en + output/pt-BR) e introduz avisos de <script> e links quebrados.

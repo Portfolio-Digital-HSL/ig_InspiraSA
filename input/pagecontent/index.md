@@ -16,7 +16,7 @@ O SA-IG deriva direto dos recursos-base do FHIR, sob um canonical antigo e sem `
 
 ## Princípio
 
-A RNDS se ajusta aos perfis do BR-Core. Onde o BR-Core não tem perfil, usa o recurso canônico do FHIR R4. Perfis próprios da RNDS, como os do SA-IG, deixam de existir.
+A RNDS se ajusta aos perfis do BR-Core. Onde o BR-Core não tem perfil, usa as especificações internacionais do HL7 (para o documento, o [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/)) e, na falta delas, o recurso canônico do FHIR R4. Perfis próprios da RNDS, como os do SA-IG, deixam de existir.
 
 ## O que este guia faz
 

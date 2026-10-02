@@ -6,7 +6,7 @@ Guia de Implementação FHIR **R4 (4.0.1)** do projeto InspiraSA, escrito em
 
 ## Conteúdo
 
-Sumário de Alta hospitalar com os perfis do BR-Core 1.3.0, substituindo o SA-IG legado da RNDS. O guia não cria perfis: usa `br-core-sumarioalta`, `br-core-encounter`, `br-core-condition`, `br-core-allergyintolerance`, `br-core-procedure`, `br-core-medicationrequest`, `br-core-medication`, `br-core-careplan` e `br-core-capacidadefuncional`, e documenta regras de preenchimento, exemplos, débitos e recomendações.
+Sumário de Alta hospitalar com os perfis do BR-Core 1.3.0, substituindo o SA-IG legado da RNDS. O guia não cria perfis: usa `br-core-sumarioalta`, `br-core-encounter`, `br-core-condition`, `br-core-allergyintolerance`, `br-core-procedure`, `br-core-medicationrequest`, `br-core-medication`, `br-core-careplan` e `br-core-capacidadefuncional`, e documenta regras de preenchimento, exemplos, débitos e recomendações. Onde o BR-Core não tem perfil, usa o FHIR Clinical Documents 1.0.1 (`clinical-document-bundle`, `clinical-document-composition`).
 
 - `json/`: exemplos em JSON e `exemplos-inspirasa.zip`.
 - `terminologia/`: suplementos pt-BR, ValueSets e ConceptMap para o OCL e o guia de terminologia (não publicados pelo IG). Ver `terminologia/README.md`.
