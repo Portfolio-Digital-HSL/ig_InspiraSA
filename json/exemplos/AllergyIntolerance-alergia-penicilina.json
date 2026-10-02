@@ -3,7 +3,7 @@
   "id": "alergia-penicilina",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/alergia-sumario-alta"
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-allergyintolerance"
     ]
   },
   "category": [
@@ -12,8 +12,8 @@
   "code": {
     "coding": [
       {
-        "system": "http://snomed.info/sct",
         "code": "372687004",
+        "system": "http://snomed.info/sct",
         "display": "Amoxicillin (substance)"
       },
       {

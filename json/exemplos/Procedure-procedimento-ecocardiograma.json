@@ -3,7 +3,7 @@
   "id": "procedimento-ecocardiograma",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/procedimento-sumario-alta"
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-procedure"
     ]
   },
   "performer": [

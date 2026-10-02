@@ -3,7 +3,7 @@
   "id": "sumario-alta-colecistectomia",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta"
     ]
   },
   "author": [
@@ -162,6 +162,7 @@
       }
     }
   ],
+  "status": "final",
   "type": {
     "coding": [
       {
@@ -171,7 +172,6 @@
       }
     ]
   },
-  "status": "final",
   "subject": {
     "reference": "Patient/paciente-lucia"
   },

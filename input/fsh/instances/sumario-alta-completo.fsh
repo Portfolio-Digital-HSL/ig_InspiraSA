@@ -2,7 +2,7 @@
 // seções preenchidas.
 
 Instance: internacao-ic
-InstanceOf: InternacaoSumarioAlta
+InstanceOf: br-core-encounter
 Usage: #example
 Title: "Internação por insuficiência cardíaca"
 Description: "Exemplo: Internação por insuficiência cardíaca."
@@ -27,7 +27,7 @@ Description: "Exemplo: Internação por insuficiência cardíaca."
 * serviceProvider = Reference(hospital-exemplo)
 
 Instance: diagnostico-ic
-InstanceOf: DiagnosticoSumarioAlta
+InstanceOf: br-core-condition
 Usage: #example
 Title: "Insuficiência cardíaca congestiva (admissão)"
 Description: "Exemplo: Insuficiência cardíaca congestiva (admissão)."
@@ -40,7 +40,7 @@ Description: "Exemplo: Insuficiência cardíaca congestiva (admissão)."
 * recordedDate = "2026-09-20"
 
 Instance: diagnostico-pneumonia
-InstanceOf: DiagnosticoSumarioAlta
+InstanceOf: br-core-condition
 Usage: #example
 Title: "Pneumonia (avaliado na internação)"
 Description: "Exemplo: Pneumonia (avaliado na internação)."
@@ -54,7 +54,7 @@ Description: "Exemplo: Pneumonia (avaliado na internação)."
 * recordedDate = "2026-09-23"
 
 Instance: alergia-penicilina
-InstanceOf: AlergiaSumarioAlta
+InstanceOf: br-core-allergyintolerance
 Usage: #example
 Title: "Alergia a amoxicilina"
 Description: "Exemplo: Alergia a amoxicilina."
@@ -63,8 +63,8 @@ Description: "Exemplo: Alergia a amoxicilina."
 * type = #allergy
 * category[0] = #medication
 * criticality = #high
-* code.coding[snomed] = $sct#372687004 "Amoxicillin (substance)"
-* code.coding[+] = $BRMedicamento#BR0281135-3 "AMOXICILINA + CLAVULANATO DE POTÁSSIO 40+5,7 MG/ML SUSPENSÃO ORAL 70 ML"
+* code.coding[0] = $sct#372687004 "Amoxicillin (substance)"
+* code.coding[1] = $BRMedicamento#BR0281135-3 "AMOXICILINA + CLAVULANATO DE POTÁSSIO 40+5,7 MG/ML SUSPENSÃO ORAL 70 ML"
 * code.text = "Amoxicilina"
 * patient = Reference(paciente-joao)
 * encounter = Reference(internacao-ic)
@@ -74,7 +74,7 @@ Description: "Exemplo: Alergia a amoxicilina."
 * reaction[0].severity = #severe
 
 Instance: procedimento-tratamento-ic
-InstanceOf: ProcedimentoSumarioAlta
+InstanceOf: br-core-procedure
 Usage: #example
 Title: "Tratamento de insuficiência cardíaca"
 Description: "Exemplo: Tratamento de insuficiência cardíaca."
@@ -88,7 +88,7 @@ Description: "Exemplo: Tratamento de insuficiência cardíaca."
 * performer[0].actor = Reference(medica-alta)
 
 Instance: procedimento-ecocardiograma
-InstanceOf: ProcedimentoSumarioAlta
+InstanceOf: br-core-procedure
 Usage: #example
 Title: "Ecocardiografia transtorácica"
 Description: "Exemplo: Ecocardiografia transtorácica."
@@ -107,7 +107,7 @@ Description: "Exemplo: Losartana potássica 100 mg comprimido."
 * code = $BRMedicamento#BR0287473 "LOSARTANA POTÁSSICA 100 MG COMPRIMIDO"
 
 Instance: prescricao-losartana
-InstanceOf: PrescricaoAltaSumarioAlta
+InstanceOf: br-core-medicationrequest
 Usage: #example
 Title: "Losartana 100 mg, 1 comprimido ao dia"
 Description: "Exemplo: Losartana 100 mg, 1 comprimido ao dia."
@@ -133,7 +133,7 @@ Description: "Exemplo: Losartana 100 mg, 1 comprimido ao dia."
 * dispenseRequest.validityPeriod.end = "2026-12-28"
 
 Instance: plano-cuidados-ic
-InstanceOf: PlanoCuidadosSumarioAlta
+InstanceOf: br-core-careplan
 Usage: #example
 Title: "Plano de cuidados pós-alta"
 Description: "Exemplo: Plano de cuidados pós-alta."
@@ -170,7 +170,7 @@ RuleSet: Secao(fatia, codigo, titulo, texto)
 * section[{fatia}].text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>{texto}</p></div>"
 
 Instance: sumario-alta-ic
-InstanceOf: SumarioAlta
+InstanceOf: br-core-sumarioalta
 Usage: #example
 Title: "Sumário de Alta: insuficiência cardíaca"
 Description: "Exemplo: Sumário de Alta: insuficiência cardíaca."

@@ -3,7 +3,7 @@
   "id": "diagnostico-ic",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/diagnostico-sumario-alta"
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-condition"
     ]
   },
   "category": [

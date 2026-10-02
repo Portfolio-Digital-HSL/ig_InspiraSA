@@ -1,51 +1,63 @@
 # Estrutura do documento
 
-O Sumário de Alta é enviado como **Bundle `document`**: a [Composition](StructureDefinition-sumario-alta.html) é a primeira entrada, seguida de todos os recursos referenciados. Ver o exemplo [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.html).
+Este guia não cria perfis. O Sumário de Alta usa os perfis do **BR-Core 1.3.0** como estão e, onde o BR-Core não tem perfil, o recurso canônico do FHIR R4; o guia diz como preenchê-los e registra o que precisa mudar no BR-Core.
 
-## Cabeçalho
+O documento é enviado como **Bundle `document`**: a Composition (`br-core-sumarioalta`) é a primeira entrada, seguida de todos os recursos referenciados. Ver o exemplo [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.html).
 
-| Elemento | Regra | Observação |
+## Perfis usados
+
+| Conteúdo | Perfil BR-Core | Antes, no SA-IG |
 |---|---|---|
-| `type` | LOINC 18842-5 Discharge summary | fixo |
-| `subject` | 1..1, br-core-patient | paciente não identificado: CNS provisório, não extensão |
-| `encounter` | 1..1, [InternacaoSumarioAlta](StructureDefinition-internacao-sumario-alta.html) | invariante sa-2 |
-| `author` | 1..* | profissional da alta |
-| `custodian` | 1..1, br-core-organization | estabelecimento (CNES) |
-| `status` | final, amended, entered-in-error | retificação com `relatesTo` |
+| Documento | `br-core-sumarioalta` (herda de `br-core-composition`) | BRSumarioAlta, sobre BRConjuntoMinimoDados (CMD) |
+| Internação | `br-core-encounter` | BRContatoAssistencial-1.0 (seção própria) |
+| Diagnósticos | `br-core-condition` | BRProblemaDiagnostico |
+| Alergias e intolerâncias | `br-core-allergyintolerance` | BRAlergiaReacaoAdversa-1.0 |
+| Procedimentos | `br-core-procedure` | BRProcedimentoRealizado-1.0 |
+| Prescrição de alta | `br-core-medicationrequest` + `br-core-medication` | BRRegistroPrescricaoMedicamento → BRPrescricaoMedicamento |
+| Plano de cuidados | `br-core-careplan` | BRPlanoCuidados-1.0 |
+| Capacidade funcional | `br-core-capacidadefuncional` | BRRestricaoFuncionalIncapacidadeSaude-1.0 |
+| Paciente, profissional, estabelecimento | `br-core-patient`, `br-core-practitioner`, `br-core-organization` | BRIndividuo, extensões próprias |
+| Equipe | `br-core-careteam`, quando necessária | BRIdentificacaoEquipe-1.0 (extensão) |
+| Documento para envio | `Bundle` do FHIR R4 (`type = document`); o BR-Core não tem perfil | — |
 
 ## Seções
 
-O `section` é 7..7. Cada seção é 1..1, identificada pelo código LOINC e DEVE ter `entry` ou `emptyReason` (invariante sa-1).
+O `br-core-sumarioalta` exige as sete seções (`section` 7..7, cada uma 1..1).
 
-| Fatia | LOINC | Entradas | Antes, no SA-IG |
-|---|---|---|---|
-| diagnosticosAdmissao | 42347-5 | [DiagnosticoSumarioAlta](StructureDefinition-diagnostico-sumario-alta.html) | parte de problemasDiagnosticosAvaliados |
-| alergiasIntolerancias | 48765-2 | [AlergiaSumarioAlta](StructureDefinition-alergia-sumario-alta.html) | alergiaReacaoAdversa |
-| diagnosticosAvaliados | 57852-6 | [DiagnosticoSumarioAlta](StructureDefinition-diagnostico-sumario-alta.html) | problemasDiagnosticosAvaliados |
-| procedimentosRealizados | 47519-4 | [ProcedimentoSumarioAlta](StructureDefinition-procedimento-sumario-alta.html) | procedimentosRealizados |
-| prescricaoAlta | 8654-6 | [PrescricaoAltaSumarioAlta](StructureDefinition-prescricao-alta-sumario-alta.html) | prescricaoAlta via Composition intermediária |
-| planoCuidados | 18776-5 | [PlanoCuidadosSumarioAlta](StructureDefinition-plano-cuidados-sumario-alta.html) | planoCuidados (só texto) |
-| capacidadeFuncional | 54522-8 | br-core-capacidadefuncional | restricaoFuncionalIncapacidadeSaude (0..1) |
+| Fatia | LOINC | Entradas |
+|---|---|---|
+| diagnosticosAdmissao | 42347-5 | br-core-condition |
+| alergiasIntolerancias | 48765-2 | br-core-allergyintolerance |
+| diagnosticosAvaliados | 57852-6 | br-core-condition |
+| procedimentosRealizados | 47519-4 | br-core-procedure |
+| prescricaoAlta | 8654-6 | br-core-medicationrequest |
+| planoCuidados | 18776-5 | br-core-careplan |
+| capacidadeFuncional | 54522-8 | br-core-capacidadefuncional |
 
-Seção sem conteúdo usa `emptyReason` de `list-empty-reason`: `nilknown` (nada conhecido), `notasked`, `unavailable` etc. Exemplo: [sumario-alta-colecistectomia](Composition-sumario-alta-colecistectomia.html).
+## Regras de preenchimento
 
-## Internação
+O BR-Core não impõe as regras abaixo; elas são orientação deste guia e estão propostas ao BR-Core em [Recomendações](recomendacoes-rnds.html).
 
-A [Internação do Sumário de Alta](StructureDefinition-internacao-sumario-alta.html) concentra o que o SA-IG espalhava em seções:
-
-| Informação | Elemento |
+| Elemento | Regra |
 |---|---|
-| Resumo da evolução clínica | `Encounter.text` (narrativa) |
-| Admissão e alta | `period.start`, `period.end` (1..1, invariante isa-1) |
-| Caráter do atendimento | `priority` (BRCaraterAtendimento) |
-| Procedência | `hospitalization.admitSource` (BRProcedencia) |
-| Desfecho / motivo da alta | `hospitalization.dischargeDisposition` (BRMotivoDesfecho) |
-| Diagnósticos com papel | `diagnosis.condition` + `diagnosis.use` (AD admissão, DD alta) |
-| Profissional da alta, equipe | `participant.type` (BRResponsabilidadeParticipante) + `participant.individual` |
-| Estabelecimento | `serviceProvider` |
+| `Composition.type` | LOINC 18842-5 Discharge summary |
+| `Composition.encounter` | DEVE referenciar a internação (substitui a seção informacoesContatoAssistencial) |
+| `Composition.custodian` | DEVE ser o estabelecimento (CNES) |
+| `Composition.section` | cada seção DEVE ter `entry` ou `emptyReason` (`list-empty-reason`: nilknown, notasked, unavailable). Ver [sumario-alta-colecistectomia](Composition-sumario-alta-colecistectomia.html) |
+| `Encounter.text` | resumo da evolução clínica (substitui o ClinicalImpression do SA-IG) |
+| `Encounter.period.end` | data da alta, DEVE estar presente |
+| `Encounter.hospitalization.dischargeDisposition` | motivo da alta (BRMotivoDesfecho) |
+| `Encounter.diagnosis.use` | AD (admissão), DD (alta), CC (comorbidade) |
+| `Encounter.participant.type` | `alta`, `admissao`, `atendimento` (BRResponsabilidadeParticipante); substitui BRIdentificacaoEquipe |
+| `AllergyIntolerance.code` | coding SNOMED CT (ou CBARA) mais um coding de BRAlergenos, exigido pelo BR-Core |
+| `AllergyIntolerance.reaction.manifestation` | SNOMED CT; MedDRA como coding adicional |
+| `Procedure.code` | BRProcedimentosNacionais: Tabela SUS ou TUSS 22 |
+| `Procedure.performer.function` | performer-role (SNOMED CT), não CBO |
+| `MedicationRequest.category` | `discharge` |
+| `MedicationRequest.medication[x]` | `medicationReference` para br-core-medication; prescrição não estruturada em `Medication.code.text` |
+| `MedicationRequest.dosageInstruction.timing` | `repeat.when` (turno) e `repeat.period`/`periodUnit` (intervalo); substituem BRTurno e BRIntervaloDoses |
+| `*.subject` / `patient` | sempre br-core-patient; sem a extensão unidentifiedPatient |
 
-## Herança
+## Validação
 
-`SumarioAlta` → `br-core-sumarioalta` → `br-core-composition` → Composition. O SA-IG da RNDS herda do `BRConjuntoMinimoDados` (CMD), fora do BR-Core.
-
-O `br-core-sumarioalta` 1.3.0 não aceita nenhuma instância válida (débitos [D-01 e D-02](debitos-tecnicos.html)): o discriminador `profile` em `section.code` faz cada seção casar com todas as fatias, e o sistema LOINC fixado como `https://loinc.org/` contradiz o binding required `doc-section-codes`. Os exemplos de Composition deste guia seguem o pai e acusam esses erros até a correção no BR-Core.
+O `br-core-sumarioalta` 1.3.0 não aceita nenhuma instância válida (débitos [D-01 e D-02](debitos-tecnicos.html)): o discriminador `profile` em `section.code` faz cada seção casar com todas as fatias, e o sistema LOINC fixado como `https://loinc.org/` contradiz o binding required `doc-section-codes`. Os exemplos de Composition seguem o perfil e acusam esses erros até a correção no BR-Core. Os demais exemplos validam.

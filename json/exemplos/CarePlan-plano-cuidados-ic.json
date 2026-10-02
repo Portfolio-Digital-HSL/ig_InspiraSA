@@ -3,7 +3,7 @@
   "id": "plano-cuidados-ic",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/plano-cuidados-sumario-alta"
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-careplan"
     ]
   },
   "period": {
@@ -27,8 +27,8 @@
       }
     }
   ],
-  "intent": "plan",
   "status": "active",
+  "intent": "plan",
   "description": "Restrição hídrica de 1,5 L/dia, pesagem diária e retorno ambulatorial com cardiologia.",
   "subject": {
     "reference": "Patient/paciente-joao"

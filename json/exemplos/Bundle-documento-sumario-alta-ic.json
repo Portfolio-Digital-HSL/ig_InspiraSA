@@ -13,7 +13,7 @@
         "id": "sumario-alta-ic",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta"
           ]
         },
         "identifier": {
@@ -170,6 +170,7 @@
             "title": "Capacidade funcional"
           }
         ],
+        "status": "final",
         "type": {
           "coding": [
             {
@@ -179,7 +180,6 @@
             }
           ]
         },
-        "status": "final",
         "subject": {
           "reference": "Patient/paciente-joao"
         },
@@ -251,7 +251,7 @@
         "id": "internacao-ic",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/internacao-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-encounter"
           ]
         },
         "text": {
@@ -443,7 +443,7 @@
         "id": "diagnostico-ic",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/diagnostico-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-condition"
           ]
         },
         "category": [
@@ -497,7 +497,7 @@
         "id": "diagnostico-pneumonia",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/diagnostico-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-condition"
           ]
         },
         "category": [
@@ -552,7 +552,7 @@
         "id": "alergia-penicilina",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/alergia-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-allergyintolerance"
           ]
         },
         "category": [
@@ -561,8 +561,8 @@
         "code": {
           "coding": [
             {
-              "system": "http://snomed.info/sct",
               "code": "372687004",
+              "system": "http://snomed.info/sct",
               "display": "Amoxicillin (substance)"
             },
             {
@@ -628,7 +628,7 @@
         "id": "procedimento-tratamento-ic",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/procedimento-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-procedure"
           ]
         },
         "performedPeriod": {
@@ -676,7 +676,7 @@
         "id": "procedimento-ecocardiograma",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/procedimento-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-procedure"
           ]
         },
         "performer": [
@@ -712,7 +712,7 @@
         "id": "prescricao-losartana",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/prescricao-alta-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-medicationrequest"
           ]
         },
         "identifier": [
@@ -769,8 +769,8 @@
             "end": "2026-12-28"
           }
         },
-        "intent": "order",
         "status": "active",
+        "intent": "order",
         "medicationReference": {
           "reference": "Medication/medicamento-losartana"
         },
@@ -814,7 +814,7 @@
         "id": "plano-cuidados-ic",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/plano-cuidados-sumario-alta"
+            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-careplan"
           ]
         },
         "period": {
@@ -838,8 +838,8 @@
             }
           }
         ],
-        "intent": "plan",
         "status": "active",
+        "intent": "plan",
         "description": "Restrição hídrica de 1,5 L/dia, pesagem diária e retorno ambulatorial com cardiologia.",
         "subject": {
           "reference": "Patient/paciente-joao"

@@ -20,7 +20,7 @@ Description: "Exemplo: Paciente Lúcia Ramos."
 * birthDate = "1979-02-05"
 
 Instance: internacao-colecistectomia
-InstanceOf: InternacaoSumarioAlta
+InstanceOf: br-core-encounter
 Usage: #example
 Title: "Internação para colecistectomia"
 Description: "Exemplo: Internação para colecistectomia."
@@ -41,7 +41,7 @@ Description: "Exemplo: Internação para colecistectomia."
 * serviceProvider = Reference(hospital-exemplo)
 
 Instance: diagnostico-colelitiase
-InstanceOf: DiagnosticoSumarioAlta
+InstanceOf: br-core-condition
 Usage: #example
 Title: "Calculose da vesícula biliar"
 Description: "Exemplo: Calculose da vesícula biliar."
@@ -54,7 +54,7 @@ Description: "Exemplo: Calculose da vesícula biliar."
 * recordedDate = "2026-09-24"
 
 Instance: procedimento-colecistectomia
-InstanceOf: ProcedimentoSumarioAlta
+InstanceOf: br-core-procedure
 Usage: #example
 Title: "Colecistectomia videolaparoscópica"
 Description: "Exemplo: Colecistectomia videolaparoscópica."
@@ -67,7 +67,7 @@ Description: "Exemplo: Colecistectomia videolaparoscópica."
 * performer[0].actor = Reference(medica-alta)
 
 Instance: plano-cuidados-colecistectomia
-InstanceOf: PlanoCuidadosSumarioAlta
+InstanceOf: br-core-careplan
 Usage: #example
 Title: "Plano de cuidados pós-colecistectomia"
 Description: "Exemplo: Plano de cuidados pós-colecistectomia."
@@ -90,7 +90,7 @@ RuleSet: SecaoVazia(fatia, codigo, titulo, motivo, texto)
 * section[{fatia}].emptyReason = $list-empty-reason#{motivo}
 
 Instance: sumario-alta-colecistectomia
-InstanceOf: SumarioAlta
+InstanceOf: br-core-sumarioalta
 Usage: #example
 Title: "Sumário de Alta com seções vazias justificadas"
 Description: "Exemplo: Sumário de Alta com seções vazias justificadas."

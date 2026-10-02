@@ -14,7 +14,7 @@ A mudança de canonical e de estrutura quebra a compatibilidade com o SA-IG. Emi
 2. **Seções novas obrigatórias.** Documentos antigos sem alguma das sete seções recebem a seção com `emptyReason = unavailable`.
 3. **Terminologia.** Alérgenos e manifestações antigos (BRAlergenos, MedDRA) continuam aceitos como coding; SNOMED CT entra como coding adicional quando disponível; MedDRA é convertido pelo ConceptMap.
 4. **Decisões pendentes antes de migrar:**
-   - correção de D-01 e D-02 no BR-Core (permite voltar o `Parent` para `br-core-sumarioalta`);
+   - correção de D-01 e D-02 no BR-Core (sem ela nenhum Sumário de Alta valida contra o `br-core-sumarioalta`);
    - CPF opcional no br-core-patient (D-03);
    - validação do mapeamento proposto de Angioedema (MedDRA 10002424 → SNOMED CT 41291007);
    - terminologia de capacidade funcional.

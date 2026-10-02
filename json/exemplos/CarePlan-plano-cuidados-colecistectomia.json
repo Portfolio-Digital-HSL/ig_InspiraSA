@@ -3,7 +3,7 @@
   "id": "plano-cuidados-colecistectomia",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/plano-cuidados-sumario-alta"
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-careplan"
     ]
   },
   "activity": [
@@ -24,8 +24,8 @@
       }
     }
   ],
-  "intent": "plan",
   "status": "active",
+  "intent": "plan",
   "description": "Curativo diário, evitar esforço por 30 dias e retorno ambulatorial para retirada de pontos.",
   "subject": {
     "reference": "Patient/paciente-lucia"
