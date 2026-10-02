@@ -1,0 +1,130 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoSituacaoEvento",
+  "id": "BRSuplementoSituacaoEvento",
+  "title": "Suplemento pt-BR: event-status",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/event-status (uso: Procedure.status). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoSituacaoEvento",
+  "concept": [
+    {
+      "code": "preparation",
+      "display": "Preparation",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Em preparo"
+        }
+      ]
+    },
+    {
+      "code": "in-progress",
+      "display": "In Progress",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Em andamento"
+        }
+      ]
+    },
+    {
+      "code": "not-done",
+      "display": "Not Done",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Não realizado"
+        }
+      ]
+    },
+    {
+      "code": "on-hold",
+      "display": "On Hold",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Suspenso"
+        }
+      ]
+    },
+    {
+      "code": "stopped",
+      "display": "Stopped",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Interrompido"
+        }
+      ]
+    },
+    {
+      "code": "completed",
+      "display": "Completed",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Concluído"
+        }
+      ]
+    },
+    {
+      "code": "entered-in-error",
+      "display": "Entered in Error",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Registrado por erro"
+        }
+      ]
+    },
+    {
+      "code": "unknown",
+      "display": "Unknown",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Desconhecido"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/event-status",
+  "caseSensitive": true
+}

@@ -1,0 +1,74 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "diagnostico-sumario-alta",
+  "url": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/diagnostico-sumario-alta",
+  "name": "DiagnosticoSumarioAlta",
+  "title": "Diagnóstico do Sumário de Alta",
+  "status": "draft",
+  "experimental": true,
+  "description": "Diagnóstico de admissão ou avaliado durante a internação. Os status usam os ValueSets obrigatórios do HL7, com designações em português dos suplementos do guia de terminologia (substituem BRStatusDiagnostico e similares do SA-IG).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Condition",
+  "baseDefinition": "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-condition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Condition",
+        "path": "Condition",
+        "short": "Diagnóstico do Sumário de Alta",
+        "definition": "Diagnóstico de admissão ou avaliado durante a internação. Os status usam os ValueSets obrigatórios do HL7, com designações em português dos suplementos do guia de terminologia (substituem BRStatusDiagnostico e similares do SA-IG)."
+      },
+      {
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.category",
+        "path": "Condition.category",
+        "comment": "encounter-diagnosis para diagnósticos da internação.",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "comment": "CID-10 (BRCID10). SNOMED CT pode ser enviado como coding adicional.",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://terminologia.saude.gov.br/fhir/ValueSet/BRCID10"
+        }
+      },
+      {
+        "id": "Condition.subject",
+        "path": "Condition.subject",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.encounter",
+        "path": "Condition.encounter",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.onset[x]",
+        "path": "Condition.onset[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.recordedDate",
+        "path": "Condition.recordedDate",
+        "mustSupport": true
+      }
+    ]
+  }
+}

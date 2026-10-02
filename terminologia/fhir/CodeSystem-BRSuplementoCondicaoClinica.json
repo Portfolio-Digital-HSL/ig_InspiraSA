@@ -1,0 +1,102 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoCondicaoClinica",
+  "id": "BRSuplementoCondicaoClinica",
+  "title": "Suplemento pt-BR: condition-clinical",
+  "description": "Designações em português do Brasil para http://terminology.hl7.org/CodeSystem/condition-clinical (uso: Condition.clinicalStatus). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoCondicaoClinica",
+  "concept": [
+    {
+      "code": "active",
+      "display": "Active",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Ativa"
+        }
+      ]
+    },
+    {
+      "code": "recurrence",
+      "display": "Recurrence",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Recorrência"
+        }
+      ]
+    },
+    {
+      "code": "relapse",
+      "display": "Relapse",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Recaída"
+        }
+      ]
+    },
+    {
+      "code": "inactive",
+      "display": "Inactive",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Inativa"
+        }
+      ]
+    },
+    {
+      "code": "remission",
+      "display": "Remission",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Remissão"
+        }
+      ]
+    },
+    {
+      "code": "resolved",
+      "display": "Resolved",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Resolvida"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+  "caseSensitive": true
+}

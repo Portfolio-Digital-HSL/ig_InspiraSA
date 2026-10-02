@@ -1,0 +1,130 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoIntencaoPrescricao",
+  "id": "BRSuplementoIntencaoPrescricao",
+  "title": "Suplemento pt-BR: medicationrequest-intent",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/CodeSystem/medicationrequest-intent (uso: MedicationRequest.intent). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoIntencaoPrescricao",
+  "concept": [
+    {
+      "code": "proposal",
+      "display": "Proposal",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Proposta"
+        }
+      ]
+    },
+    {
+      "code": "plan",
+      "display": "Plan",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Plano"
+        }
+      ]
+    },
+    {
+      "code": "order",
+      "display": "Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Prescrição"
+        }
+      ]
+    },
+    {
+      "code": "original-order",
+      "display": "Original Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Prescrição original"
+        }
+      ]
+    },
+    {
+      "code": "reflex-order",
+      "display": "Reflex Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Prescrição reflexa"
+        }
+      ]
+    },
+    {
+      "code": "filler-order",
+      "display": "Filler Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Prescrição do executante"
+        }
+      ]
+    },
+    {
+      "code": "instance-order",
+      "display": "Instance Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Prescrição de instância"
+        }
+      ]
+    },
+    {
+      "code": "option",
+      "display": "Option",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Opção"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+  "caseSensitive": true
+}

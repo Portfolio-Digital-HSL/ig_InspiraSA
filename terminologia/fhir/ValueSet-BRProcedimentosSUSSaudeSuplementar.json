@@ -1,0 +1,26 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "BRProcedimentosSUSSaudeSuplementar",
+  "id": "BRProcedimentosSUSSaudeSuplementar",
+  "title": "Procedimentos: SIGTAP, TUSS e CBHPM",
+  "description": "Procedimentos realizados no SUS (Tabela SUS / SIGTAP) e na saúde suplementar (TUSS 22 da ANS e CBHPM). Recompõe o BRProcedimentosNacionais do BR-Core, que hoje enumera só parte da TUSS e não inclui a Tabela SUS.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/ValueSet/BRProcedimentosSUSSaudeSuplementar",
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "compose": {
+    "include": [
+      {
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRTabelaSUS"
+      },
+      {
+        "system": "https://fhir.ans.gov.br/CodeSystem/tuss-22"
+      },
+      {
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRCBHPMTUSS"
+      }
+    ]
+  }
+}

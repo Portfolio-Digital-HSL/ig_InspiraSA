@@ -1,0 +1,187 @@
+{
+  "resourceType": "Composition",
+  "id": "sumario-alta-colecistectomia",
+  "meta": {
+    "profile": [
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+    ]
+  },
+  "author": [
+    {
+      "reference": "Practitioner/medica-alta"
+    }
+  ],
+  "section": [
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Calculose da vesícula biliar (K80.2).</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "Condition/diagnostico-colelitiase"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "42347-5",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Diagnósticos da admissão"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Nega alergias.</p></div>"
+      },
+      "code": {
+        "coding": [
+          {
+            "code": "48765-2",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Alergias e intolerâncias",
+      "emptyReason": {
+        "coding": [
+          {
+            "code": "nilknown",
+            "system": "http://terminology.hl7.org/CodeSystem/list-empty-reason"
+          }
+        ]
+      }
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Calculose da vesícula biliar (K80.2) tratada.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "Condition/diagnostico-colelitiase"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "57852-6",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Diagnósticos avaliados"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Colecistectomia videolaparoscópica.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "Procedure/procedimento-colecistectomia"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "47519-4",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Procedimentos realizados"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Sem medicamentos de uso contínuo.</p></div>"
+      },
+      "code": {
+        "coding": [
+          {
+            "code": "8654-6",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Prescrição de alta",
+      "emptyReason": {
+        "coding": [
+          {
+            "code": "nilknown",
+            "system": "http://terminology.hl7.org/CodeSystem/list-empty-reason"
+          }
+        ]
+      }
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Curativo diário e retorno em 10 dias.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "CarePlan/plano-cuidados-colecistectomia"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "18776-5",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Plano de cuidados"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Não avaliada.</p></div>"
+      },
+      "code": {
+        "coding": [
+          {
+            "code": "54522-8",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Capacidade funcional",
+      "emptyReason": {
+        "coding": [
+          {
+            "code": "notasked",
+            "system": "http://terminology.hl7.org/CodeSystem/list-empty-reason"
+          }
+        ]
+      }
+    }
+  ],
+  "type": {
+    "coding": [
+      {
+        "code": "18842-5",
+        "system": "http://loinc.org",
+        "display": "Discharge summary"
+      }
+    ]
+  },
+  "status": "final",
+  "subject": {
+    "reference": "Patient/paciente-lucia"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-colecistectomia"
+  },
+  "date": "2026-09-25T10:30:00-03:00",
+  "title": "Sumário de Alta",
+  "confidentiality": "N",
+  "custodian": {
+    "reference": "Organization/hospital-exemplo"
+  }
+}

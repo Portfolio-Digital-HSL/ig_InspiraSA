@@ -1,0 +1,60 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoGravidadeReacao",
+  "id": "BRSuplementoGravidadeReacao",
+  "title": "Suplemento pt-BR: reaction-event-severity",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/reaction-event-severity (uso: AllergyIntolerance.reaction.severity). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoGravidadeReacao",
+  "concept": [
+    {
+      "code": "mild",
+      "display": "Mild",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Leve"
+        }
+      ]
+    },
+    {
+      "code": "moderate",
+      "display": "Moderate",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Moderada"
+        }
+      ]
+    },
+    {
+      "code": "severe",
+      "display": "Severe",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Grave"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/reaction-event-severity",
+  "caseSensitive": true
+}

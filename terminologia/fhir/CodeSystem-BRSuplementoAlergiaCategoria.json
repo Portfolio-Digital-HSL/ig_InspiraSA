@@ -1,0 +1,74 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoAlergiaCategoria",
+  "id": "BRSuplementoAlergiaCategoria",
+  "title": "Suplemento pt-BR: allergy-intolerance-category",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/allergy-intolerance-category (uso: AllergyIntolerance.category). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoAlergiaCategoria",
+  "concept": [
+    {
+      "code": "food",
+      "display": "Food",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Alimento"
+        }
+      ]
+    },
+    {
+      "code": "medication",
+      "display": "Medication",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Medicamento"
+        }
+      ]
+    },
+    {
+      "code": "environment",
+      "display": "Environment",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Ambiental"
+        }
+      ]
+    },
+    {
+      "code": "biologic",
+      "display": "Biologic",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Biológico"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/allergy-intolerance-category",
+  "caseSensitive": true
+}

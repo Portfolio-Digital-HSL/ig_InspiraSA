@@ -1,0 +1,46 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "BRAlergenosSNOMEDNacional",
+  "id": "BRAlergenosSNOMEDNacional",
+  "title": "Alérgenos: SNOMED CT e códigos nacionais",
+  "description": "Agentes de alergia e intolerância. Padrão: SNOMED CT (substâncias e produtos farmacêuticos/biológicos), que é a base do CBARA. Códigos nacionais do CBARA sem conceito SNOMED, medicamentos (BRMedicamento) e imunobiológicos (BRImunobiologico) são aceitos para compatibilidade com o BRAlergenos do BR-Core.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/ValueSet/BRAlergenosSNOMEDNacional",
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "105590001"
+          }
+        ]
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "373873005"
+          }
+        ]
+      },
+      {
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRAlergenosCBARA"
+      },
+      {
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedicamento"
+      },
+      {
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRImunobiologico"
+      }
+    ]
+  }
+}

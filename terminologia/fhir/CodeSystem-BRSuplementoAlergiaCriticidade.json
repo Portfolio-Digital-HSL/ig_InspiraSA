@@ -1,0 +1,60 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoAlergiaCriticidade",
+  "id": "BRSuplementoAlergiaCriticidade",
+  "title": "Suplemento pt-BR: allergy-intolerance-criticality",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/allergy-intolerance-criticality (uso: AllergyIntolerance.criticality). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoAlergiaCriticidade",
+  "concept": [
+    {
+      "code": "low",
+      "display": "Low Risk",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Baixo risco"
+        }
+      ]
+    },
+    {
+      "code": "high",
+      "display": "High Risk",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Alto risco"
+        }
+      ]
+    },
+    {
+      "code": "unable-to-assess",
+      "display": "Unable to Assess Risk",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Risco não avaliável"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/allergy-intolerance-criticality",
+  "caseSensitive": true
+}

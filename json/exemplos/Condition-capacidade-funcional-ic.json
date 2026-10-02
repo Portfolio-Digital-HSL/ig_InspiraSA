@@ -1,0 +1,51 @@
+{
+  "resourceType": "Condition",
+  "id": "capacidade-funcional-ic",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-capacidadefuncional"
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "02",
+          "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRCategoriaDiagnostico",
+          "display": "Secundário"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "identifier": {
+      "system": "https://saude.gov.br/fhir/sid/cns",
+      "value": "700000000000013"
+    },
+    "reference": "Patient/paciente-joao"
+  },
+  "stage": [
+    {
+      "summary": {
+        "text": "Deambula com auxílio para distâncias acima de 50 m"
+      }
+    }
+  ],
+  "clinicalStatus": {
+    "coding": [
+      {
+        "code": "active",
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "Z74.0",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRCID10",
+        "display": "Mobilidade reduzida"
+      }
+    ]
+  }
+}

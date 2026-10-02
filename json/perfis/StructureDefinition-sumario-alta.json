@@ -1,0 +1,574 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sumario-alta",
+  "url": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta",
+  "name": "SumarioAlta",
+  "title": "Sumário de Alta",
+  "status": "draft",
+  "experimental": true,
+  "description": "Documento clínico emitido na alta hospitalar. Reproduz as sete seções do br-core-sumarioalta sobre o br-core-composition e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter).",
+  "purpose": "Pai provisório: br-core-composition. O br-core-sumarioalta 1.3.0 não admite nenhuma instância válida (fatiamento de section por discriminador profile em code e sistema LOINC fixado como https://loinc.org/; ver débitos técnicos D-01 e D-02). Quando o BR-Core corrigir, basta trocar o Parent para br-core-sumarioalta.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Composition",
+  "baseDefinition": "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-composition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Composition",
+        "path": "Composition",
+        "short": "Sumário de Alta",
+        "definition": "Documento clínico emitido na alta hospitalar. Reproduz as sete seções do br-core-sumarioalta sobre o br-core-composition e substitui o perfil BRSumarioAlta do SA-IG legado. O resumo da evolução clínica, o contato assistencial e as informações adicionais deixam de ser seções e passam para a Internação (Composition.encounter).",
+        "constraint": [
+          {
+            "key": "sa-2",
+            "severity": "error",
+            "human": "O Sumário de Alta DEVE referenciar uma internação encerrada.",
+            "expression": "encounter.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ]
+      },
+      {
+        "id": "Composition.identifier",
+        "path": "Composition.identifier",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.status",
+        "path": "Composition.status",
+        "comment": "final na emissão; amended para retificação (com relatesTo); entered-in-error para anulação.",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.type",
+        "path": "Composition.type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "18842-5",
+              "system": "http://loinc.org",
+              "display": "Discharge summary"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.category",
+        "path": "Composition.category",
+        "max": "1"
+      },
+      {
+        "id": "Composition.subject",
+        "path": "Composition.subject",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.encounter",
+        "path": "Composition.encounter",
+        "comment": "Substitui as seções informacoesContatoAssistencial e informacoesAdicionais e o resumo da evolução clínica (ClinicalImpression) do SA-IG.",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/internacao-sumario-alta"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.date",
+        "path": "Composition.date",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.author",
+        "path": "Composition.author",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.title",
+        "path": "Composition.title",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.confidentiality",
+        "path": "Composition.confidentiality",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.attester",
+        "path": "Composition.attester",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.custodian",
+        "path": "Composition.custodian",
+        "comment": "Estabelecimento (CNES) responsável pela guarda do documento.",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.relatesTo",
+        "path": "Composition.relatesTo",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section",
+        "path": "Composition.section",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "code"
+            }
+          ],
+          "rules": "open",
+          "description": "Sete seções do br-core-sumarioalta, identificadas pelo código LOINC."
+        },
+        "min": 7,
+        "max": "7"
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao",
+        "path": "Composition.section",
+        "sliceName": "diagnosticosAdmissao",
+        "min": 1,
+        "max": "1",
+        "constraint": [
+          {
+            "key": "sa-1",
+            "severity": "error",
+            "human": "Cada seção DEVE ter entradas ou informar o motivo de estar vazia (emptyReason).",
+            "expression": "entry.exists() or emptyReason.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.title",
+        "path": "Composition.section.title",
+        "short": "Diagnósticos da admissão",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.code",
+        "path": "Composition.section.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "42347-5",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.text",
+        "path": "Composition.section.text",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.entry",
+        "path": "Composition.section.entry",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/diagnostico-sumario-alta"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAdmissao.emptyReason",
+        "path": "Composition.section.emptyReason",
+        "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias",
+        "path": "Composition.section",
+        "sliceName": "alergiasIntolerancias",
+        "min": 1,
+        "max": "1",
+        "constraint": [
+          {
+            "key": "sa-1",
+            "severity": "error",
+            "human": "Cada seção DEVE ter entradas ou informar o motivo de estar vazia (emptyReason).",
+            "expression": "entry.exists() or emptyReason.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.title",
+        "path": "Composition.section.title",
+        "short": "Alergias e intolerâncias",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.code",
+        "path": "Composition.section.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "48765-2",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.text",
+        "path": "Composition.section.text",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.entry",
+        "path": "Composition.section.entry",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/alergia-sumario-alta"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:alergiasIntolerancias.emptyReason",
+        "path": "Composition.section.emptyReason",
+        "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados",
+        "path": "Composition.section",
+        "sliceName": "diagnosticosAvaliados",
+        "min": 1,
+        "max": "1",
+        "constraint": [
+          {
+            "key": "sa-1",
+            "severity": "error",
+            "human": "Cada seção DEVE ter entradas ou informar o motivo de estar vazia (emptyReason).",
+            "expression": "entry.exists() or emptyReason.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.title",
+        "path": "Composition.section.title",
+        "short": "Diagnósticos avaliados na internação",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.code",
+        "path": "Composition.section.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "57852-6",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.text",
+        "path": "Composition.section.text",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.entry",
+        "path": "Composition.section.entry",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/diagnostico-sumario-alta"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:diagnosticosAvaliados.emptyReason",
+        "path": "Composition.section.emptyReason",
+        "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados",
+        "path": "Composition.section",
+        "sliceName": "procedimentosRealizados",
+        "min": 1,
+        "max": "1",
+        "constraint": [
+          {
+            "key": "sa-1",
+            "severity": "error",
+            "human": "Cada seção DEVE ter entradas ou informar o motivo de estar vazia (emptyReason).",
+            "expression": "entry.exists() or emptyReason.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.title",
+        "path": "Composition.section.title",
+        "short": "Procedimentos realizados",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.code",
+        "path": "Composition.section.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "47519-4",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.text",
+        "path": "Composition.section.text",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.entry",
+        "path": "Composition.section.entry",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/procedimento-sumario-alta"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:procedimentosRealizados.emptyReason",
+        "path": "Composition.section.emptyReason",
+        "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta",
+        "path": "Composition.section",
+        "sliceName": "prescricaoAlta",
+        "min": 1,
+        "max": "1",
+        "constraint": [
+          {
+            "key": "sa-1",
+            "severity": "error",
+            "human": "Cada seção DEVE ter entradas ou informar o motivo de estar vazia (emptyReason).",
+            "expression": "entry.exists() or emptyReason.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.title",
+        "path": "Composition.section.title",
+        "short": "Prescrição de alta",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.code",
+        "path": "Composition.section.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "8654-6",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.text",
+        "path": "Composition.section.text",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.entry",
+        "path": "Composition.section.entry",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/prescricao-alta-sumario-alta"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:prescricaoAlta.emptyReason",
+        "path": "Composition.section.emptyReason",
+        "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados",
+        "path": "Composition.section",
+        "sliceName": "planoCuidados",
+        "min": 1,
+        "max": "1",
+        "constraint": [
+          {
+            "key": "sa-1",
+            "severity": "error",
+            "human": "Cada seção DEVE ter entradas ou informar o motivo de estar vazia (emptyReason).",
+            "expression": "entry.exists() or emptyReason.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados.title",
+        "path": "Composition.section.title",
+        "short": "Plano de cuidados",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados.code",
+        "path": "Composition.section.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "18776-5",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados.text",
+        "path": "Composition.section.text",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados.entry",
+        "path": "Composition.section.entry",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/plano-cuidados-sumario-alta"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:planoCuidados.emptyReason",
+        "path": "Composition.section.emptyReason",
+        "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional",
+        "path": "Composition.section",
+        "sliceName": "capacidadeFuncional",
+        "min": 1,
+        "max": "1",
+        "constraint": [
+          {
+            "key": "sa-1",
+            "severity": "error",
+            "human": "Cada seção DEVE ter entradas ou informar o motivo de estar vazia (emptyReason).",
+            "expression": "entry.exists() or emptyReason.exists()",
+            "source": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.title",
+        "path": "Composition.section.title",
+        "short": "Capacidade funcional",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.code",
+        "path": "Composition.section.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "54522-8",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.text",
+        "path": "Composition.section.text",
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.entry",
+        "path": "Composition.section.entry",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-capacidadefuncional"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Composition.section:capacidadeFuncional.emptyReason",
+        "path": "Composition.section.emptyReason",
+        "comment": "Use list-empty-reason (nilknown, notasked, unavailable...). Substitui a seção vazia sem justificativa do SA-IG.",
+        "mustSupport": true
+      }
+    ]
+  }
+}

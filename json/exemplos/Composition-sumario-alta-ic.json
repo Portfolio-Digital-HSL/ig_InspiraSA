@@ -1,0 +1,185 @@
+{
+  "resourceType": "Composition",
+  "id": "sumario-alta-ic",
+  "meta": {
+    "profile": [
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta"
+    ]
+  },
+  "identifier": {
+    "system": "http://fhir.hsl.org.br/ig/inspirasa/sid/documento",
+    "value": "SA-2026-000789"
+  },
+  "author": [
+    {
+      "reference": "Practitioner/medica-alta"
+    }
+  ],
+  "section": [
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Insuficiência cardíaca congestiva (I50.0).</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "Condition/diagnostico-ic"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "42347-5",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Diagnósticos da admissão"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Amoxicilina: angioedema (grave).</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "AllergyIntolerance/alergia-penicilina"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "48765-2",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Alergias e intolerâncias"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Pneumonia (J18.9) resolvida.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "Condition/diagnostico-pneumonia"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "57852-6",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Diagnósticos avaliados"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Tratamento de insuficiência cardíaca; ecocardiografia transtorácica.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "Procedure/procedimento-tratamento-ic"
+        },
+        {
+          "reference": "Procedure/procedimento-ecocardiograma"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "47519-4",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Procedimentos realizados"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Losartana 100 mg 1 comprimido pela manhã.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "MedicationRequest/prescricao-losartana"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "8654-6",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Prescrição de alta"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Restrição hídrica e retorno com cardiologia em até 7 dias.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "CarePlan/plano-cuidados-ic"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "18776-5",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Plano de cuidados"
+    },
+    {
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Deambula com auxílio.</p></div>"
+      },
+      "entry": [
+        {
+          "reference": "Condition/capacidade-funcional-ic"
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "code": "54522-8",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "title": "Capacidade funcional"
+    }
+  ],
+  "type": {
+    "coding": [
+      {
+        "code": "18842-5",
+        "system": "http://loinc.org",
+        "display": "Discharge summary"
+      }
+    ]
+  },
+  "status": "final",
+  "subject": {
+    "reference": "Patient/paciente-joao"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-ic"
+  },
+  "date": "2026-09-28T11:30:00-03:00",
+  "title": "Sumário de Alta",
+  "confidentiality": "N",
+  "custodian": {
+    "reference": "Organization/hospital-exemplo"
+  }
+}

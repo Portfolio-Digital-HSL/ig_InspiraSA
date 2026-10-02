@@ -1,0 +1,67 @@
+{
+  "resourceType": "ConceptMap",
+  "id": "BRMedDRAParaSNOMED",
+  "url": "https://terminologia.saude.gov.br/fhir/ConceptMap/BRMedDRAParaSNOMED",
+  "title": "MedDRA para SNOMED CT (manifestações)",
+  "version": "0.1.0",
+  "name": "BRMedDRAParaSNOMED",
+  "status": "draft",
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "description": "Mapa das manifestações de reação adversa em MedDRA (BRReacoesAdversasMedDRA) para SNOMED CT. O conteúdo completo deve vir do mapa oficial MedDRA–SNOMED CT (MSSO/SNOMED International), sujeito às licenças das duas terminologias. Os mapeamentos abaixo são ilustrativos.",
+  "sourceCanonical": "https://terminologia.saude.gov.br/fhir/ValueSet/BRReacoesAdversasMedDRA",
+  "targetCanonical": "https://terminologia.saude.gov.br/fhir/ValueSet/BRManifestacaoReacaoSNOMED",
+  "group": [
+    {
+      "source": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedDRA",
+      "target": "http://snomed.info/sct",
+      "element": [
+        {
+          "code": "10002424",
+          "display": "Angioedema",
+          "target": [
+            {
+              "code": "41291007",
+              "display": "Angioedema (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10013968",
+          "display": "Dispnéia",
+          "target": [
+            {
+              "code": "267036007",
+              "display": "Dyspnea (finding)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10014184",
+          "display": "Eczema",
+          "target": [
+            {
+              "code": "43116000",
+              "display": "Eczema (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10037868",
+          "display": "Exantema maculopapular",
+          "target": [
+            {
+              "code": "247471006",
+              "display": "Maculopapular eruption (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

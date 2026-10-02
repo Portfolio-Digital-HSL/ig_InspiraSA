@@ -1,0 +1,47 @@
+{
+  "resourceType": "Patient",
+  "id": "paciente-lucia",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-patient"
+    ]
+  },
+  "identifier": [
+    {
+      "use": "official",
+      "system": "https://saude.gov.br/fhir/sid/cpf",
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "TAX"
+          }
+        ]
+      },
+      "value": "00000000353"
+    },
+    {
+      "use": "official",
+      "system": "https://saude.gov.br/fhir/sid/cns",
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "HC"
+          }
+        ]
+      },
+      "value": "700000000000048"
+    }
+  ],
+  "name": [
+    {
+      "given": [
+        "Lúcia"
+      ],
+      "family": "Ramos"
+    }
+  ],
+  "gender": "female",
+  "birthDate": "1979-02-05"
+}

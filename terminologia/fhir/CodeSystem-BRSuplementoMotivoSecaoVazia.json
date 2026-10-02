@@ -1,0 +1,102 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoMotivoSecaoVazia",
+  "id": "BRSuplementoMotivoSecaoVazia",
+  "title": "Suplemento pt-BR: list-empty-reason",
+  "description": "Designações em português do Brasil para http://terminology.hl7.org/CodeSystem/list-empty-reason (uso: Composition.section.emptyReason). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoMotivoSecaoVazia",
+  "concept": [
+    {
+      "code": "nilknown",
+      "display": "Nil Known",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Nada conhecido"
+        }
+      ]
+    },
+    {
+      "code": "notasked",
+      "display": "Not Asked",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Não perguntado"
+        }
+      ]
+    },
+    {
+      "code": "withheld",
+      "display": "Information Withheld",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Informação retida"
+        }
+      ]
+    },
+    {
+      "code": "unavailable",
+      "display": "Unavailable",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Indisponível"
+        }
+      ]
+    },
+    {
+      "code": "notstarted",
+      "display": "Not Started",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Não iniciado"
+        }
+      ]
+    },
+    {
+      "code": "closed",
+      "display": "Closed",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Encerrado"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://terminology.hl7.org/CodeSystem/list-empty-reason",
+  "caseSensitive": true
+}

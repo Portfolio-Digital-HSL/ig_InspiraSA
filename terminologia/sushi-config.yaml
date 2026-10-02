@@ -1,0 +1,6 @@
+# Projeto FSH só para gerar os recursos de terminologia (sem IG).
+canonical: https://terminologia.saude.gov.br/fhir
+status: draft
+version: 0.1.0
+fhirVersion: 4.0.1
+FSHOnly: true

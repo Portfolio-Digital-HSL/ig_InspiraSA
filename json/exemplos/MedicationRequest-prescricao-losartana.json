@@ -1,0 +1,78 @@
+{
+  "resourceType": "MedicationRequest",
+  "id": "prescricao-losartana",
+  "meta": {
+    "profile": [
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/prescricao-alta-sumario-alta"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "http://fhir.hsl.org.br/ig/inspirasa/sid/prescricao",
+      "value": "RX-2026-000456-1"
+    }
+  ],
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "discharge",
+          "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category"
+        }
+      ]
+    }
+  ],
+  "dosageInstruction": [
+    {
+      "timing": {
+        "repeat": {
+          "when": [
+            "MORN"
+          ],
+          "frequency": 1,
+          "period": 1,
+          "periodUnit": "d"
+        }
+      },
+      "doseAndRate": [
+        {
+          "doseQuantity": {
+            "value": 1,
+            "unit": "comprimido"
+          }
+        }
+      ],
+      "text": "1 comprimido por via oral pela manhã, uso contínuo",
+      "route": {
+        "coding": [
+          {
+            "code": "20053000",
+            "system": "http://standardterms.edqm.eu",
+            "display": "Oral use"
+          }
+        ]
+      }
+    }
+  ],
+  "dispenseRequest": {
+    "validityPeriod": {
+      "start": "2026-09-28",
+      "end": "2026-12-28"
+    }
+  },
+  "intent": "order",
+  "status": "active",
+  "medicationReference": {
+    "reference": "Medication/medicamento-losartana"
+  },
+  "subject": {
+    "reference": "Patient/paciente-joao"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-ic"
+  },
+  "authoredOn": "2026-09-28",
+  "requester": {
+    "reference": "Practitioner/medica-alta"
+  }
+}

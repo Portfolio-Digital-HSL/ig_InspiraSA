@@ -1,0 +1,94 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "plano-cuidados-sumario-alta",
+  "url": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/plano-cuidados-sumario-alta",
+  "name": "PlanoCuidadosSumarioAlta",
+  "title": "Plano de Cuidados pós-alta",
+  "status": "draft",
+  "experimental": true,
+  "description": "Orientações e acompanhamento programados para depois da alta. Diferente do SA-IG, permite activity (o BR-Core a exige).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "CarePlan",
+  "baseDefinition": "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-careplan",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "CarePlan",
+        "path": "CarePlan",
+        "short": "Plano de Cuidados pós-alta",
+        "definition": "Orientações e acompanhamento programados para depois da alta. Diferente do SA-IG, permite activity (o BR-Core a exige)."
+      },
+      {
+        "id": "CarePlan.status",
+        "path": "CarePlan.status",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.intent",
+        "path": "CarePlan.intent",
+        "patternCode": "plan",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.description",
+        "path": "CarePlan.description",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.subject",
+        "path": "CarePlan.subject",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.encounter",
+        "path": "CarePlan.encounter",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.period",
+        "path": "CarePlan.period",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity",
+        "path": "CarePlan.activity",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail.extension",
+        "path": "CarePlan.activity.detail.extension",
+        "short": "Extensões adicionais",
+        "definition": "Extensões que acrescentam informação não prevista no modelo base."
+      },
+      {
+        "id": "CarePlan.activity.detail.code",
+        "path": "CarePlan.activity.detail.code",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail.status",
+        "path": "CarePlan.activity.detail.status",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail.doNotPerform",
+        "path": "CarePlan.activity.detail.doNotPerform",
+        "short": "Não realizar",
+        "definition": "Indica que a ação NÃO deve ser realizada."
+      },
+      {
+        "id": "CarePlan.activity.detail.scheduled[x]",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail.description",
+        "path": "CarePlan.activity.detail.description",
+        "mustSupport": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "resourceType": "AllergyIntolerance",
+  "id": "alergia-penicilina",
+  "meta": {
+    "profile": [
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/alergia-sumario-alta"
+    ]
+  },
+  "category": [
+    "medication"
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "372687004",
+        "display": "Amoxicillin (substance)"
+      },
+      {
+        "code": "BR0281135-3",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedicamento",
+        "display": "AMOXICILINA + CLAVULANATO DE POTÁSSIO 40+5,7 MG/ML SUSPENSÃO ORAL 70 ML"
+      }
+    ],
+    "text": "Amoxicilina"
+  },
+  "reaction": [
+    {
+      "manifestation": [
+        {
+          "coding": [
+            {
+              "code": "41291007",
+              "system": "http://snomed.info/sct",
+              "display": "Angioedema (disorder)"
+            },
+            {
+              "code": "10002424",
+              "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedDRA",
+              "display": "Angioedema"
+            }
+          ]
+        }
+      ],
+      "severity": "severe"
+    }
+  ],
+  "clinicalStatus": {
+    "coding": [
+      {
+        "code": "active",
+        "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical"
+      }
+    ]
+  },
+  "verificationStatus": {
+    "coding": [
+      {
+        "code": "confirmed",
+        "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification"
+      }
+    ]
+  },
+  "type": "allergy",
+  "criticality": "high",
+  "patient": {
+    "reference": "Patient/paciente-joao"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-ic"
+  },
+  "recordedDate": "2026-09-20"
+}

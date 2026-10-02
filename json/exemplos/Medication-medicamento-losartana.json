@@ -1,0 +1,18 @@
+{
+  "resourceType": "Medication",
+  "id": "medicamento-losartana",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-medication"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "BR0287473",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedicamento",
+        "display": "LOSARTANA POTÁSSICA 100 MG COMPRIMIDO"
+      }
+    ]
+  }
+}

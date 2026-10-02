@@ -1,0 +1,36 @@
+{
+  "resourceType": "CarePlan",
+  "id": "plano-cuidados-colecistectomia",
+  "meta": {
+    "profile": [
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/plano-cuidados-sumario-alta"
+    ]
+  },
+  "activity": [
+    {
+      "detail": {
+        "code": {
+          "coding": [
+            {
+              "code": "0301",
+              "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSubgrupoTabelaSUS",
+              "display": "Consultas / Atendimentos / Acompanhamentos"
+            }
+          ]
+        },
+        "status": "scheduled",
+        "scheduledString": "Retorno em 10 dias",
+        "description": "Consulta com cirurgia geral para retirada de pontos."
+      }
+    }
+  ],
+  "intent": "plan",
+  "status": "active",
+  "description": "Curativo diário, evitar esforço por 30 dias e retorno ambulatorial para retirada de pontos.",
+  "subject": {
+    "reference": "Patient/paciente-lucia"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-colecistectomia"
+  }
+}

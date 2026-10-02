@@ -1,0 +1,46 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoAlergiaTipo",
+  "id": "BRSuplementoAlergiaTipo",
+  "title": "Suplemento pt-BR: allergy-intolerance-type",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/allergy-intolerance-type (uso: AllergyIntolerance.type). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoAlergiaTipo",
+  "concept": [
+    {
+      "code": "allergy",
+      "display": "Allergy",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Alergia"
+        }
+      ]
+    },
+    {
+      "code": "intolerance",
+      "display": "Intolerance",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Intolerância"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/allergy-intolerance-type",
+  "caseSensitive": true
+}

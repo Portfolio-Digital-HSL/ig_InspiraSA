@@ -4,6 +4,35 @@ Guia de Implementação FHIR **R4 (4.0.1)** do projeto InspiraSA, escrito em
 [FHIR Shorthand (FSH)](https://hl7.org/fhir/uv/shorthand/) e compilado com
 [SUSHI](https://fshschool.org/docs/sushi/) + [IG Publisher](https://github.com/HL7/fhir-ig-publisher).
 
+## Conteúdo
+
+Sumário de Alta hospitalar derivado do BR-Core 1.3.0, substituindo o SA-IG legado da RNDS.
+
+| Perfil | Pai |
+|---|---|
+| SumarioAlta (`sumario-alta`) | br-core-composition (provisório; ver débitos D-01 e D-02) |
+| InternacaoSumarioAlta | br-core-encounter |
+| DiagnosticoSumarioAlta | br-core-condition |
+| AlergiaSumarioAlta | br-core-allergyintolerance |
+| ProcedimentoSumarioAlta | br-core-procedure |
+| PrescricaoAltaSumarioAlta | br-core-medicationrequest |
+| PlanoCuidadosSumarioAlta | br-core-careplan |
+
+Capacidade funcional usa o `br-core-capacidadefuncional` direto.
+
+- `json/`: perfis e exemplos em JSON, e `perfis-inspirasa.zip`.
+- `terminologia/`: suplementos pt-BR, ValueSets e ConceptMap para o OCL e o guia de terminologia (não publicados pelo IG). Ver `terminologia/README.md`.
+
+### Tradução para português
+
+Os textos herdados do FHIR em inglês são traduzidos por RuleSets gerados:
+
+```bash
+npx sushi build . --snapshot
+python3 scripts/traducao_ptbr.py   # gera input/fsh/traducao/*.fsh
+npx sushi build . --snapshot
+```
+
 ## Pré-requisitos
 
 | Ferramenta | Versão | Para quê |

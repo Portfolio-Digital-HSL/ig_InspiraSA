@@ -1,0 +1,144 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoIntencaoRequisicao",
+  "id": "BRSuplementoIntencaoRequisicao",
+  "title": "Suplemento pt-BR: request-intent",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/request-intent (uso: CarePlan.intent). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoIntencaoRequisicao",
+  "concept": [
+    {
+      "code": "proposal",
+      "display": "Proposal",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Proposta"
+        }
+      ]
+    },
+    {
+      "code": "plan",
+      "display": "Plan",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Plano"
+        }
+      ]
+    },
+    {
+      "code": "directive",
+      "display": "Directive",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Diretiva"
+        }
+      ]
+    },
+    {
+      "code": "order",
+      "display": "Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Ordem"
+        }
+      ]
+    },
+    {
+      "code": "original-order",
+      "display": "Original Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Ordem original"
+        }
+      ]
+    },
+    {
+      "code": "reflex-order",
+      "display": "Reflex Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Ordem reflexa"
+        }
+      ]
+    },
+    {
+      "code": "filler-order",
+      "display": "Filler Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Ordem do executante"
+        }
+      ]
+    },
+    {
+      "code": "instance-order",
+      "display": "Instance Order",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Ordem de instância"
+        }
+      ]
+    },
+    {
+      "code": "option",
+      "display": "Option",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Opção"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/request-intent",
+  "caseSensitive": true
+}

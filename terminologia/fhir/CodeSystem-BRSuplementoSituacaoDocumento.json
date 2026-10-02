@@ -1,0 +1,74 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoSituacaoDocumento",
+  "id": "BRSuplementoSituacaoDocumento",
+  "title": "Suplemento pt-BR: composition-status",
+  "description": "Designações em português do Brasil para http://hl7.org/fhir/composition-status (uso: Composition.status). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoSituacaoDocumento",
+  "concept": [
+    {
+      "code": "preliminary",
+      "display": "Preliminary",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Preliminar"
+        }
+      ]
+    },
+    {
+      "code": "final",
+      "display": "Final",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Final"
+        }
+      ]
+    },
+    {
+      "code": "amended",
+      "display": "Amended",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Retificado"
+        }
+      ]
+    },
+    {
+      "code": "entered-in-error",
+      "display": "Entered in Error",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Registrado por erro"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://hl7.org/fhir/composition-status",
+  "caseSensitive": true
+}

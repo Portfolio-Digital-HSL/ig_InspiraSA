@@ -1,0 +1,27 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "BRManifestacaoReacaoSNOMED",
+  "id": "BRManifestacaoReacaoSNOMED",
+  "title": "Manifestação de reação adversa: SNOMED CT",
+  "description": "Manifestações clínicas de reação alérgica ou intolerância. Padrão: SNOMED CT (achados clínicos). MedDRA, usado pela Anvisa na farmacovigilância, é aceito como codificação adicional e convertido pelo ConceptMap BRMedDRAParaSNOMED.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/ValueSet/BRManifestacaoReacaoSNOMED",
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "404684003"
+          }
+        ]
+      }
+    ]
+  }
+}

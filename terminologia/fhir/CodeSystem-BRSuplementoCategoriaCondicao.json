@@ -1,0 +1,46 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "supplement",
+  "name": "BRSuplementoCategoriaCondicao",
+  "id": "BRSuplementoCategoriaCondicao",
+  "title": "Suplemento pt-BR: condition-category",
+  "description": "Designações em português do Brasil para http://terminology.hl7.org/CodeSystem/condition-category (uso: Condition.category). Não cria códigos novos.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSuplementoCategoriaCondicao",
+  "concept": [
+    {
+      "code": "problem-list-item",
+      "display": "Problem List Item",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Item da lista de problemas"
+        }
+      ]
+    },
+    {
+      "code": "encounter-diagnosis",
+      "display": "Encounter Diagnosis",
+      "designation": [
+        {
+          "language": "pt-BR",
+          "use": {
+            "code": "display",
+            "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+          },
+          "value": "Diagnóstico do atendimento"
+        }
+      ]
+    }
+  ],
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "supplements": "http://terminology.hl7.org/CodeSystem/condition-category",
+  "caseSensitive": true
+}
