@@ -56,8 +56,9 @@ scripts/importar_ocl.ps1         # importação pela API REST (Windows)
 - **BRMedDRAParaSNOMED**: reproduz os 28 mapeamentos que já estão no OCL
   (Source MS/BRMedDRA), um por código. O JSONL não leva mapeamentos.
 - **CBARA**: no OCL, `BRAlergenosCBARA` tem 152 códigos e 147 mapeamentos
-  SAME-AS para SNOMED CT. O de `veneno-vespa` ainda aponta para
-  `/orgs/SNOMED/sources/sct/`, que não existe; seis códigos não têm mapeamento.
+  SAME-AS para SNOMED CT. O de `veneno-vespa` (141) está gravado com
+  `/orgs/SNOMED/sources/sct/` e nome "Kiwi fruit"; a interface resolve pelo
+  canonical e mostra Wasp venom, mas a API não; seis códigos não têm mapeamento.
   No guia de terminologia o CodeSystem continua `not-present`.
 
 ## Subir no OCL
