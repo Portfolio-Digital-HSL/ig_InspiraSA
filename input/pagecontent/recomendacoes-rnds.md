@@ -1,6 +1,6 @@
 # Recomendações à RNDS
 
-1. **Corrigir o `br-core-sumarioalta` antes de exigi-lo** (D-01, D-02): discriminador `pattern` em `code` e sistema `http://loinc.org`. Hoje nenhum documento passa na validação.
+1. **Publicar a correção do BR-Core** (branch `fix/sumarioalta-capacidadefuncional` do repositório br.org.hl7.fhir.core): discriminador `pattern` em `section.code` e `http://loinc.org` no `br-core-sumarioalta` e no `br-core-registroatendimentoclinico` (D-01, D-02), e o `br-core-capacidadefuncional` revisto (D-04). Com a correção, os exemplos deste guia validam sem erro também contra o `clinical-document-composition`.
 2. **A RNDS se ajusta ao BR-Core, não o contrário.** Usar o `br-core-sumarioalta` e os perfis do BR-Core; onde não houver perfil BR-Core, o recurso canônico do FHIR R4. Nenhum perfil próprio da RNDS. Abandonar o SA-IG (canonical `www.saude.gov.br/fhir/r4`, herança do CMD) e publicar o guia com `dependsOn` do pacote BR-Core.
 3. **Usar elementos nativos**: `Composition.encounter` para o contato assistencial, `Encounter.text` para o resumo da evolução, `Timing` para turno e intervalo, `participant`/CareTeam para a equipe.
 4. **Permitir paciente sem CPF** no br-core-patient (D-03), com a regra "CPF ou CNS", para que o CNS provisório substitua a extensão unidentifiedPatient.
@@ -24,7 +24,7 @@ Regras que este guia hoje só consegue dar como orientação de preenchimento:
 | br-core-allergyintolerance | incluir SNOMED CT no BRAlergenos; `reaction.manifestation` preferred SNOMED CT |
 | br-core-procedure | `code` extensible ao BRProcedimentosNacionais; `performer.function` preferred performer-role |
 | br-core-medicationrequest | `dosageInstruction` 0..*; sem binding na fatia `medicationReference` (D-05, D-07) |
-| br-core-capacidadefuncional | terminologia de funcionalidade; categoria do HL7; `subject` só por referência (D-04) |
+| br-core-capacidadefuncional | feito no branch `fix/sumarioalta-capacidadefuncional` |
 | br-core-patient | CPF 0..1 com invariante "CPF ou CNS" (D-03) |
 
 ## Terminologias propostas

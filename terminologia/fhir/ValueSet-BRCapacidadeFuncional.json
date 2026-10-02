@@ -1,0 +1,27 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "BRCapacidadeFuncional",
+  "id": "BRCapacidadeFuncional",
+  "title": "Capacidade funcional: SNOMED CT",
+  "description": "Achados funcionais (capacidade ou incapacidade) em SNOMED CT, descendentes de 118228005 Functional finding. Usado em br-core-capacidadefuncional.code (preferred), na correção proposta ao BR-Core. CID-10 e CIAP-2 da condição de base podem vir como codificação adicional.",
+  "version": "0.1.0",
+  "url": "https://terminologia.saude.gov.br/fhir/ValueSet/BRCapacidadeFuncional",
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "118228005"
+          }
+        ]
+      }
+    ]
+  }
+}

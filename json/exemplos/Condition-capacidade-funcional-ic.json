@@ -17,6 +17,20 @@
       ]
     }
   ],
+  "code": {
+    "coding": [
+      {
+        "code": "228158008",
+        "system": "http://snomed.info/sct",
+        "display": "Walking disability (finding)"
+      },
+      {
+        "code": "Z74.0",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRCID10",
+        "display": "Mobilidade reduzida"
+      }
+    ]
+  },
   "subject": {
     "identifier": {
       "system": "https://saude.gov.br/fhir/sid/cns",
@@ -36,15 +50,6 @@
       {
         "code": "active",
         "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
-      }
-    ]
-  },
-  "code": {
-    "coding": [
-      {
-        "code": "Z74.0",
-        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRCID10",
-        "display": "Mobilidade reduzida"
       }
     ]
   }

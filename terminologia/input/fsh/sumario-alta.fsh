@@ -26,6 +26,13 @@ Description: "Manifestações clínicas de reação alérgica ou intolerância. 
 * insert TermoDraft(ValueSet/BRManifestacaoReacaoSNOMED)
 * include codes from system $sct where concept is-a #404684003 "Clinical finding (finding)"
 
+ValueSet: BRCapacidadeFuncional
+Id: BRCapacidadeFuncional
+Title: "Capacidade funcional: SNOMED CT"
+Description: "Achados funcionais (capacidade ou incapacidade) em SNOMED CT, descendentes de 118228005 Functional finding. Usado em br-core-capacidadefuncional.code (preferred), na correção proposta ao BR-Core. CID-10 e CIAP-2 da condição de base podem vir como codificação adicional."
+* insert TermoDraft(ValueSet/BRCapacidadeFuncional)
+* include codes from system $sct where concept is-a #118228005 "Functional finding (finding)"
+
 ValueSet: BRProcedimentosNacionais
 Id: BRProcedimentosNacionais
 Title: "BR Procedimentos Nacionais"

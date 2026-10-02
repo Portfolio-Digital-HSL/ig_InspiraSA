@@ -49,6 +49,10 @@ O MedDRA é usado pela Anvisa na farmacovigilância; o padrão clínico é o SNO
 
 O BRCBHPMTUSS sai do ValueSet. A CBHPM fica de fora: é propriedade da AMB, de uso licenciado e pago, e não está no OCL.
 
+## Capacidade funcional: SNOMED CT
+
+**BRCapacidadeFuncional**: SNOMED CT, descendentes de 118228005 Functional finding. Proposto para `br-core-capacidadefuncional.code` (preferred) na correção do BR-Core. Hoje a 1.3.0 exige CID-10 (`BRTerminologiaSuspeitaDiagnostica`, required); o exemplo envia os dois.
+
 ## Outras ligações
 
 | Elemento | Terminologia |

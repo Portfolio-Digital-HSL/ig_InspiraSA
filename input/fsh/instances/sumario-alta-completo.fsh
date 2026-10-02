@@ -155,7 +155,8 @@ Title: "Capacidade funcional na alta"
 Description: "Exemplo: Capacidade funcional na alta."
 * clinicalStatus = $condition-clinical#active
 * category[0] = $BRCategoriaDiagnostico#02 "Secundário"
-* code = $BRCID10#Z74.0 "Mobilidade reduzida"
+* code.coding[0] = $sct#228158008 "Walking disability (finding)"
+* code.coding[1] = $BRCID10#Z74.0 "Mobilidade reduzida"
 * subject = Reference(paciente-joao)
 * subject.identifier.system = $sid-cns
 * subject.identifier.value = "700000000000013"

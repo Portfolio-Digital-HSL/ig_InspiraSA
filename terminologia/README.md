@@ -41,6 +41,7 @@ scripts/importar_ocl.ps1         # importação pela API REST (Windows)
 | CodeSystem supplement | BRSuplementoMotivoSecaoVazia | Composition.section.emptyReason |
 | ValueSet | BRAlergenosSNOMEDNacional | AllergyIntolerance.code.coding[snomed] |
 | ValueSet | BRManifestacaoReacaoSNOMED | AllergyIntolerance.reaction.manifestation |
+| ValueSet | BRCapacidadeFuncional | br-core-capacidadefuncional.code (correção proposta ao BR-Core) |
 | ValueSet | BRProcedimentosNacionais (nova versão) | Procedure.code |
 | ConceptMap | BRMedDRAParaSNOMED | MedDRA (Anvisa) para SNOMED CT |
 
