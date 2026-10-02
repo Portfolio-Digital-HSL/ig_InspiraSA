@@ -15,7 +15,7 @@ Regras de conversão
   português como preferido e o display HL7 em inglês como sinônimo.
 - ValueSet -> Collection (collection_type Value Set).
   * Os três ValueSets deste pacote são intensionais (SNOMED CT por hierarquia
-    ou sistemas inteiros: Tabela SUS, TUSS, CBHPM, MedDRA, BRMedicamento...).
+    ou sistemas inteiros: Tabela SUS, TUSS, MedDRA, BRMedicamento...).
     O OCL não guarda filtros is-a nem "todo o sistema" como referência
     explícita: a Collection sai sem References e o compose FHIR vai em
     extras.fhir_compose. A expansão fica com o servidor de terminologia

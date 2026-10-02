@@ -16,7 +16,6 @@ A mudança de canonical e de estrutura quebra a compatibilidade com o SA-IG. Emi
 4. **Decisões pendentes antes de migrar:**
    - correção de D-01 e D-02 no BR-Core (permite voltar o `Parent` para `br-core-sumarioalta`);
    - CPF opcional no br-core-patient (D-03);
-   - URL do CodeSystem CBHPM;
    - licença e carga do mapa MedDRA–SNOMED CT;
    - terminologia de capacidade funcional.
 5. **Medição de perda semântica.** Contar os documentos que não convertem sem ambiguidade, principalmente diagnósticos sem papel definido e prescrições em texto livre.

@@ -6,7 +6,7 @@
 4. **Permitir paciente sem CPF** no br-core-patient (D-03), com a regra "CPF ou CNS", para que o CNS provisório substitua a extensão unidentifiedPatient.
 5. **Status do HL7 com tradução por suplemento.** Descontinuar os CodeSystems nacionais que copiam códigos do HL7 e publicar suplementos pt-BR no guia de terminologia.
 6. **SNOMED CT para alergias e manifestações.** Incluir SNOMED CT (via CBARA) no BRAlergenos; carregar o CBARA completo no guia de terminologia; ligar manifestações a SNOMED CT e publicar o mapa MedDRA–SNOMED CT para a farmacovigilância da Anvisa.
-7. **Recompor o `BRProcedimentosNacionais`** com SIGTAP, TUSS e CBHPM, e publicar um CodeSystem CBHPM com URL própria.
+7. **Recompor o `BRProcedimentosNacionais`** com SIGTAP e TUSS 22. A CBHPM é da AMB e paga: não deve entrar em terminologia nacional de uso obrigatório.
 8. **Revisar o `br-core-capacidadefuncional`** (D-04): terminologia de funcionalidade (CIF ou SNOMED CT), categoria do HL7 e `subject` só por referência.
 9. **Liberar mais de uma posologia** em `br-core-medicationrequest` (D-05) e remover o binding da fatia `medicationReference` (D-07).
 10. **Enviar o Sumário de Alta como Bundle `document`** assinado, com `identifier` estável e retificação por `relatesTo`.

@@ -2,7 +2,6 @@ Alias: $sct = http://snomed.info/sct
 Alias: $designation-usage = http://terminology.hl7.org/CodeSystem/designation-usage
 Alias: $BRTabelaSUS = https://terminologia.saude.gov.br/fhir/CodeSystem/BRTabelaSUS
 Alias: $tuss-22 = https://fhir.ans.gov.br/CodeSystem/tuss-22
-Alias: $BRCBHPMTUSS = https://terminologia.saude.gov.br/fhir/CodeSystem/BRCBHPMTUSS
 Alias: $BRMedDRA = https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedDRA
 Alias: $BRAlergenosCBARA = https://terminologia.saude.gov.br/fhir/CodeSystem/BRAlergenosCBARA
 Alias: $BRMedicamento = https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedicamento

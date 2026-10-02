@@ -2,7 +2,7 @@ Profile: ProcedimentoSumarioAlta
 Parent: br-core-procedure
 Id: procedimento-sumario-alta
 Title: "Procedimento do Sumário de Alta"
-Description: "Procedimento realizado na internação. Código da Tabela SUS (SIGTAP), TUSS ou CBHPM. A função do executante usa performer-role (SNOMED CT), não CBO."
+Description: "Procedimento realizado na internação. Código da Tabela SUS (SIGTAP) ou da TUSS 22. A função do executante usa performer-role (SNOMED CT), não CBO."
 * ^status = #draft
 * ^experimental = true
 * status MS

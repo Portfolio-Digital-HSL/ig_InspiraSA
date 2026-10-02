@@ -28,12 +28,11 @@ Description: "Manifestações clínicas de reação alérgica ou intolerância. 
 
 ValueSet: BRProcedimentosSUSSaudeSuplementar
 Id: BRProcedimentosSUSSaudeSuplementar
-Title: "Procedimentos: SIGTAP, TUSS e CBHPM"
-Description: "Procedimentos realizados no SUS (Tabela SUS / SIGTAP) e na saúde suplementar (TUSS 22 da ANS e CBHPM). Recompõe o BRProcedimentosNacionais do BR-Core, que hoje enumera só parte da TUSS e não inclui a Tabela SUS."
+Title: "Procedimentos: SIGTAP e TUSS 22"
+Description: "Procedimentos realizados no SUS (Tabela SUS / SIGTAP) e na saúde suplementar (TUSS 22 da ANS). A CBHPM não entra: é da AMB, de uso licenciado e pago. Recompõe o BRProcedimentosNacionais do BR-Core, que hoje enumera só parte da TUSS e não inclui a Tabela SUS."
 * insert TermoDraft(ValueSet/BRProcedimentosSUSSaudeSuplementar)
 * include codes from system $BRTabelaSUS
 * include codes from system $tuss-22
-* include codes from system $BRCBHPMTUSS
 
 Instance: BRMedDRAParaSNOMED
 InstanceOf: ConceptMap

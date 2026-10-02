@@ -21,7 +21,7 @@ O SA-IG deriva direto dos recursos-base do FHIR, sob um canonical antigo e sem `
 - Perfis por seção derivados do BR-Core: [Diagnóstico](StructureDefinition-diagnostico-sumario-alta.html), [Alergia](StructureDefinition-alergia-sumario-alta.html), [Procedimento](StructureDefinition-procedimento-sumario-alta.html), [Prescrição de Alta](StructureDefinition-prescricao-alta-sumario-alta.html), [Plano de Cuidados](StructureDefinition-plano-cuidados-sumario-alta.html). A capacidade funcional usa o `br-core-capacidadefuncional` sem especialização.
 - Status pelos ValueSets do HL7, com designações em português em suplementos do guia de terminologia.
 - Alérgenos e manifestações em SNOMED CT (base do CBARA), com códigos nacionais e MedDRA aceitos.
-- Procedimentos por um ValueSet que reúne Tabela SUS (SIGTAP), TUSS e CBHPM.
+- Procedimentos por um ValueSet que reúne Tabela SUS (SIGTAP) e TUSS 22.
 
 As terminologias novas **não** estão neste guia: ficam na pasta `terminologia/` do repositório, para o OCL e o guia de terminologia (`https://terminologia.saude.gov.br/fhir/...`). Ver [Terminologia](terminologia.html).
 

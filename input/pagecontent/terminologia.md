@@ -43,11 +43,11 @@ O MedDRA é usado pela Anvisa na farmacovigilância; o padrão clínico é o SNO
 - MedDRA (BRMedDRA) vai como coding adicional quando o emissor o tiver.
 - **ConceptMap BRMedDRAParaSNOMED**: conversão MedDRA para SNOMED CT. O conteúdo completo vem do mapa oficial MedDRA–SNOMED CT (MSSO e SNOMED International), sujeito às duas licenças; no repositório há só mapeamentos ilustrativos.
 
-## Procedimentos: SIGTAP, TUSS e CBHPM
+## Procedimentos: SIGTAP e TUSS 22
 
-**BRProcedimentosSUSSaudeSuplementar** reúne a Tabela SUS (BRTabelaSUS), a TUSS 22 da ANS (`https://fhir.ans.gov.br/CodeSystem/tuss-22`) e a CBHPM. Ligado como `extensible` em `Procedure.code`. O `BRProcedimentosNacionais` do guia de terminologia enumera só parte da TUSS e não tem SIGTAP (débito D-08).
+**BRProcedimentosSUSSaudeSuplementar** reúne a Tabela SUS (BRTabelaSUS), e a TUSS 22 da ANS (`https://fhir.ans.gov.br/CodeSystem/tuss-22`), as duas no OCL. Ligado como `extensible` em `Procedure.code`. O `BRProcedimentosNacionais` do guia de terminologia enumera só parte da TUSS e não tem SIGTAP (débito D-08).
 
-A CBHPM não tem CodeSystem próprio no guia de terminologia; o ValueSet usa o `BRCBHPMTUSS` até o GT confirmar a URL.
+A CBHPM fica de fora: é propriedade da AMB, de uso licenciado e pago, e não está no OCL.
 
 ## Outras ligações
 

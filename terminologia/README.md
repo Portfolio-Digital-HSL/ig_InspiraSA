@@ -46,8 +46,8 @@ scripts/importar_ocl.ps1         # importação pela API REST (Windows)
 
 ## Pendências
 
-- **CBHPM**: não há CodeSystem CBHPM no guia de terminologia. O ValueSet de
-  procedimentos usa `BRCBHPMTUSS` até o GT confirmar a URL.
+- **CBHPM**: fora do ValueSet de procedimentos. É da AMB, de uso licenciado e
+  pago, e não está no OCL; o ValueSet usa só BRTabelaSUS e TUSS 22.
 - **BRMedDRAParaSNOMED**: só mapeamentos ilustrativos. O conteúdo completo vem
   do mapa oficial MedDRA–SNOMED CT (MSSO e SNOMED International), sujeito às
   licenças das duas terminologias.
