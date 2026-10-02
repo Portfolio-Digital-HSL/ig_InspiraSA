@@ -30,7 +30,7 @@ O sistema emissor envia o código do HL7; o display em português vem do supleme
 
 ## Alergias: SNOMED CT
 
-O CBARA tem códigos nacionais, cada um mapeado (SAME-AS) para um conceito SNOMED CT no OCL. Por isso o agente da alergia é codificado em SNOMED CT, e o código CBARA pode ir junto:
+O CBARA tem 152 códigos nacionais no OCL; 147 estão mapeados (SAME-AS) para SNOMED CT. Por isso o agente da alergia é codificado em SNOMED CT, e o código CBARA pode ir junto:
 
 - **BRAlergenosSNOMEDNacional**: SNOMED CT (descendentes de 105590001 Substance e 373873005 Pharmaceutical / biologic product) + BRAlergenosCBARA + BRMedicamento + BRImunobiologico. Usado como coding adicional; o BR-Core não liga este ValueSet.
 - O BR-Core mantém `AllergyIntolerance.code` required em **BRAlergenos**, que não tem SNOMED CT. Enquanto isso não mudar, envie também um coding de BRAlergenos (BRMedicamento, BRImunobiologico ou CBARA). Ver débito D-06.
@@ -41,11 +41,11 @@ O MedDRA é usado pela Anvisa na farmacovigilância; o padrão clínico é o SNO
 
 - **BRManifestacaoReacaoSNOMED**: SNOMED CT, descendentes de 404684003 Clinical finding. O BR-Core liga `reaction.manifestation` ao BRReacoesAdversasMedDRA como `example`, o que permite SNOMED CT; proposta: `preferred` SNOMED CT.
 - MedDRA (BRMedDRA) vai como coding adicional quando o emissor o tiver.
-- **ConceptMap BRMedDRAParaSNOMED**: forma FHIR dos 25 mapeamentos SAME-AS que já existem no OCL, na Source MS/BRMedDRA, para SNOMED CT (`/orgs/SNOMED/sources/gps/`). O único código do BRMedDRA sem mapeamento no OCL, Angioedema (10002424), recebe aqui a proposta 41291007 Angioedema.
+- **ConceptMap BRMedDRAParaSNOMED**: forma FHIR dos 28 mapeamentos SAME-AS que existem no OCL, na Source MS/BRMedDRA, para SNOMED CT (`/orgs/SNOMED/sources/gps/`). Todos os códigos do BRMedDRA estão mapeados.
 
 ## Procedimentos: SIGTAP e TUSS 22
 
-**BRProcedimentosNacionais** (mesmo nome e canonical do guia de terminologia), em nova versão proposta: Tabela SUS inteira (BRTabelaSUS, `MS/BRTabelaSUS` no OCL) e TUSS 22 inteira (`https://fhir.ans.gov.br/CodeSystem/tuss-22`, `ANS/tabela-22` no OCL). O BR-Core liga `Procedure.code` ao BRProcedimentosNacionais como `example`; proposta: `extensible`. Hoje o guia de terminologia enumera 1000 códigos TUSS 22 e o OCL (`MS/BRProcedimentosNacionais-1.0`) tem 25 códigos da BRTabelaSUS (débito D-08).
+**BRProcedimentosNacionais** (mesmo nome e canonical do guia de terminologia), em nova versão proposta: Tabela SUS inteira (BRTabelaSUS, `MS/BRTabelaSUS` no OCL) e TUSS 22 inteira (`https://fhir.ans.gov.br/CodeSystem/tuss-22`, `ANS/tabela-22` no OCL). O BR-Core liga `Procedure.code` ao BRProcedimentosNacionais como `example`; proposta: `extensible`. No OCL (`MS/BRProcedimentosNacionais-1.0`) a coleção já referencia a BRTabelaSUS inteira e a TUSS 22, mas as referências da TUSS apontam para uma Source inexistente; o guia de terminologia enumera só 1000 códigos TUSS 22 (débito D-08).
 
 O BRCBHPMTUSS sai do ValueSet. A CBHPM fica de fora: é propriedade da AMB, de uso licenciado e pago, e não está no OCL.
 

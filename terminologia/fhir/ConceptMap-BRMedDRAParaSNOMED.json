@@ -9,7 +9,7 @@
   "experimental": true,
   "publisher": "Ministério da Saúde",
   "language": "pt-BR",
-  "description": "Manifestações de reação adversa do BRMedDRA (usado pela Anvisa) para SNOMED CT. Os 25 mapeamentos SAME-AS já existem no OCL, na Source MS/BRMedDRA (alvo /orgs/SNOMED/sources/gps/); este ConceptMap é a forma FHIR deles. Angioedema (10002424) não tem mapeamento no OCL: o alvo 41291007 é proposta deste guia.",
+  "description": "Manifestações de reação adversa do BRMedDRA (usado pela Anvisa) para SNOMED CT. Forma FHIR dos 28 mapeamentos SAME-AS que existem no OCL, na Source MS/BRMedDRA (alvo /orgs/SNOMED/sources/gps/), um para cada código do BRMedDRA.",
   "sourceCanonical": "https://terminologia.saude.gov.br/fhir/ValueSet/BRReacoesAdversasMedDRA",
   "targetCanonical": "https://terminologia.saude.gov.br/fhir/ValueSet/BRManifestacaoReacaoSNOMED",
   "group": [
@@ -17,6 +17,39 @@
       "source": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedDRA",
       "target": "http://snomed.info/sct",
       "element": [
+        {
+          "code": "10002198",
+          "display": "Anafilaxia",
+          "target": [
+            {
+              "code": "39579001",
+              "display": "Anaphylaxis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10002424",
+          "display": "Angioedema",
+          "target": [
+            {
+              "code": "41291007",
+              "display": "Angioedema (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "10003246",
+          "display": "Artrite",
+          "target": [
+            {
+              "code": "3723001",
+              "display": "Arthritis (disorder)",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
         {
           "code": "10003553",
           "display": "Asma",
@@ -289,18 +322,6 @@
               "code": "702809001",
               "display": "Drug reaction with eosinophilia and systemic symptoms (disorder)",
               "equivalence": "equivalent"
-            }
-          ]
-        },
-        {
-          "code": "10002424",
-          "display": "Angioedema",
-          "target": [
-            {
-              "code": "41291007",
-              "display": "Angioedema (disorder)",
-              "equivalence": "equivalent",
-              "comment": "Proposto: ausente no OCL."
             }
           ]
         }

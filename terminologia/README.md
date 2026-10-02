@@ -50,15 +50,15 @@ scripts/importar_ocl.ps1         # importação pela API REST (Windows)
 - **CBHPM**: fora do ValueSet de procedimentos. É da AMB, de uso licenciado e
   pago, e não está no OCL; a nova versão do BRProcedimentosNacionais usa só BRTabelaSUS e TUSS 22.
   No OCL a Collection já existe como `MS/BRProcedimentosNacionais-1.0`: o
-  JSONL grava a nova versão nela, não cria outra.
-- **BRMedDRAParaSNOMED**: reproduz os 25 mapeamentos que já estão no OCL
-  (Source MS/BRMedDRA). O JSONL só leva o que falta: Angioedema (10002424) →
-  SNOMED CT 41291007, proposta, gravado na própria Source BRMedDRA.
-- **CBARA**: no OCL, `BRAlergenosCBARA` tem 25 códigos nacionais mapeados
-  (SAME-AS) para SNOMED CT. O mapeamento de `veneno-vespa` aponta para
-  `/orgs/SNOMED/sources/sct/`, que não existe; deve apontar para
-  `/orgs/SNOMED/sources/gps/`. No guia de terminologia o CodeSystem continua
-  `not-present`.
+  JSONL grava a nova versão nela, não cria outra. Hoje ela referencia a TUSS 22 em
+  `/orgs/ans/sources/tuss-22/`, que não existe; o caminho certo é
+  `/orgs/ANS/sources/tabela-22/`.
+- **BRMedDRAParaSNOMED**: reproduz os 28 mapeamentos que já estão no OCL
+  (Source MS/BRMedDRA), um por código. O JSONL não leva mapeamentos.
+- **CBARA**: no OCL, `BRAlergenosCBARA` tem 152 códigos e 147 mapeamentos
+  SAME-AS para SNOMED CT. O de `veneno-vespa` ainda aponta para
+  `/orgs/SNOMED/sources/sct/`, que não existe; seis códigos não têm mapeamento.
+  No guia de terminologia o CodeSystem continua `not-present`.
 
 ## Subir no OCL
 
