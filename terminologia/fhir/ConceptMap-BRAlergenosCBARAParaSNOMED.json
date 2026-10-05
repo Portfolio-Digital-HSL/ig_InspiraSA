@@ -1,0 +1,57 @@
+{
+  "resourceType": "ConceptMap",
+  "id": "BRAlergenosCBARAParaSNOMED",
+  "url": "https://terminologia.saude.gov.br/fhir/ConceptMap/BRAlergenosCBARAParaSNOMED",
+  "title": "CBARA para SNOMED CT (complemento)",
+  "version": "0.1.0",
+  "name": "BRAlergenosCBARAParaSNOMED",
+  "status": "draft",
+  "experimental": true,
+  "publisher": "Ministério da Saúde",
+  "language": "pt-BR",
+  "description": "Mapeamentos SAME-AS dos códigos do BRAlergenosCBARA que estavam sem correspondência em SNOMED CT no OCL. O JSONL grava cada um na Source MS/BRAlergenosCBARA.",
+  "group": [
+    {
+      "source": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRAlergenosCBARA",
+      "target": "http://snomed.info/sct",
+      "element": [
+        {
+          "code": "lima",
+          "display": "Lima",
+          "target": [
+            {
+              "code": "1285547006",
+              "display": "Citrus X latifolia (substance)",
+              "equivalence": "equivalent",
+              "comment": "Proposto: limão-taiti (lima ácida Tahiti), sinônimo SNOMED Seedless lime."
+            }
+          ]
+        },
+        {
+          "code": "grama",
+          "display": "Grama",
+          "target": [
+            {
+              "code": "256277009",
+              "display": "Grass pollen (substance)",
+              "equivalence": "equivalent",
+              "comment": "Proposto: pólen de gramíneas."
+            }
+          ]
+        },
+        {
+          "code": "contato-metal",
+          "display": "Contato com metal",
+          "target": [
+            {
+              "code": "767098004",
+              "display": "Metal and/or metal compound (substance)",
+              "equivalence": "equivalent",
+              "comment": "Proposto."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
