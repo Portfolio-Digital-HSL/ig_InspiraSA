@@ -44,7 +44,7 @@ scripts/importar_ocl.ps1         # importação pela API REST (Windows)
 | ValueSet | BRCapacidadeFuncional | br-core-capacidadefuncional.code (correção proposta ao BR-Core) |
 | ValueSet | BRProcedimentosNacionais (nova versão) | Procedure.code |
 | ConceptMap | BRMedDRAParaSNOMED | MedDRA (Anvisa) para SNOMED CT |
-| ConceptMap | BRAlergenosCBARAParaSNOMED | mapeamentos do CBARA que faltavam no OCL (lima, grama, contato-metal) |
+| ConceptMap | BRAlergenosCBARAParaSNOMED | mapeamentos do CBARA criados no OCL em 06/10/2026 (lima, grama, contato-metal) |
 
 ## Pendências
 

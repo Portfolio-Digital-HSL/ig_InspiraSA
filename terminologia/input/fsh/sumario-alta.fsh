@@ -199,8 +199,8 @@ Title: "MedDRA para SNOMED CT (manifestações)"
 * group[0].element[27].target[0].display = "Drug reaction with eosinophilia and systemic symptoms (disorder)"
 * group[0].element[27].target[0].equivalence = #equivalent
 
-// Mapeamentos do CBARA para SNOMED CT que faltavam no OCL (decididos em
-// 05/10/2026). Os demais 147 já estão na Source MS/BRAlergenosCBARA.
+// Mapeamentos do CBARA para SNOMED CT que faltavam no OCL, já criados lá
+// (302, 303, 304). Os demais estão na Source MS/BRAlergenosCBARA.
 Instance: BRAlergenosCBARAParaSNOMED
 InstanceOf: ConceptMap
 Usage: #definition
@@ -213,7 +213,7 @@ Title: "CBARA para SNOMED CT (complemento)"
 * experimental = true
 * publisher = "Ministério da Saúde"
 * language = #pt-BR
-* description = "Mapeamentos SAME-AS dos códigos do BRAlergenosCBARA que estavam sem correspondência em SNOMED CT no OCL. O JSONL grava cada um na Source MS/BRAlergenosCBARA."
+* description = "Mapeamentos SAME-AS dos três códigos do BRAlergenosCBARA que estavam sem correspondência em SNOMED CT no OCL, criados na Source MS/BRAlergenosCBARA em 06/10/2026."
 * group[0].source = $BRAlergenosCBARA
 * group[0].target = $sct
 * group[0].element[0].code = #lima
@@ -221,16 +221,15 @@ Title: "CBARA para SNOMED CT (complemento)"
 * group[0].element[0].target[0].code = #1285547006
 * group[0].element[0].target[0].display = "Citrus X latifolia (substance)"
 * group[0].element[0].target[0].equivalence = #equivalent
-* group[0].element[0].target[0].comment = "Proposto: limão-taiti (lima ácida Tahiti), sinônimo SNOMED Seedless lime."
+* group[0].element[0].target[0].comment = "Limão-taiti (lima ácida Tahiti), sinônimo SNOMED Seedless lime."
 * group[0].element[1].code = #grama
 * group[0].element[1].display = "Grama"
-* group[0].element[1].target[0].code = #256277009
-* group[0].element[1].target[0].display = "Grass pollen (substance)"
+* group[0].element[1].target[0].code = #422304003
+* group[0].element[1].target[0].display = "Family Poaceae (organism)"
 * group[0].element[1].target[0].equivalence = #equivalent
-* group[0].element[1].target[0].comment = "Proposto: pólen de gramíneas."
+* group[0].element[1].target[0].comment = "Contato com a planta (gramíneas). O SNOMED CT não tem substância Grass; o pólen é o polen-grama (256277009)."
 * group[0].element[2].code = #contato-metal
 * group[0].element[2].display = "Contato com metal"
 * group[0].element[2].target[0].code = #767098004
 * group[0].element[2].target[0].display = "Metal and/or metal compound (substance)"
 * group[0].element[2].target[0].equivalence = #equivalent
-* group[0].element[2].target[0].comment = "Proposto."
