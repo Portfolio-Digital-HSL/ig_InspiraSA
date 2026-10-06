@@ -42,8 +42,8 @@ pages:
     title: Terminologia
   mapeamento-sa.md:
     title: Mapeamento SA-IG
-  comparativos.md:
-    title: Comparativos
+  mapa-estrutura.md:
+    title: Mapa de estrutura
   debitos-tecnicos.md:
     title: Débitos técnicos
   recomendacoes-rnds.md:
@@ -58,7 +58,8 @@ menu:
     Terminologia: terminologia.html
   Análise:
     Mapeamento SA-IG: mapeamento-sa.html
-    Comparativos: comparativos.html
+    Mapa de estrutura: mapa-estrutura.html
+    Modelo lógico: StructureDefinition-sumario-alta-ml.html
   Débitos:
     Débitos técnicos: debitos-tecnicos.html
     Recomendações à RNDS: recomendacoes-rnds.html

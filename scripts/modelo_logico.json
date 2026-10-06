@@ -1,0 +1,677 @@
+[
+[
+"documento",
+"1..1",
+"BackboneElement",
+"Documento",
+"Dados do documento Sumário de Alta como um todo.",
+"Bundle (br-core-bundle-documento) + Composition (br-core-sumarioalta)",
+"Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1)"
+],
+[
+"documento.identificador",
+"1..1",
+"Identifier",
+"Identificador do documento",
+"Identificador persistente do documento, igual em todas as transmissões.",
+"Bundle.identifier; Composition.identifier",
+"não existe (Composition.identifier 0..0 no CMD)"
+],
+[
+"documento.dataHora",
+"1..1",
+"dateTime",
+"Data e hora do documento",
+"Momento de emissão do documento.",
+"Composition.date; Bundle.timestamp",
+"Composition.date"
+],
+[
+"documento.situacao",
+"1..1",
+"code",
+"Situação do documento",
+"final, retificado ou anulado.",
+"Composition.status (composition-status)",
+"Composition.status (BREstadoDocumento-1.0)"
+],
+[
+"documento.tipo",
+"1..1",
+"CodeableConcept",
+"Tipo de documento",
+"Sumário de Alta.",
+"Composition.type = LOINC 18842-5",
+"Composition.type (BRTipoDocumento-1.0)"
+],
+[
+"documento.autor",
+"1..*",
+"Reference",
+"Autor",
+"Profissional responsável pela alta.",
+"Composition.author (br-core-practitioner / practitionerrole)",
+"Composition.author.identifier (BRPessoaJuridicaProfissionalLiberal-1.0)"
+],
+[
+"documento.atestador",
+"0..1",
+"Reference",
+"Atestador legal",
+"Quem autentica o documento.",
+"Composition.attester (mode = legal)",
+"não existe (attester 0..0)"
+],
+[
+"documento.custodiante",
+"1..1",
+"Reference",
+"Estabelecimento custodiante",
+"Estabelecimento (CNES) responsável pela guarda.",
+"Composition.custodian (br-core-organization)",
+"não existe (custodian 0..0)"
+],
+[
+"documento.documentoSubstituido",
+"0..1",
+"Reference",
+"Documento substituído",
+"Documento retificado por este.",
+"Composition.relatesTo (replaces)",
+"Composition.relatesTo"
+],
+[
+"individuo",
+"1..1",
+"Reference",
+"Indivíduo",
+"Paciente do sumário.",
+"Composition.subject (br-core-patient)",
+"Composition.subject.identifier (BRIndividuo-1.0) ou extensão unidentifiedPatient"
+],
+[
+"contatoAssistencial",
+"1..1",
+"BackboneElement",
+"Contato assistencial (internação)",
+"Dados da internação a que o sumário se refere.",
+"Composition.encounter (br-core-encounter)",
+"seção informacoesContatoAssistencial (BRContatoAssistencial-1.0)"
+],
+[
+"contatoAssistencial.modalidade",
+"1..1",
+"CodeableConcept",
+"Modalidade assistencial",
+"Modalidade do atendimento.",
+"Encounter.class (BRModalidadeAssistencial)",
+"Encounter.class; também Composition.category no CMD"
+],
+[
+"contatoAssistencial.modalidadeTelessaude",
+"0..1",
+"CodeableConcept",
+"Modalidade de telessaúde",
+"Quando o atendimento envolve telessaúde.",
+"Encounter.type",
+"Encounter.type (BRModalidadeTelessaude)"
+],
+[
+"contatoAssistencial.carater",
+"1..1",
+"CodeableConcept",
+"Caráter do atendimento",
+"Eletivo, urgência etc.",
+"Encounter.priority (BRCaraterAtendimento)",
+"Encounter.priority"
+],
+[
+"contatoAssistencial.admissao",
+"1..1",
+"dateTime",
+"Momento da admissão",
+"Data e hora da admissão.",
+"Encounter.period.start",
+"Encounter.period.start"
+],
+[
+"contatoAssistencial.alta",
+"1..1",
+"dateTime",
+"Momento da alta",
+"Data e hora do desfecho.",
+"Encounter.period.end",
+"Encounter.period.end"
+],
+[
+"contatoAssistencial.procedencia",
+"1..1",
+"CodeableConcept",
+"Procedência",
+"Origem do paciente.",
+"Encounter.hospitalization.admitSource (BRProcedencia)",
+"Encounter.hospitalization.admitSource"
+],
+[
+"contatoAssistencial.motivoDesfecho",
+"1..1",
+"CodeableConcept",
+"Motivo do desfecho",
+"Alta, óbito, transferência etc.",
+"Encounter.hospitalization.dischargeDisposition (BRMotivoDesfecho)",
+"Encounter.hospitalization.dischargeDisposition"
+],
+[
+"contatoAssistencial.motivoAtendimento",
+"0..1",
+"Reference",
+"Motivo do atendimento",
+"Condição que motivou a internação.",
+"Encounter.reasonReference",
+"Encounter.reasonReference"
+],
+[
+"contatoAssistencial.profissional",
+"1..*",
+"BackboneElement",
+"Profissional participante",
+"Profissionais do atendimento e da alta.",
+"Encounter.participant",
+"Encounter.participant (+ extensões function e team)"
+],
+[
+"contatoAssistencial.profissional.papel",
+"1..1",
+"CodeableConcept",
+"Tipo de participação",
+"Admissão, atendimento, alta.",
+"Encounter.participant.type (BRResponsabilidadeParticipante)",
+"Encounter.participant.type"
+],
+[
+"contatoAssistencial.profissional.individuo",
+"1..1",
+"Reference",
+"Profissional",
+"Profissional participante.",
+"Encounter.participant.individual (br-core-practitioner / practitionerrole)",
+"Encounter.participant.individual"
+],
+[
+"contatoAssistencial.equipe",
+"0..1",
+"Reference",
+"Equipe",
+"Equipe responsável.",
+"CareTeam (br-core-careteam)",
+"extensão team / BRIdentificacaoEquipe"
+],
+[
+"contatoAssistencial.local",
+"0..1",
+"Reference",
+"Local de atendimento",
+"Unidade ou leito.",
+"Encounter.location (br-core-location)",
+"Encounter.location"
+],
+[
+"contatoAssistencial.estabelecimento",
+"1..1",
+"Reference",
+"Estabelecimento",
+"Estabelecimento (CNES) do atendimento.",
+"Encounter.serviceProvider (br-core-organization)",
+"Encounter.serviceProvider.identifier"
+],
+[
+"contatoAssistencial.contatoAnterior",
+"0..1",
+"Reference",
+"Contato assistencial anterior",
+"Atendimento que originou este.",
+"Encounter.partOf",
+"Encounter.partOf"
+],
+[
+"contatoAssistencial.resumoEvolucao",
+"1..1",
+"string",
+"Resumo da evolução clínica",
+"Narrativa da evolução durante a internação.",
+"Encounter.text",
+"seção resumoEvolucaoClinica (ClinicalImpression.summary)"
+],
+[
+"contatoAssistencial.informacoesAdicionais",
+"0..1",
+"string",
+"Informações adicionais",
+"Informações complementares.",
+"Encounter.text ou Composition.section.text",
+"seção informacoesAdicionais (BRObservacaoDescritiva-1.0) e extensão otherInformations"
+],
+[
+"diagnosticoAdmissao",
+"0..*",
+"BackboneElement",
+"Diagnóstico da admissão",
+"Diagnósticos ou problemas na admissão.",
+"Composition.section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)",
+"seção problemasDiagnosticosAvaliados (BRProblemaDiagnostico)"
+],
+[
+"diagnosticoAdmissao.codigo",
+"1..1",
+"CodeableConcept",
+"Diagnóstico ou problema",
+"CID-10.",
+"Condition.code (BRCID10)",
+"Condition.code (BRProblemaDiagnostico)"
+],
+[
+"diagnosticoAdmissao.situacao",
+"1..1",
+"CodeableConcept",
+"Estado da resolução",
+"Ativo, resolvido etc.",
+"Condition.clinicalStatus (condition-clinical + suplemento pt-BR)",
+"Condition.clinicalStatus (BREstadoResolucaoDiagnosticoProblema-1.0)"
+],
+[
+"diagnosticoAdmissao.nota",
+"0..1",
+"string",
+"Nota",
+"Observação.",
+"Condition.note",
+"Condition.note"
+],
+[
+"diagnosticoAvaliado",
+"0..*",
+"BackboneElement",
+"Diagnóstico avaliado",
+"Diagnósticos ou problemas avaliados durante a internação.",
+"Composition.section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use",
+"seção problemasDiagnosticosAvaliados; Encounter.diagnosis:problemAndDiagnosis"
+],
+[
+"diagnosticoAvaliado.codigo",
+"1..1",
+"CodeableConcept",
+"Diagnóstico ou problema",
+"CID-10.",
+"Condition.code (BRCID10)",
+"Condition.code"
+],
+[
+"diagnosticoAvaliado.papel",
+"0..1",
+"CodeableConcept",
+"Principal ou secundário",
+"Papel do diagnóstico na internação.",
+"Encounter.diagnosis.use / rank",
+"Encounter.diagnosis.rank"
+],
+[
+"diagnosticoAvaliado.situacao",
+"1..1",
+"CodeableConcept",
+"Estado da resolução",
+"Ativo, resolvido etc.",
+"Condition.clinicalStatus",
+"Condition.clinicalStatus"
+],
+[
+"alergia",
+"0..*",
+"BackboneElement",
+"Alergia ou reação adversa",
+"Alergias e intolerâncias conhecidas ou ocorridas.",
+"Composition.section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)",
+"seção alergiaReacaoAdversa (BRAlergiaReacaoAdversa-1.0)"
+],
+[
+"alergia.agente",
+"1..1",
+"CodeableConcept",
+"Agente ou substância",
+"Substância (ou o tipo, se a substância não é conhecida).",
+"AllergyIntolerance.code (CBARA + SNOMED CT; BRMedicamento; BRImunobiologico)",
+"AllergyIntolerance.code (BRAlergenos-1.0)"
+],
+[
+"alergia.categoria",
+"1..1",
+"code",
+"Categoria do agente",
+"Alimento, medicamento, ambiente, biológico.",
+"AllergyIntolerance.category",
+"AllergyIntolerance.category (BRCategoriaAgenteAlergiasReacoesAdversas-1.0)"
+],
+[
+"alergia.tipo",
+"0..1",
+"code",
+"Tipo de reação",
+"Alergia ou intolerância.",
+"AllergyIntolerance.type",
+"AllergyIntolerance.type"
+],
+[
+"alergia.grauCerteza",
+"0..1",
+"CodeableConcept",
+"Grau de certeza",
+"Confirmada, não confirmada etc.",
+"AllergyIntolerance.verificationStatus",
+"AllergyIntolerance.verificationStatus (BRGrauCertezaAlergiasReacoesAdversas-1.0)"
+],
+[
+"alergia.criticidade",
+"0..1",
+"code",
+"Criticidade",
+"Baixa, alta, não avaliável.",
+"AllergyIntolerance.criticality",
+"AllergyIntolerance.criticality (BRCriticidadeAlergiasReacoesAdversas-1.0)"
+],
+[
+"alergia.instalacao",
+"0..1",
+"dateTime",
+"Data da instalação",
+"Início da alergia ou reação.",
+"AllergyIntolerance.onset[x]",
+"AllergyIntolerance.onset[x]"
+],
+[
+"alergia.manifestacao",
+"0..*",
+"CodeableConcept",
+"Manifestação",
+"Sinais e sintomas.",
+"AllergyIntolerance.reaction.manifestation (SNOMED CT; MedDRA adicional)",
+"AllergyIntolerance.reaction.manifestation (MedDRA, máx. 1)"
+],
+[
+"alergia.evolucao",
+"0..1",
+"string",
+"Evolução",
+"Evolução da alergia ou reação.",
+"AllergyIntolerance.note",
+"AllergyIntolerance.note"
+],
+[
+"procedimento",
+"0..*",
+"BackboneElement",
+"Procedimento realizado",
+"Procedimentos realizados na internação.",
+"Composition.section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)",
+"seção procedimentosRealizados (BRProcedimentoRealizado-1.0); Encounter.diagnosis:procedure"
+],
+[
+"procedimento.codigo",
+"1..1",
+"CodeableConcept",
+"Procedimento",
+"Tabela SUS ou TUSS 22.",
+"Procedure.code (BRProcedimentosNacionais)",
+"Procedure.code (BRProcedimentosNacionais-1.0)"
+],
+[
+"procedimento.situacao",
+"1..1",
+"code",
+"Estado do procedimento",
+"Concluído, não realizado etc.",
+"Procedure.status (event-status + suplemento pt-BR)",
+"Procedure.status (BREstadoEvento-1.0)"
+],
+[
+"procedimento.momento",
+"1..1",
+"dateTime",
+"Momento da realização",
+"Data e hora ou período.",
+"Procedure.performed[x]",
+"Procedure.performed[x]"
+],
+[
+"procedimento.quantidade",
+"0..1",
+"integer",
+"Quantidade",
+"Quantidade realizada.",
+"sem elemento no Procedure; produção na camada financeira (Claim)",
+"extensão quantity (BRQuantidade-1.0)"
+],
+[
+"procedimento.executante",
+"1..*",
+"Reference",
+"Executante",
+"Profissional executante.",
+"Procedure.performer.actor",
+"Procedure.performer:practitioner.actor"
+],
+[
+"procedimento.funcao",
+"0..1",
+"CodeableConcept",
+"Função do executante",
+"Cirurgião, auxiliar, anestesista.",
+"Procedure.performer.function (performer-role, SNOMED CT)",
+"Procedure.performer.function (BROcupacao-1.0, CBO)"
+],
+[
+"procedimento.estabelecimentoTerceiro",
+"0..1",
+"Reference",
+"Estabelecimento terceiro",
+"Quando realizado por terceiro.",
+"Procedure.performer.onBehalfOf",
+"Procedure.performer.onBehalfOf"
+],
+[
+"procedimento.autorizacao",
+"0..1",
+"Identifier",
+"Número de autorização",
+"Autorização do procedimento.",
+"Claim/ClaimResponse (camada financeira)",
+"Procedure.identifier (type AUTH)"
+],
+[
+"procedimento.resultado",
+"0..1",
+"string",
+"Resultado ou observações",
+"Resultado do procedimento.",
+"Procedure.note / outcome",
+"Procedure.note"
+],
+[
+"prescricao",
+"0..*",
+"BackboneElement",
+"Prescrição de alta",
+"Medicamentos prescritos na alta.",
+"Composition.section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)",
+"seção prescricaoAlta → BRRegistroPrescricaoMedicamento → BRPrescricaoMedicamento"
+],
+[
+"prescricao.medicamento",
+"1..1",
+"Reference",
+"Medicamento",
+"Medicamento prescrito.",
+"MedicationRequest.medicationReference (br-core-medication, BRMedicamento)",
+"MedicationRequest.medication[x] (BRPrescricaoNaoEstruturada, texto livre)"
+],
+[
+"prescricao.dataPrescricao",
+"1..1",
+"dateTime",
+"Data e hora da prescrição",
+"",
+"MedicationRequest.authoredOn",
+"MedicationRequest.authoredOn"
+],
+[
+"prescricao.prescritor",
+"1..1",
+"Reference",
+"Prescritor",
+"Profissional prescritor.",
+"MedicationRequest.requester",
+"MedicationRequest.recorder.identifier (requester = estabelecimento)"
+],
+[
+"prescricao.posologia",
+"0..1",
+"string",
+"Posologia em texto",
+"Prescrição não estruturada.",
+"MedicationRequest.dosageInstruction.text",
+"MedicationRequest.dosageInstruction.text"
+],
+[
+"prescricao.orientacoes",
+"0..1",
+"string",
+"Orientações de uso",
+"",
+"MedicationRequest.dosageInstruction.patientInstruction",
+"MedicationRequest.dosageInstruction.patientInstruction"
+],
+[
+"prescricao.frequencia",
+"0..1",
+"Timing",
+"Frequência e turno",
+"Intervalo entre doses e turno do dia.",
+"MedicationRequest.dosageInstruction.timing (repeat.period, repeat.when)",
+"timing + extensões BRIntervaloDoses e BRTurno"
+],
+[
+"prescricao.seNecessario",
+"0..1",
+"boolean",
+"Uso se necessário",
+"",
+"MedicationRequest.dosageInstruction.asNeeded[x]",
+"MedicationRequest.dosageInstruction.asNeeded[x]"
+],
+[
+"prescricao.via",
+"1..1",
+"CodeableConcept",
+"Via de administração",
+"",
+"MedicationRequest.dosageInstruction.route (EDQM, IPS)",
+"MedicationRequest.dosageInstruction.route (BRViaAdministracao-1.0)"
+],
+[
+"prescricao.dose",
+"1..1",
+"Quantity",
+"Dose",
+"",
+"MedicationRequest.dosageInstruction.doseAndRate.dose[x]",
+"MedicationRequest.dosageInstruction.maxDosePerAdministration"
+],
+[
+"prescricao.duracao",
+"1..1",
+"Period",
+"Duração / validade",
+"",
+"MedicationRequest.dispenseRequest.validityPeriod",
+"MedicationRequest.dispenseRequest.validityPeriod"
+],
+[
+"prescricao.quantidadeTotal",
+"0..1",
+"Quantity",
+"Total do tratamento",
+"",
+"MedicationRequest.dispenseRequest.quantity",
+"MedicationRequest.dispenseRequest.quantity"
+],
+[
+"planoCuidados",
+"0..*",
+"BackboneElement",
+"Plano de cuidados",
+"Instruções e recomendações para depois da alta.",
+"Composition.section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)",
+"seção planoCuidados (BRPlanoCuidados-1.0)"
+],
+[
+"planoCuidados.descricao",
+"1..1",
+"string",
+"Descrição",
+"Plano, instruções e recomendações.",
+"CarePlan.description",
+"CarePlan.description"
+],
+[
+"planoCuidados.situacao",
+"1..1",
+"code",
+"Estado do plano",
+"",
+"CarePlan.status (request-status + suplemento pt-BR)",
+"CarePlan.status (BREstadoSolicitacao-1.0)"
+],
+[
+"planoCuidados.atividade",
+"0..*",
+"BackboneElement",
+"Atividade programada",
+"Consulta, exame, retorno.",
+"CarePlan.activity.detail (BRSubgrupoTabelaSUS)",
+"não existe (activity 0..0)"
+],
+[
+"capacidadeFuncional",
+"0..*",
+"BackboneElement",
+"Capacidade funcional",
+"Restrições funcionais e incapacidades na alta.",
+"Composition.section:capacidadeFuncional (LOINC 54522-8) → Condition (br-core-capacidadefuncional)",
+"seção restricaoFuncionalIncapacidadeSaude (BRRestricaoFuncionalIncapacidadeSaude-1.0)"
+],
+[
+"capacidadeFuncional.achado",
+"1..1",
+"CodeableConcept",
+"Achado funcional",
+"Capacidade ou incapacidade.",
+"Condition.code (BRCapacidadeFuncional, SNOMED CT; CID-10 adicional)",
+"Condition.code.text (texto livre)"
+],
+[
+"capacidadeFuncional.situacao",
+"1..1",
+"CodeableConcept",
+"Estado",
+"",
+"Condition.clinicalStatus",
+"Condition.clinicalStatus (BREstadoRestricaoFuncionalIncapacidadeSaude-1.0)"
+],
+[
+"capacidadeFuncional.grau",
+"0..1",
+"CodeableConcept",
+"Grau",
+"Grau da incapacidade, com a escala aplicada.",
+"Condition.stage",
+"não existe"
+]
+]

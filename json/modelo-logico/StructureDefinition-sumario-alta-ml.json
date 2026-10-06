@@ -1,0 +1,1810 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sumario-alta-ml",
+  "url": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta-ml",
+  "name": "SumarioAltaML",
+  "title": "Modelo lógico do Sumário de Alta",
+  "status": "draft",
+  "experimental": true,
+  "description": "Modelo de informação do Sumário de Alta hospitalar, independente de tecnologia, com o mapeamento de cada elemento para o BR-Core (refatoração) e para o SA-IG da RNDS (legado).",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "br-core",
+      "name": "BR-Core (refatoração)",
+      "uri": "https://br-core.saude.gov.br/fhir",
+      "comment": "Elemento FHIR do BR-Core 1.3.0 usado neste guia."
+    },
+    {
+      "identity": "sa-ig",
+      "name": "SA-IG da RNDS (legado)",
+      "uri": "http://www.saude.gov.br/fhir/r4",
+      "comment": "Elemento ou perfil do SA-IG da RNDS que carrega a mesma informação hoje."
+    }
+  ],
+  "kind": "logical",
+  "abstract": false,
+  "type": "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/sumario-alta-ml",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Base",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "sumario-alta-ml",
+        "path": "sumario-alta-ml",
+        "short": "Modelo lógico do Sumário de Alta",
+        "definition": "Modelo de informação do Sumário de Alta hospitalar, independente de tecnologia, com o mapeamento de cada elemento para o BR-Core (refatoração) e para o SA-IG da RNDS (legado)."
+      },
+      {
+        "id": "sumario-alta-ml.documento",
+        "path": "sumario-alta-ml.documento",
+        "short": "Documento",
+        "definition": "Dados do documento Sumário de Alta como um todo.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Bundle (br-core-bundle-documento) + Composition (br-core-sumarioalta)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.identificador",
+        "path": "sumario-alta-ml.documento.identificador",
+        "short": "Identificador do documento",
+        "definition": "Identificador persistente do documento, igual em todas as transmissões.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Bundle.identifier; Composition.identifier"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "não existe (Composition.identifier 0..0 no CMD)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.dataHora",
+        "path": "sumario-alta-ml.documento.dataHora",
+        "short": "Data e hora do documento",
+        "definition": "Momento de emissão do documento.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.date; Bundle.timestamp"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Composition.date"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.situacao",
+        "path": "sumario-alta-ml.documento.situacao",
+        "short": "Situação do documento",
+        "definition": "final, retificado ou anulado.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.status (composition-status)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Composition.status (BREstadoDocumento-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.tipo",
+        "path": "sumario-alta-ml.documento.tipo",
+        "short": "Tipo de documento",
+        "definition": "Sumário de Alta.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.type = LOINC 18842-5"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Composition.type (BRTipoDocumento-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.autor",
+        "path": "sumario-alta-ml.documento.autor",
+        "short": "Autor",
+        "definition": "Profissional responsável pela alta.",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.author (br-core-practitioner / practitionerrole)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Composition.author.identifier (BRPessoaJuridicaProfissionalLiberal-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.atestador",
+        "path": "sumario-alta-ml.documento.atestador",
+        "short": "Atestador legal",
+        "definition": "Quem autentica o documento.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.attester (mode = legal)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "não existe (attester 0..0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.custodiante",
+        "path": "sumario-alta-ml.documento.custodiante",
+        "short": "Estabelecimento custodiante",
+        "definition": "Estabelecimento (CNES) responsável pela guarda.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.custodian (br-core-organization)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "não existe (custodian 0..0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.documento.documentoSubstituido",
+        "path": "sumario-alta-ml.documento.documentoSubstituido",
+        "short": "Documento substituído",
+        "definition": "Documento retificado por este.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.relatesTo (replaces)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Composition.relatesTo"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.individuo",
+        "path": "sumario-alta-ml.individuo",
+        "short": "Indivíduo",
+        "definition": "Paciente do sumário.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.subject (br-core-patient)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Composition.subject.identifier (BRIndividuo-1.0) ou extensão unidentifiedPatient"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial",
+        "path": "sumario-alta-ml.contatoAssistencial",
+        "short": "Contato assistencial (internação)",
+        "definition": "Dados da internação a que o sumário se refere.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.encounter (br-core-encounter)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção informacoesContatoAssistencial (BRContatoAssistencial-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.modalidade",
+        "path": "sumario-alta-ml.contatoAssistencial.modalidade",
+        "short": "Modalidade assistencial",
+        "definition": "Modalidade do atendimento.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.class (BRModalidadeAssistencial)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.class; também Composition.category no CMD"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.modalidadeTelessaude",
+        "path": "sumario-alta-ml.contatoAssistencial.modalidadeTelessaude",
+        "short": "Modalidade de telessaúde",
+        "definition": "Quando o atendimento envolve telessaúde.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.type"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.type (BRModalidadeTelessaude)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.carater",
+        "path": "sumario-alta-ml.contatoAssistencial.carater",
+        "short": "Caráter do atendimento",
+        "definition": "Eletivo, urgência etc.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.priority (BRCaraterAtendimento)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.priority"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.admissao",
+        "path": "sumario-alta-ml.contatoAssistencial.admissao",
+        "short": "Momento da admissão",
+        "definition": "Data e hora da admissão.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.period.start"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.period.start"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.alta",
+        "path": "sumario-alta-ml.contatoAssistencial.alta",
+        "short": "Momento da alta",
+        "definition": "Data e hora do desfecho.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.period.end"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.period.end"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.procedencia",
+        "path": "sumario-alta-ml.contatoAssistencial.procedencia",
+        "short": "Procedência",
+        "definition": "Origem do paciente.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.hospitalization.admitSource (BRProcedencia)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.hospitalization.admitSource"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.motivoDesfecho",
+        "path": "sumario-alta-ml.contatoAssistencial.motivoDesfecho",
+        "short": "Motivo do desfecho",
+        "definition": "Alta, óbito, transferência etc.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.hospitalization.dischargeDisposition (BRMotivoDesfecho)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.hospitalization.dischargeDisposition"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.motivoAtendimento",
+        "path": "sumario-alta-ml.contatoAssistencial.motivoAtendimento",
+        "short": "Motivo do atendimento",
+        "definition": "Condição que motivou a internação.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.reasonReference"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.reasonReference"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.profissional",
+        "path": "sumario-alta-ml.contatoAssistencial.profissional",
+        "short": "Profissional participante",
+        "definition": "Profissionais do atendimento e da alta.",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.participant"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.participant (+ extensões function e team)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.profissional.papel",
+        "path": "sumario-alta-ml.contatoAssistencial.profissional.papel",
+        "short": "Tipo de participação",
+        "definition": "Admissão, atendimento, alta.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.participant.type (BRResponsabilidadeParticipante)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.participant.type"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.profissional.individuo",
+        "path": "sumario-alta-ml.contatoAssistencial.profissional.individuo",
+        "short": "Profissional",
+        "definition": "Profissional participante.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.participant.individual (br-core-practitioner / practitionerrole)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.participant.individual"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.equipe",
+        "path": "sumario-alta-ml.contatoAssistencial.equipe",
+        "short": "Equipe",
+        "definition": "Equipe responsável.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "CareTeam (br-core-careteam)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "extensão team / BRIdentificacaoEquipe"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.local",
+        "path": "sumario-alta-ml.contatoAssistencial.local",
+        "short": "Local de atendimento",
+        "definition": "Unidade ou leito.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.location (br-core-location)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.location"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.estabelecimento",
+        "path": "sumario-alta-ml.contatoAssistencial.estabelecimento",
+        "short": "Estabelecimento",
+        "definition": "Estabelecimento (CNES) do atendimento.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.serviceProvider (br-core-organization)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.serviceProvider.identifier"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.contatoAnterior",
+        "path": "sumario-alta-ml.contatoAssistencial.contatoAnterior",
+        "short": "Contato assistencial anterior",
+        "definition": "Atendimento que originou este.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.partOf"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.partOf"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.resumoEvolucao",
+        "path": "sumario-alta-ml.contatoAssistencial.resumoEvolucao",
+        "short": "Resumo da evolução clínica",
+        "definition": "Narrativa da evolução durante a internação.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.text"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção resumoEvolucaoClinica (ClinicalImpression.summary)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.contatoAssistencial.informacoesAdicionais",
+        "path": "sumario-alta-ml.contatoAssistencial.informacoesAdicionais",
+        "short": "Informações adicionais",
+        "definition": "Informações complementares.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.text ou Composition.section.text"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção informacoesAdicionais (BRObservacaoDescritiva-1.0) e extensão otherInformations"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAdmissao",
+        "path": "sumario-alta-ml.diagnosticoAdmissao",
+        "short": "Diagnóstico da admissão",
+        "definition": "Diagnósticos ou problemas na admissão.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção problemasDiagnosticosAvaliados (BRProblemaDiagnostico)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAdmissao.codigo",
+        "path": "sumario-alta-ml.diagnosticoAdmissao.codigo",
+        "short": "Diagnóstico ou problema",
+        "definition": "CID-10.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.code (BRCID10)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Condition.code (BRProblemaDiagnostico)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAdmissao.situacao",
+        "path": "sumario-alta-ml.diagnosticoAdmissao.situacao",
+        "short": "Estado da resolução",
+        "definition": "Ativo, resolvido etc.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.clinicalStatus (condition-clinical + suplemento pt-BR)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Condition.clinicalStatus (BREstadoResolucaoDiagnosticoProblema-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAdmissao.nota",
+        "path": "sumario-alta-ml.diagnosticoAdmissao.nota",
+        "short": "Nota",
+        "definition": "Observação.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.note"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Condition.note"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAvaliado",
+        "path": "sumario-alta-ml.diagnosticoAvaliado",
+        "short": "Diagnóstico avaliado",
+        "definition": "Diagnósticos ou problemas avaliados durante a internação.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção problemasDiagnosticosAvaliados; Encounter.diagnosis:problemAndDiagnosis"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAvaliado.codigo",
+        "path": "sumario-alta-ml.diagnosticoAvaliado.codigo",
+        "short": "Diagnóstico ou problema",
+        "definition": "CID-10.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.code (BRCID10)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Condition.code"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAvaliado.papel",
+        "path": "sumario-alta-ml.diagnosticoAvaliado.papel",
+        "short": "Principal ou secundário",
+        "definition": "Papel do diagnóstico na internação.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Encounter.diagnosis.use / rank"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Encounter.diagnosis.rank"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.diagnosticoAvaliado.situacao",
+        "path": "sumario-alta-ml.diagnosticoAvaliado.situacao",
+        "short": "Estado da resolução",
+        "definition": "Ativo, resolvido etc.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.clinicalStatus"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Condition.clinicalStatus"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia",
+        "path": "sumario-alta-ml.alergia",
+        "short": "Alergia ou reação adversa",
+        "definition": "Alergias e intolerâncias conhecidas ou ocorridas.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção alergiaReacaoAdversa (BRAlergiaReacaoAdversa-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.agente",
+        "path": "sumario-alta-ml.alergia.agente",
+        "short": "Agente ou substância",
+        "definition": "Substância (ou o tipo, se a substância não é conhecida).",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.code (CBARA + SNOMED CT; BRMedicamento; BRImunobiologico)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.code (BRAlergenos-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.categoria",
+        "path": "sumario-alta-ml.alergia.categoria",
+        "short": "Categoria do agente",
+        "definition": "Alimento, medicamento, ambiente, biológico.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.category"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.category (BRCategoriaAgenteAlergiasReacoesAdversas-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.tipo",
+        "path": "sumario-alta-ml.alergia.tipo",
+        "short": "Tipo de reação",
+        "definition": "Alergia ou intolerância.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.type"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.type"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.grauCerteza",
+        "path": "sumario-alta-ml.alergia.grauCerteza",
+        "short": "Grau de certeza",
+        "definition": "Confirmada, não confirmada etc.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.verificationStatus"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.verificationStatus (BRGrauCertezaAlergiasReacoesAdversas-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.criticidade",
+        "path": "sumario-alta-ml.alergia.criticidade",
+        "short": "Criticidade",
+        "definition": "Baixa, alta, não avaliável.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.criticality"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.criticality (BRCriticidadeAlergiasReacoesAdversas-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.instalacao",
+        "path": "sumario-alta-ml.alergia.instalacao",
+        "short": "Data da instalação",
+        "definition": "Início da alergia ou reação.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.onset[x]"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.onset[x]"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.manifestacao",
+        "path": "sumario-alta-ml.alergia.manifestacao",
+        "short": "Manifestação",
+        "definition": "Sinais e sintomas.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.reaction.manifestation (SNOMED CT; MedDRA adicional)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.reaction.manifestation (MedDRA, máx. 1)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.alergia.evolucao",
+        "path": "sumario-alta-ml.alergia.evolucao",
+        "short": "Evolução",
+        "definition": "Evolução da alergia ou reação.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "AllergyIntolerance.note"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "AllergyIntolerance.note"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento",
+        "path": "sumario-alta-ml.procedimento",
+        "short": "Procedimento realizado",
+        "definition": "Procedimentos realizados na internação.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção procedimentosRealizados (BRProcedimentoRealizado-1.0); Encounter.diagnosis:procedure"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.codigo",
+        "path": "sumario-alta-ml.procedimento.codigo",
+        "short": "Procedimento",
+        "definition": "Tabela SUS ou TUSS 22.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Procedure.code (BRProcedimentosNacionais)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.code (BRProcedimentosNacionais-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.situacao",
+        "path": "sumario-alta-ml.procedimento.situacao",
+        "short": "Estado do procedimento",
+        "definition": "Concluído, não realizado etc.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Procedure.status (event-status + suplemento pt-BR)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.status (BREstadoEvento-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.momento",
+        "path": "sumario-alta-ml.procedimento.momento",
+        "short": "Momento da realização",
+        "definition": "Data e hora ou período.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Procedure.performed[x]"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.performed[x]"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.quantidade",
+        "path": "sumario-alta-ml.procedimento.quantidade",
+        "short": "Quantidade",
+        "definition": "Quantidade realizada.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "sem elemento no Procedure; produção na camada financeira (Claim)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "extensão quantity (BRQuantidade-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.executante",
+        "path": "sumario-alta-ml.procedimento.executante",
+        "short": "Executante",
+        "definition": "Profissional executante.",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Procedure.performer.actor"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.performer:practitioner.actor"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.funcao",
+        "path": "sumario-alta-ml.procedimento.funcao",
+        "short": "Função do executante",
+        "definition": "Cirurgião, auxiliar, anestesista.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Procedure.performer.function (performer-role, SNOMED CT)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.performer.function (BROcupacao-1.0, CBO)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.estabelecimentoTerceiro",
+        "path": "sumario-alta-ml.procedimento.estabelecimentoTerceiro",
+        "short": "Estabelecimento terceiro",
+        "definition": "Quando realizado por terceiro.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Procedure.performer.onBehalfOf"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.performer.onBehalfOf"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.autorizacao",
+        "path": "sumario-alta-ml.procedimento.autorizacao",
+        "short": "Número de autorização",
+        "definition": "Autorização do procedimento.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Claim/ClaimResponse (camada financeira)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.identifier (type AUTH)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.procedimento.resultado",
+        "path": "sumario-alta-ml.procedimento.resultado",
+        "short": "Resultado ou observações",
+        "definition": "Resultado do procedimento.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Procedure.note / outcome"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Procedure.note"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao",
+        "path": "sumario-alta-ml.prescricao",
+        "short": "Prescrição de alta",
+        "definition": "Medicamentos prescritos na alta.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção prescricaoAlta → BRRegistroPrescricaoMedicamento → BRPrescricaoMedicamento"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.medicamento",
+        "path": "sumario-alta-ml.prescricao.medicamento",
+        "short": "Medicamento",
+        "definition": "Medicamento prescrito.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.medicationReference (br-core-medication, BRMedicamento)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.medication[x] (BRPrescricaoNaoEstruturada, texto livre)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.dataPrescricao",
+        "path": "sumario-alta-ml.prescricao.dataPrescricao",
+        "short": "Data e hora da prescrição",
+        "definition": "Data e hora da prescrição",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.authoredOn"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.authoredOn"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.prescritor",
+        "path": "sumario-alta-ml.prescricao.prescritor",
+        "short": "Prescritor",
+        "definition": "Profissional prescritor.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.requester"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.recorder.identifier (requester = estabelecimento)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.posologia",
+        "path": "sumario-alta-ml.prescricao.posologia",
+        "short": "Posologia em texto",
+        "definition": "Prescrição não estruturada.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dosageInstruction.text"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.dosageInstruction.text"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.orientacoes",
+        "path": "sumario-alta-ml.prescricao.orientacoes",
+        "short": "Orientações de uso",
+        "definition": "Orientações de uso",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dosageInstruction.patientInstruction"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.dosageInstruction.patientInstruction"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.frequencia",
+        "path": "sumario-alta-ml.prescricao.frequencia",
+        "short": "Frequência e turno",
+        "definition": "Intervalo entre doses e turno do dia.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Timing"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dosageInstruction.timing (repeat.period, repeat.when)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "timing + extensões BRIntervaloDoses e BRTurno"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.seNecessario",
+        "path": "sumario-alta-ml.prescricao.seNecessario",
+        "short": "Uso se necessário",
+        "definition": "Uso se necessário",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dosageInstruction.asNeeded[x]"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.dosageInstruction.asNeeded[x]"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.via",
+        "path": "sumario-alta-ml.prescricao.via",
+        "short": "Via de administração",
+        "definition": "Via de administração",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dosageInstruction.route (EDQM, IPS)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.dosageInstruction.route (BRViaAdministracao-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.dose",
+        "path": "sumario-alta-ml.prescricao.dose",
+        "short": "Dose",
+        "definition": "Dose",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dosageInstruction.doseAndRate.dose[x]"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.dosageInstruction.maxDosePerAdministration"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.duracao",
+        "path": "sumario-alta-ml.prescricao.duracao",
+        "short": "Duração / validade",
+        "definition": "Duração / validade",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Period"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dispenseRequest.validityPeriod"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.dispenseRequest.validityPeriod"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.prescricao.quantidadeTotal",
+        "path": "sumario-alta-ml.prescricao.quantidadeTotal",
+        "short": "Total do tratamento",
+        "definition": "Total do tratamento",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "MedicationRequest.dispenseRequest.quantity"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "MedicationRequest.dispenseRequest.quantity"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.planoCuidados",
+        "path": "sumario-alta-ml.planoCuidados",
+        "short": "Plano de cuidados",
+        "definition": "Instruções e recomendações para depois da alta.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção planoCuidados (BRPlanoCuidados-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.planoCuidados.descricao",
+        "path": "sumario-alta-ml.planoCuidados.descricao",
+        "short": "Descrição",
+        "definition": "Plano, instruções e recomendações.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "CarePlan.description"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "CarePlan.description"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.planoCuidados.situacao",
+        "path": "sumario-alta-ml.planoCuidados.situacao",
+        "short": "Estado do plano",
+        "definition": "Estado do plano",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "CarePlan.status (request-status + suplemento pt-BR)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "CarePlan.status (BREstadoSolicitacao-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.planoCuidados.atividade",
+        "path": "sumario-alta-ml.planoCuidados.atividade",
+        "short": "Atividade programada",
+        "definition": "Consulta, exame, retorno.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "CarePlan.activity.detail (BRSubgrupoTabelaSUS)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "não existe (activity 0..0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.capacidadeFuncional",
+        "path": "sumario-alta-ml.capacidadeFuncional",
+        "short": "Capacidade funcional",
+        "definition": "Restrições funcionais e incapacidades na alta.",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Composition.section:capacidadeFuncional (LOINC 54522-8) → Condition (br-core-capacidadefuncional)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "seção restricaoFuncionalIncapacidadeSaude (BRRestricaoFuncionalIncapacidadeSaude-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.capacidadeFuncional.achado",
+        "path": "sumario-alta-ml.capacidadeFuncional.achado",
+        "short": "Achado funcional",
+        "definition": "Capacidade ou incapacidade.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.code (BRCapacidadeFuncional, SNOMED CT; CID-10 adicional)"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Condition.code.text (texto livre)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.capacidadeFuncional.situacao",
+        "path": "sumario-alta-ml.capacidadeFuncional.situacao",
+        "short": "Estado",
+        "definition": "Estado",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.clinicalStatus"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "Condition.clinicalStatus (BREstadoRestricaoFuncionalIncapacidadeSaude-1.0)"
+          }
+        ]
+      },
+      {
+        "id": "sumario-alta-ml.capacidadeFuncional.grau",
+        "path": "sumario-alta-ml.capacidadeFuncional.grau",
+        "short": "Grau",
+        "definition": "Grau da incapacidade, com a escala aplicada.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "br-core",
+            "map": "Condition.stage"
+          },
+          {
+            "identity": "sa-ig",
+            "map": "não existe"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # Recomendações à RNDS
 
-1. **Publicar a correção do BR-Core** (branch `fix/sumarioalta-capacidadefuncional` do repositório br.org.hl7.fhir.core): discriminador `pattern` em `section.code` e `http://loinc.org` no `br-core-sumarioalta` e no `br-core-registroatendimentoclinico` (D-01, D-02), e o `br-core-capacidadefuncional` revisto (D-04). Com a correção, os exemplos deste guia validam sem erro também contra o `clinical-document-composition`.
+1. **Publicar a correção do BR-Core** (branch `fix/sumarioalta-capacidadefuncional` do repositório br.org.hl7.fhir.core): discriminador `pattern` em `section.code` e `http://loinc.org` no `br-core-sumarioalta` e no `br-core-registroatendimentoclinico` (D-01, D-02), e o `br-core-capacidadefuncional` revisto (D-04). Falta decidir os três códigos de seção fora do ValueSet `doc-section-codes` (D-39). Com a correção, os exemplos deste guia validam sem erro também contra o `clinical-document-composition`.
 2. **A RNDS se ajusta ao BR-Core, não o contrário.** Usar o `br-core-sumarioalta` e os perfis do BR-Core; onde não houver perfil BR-Core, o recurso canônico do FHIR R4. Nenhum perfil próprio da RNDS. Abandonar o SA-IG (canonical `www.saude.gov.br/fhir/r4`, herança do CMD) e publicar o guia com `dependsOn` do pacote BR-Core.
 3. **Usar elementos nativos**: `Composition.encounter` para o contato assistencial, `Encounter.text` para o resumo da evolução, `Timing` para turno e intervalo, `participant`/CareTeam para a equipe.
 4. **Permitir paciente sem CPF** no br-core-patient (D-03), com a regra "CPF ou CNS", para que o CNS provisório substitua a extensão unidentifiedPatient.
@@ -18,7 +18,7 @@ Regras que este guia hoje só consegue dar como orientação de preenchimento:
 
 | Perfil | Mudança |
 |---|---|
-| br-core-sumarioalta | `encounter` 1..1; `custodian` 1..1; `type` = LOINC 18842-5; invariante "seção com `entry` ou `emptyReason`"; discriminador `pattern` em `code` e `http://loinc.org` (D-01, D-02) |
+| br-core-sumarioalta | `encounter` 1..1; `custodian` 1..1; `type` = LOINC 18842-5; invariante "seção com `entry` ou `emptyReason`"; discriminador `pattern` em `code` e `http://loinc.org` (D-01, D-02); códigos de seção do `doc-section-codes` ou binding extensible (D-39) |
 | br-core-composition | compatibilidade declarada com o `clinical-document-composition` (FHIR Clinical Documents): categoria 107903-7 Clinical note, fatias de atestador legal e profissional, extensões de versão e destinatário |
 | br-core-bundle-documento (novo) | criado no branch `fix/sumarioalta-capacidadefuncional`: Bundle `document` com identifier, timestamp ≥ Composition.date, br-core-composition como primeira entrada e fullUrl em todas as entradas, nas regras do `clinical-document-bundle` |
 | br-core-encounter | invariante "internação encerrada tem `period.end`" para uso no Sumário de Alta |
