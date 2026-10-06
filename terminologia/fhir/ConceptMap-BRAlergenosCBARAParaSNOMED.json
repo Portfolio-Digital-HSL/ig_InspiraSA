@@ -9,7 +9,7 @@
   "experimental": true,
   "publisher": "Ministério da Saúde",
   "language": "pt-BR",
-  "description": "Mapeamentos SAME-AS dos códigos do BRAlergenosCBARA que estavam sem correspondência em SNOMED CT no OCL. O JSONL grava cada um na Source MS/BRAlergenosCBARA.",
+  "description": "Mapeamentos SAME-AS dos três códigos do BRAlergenosCBARA que estavam sem correspondência em SNOMED CT no OCL, criados na Source MS/BRAlergenosCBARA em 06/10/2026.",
   "group": [
     {
       "source": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRAlergenosCBARA",
@@ -23,7 +23,7 @@
               "code": "1285547006",
               "display": "Citrus X latifolia (substance)",
               "equivalence": "equivalent",
-              "comment": "Proposto: limão-taiti (lima ácida Tahiti), sinônimo SNOMED Seedless lime."
+              "comment": "Limão-taiti (lima ácida Tahiti), sinônimo SNOMED Seedless lime."
             }
           ]
         },
@@ -32,10 +32,10 @@
           "display": "Grama",
           "target": [
             {
-              "code": "256277009",
-              "display": "Grass pollen (substance)",
+              "code": "422304003",
+              "display": "Family Poaceae (organism)",
               "equivalence": "equivalent",
-              "comment": "Proposto: pólen de gramíneas."
+              "comment": "Contato com a planta (gramíneas). O SNOMED CT não tem substância Grass; o pólen é o polen-grama (256277009)."
             }
           ]
         },
@@ -46,8 +46,7 @@
             {
               "code": "767098004",
               "display": "Metal and/or metal compound (substance)",
-              "equivalence": "equivalent",
-              "comment": "Proposto."
+              "equivalence": "equivalent"
             }
           ]
         }
