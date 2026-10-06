@@ -9,7 +9,8 @@
 7. **Publicar nova versão do `BRProcedimentosNacionais`** com BRTabelaSUS e TUSS 22 inteiras, sem o BRCBHPMTUSS (a CBHPM é da AMB e paga), e alinhar o conteúdo do guia de terminologia e do OCL.
 8. **Revisar o `br-core-capacidadefuncional`** (D-04): terminologia de funcionalidade (CIF ou SNOMED CT), categoria do HL7 e `subject` só por referência.
 9. **Liberar mais de uma posologia** em `br-core-medicationrequest` (D-05) e remover o binding da fatia `medicationReference` (D-07).
-10. **Enviar o Sumário de Alta como Bundle `document` conforme ao `clinical-document-bundle`** (FHIR Clinical Documents), assinado, com `identifier` estável e retificação por `relatesTo`.
+I. **Dar hierarquia ao CBARA** no OCL e no guia de terminologia: tipo (cereal, leguminosa, metal, pólen, grão) como pai das substâncias, para que o tipo do modelo de informação seja derivado da substância e não enviado em paralelo.
+12. **Descontinuar o CMD como base de documentos.** As restrições do BRConjuntoMinimoDados (documento sem identificador, sem atestação, sem narrativa, paciente e autor só por identificador) vão para todos os documentos que derivam dele. O ponto de partida é o br-core-composition.
 
 ## Mudanças propostas ao BR-Core
 

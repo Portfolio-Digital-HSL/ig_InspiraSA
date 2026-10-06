@@ -41,6 +41,7 @@ Alias: $BRMotivoDesfecho     = https://terminologia.saude.gov.br/fhir/CodeSystem
 Alias: $BRProcedencia        = https://terminologia.saude.gov.br/fhir/CodeSystem/BRProcedencia
 Alias: $BRCaraterAtendimento = https://terminologia.saude.gov.br/fhir/CodeSystem/BRCaraterAtendimento
 Alias: $BRResponsabilidadeParticipante = https://terminologia.saude.gov.br/fhir/CodeSystem/BRResponsabilidadeParticipante
+Alias: $BRAlergenosCBARA     = https://terminologia.saude.gov.br/fhir/CodeSystem/BRAlergenosCBARA
 Alias: $BRMedDRA             = https://terminologia.saude.gov.br/fhir/CodeSystem/BRMedDRA
 // Novos (terminologia/ deste repositório, a publicar no guia de terminologia)
 Alias: $BRAlergenosSNOMEDNacional-vs = https://terminologia.saude.gov.br/fhir/ValueSet/BRAlergenosSNOMEDNacional

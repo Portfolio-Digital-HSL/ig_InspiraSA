@@ -23,6 +23,7 @@ Description: "Exemplo: Documento do Sumário de Alta (insuficiência cardíaca).
 * insert Entrada(Condition, diagnostico-ic)
 * insert Entrada(Condition, diagnostico-pneumonia)
 * insert Entrada(AllergyIntolerance, alergia-penicilina)
+* insert Entrada(AllergyIntolerance, alergia-soja)
 * insert Entrada(Procedure, procedimento-tratamento-ic)
 * insert Entrada(Procedure, procedimento-ecocardiograma)
 * insert Entrada(MedicationRequest, prescricao-losartana)

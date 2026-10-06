@@ -41,3 +41,10 @@ Achados do comparativo SA-IG x BR-Core x FHIR R4 e da construção deste guia, c
 | D-28 | Seção informacoesAdicionais (BROutrasInformacoes) | Baixo | Encounter |
 | D-29 | Versões incoerentes (01.10, 2.0, 2.1.0, 1.0...) e histórico de 3 commits no SA-IG | Baixo | SemVer 0.1.0, controle no git |
 | D-30 | Restrição de `note` a 0..1 e de `onset[x]` a dateTime no SA-IG | Baixo | não restringido; decisão de negócio a documentar |
+| D-31 | CMD (BRConjuntoMinimoDados-1.1) proíbe `identifier`, `attester`, `custodian`, `confidentiality` e `event` na Composition: documento sem identificador, sem atestação e sem custodiante | Alto | br-core-sumarioalta + clinical-document-composition: identifier, atestador legal e custodian (CNES) |
+| D-32 | CMD fixa `title` em "Conjunto Mínimo de Dados", também no Sumário de Alta | Médio | Título livre |
+| D-33 | CMD usa `category` para a modalidade assistencial (BRModalidadeAssistencial, required, 1..1) | Médio | Modalidade no Encounter; `category` = LOINC 107903-7 Clinical note |
+| D-34 | CMD proíbe `subject.reference` e `author.reference`: paciente e autor só por identificador | Alto | Referência a br-core-patient e br-core-practitioner |
+| D-35 | SA-IG proíbe `section.code`, `section.text` e `emptyReason` em todas as seções: sem código, sem narrativa atestável, sem justificativa de seção vazia. Com o BR-Core corrigido, seção sem `code` não casa com nenhuma fatia | Bloqueante | Código LOINC, narrativa e emptyReason em toda seção |
+| D-36 | SA-IG fatia as seções por perfil em `entry.resolve()`, com uma entrada por seção e seções repetidas; a seção de procedimentos é obrigatória (1..*), o que o comparativo anterior não registrou | Médio | Uma seção por tipo, com várias entradas (7..7 no BR-Core) |
+| D-37 | CBARA mistura tipo e substância numa lista sem hierarquia (nenhum conceito pai no OCL) | Médio | Criar a hierarquia no OCL (ex.: `grao-soja` filho de `grao`, `niquel` filho de `contato-metal`) |

@@ -68,11 +68,14 @@
       },
       "text": {
         "status": "generated",
-        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Amoxicilina: angioedema (grave).</p></div>"
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Amoxicilina: angioedema (grave). Soja: urticária (leve).</p></div>"
       },
       "entry": [
         {
           "reference": "AllergyIntolerance/alergia-penicilina"
+        },
+        {
+          "reference": "AllergyIntolerance/alergia-soja"
         }
       ],
       "title": "Alergias e intolerâncias"

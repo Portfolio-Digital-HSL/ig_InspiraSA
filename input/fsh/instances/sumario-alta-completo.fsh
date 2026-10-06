@@ -73,6 +73,26 @@ Description: "Exemplo: Alergia a amoxicilina."
 * reaction[0].manifestation[0].coding[1] = $BRMedDRA#10002424 "Angioedema"
 * reaction[0].severity = #severe
 
+Instance: alergia-soja
+InstanceOf: br-core-allergyintolerance
+Usage: #example
+Title: "Alergia a soja"
+Description: "Exemplo: substância do CBARA (grao-soja) com o SNOMED CT equivalente; o tipo (grao) vem da hierarquia do CBARA, não de um segundo coding."
+* clinicalStatus = $allergy-clinical#active
+* verificationStatus = $allergy-verification#confirmed
+* type = #allergy
+* category[0] = #food
+* criticality = #low
+* code.coding[0] = $BRAlergenosCBARA#grao-soja "Grãos de soja"
+* code.coding[1] = $sct#256355007 "Glycine max (substance)"
+* code.text = "Soja"
+* patient = Reference(paciente-joao)
+* encounter = Reference(internacao-ic)
+* recordedDate = "2026-09-20"
+* reaction[0].manifestation[0].coding[0] = $sct#126485001 "Urticaria (disorder)"
+* reaction[0].manifestation[0].coding[1] = $BRMedDRA#10046735 "Urticária"
+* reaction[0].severity = #mild
+
 Instance: procedimento-tratamento-ic
 InstanceOf: br-core-procedure
 Usage: #example
@@ -195,8 +215,9 @@ Description: "Exemplo: Sumário de Alta: insuficiência cardíaca."
 * attester[0].party = Reference(medica-alta)
 * insert Secao(diagnosticosAdmissao, 42347-5, Diagnósticos da admissão, Insuficiência cardíaca congestiva (I50.0\).)
 * section[diagnosticosAdmissao].entry[0] = Reference(diagnostico-ic)
-* insert Secao(alergiasIntolerancias, 48765-2, Alergias e intolerâncias, Amoxicilina: angioedema (grave\).)
+* insert Secao(alergiasIntolerancias, 48765-2, Alergias e intolerâncias, Amoxicilina: angioedema (grave\). Soja: urticária (leve\).)
 * section[alergiasIntolerancias].entry[0] = Reference(alergia-penicilina)
+* section[alergiasIntolerancias].entry[+] = Reference(alergia-soja)
 * insert Secao(diagnosticosAvaliados, 57852-6, Diagnósticos avaliados, Pneumonia (J18.9\) resolvida.)
 * section[diagnosticosAvaliados].entry[0] = Reference(diagnostico-pneumonia)
 * insert Secao(procedimentosRealizados, 47519-4, Procedimentos realizados, Tratamento de insuficiência cardíaca; ecocardiografia transtorácica.)

@@ -35,8 +35,9 @@ As terminologias novas **não** estão neste guia: ficam na pasta `terminologia/
 
 1. [Estrutura do documento](estrutura.html)
 2. [Mapeamento SA-IG](mapeamento-sa.html)
-3. [Débitos técnicos](debitos-tecnicos.html) e [Recomendações à RNDS](recomendacoes-rnds.html)
-4. [Transição e convivência](transicao.html)
+3. [Comparativos](comparativos.html)
+4. [Débitos técnicos](debitos-tecnicos.html) e [Recomendações à RNDS](recomendacoes-rnds.html)
+5. [Transição e convivência](transicao.html)
 
 ### Dependências
 

@@ -46,6 +46,13 @@ Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/S
 
 | Elemento | SA-IG | BR-Core + regra de preenchimento deste guia |
 |---|---|---|
+| Composition.identifier | 0..0 (CMD) | identifier do documento; Bundle com identifier persistente |
+| Composition.attester | 0..0 (CMD) | atestador legal (clinical-document-composition) |
+| Composition.custodian | 0..0 (CMD) | estabelecimento (CNES) |
+| Composition.title | fixo "Conjunto Mínimo de Dados" (CMD) | livre ("Sumário de Alta") |
+| Composition.category | modalidade assistencial, required (CMD) | LOINC 107903-7 Clinical note |
+| Composition.subject / author | só identifier, sem reference (CMD) | reference a br-core-patient / br-core-practitioner |
+| Composition.section.code / text / emptyReason | 0..0 | LOINC por seção, narrativa, emptyReason |
 | Composition.encounter | 0..0 | 0..1 no BR-Core; preenchimento obrigatório por este guia |
 | Composition.section | sem cardinalidade total | 7..7, cada seção 1..1 (BR-Core); entry ou emptyReason (regra deste guia) |
 | Condition.code | BRProblemaDiagnostico, URL www.saude.gov.br | BRCID10 (preferred), URL terminologia.saude.gov.br |

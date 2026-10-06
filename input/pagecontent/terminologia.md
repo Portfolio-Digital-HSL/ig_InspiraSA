@@ -28,12 +28,36 @@ O SA-IG criou CodeSystems nacionais que eram traduções dos códigos do HL7 (st
 
 O sistema emissor envia o código do HL7; o display em português vem do suplemento no servidor de terminologia.
 
-## Alergias: SNOMED CT
+## Alergias: SNOMED CT e CBARA
 
-O CBARA tem 152 códigos nacionais no OCL; 147 estão mapeados (SAME-AS) para SNOMED CT. Por isso o agente da alergia é codificado em SNOMED CT, e o código CBARA pode ir junto:
+O CBARA tem 152 códigos nacionais no OCL (`MS/BRAlergenosCBARA`), todos mapeados para SNOMED CT na Source `gps` (153 mapeamentos, conferidos em 06/10/2026). O agente da alergia vai em SNOMED CT, e o código CBARA pode ir junto no mesmo `code`, porque os dois são equivalentes (SAME-AS).
 
 - **BRAlergenosSNOMEDNacional**: SNOMED CT (descendentes de 105590001 Substance e 373873005 Pharmaceutical / biologic product) + BRAlergenosCBARA + BRMedicamento + BRImunobiologico. Usado como coding adicional; o BR-Core não liga este ValueSet.
 - O BR-Core mantém `AllergyIntolerance.code` required em **BRAlergenos**, que não tem SNOMED CT. Enquanto isso não mudar, envie também um coding de BRAlergenos (BRMedicamento, BRImunobiologico ou CBARA). Ver débito D-06.
+
+### Tipo e substância
+
+O modelo de informação da RNDS tem dois elementos: o tipo do agente e a substância. O CBARA mistura os dois níveis numa lista sem hierarquia: `cereal`, `leguminosa`, `fruta-citrica`, `contato-metal`, `polen` e `grao` são tipos; `trigo`, `feijao`, `grao-soja`, `laranja`, `lima`, `niquel` e `polen-grama` são substâncias.
+
+No FHIR, tipo e substância não cabem juntos em `AllergyIntolerance.code`: os codings de um CodeableConcept têm de ser equivalentes. A regra deste guia:
+
+- `code` leva a substância, com CBARA e SNOMED CT (exemplo: `grao-soja` e 256355007 *Glycine max*);
+- quando a substância não é conhecida, `code` leva o tipo (exemplo: `grao` e 264331002 Grain);
+- `category` leva a categoria do HL7 (food, medication, environment, biologic);
+- o tipo de uma substância vem da hierarquia do CBARA, que precisa ser criada no OCL (débito D-37).
+
+### Decisões de mapeamento (05 e 06/10/2026)
+
+| CBARA | SNOMED CT | Observação |
+|---|---|---|
+| `lima` | 1285547006 *Citrus X latifolia* | limão-taiti (lima ácida Tahiti), sinônimo Seedless lime |
+| `grama` | 422304003 Family Poaceae (organism) | contato com a planta; o SNOMED CT não tem substância Grass; o pólen é `polen-grama` (256277009) |
+| `contato-metal` | 767098004 Metal and/or metal compound | tipo; as substâncias são `niquel`, `cobre`, `ferro` etc. |
+| `grao` | 264331002 Grain | tipo; a substância é `grao-soja` |
+| `glutamato` | 430503006 Glutamate | |
+| `sepia` | 726759005 Cuttlefish | antes duplicava `lula` (735006003 Squid) |
+| `veneno-vespa` | 256440004 Wasp venom | mapeamento recriado (298); o anterior levava ao 260176001 Kiwi fruit |
+| `outro-agente-substancia` | 105590001 Substance | categoria de resto |
 
 ## Manifestações: SNOMED CT, com MedDRA aceito
 
