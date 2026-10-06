@@ -19,7 +19,7 @@ Regras que este guia hoje só consegue dar como orientação de preenchimento:
 |---|---|
 | br-core-sumarioalta | `encounter` 1..1; `custodian` 1..1; `type` = LOINC 18842-5; invariante "seção com `entry` ou `emptyReason`"; discriminador `pattern` em `code` e `http://loinc.org` (D-01, D-02) |
 | br-core-composition | compatibilidade declarada com o `clinical-document-composition` (FHIR Clinical Documents): categoria 107903-7 Clinical note, fatias de atestador legal e profissional, extensões de versão e destinatário |
-| (novo) Bundle de documento | adotar o `clinical-document-bundle` do HL7 internacional, sem perfil nacional próprio |
+| br-core-bundle-documento (novo) | criado no branch `fix/sumarioalta-capacidadefuncional`: Bundle `document` com identifier, timestamp ≥ Composition.date, br-core-composition como primeira entrada e fullUrl em todas as entradas, nas regras do `clinical-document-bundle` |
 | br-core-encounter | invariante "internação encerrada tem `period.end`" para uso no Sumário de Alta |
 | br-core-allergyintolerance | incluir SNOMED CT no BRAlergenos; `reaction.manifestation` preferred SNOMED CT |
 | br-core-procedure | `code` extensible ao BRProcedimentosNacionais; `performer.function` preferred performer-role |

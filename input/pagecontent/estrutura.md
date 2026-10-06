@@ -18,7 +18,7 @@ O documento é enviado como **Bundle `document`** conforme ao `clinical-document
 | Capacidade funcional | `br-core-capacidadefuncional` | BRRestricaoFuncionalIncapacidadeSaude-1.0 |
 | Paciente, profissional, estabelecimento | `br-core-patient`, `br-core-practitioner`, `br-core-organization` | BRIndividuo, extensões próprias |
 | Equipe | `br-core-careteam`, quando necessária | BRIdentificacaoEquipe-1.0 (extensão) |
-| Documento para envio | `clinical-document-bundle` (FHIR Clinical Documents); o BR-Core não tem perfil de Bundle | — |
+| Documento para envio | `clinical-document-bundle` (FHIR Clinical Documents) até a publicação do `br-core-bundle-documento`, já criado no branch de correção do BR-Core | — |
 
 ## Seções
 
