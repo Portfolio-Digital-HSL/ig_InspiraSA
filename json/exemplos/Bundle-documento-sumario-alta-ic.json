@@ -3,12 +3,12 @@
   "id": "documento-sumario-alta-ic",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-bundle"
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-documento-sumarioalta"
     ]
   },
   "identifier": {
-    "system": "http://fhir.hsl.org.br/ig/inspirasa/sid/documento",
-    "value": "SA-2026-000789"
+    "system": "http://fhir.hsl.org.br/ig/inspirasa/sid/documento-instancia",
+    "value": "SA-2026-000789-v1"
   },
   "entry": [
     {
@@ -18,7 +18,7 @@
         "id": "sumario-alta-ic",
         "meta": {
           "profile": [
-            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta",
+            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-sumarioalta",
             "http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-composition"
           ]
         },
@@ -199,7 +199,6 @@
             "title": "Capacidade funcional"
           }
         ],
-        "status": "final",
         "type": {
           "coding": [
             {
@@ -209,6 +208,7 @@
             }
           ]
         },
+        "status": "final",
         "subject": {
           "reference": "Patient/paciente-joao"
         },
@@ -233,6 +233,20 @@
             "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-patient"
           ]
         },
+        "extension": [
+          {
+            "url": "https://ips.saude.gov.br/fhir/StructureDefinition/raca-br-ips",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "03",
+                  "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRRacaCor",
+                  "display": "Parda"
+                }
+              ]
+            }
+          }
+        ],
         "identifier": [
           {
             "use": "official",
@@ -280,7 +294,7 @@
         "id": "internacao-ic",
         "meta": {
           "profile": [
-            "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-encounter"
+            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-internacao"
           ]
         },
         "text": {

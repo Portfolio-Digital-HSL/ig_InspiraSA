@@ -10,7 +10,7 @@ Autoria: Jussara Macedo Pinho Rötzsch (HL7 Brasil / Hospital Sírio-Libanês, p
 
 A RNDS se ajusta aos perfis do BR-Core. Onde o BR-Core não tem perfil, usa a especificação internacional do HL7 (para o documento, o [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/) 1.0.1) e, na falta dela, o recurso canônico do FHIR R4.
 
-Este guia **não cria perfis**. Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)), não contornados aqui.
+Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)), não contornados aqui. Para os implementadores da RNDS, o guia tem três perfis RNDS que só restringem o BR-Core e o FHIR Clinical Documents (`rnds-documento-sumarioalta`, `rnds-sumarioalta`, `rnds-internacao`) e a declaração de capacidades do servidor da RNDS (`rnds-servidor-sumarioalta`).
 
 ## Por que refatorar
 
@@ -26,7 +26,7 @@ Este guia **não cria perfis**. Defeitos do BR-Core são corrigidos no repositó
 2. Modelo lógico SumarioAltaML reconstruído dos perfis do SA-IG, com mapeamento para o BR-Core e para o SA-IG.
 3. Substituição de cada perfil do SA-IG pelo do BR-Core; as seções sem equivalente vão para o Encounter da internação.
 4. Composition e Bundle conformes também ao `clinical-document-composition` e ao `clinical-document-bundle`.
-5. Correção do BR-Core na branch `fix/sumarioalta-capacidadefuncional`.
+5. Correção do BR-Core no `main` do repositório do HL7 Brasil (commit 9cf1bc9).
 6. Terminologia pelos ValueSets do HL7 com suplementos pt-BR, SNOMED CT com CBARA e MedDRA, `BRProcedimentosNacionais` (Tabela SUS e TUSS 22). Mapas revisados no OCL.
 7. Validação com o validador FHIR e o IG Publisher.
 
@@ -34,9 +34,9 @@ Este guia **não cria perfis**. Defeitos do BR-Core são corrigidos no repositó
 
 | Conteúdo | Perfil |
 |---|---|
-| Documento | `br-core-sumarioalta` + `clinical-document-composition` |
-| Envio | `clinical-document-bundle` (até a publicação do `br-core-bundle-documento`) |
-| Internação | `br-core-encounter` |
+| Documento | `rnds-sumarioalta` (deriva de `br-core-sumarioalta`, impõe `clinical-document-composition`) |
+| Envio | `rnds-documento-sumarioalta` (deriva de `clinical-document-bundle`; de `br-core-bundle-documento` quando publicado) |
+| Internação | `rnds-internacao` (deriva de `br-core-encounter`) |
 | Diagnósticos | `br-core-condition` |
 | Alergias e intolerâncias | `br-core-allergyintolerance` |
 | Procedimentos | `br-core-procedure` |
@@ -47,7 +47,7 @@ Este guia **não cria perfis**. Defeitos do BR-Core são corrigidos no repositó
 
 ## Correções propostas ao BR-Core
 
-Branch `fix/sumarioalta-capacidadefuncional` do [br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core), sobre a 1.4.1:
+No `main` do [br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core), sobre a 1.4.1:
 
 | Débito | Correção |
 |---|---|
@@ -57,12 +57,14 @@ Branch `fix/sumarioalta-capacidadefuncional` do [br.org.hl7.fhir.core](https://g
 | D-39 | `br-core-composition`: `section.code` com o ValueSet `doc-section-codes` como example, como no R4 e no IPS; códigos de seção do IPS onde o IPS tem a seção |
 | novo | `br-core-bundle-documento` (Bundle `document`) |
 
-Até a publicação, o guia depende do BR-Core **1.3.0**: os exemplos seguem o perfil publicado e o QA acusa 208 erros, todos causados por D-01 e D-02. Com a branch corrigida, os exemplos validam sem erro.
+Até a publicação, o guia depende do BR-Core **1.3.0**: os exemplos seguem o perfil publicado e o QA acusa 209 erros, todos causados por D-01 e D-02. Com o `main` do BR-Core, os exemplos validam sem erro.
 
 ## Conteúdo do repositório
 
 | Caminho | Conteúdo |
 |---|---|
+| `input/fsh/profiles/` | Perfis RNDS (`rnds-documento-sumarioalta`, `rnds-sumarioalta`, `rnds-internacao`): só restrições sobre o BR-Core e o FHIR Clinical Documents |
+| `input/fsh/capacidades/` | CapabilityStatement do servidor da RNDS (`rnds-servidor-sumarioalta`) |
 | `input/fsh/instances/` | Exemplos: internação por insuficiência cardíaca (documento completo e Bundle) e colecistectomia (seções vazias com `emptyReason`) |
 | `input/fsh/logicos/` | Modelo lógico SumarioAltaML, com mapeamentos para o BR-Core e o SA-IG |
 | `input/pagecontent/` | Páginas: Início, Estrutura do documento, Terminologia, Mapeamento SA-IG, Mapa de estrutura, Débitos técnicos, Recomendações à RNDS, Transição |

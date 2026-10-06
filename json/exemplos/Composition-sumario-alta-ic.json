@@ -3,7 +3,7 @@
   "id": "sumario-alta-ic",
   "meta": {
     "profile": [
-      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta",
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-sumarioalta",
       "http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-composition"
     ]
   },
@@ -184,7 +184,6 @@
       "title": "Capacidade funcional"
     }
   ],
-  "status": "final",
   "type": {
     "coding": [
       {
@@ -194,6 +193,7 @@
       }
     ]
   },
+  "status": "final",
   "subject": {
     "reference": "Patient/paciente-joao"
   },

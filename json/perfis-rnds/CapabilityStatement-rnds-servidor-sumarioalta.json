@@ -1,0 +1,61 @@
+{
+  "resourceType" : "CapabilityStatement",
+  "id" : "rnds-servidor-sumarioalta",
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Narrativa gerada: CapabilityStatement rnds-servidor-sumarioalta</b></p><a name=\"rnds-servidor-sumarioalta\"> </a><a name=\"hcrnds-servidor-sumarioalta\"> </a><h2 id=\"title\">RNDS: servidor do Sumário de Alta</h2><ul><li>Guia de implementação Versão: 0.1.0 </li><li>Versão FHIR: 4.0.1 </li><li>Formatos suportados: <code>json</code>, <code>xml</code></li><li>Publicado em: 2026-10-06 </li><li>Publicado por: Hospital Sírio-Libanês </li></ul><blockquote class=\"impl-note\"><p><strong>Nota para os implementadores: Capacidades FHIR</strong></p><p>Qualquer capacidade FHIR pode ser &quot;permitida&quot; pelo sistema, exceto se for explicitamente assinalada como &quot;NÃO DEVE&quot;. Alguns itens são marcados como MAY no Guia de Implementação para destacar a sua potencial relevância para o caso de utilização.</p></blockquote><h3 id=\"shallIGs\">DEVERÁ suportar os seguintes guias de implementação</h3><ul><li><a href=\"index.html\">http://fhir.hsl.org.br/ig/inspirasa/ImplementationGuide/br.org.hsl.inspirasa</a></li></ul><h2 id=\"rest\">Capacidades FHIR RESTful</h2><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 id=\"mode1\" class=\"panel-title\">Mode: <code>server</code></h3></div><div class=\"panel-body\"><div><p>O estabelecimento envia o Sumário de Alta como Bundle document (POST [base]/Bundle). Uma retificação é um novo Bundle com Composition.identifier igual ao do original, Composition.relatesTo (code = replaces) apontando o documento substituído e novo Bundle.identifier.</p>\n</div></div></div><h3 id=\"resourcesCap1\">Capacidades por recurso/perfil</h3><h4 id=\"resourcesSummary1\">Resumo</h4><p>A tabela de resumo enumera os recursos que fazem parte desta configuração e, para cada recurso, enumera-os:</p><ul><li>Os perfis relevantes (se existirem)</li><li>As interações suportadas por cada recurso (<b><span class=\"bg-info\">R</span></b>ead, <b><span class=\"bg-info\">S</span></b>earch, <b><span class=\"bg-info\">U</span></b>pdate, and <b><span class=\"bg-info\">C</span></b>reate, are always shown, while <b><span class=\"bg-info\">VR</span></b>ead, <b><span class=\"bg-info\">P</span></b>atch, <b><span class=\"bg-info\">D</span></b>elete, <b><span class=\"bg-info\">H</span></b>istory on <b><span class=\"bg-info\">I</span></b>nstance, or <b><span class=\"bg-info\">H</span></b>istory on <b><span class=\"bg-info\">T</span></b>só estão presentes se pelo menos um dos recursos os suportar.</li><li><span>Os parâmetros de pesquisa obrigatórios, recomendados e alguns opcionais (se existirem). </span></li><li>Os recursos ligados activados para <code>_include</code></li><li>Os outros recursos activados para <code>_revinclude</code></li><li>As operações sobre o recurso (se existirem)</li></ul><div class=\"table-responsive\"><table class=\"table table-condensed table-hover\"><thead><tr><th><b>Tipo de recurso</b></th><th><b>Perfil</b></th><th class=\"text-center\"><b title=\"GET um recurso (interação de leitura)\">R</b></th><th class=\"text-center\"><b title=\"GET todo o conjunto de recursos do tipo (interação de pesquisa)\">S</b></th><th class=\"text-center\"><b title=\"PUT uma nova versão do recurso (interação de atualização)\">U</b></th><th class=\"text-center\"><b title=\"POST um novo recurso (criar interação)\">C</b></th><th><b title=\"Parâmetros de pesquisa necessários e recomendados\">Pesquisas</b></th><th><code><b>_include</b></code></th><th><code><b>_revinclude</b></code></th><th><b>Operações</b></th></tr></thead><tbody><tr><td><a href=\"#Bundle1-1\">Bundle</a></td><td>Perfis suportados<br/>\u00a0\u00a0<a href=\"StructureDefinition-rnds-documento-sumarioalta.html\">RNDS Documento do Sumário de Alta</a></td><td class=\"text-center\">y</td><td class=\"text-center\"/><td class=\"text-center\"/><td class=\"text-center\">y</td><td>identifier, composition</td><td/><td/><td/></tr></tbody></table></div><hr/><div class=\"panel panel-default\"><div class=\"panel-heading\"><h4 id=\"Bundle1-1\" class=\"panel-title\"><span style=\"float: right;\">Conformidade do recurso: unspecified </span>Bundle</h4></div><div class=\"panel-body\"><div class=\"container\"><div class=\"row\"><div class=\"col-lg-4\"><span class=\"lead\">Recurso FHIR principal</span><br/><a href=\"http://hl7.org/fhir/R4/bundle.html\">Bundle</a></div><div class=\"col-lg-4\"><span class=\"lead\">Política de referência</span><br/></div><div class=\"col-lg-4\"><span class=\"lead\">Resumo da interação</span><br/><ul><li>Apoios <code>read</code><br/><code>create</code><div><p>Recebe o documento. O servidor DEVE rejeitar Bundle não conforme ao rnds-documento-sumarioalta.</p>\n</div></li></ul></div></div><p/><div class=\"row\"><div class=\"col-6\"><span class=\"lead\">Perfis suportados</span><p><a href=\"StructureDefinition-rnds-documento-sumarioalta.html\">RNDS Documento do Sumário de Alta</a></p></div></div><p/><div class=\"row\"><div class=\"col-lg-7\"><span class=\"lead\">Parâmetros de pesquisa</span><table class=\"table table-condensed table-hover\"><thead><tr><th>Conformidade</th><th>Parâmetro</th><th>Tipo</th><th>Documentação</th></tr></thead><tbody><tr><td><b>SHALL</b></td><td><a href=\"http://hl7.org/fhir/R4/bundle.html#search\">identifier</a></td><td><code>token</code></td><td><div/></td></tr><tr><td><b>SHALL</b></td><td><a href=\"http://hl7.org/fhir/R4/bundle.html#search\">composition</a></td><td><code>reference</code></td><td><div/></td></tr></tbody></table></div><div class=\"col-lg-5\">\u00a0</div></div></div></div></div></div>"
+  },
+  "url" : "http://fhir.hsl.org.br/ig/inspirasa/CapabilityStatement/rnds-servidor-sumarioalta",
+  "version" : "0.1.0",
+  "name" : "RNDSServidorSumarioAlta",
+  "title" : "RNDS: servidor do Sumário de Alta",
+  "status" : "draft",
+  "experimental" : true,
+  "date" : "2026-10-06",
+  "publisher" : "Hospital Sírio-Libanês",
+  "contact" : [{
+    "name" : "Hospital Sírio-Libanês",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.hospitalsiriolibanes.org.br"
+    }]
+  }],
+  "description" : "Requisitos que o servidor da RNDS atende para receber o Sumário de Alta: aceita o documento (Bundle) conforme ao rnds-documento-sumarioalta e permite consultá-lo pelo identificador. Endpoint, autenticação e autorização seguem a documentação operacional da RNDS.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "BR",
+      "display" : "Brazil"
+    }]
+  }],
+  "kind" : "requirements",
+  "fhirVersion" : "4.0.1",
+  "format" : ["json",
+  "xml"],
+  "implementationGuide" : ["http://fhir.hsl.org.br/ig/inspirasa/ImplementationGuide/br.org.hsl.inspirasa"],
+  "rest" : [{
+    "mode" : "server",
+    "documentation" : "O estabelecimento envia o Sumário de Alta como Bundle document (POST [base]/Bundle). Uma retificação é um novo Bundle com Composition.identifier igual ao do original, Composition.relatesTo (code = replaces) apontando o documento substituído e novo Bundle.identifier.",
+    "resource" : [{
+      "type" : "Bundle",
+      "supportedProfile" : ["http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-documento-sumarioalta"],
+      "interaction" : [{
+        "code" : "create",
+        "documentation" : "Recebe o documento. O servidor DEVE rejeitar Bundle não conforme ao rnds-documento-sumarioalta."
+      },
+      {
+        "code" : "read"
+      }],
+      "searchParam" : [{
+        "name" : "identifier",
+        "definition" : "http://hl7.org/fhir/SearchParameter/Bundle-identifier",
+        "type" : "token"
+      },
+      {
+        "name" : "composition",
+        "definition" : "http://hl7.org/fhir/SearchParameter/Bundle-composition",
+        "type" : "reference"
+      }]
+    }]
+  }]
+}

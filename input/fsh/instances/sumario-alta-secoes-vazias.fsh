@@ -6,6 +6,9 @@ InstanceOf: br-core-patient
 Usage: #example
 Title: "Paciente Lúcia Ramos"
 Description: "Exemplo: Paciente Lúcia Ramos."
+// raça/cor: extensão do IPS-BR, 1..1 no br-core-patient (FSH desde a 1.3.0)
+* extension[0].url = $raca-br-ips
+* extension[0].valueCodeableConcept = $BRRacaCor#01 "Branca"
 * identifier[cpf].use = #official
 * identifier[cpf].type = $v2-0203#TAX
 * identifier[cpf].system = $sid-cpf
@@ -20,7 +23,7 @@ Description: "Exemplo: Paciente Lúcia Ramos."
 * birthDate = "1979-02-05"
 
 Instance: internacao-colecistectomia
-InstanceOf: br-core-encounter
+InstanceOf: RNDSInternacao
 Usage: #example
 Title: "Internação para colecistectomia"
 Description: "Exemplo: Internação para colecistectomia."
@@ -90,13 +93,15 @@ RuleSet: SecaoVazia(fatia, codigo, titulo, motivo, texto)
 * section[{fatia}].emptyReason = $list-empty-reason#{motivo}
 
 Instance: sumario-alta-colecistectomia
-InstanceOf: br-core-sumarioalta
+InstanceOf: RNDSSumarioAlta
 Usage: #example
 Title: "Sumário de Alta com seções vazias justificadas"
 Description: "Exemplo: Sumário de Alta com seções vazias justificadas."
-// Conforme também ao clinical-document-composition (FHIR Clinical Documents)
-* meta.profile[0] = "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta"
+// Conforme ao rnds-sumarioalta, que deriva do br-core-sumarioalta e impõe o clinical-document-composition
+* meta.profile[0] = Canonical(RNDSSumarioAlta)
 * meta.profile[1] = $clindoc-composition
+* identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento"
+* identifier.value = "SA-2026-000790"
 * status = #final
 * type = $loinc#18842-5 "Discharge summary"
 * category[0] = $loinc#107903-7 "Clinical note"

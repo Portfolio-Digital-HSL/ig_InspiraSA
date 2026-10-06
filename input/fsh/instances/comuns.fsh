@@ -7,6 +7,9 @@ InstanceOf: br-core-patient
 Usage: #example
 Title: "Paciente João Pereira"
 Description: "Exemplo: Paciente João Pereira."
+// raça/cor: extensão do IPS-BR, 1..1 no br-core-patient (FSH desde a 1.3.0)
+* extension[0].url = $raca-br-ips
+* extension[0].valueCodeableConcept = $BRRacaCor#03 "Parda"
 * identifier[cpf].use = #official
 * identifier[cpf].type = $v2-0203#TAX
 * identifier[cpf].system = $sid-cpf

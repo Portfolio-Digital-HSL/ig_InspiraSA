@@ -21,28 +21,32 @@ O próprio `br-core-sumarioalta` 1.3.0 também não aceita instância válida (D
 
 A RNDS se ajusta aos perfis do BR-Core. Onde o BR-Core não tem perfil, usa as especificações internacionais do HL7 (para o documento, o [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/)) e, na falta delas, o recurso canônico do FHIR R4. Perfis próprios da RNDS, como os do SA-IG, deixam de existir.
 
-## Por que este guia não tem perfis
+## Perfis RNDS: só restrições sobre o BR-Core
 
-Nenhum perfil, extensão, ValueSet ou CodeSystem precisou ser criado neste guia. O conteúdo do Sumário de Alta é coberto assim:
+O guia é entregue aos implementadores da RNDS, e a RNDS precisa de artefatos que o validador aplique. Por isso há três perfis RNDS, todos derivados, sem hierarquia paralela:
 
-| Necessidade | Onde está |
+| Perfil RNDS | Deriva de |
 |---|---|
-| Documento e seções | `br-core-sumarioalta` (BR-Core), conforme também ao `clinical-document-composition` (FHIR Clinical Documents) |
-| Envio do documento | `clinical-document-bundle` (FHIR Clinical Documents); `br-core-bundle-documento`, criado no BR-Core |
-| Internação, diagnósticos, alergias, procedimentos, prescrição, plano de cuidados, capacidade funcional | perfis do BR-Core (`br-core-encounter`, `br-core-condition`, `br-core-allergyintolerance`, `br-core-procedure`, `br-core-medicationrequest`, `br-core-careplan`, `br-core-capacidadefuncional`) |
-| Paciente, profissional, estabelecimento | `br-core-patient`, `br-core-practitioner`, `br-core-organization` |
-| Status em português | suplementos pt-BR dos CodeSystems do HL7, no guia de terminologia |
-| Alérgenos, manifestações, procedimentos, capacidade funcional | ValueSets e ConceptMaps no guia de terminologia e no OCL |
+| [rnds-documento-sumarioalta](StructureDefinition-rnds-documento-sumarioalta.html) (Bundle) | `clinical-document-bundle`; `br-core-bundle-documento` quando publicado |
+| [rnds-sumarioalta](StructureDefinition-rnds-sumarioalta.html) (Composition) | `br-core-sumarioalta`, impondo `clinical-document-composition` |
+| [rnds-internacao](StructureDefinition-rnds-internacao.html) (Encounter) | `br-core-encounter` |
 
-O que estava errado ou faltava foi corrigido na origem, no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)): fatiamento e códigos das seções, LOINC, binding de `section.code`, `br-core-capacidadefuncional` e o novo `br-core-bundle-documento`. Um perfil próprio aqui repetiria o erro do SA-IG: uma camada nacional paralela que não recebe as evoluções do BR-Core.
+Eles só restringem: cardinalidades, valores fixos e invariantes. Não criam elementos, extensões, ValueSets nem CodeSystems. Os demais recursos usam os perfis do BR-Core sem restrição adicional. A [declaração de capacidades](CapabilityStatement-rnds-servidor-sumarioalta.html) do servidor da RNDS aponta o perfil do Bundle aceito.
 
-Por isso o código FSH deste guia tem só exemplos (`input/fsh/instances/`) e o modelo lógico (`input/fsh/logicos/`). As regras que o BR-Core ainda não impõe estão em [Estrutura do documento](estrutura.html), como regras de preenchimento, e em [Recomendações](recomendacoes-rnds.html), como mudanças propostas ao BR-Core.
+Cada restrição está classificada:
+
+- **regra nacional**, proposta ao BR-Core (tipo do documento, `encounter` e `custodian` obrigatórios, seção com `entry` ou `emptyReason`): fica no perfil RNDS só até o BR-Core publicar e depois sai;
+- **regra operacional da RNDS** (identificadores do documento, atestador legal, categoria do FHIR Clinical Documents, internação encerrada com profissional e data da alta, primeira entrada do Bundle): fica no perfil RNDS.
+
+O que estava errado no BR-Core foi corrigido na origem, no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)): fatiamento e códigos das seções, LOINC, binding de `section.code`, `br-core-capacidadefuncional` e o novo `br-core-bundle-documento`. A diferença para o SA-IG está aí: o SA-IG tinha perfis paralelos, sobre o CMD, que não recebiam as evoluções do BR-Core; os perfis RNDS herdam do BR-Core e mudam com ele.
+
+O guia para implementadores está em [Implementação na RNDS](implementacao-rnds.html).
 
 ## Como foi feito
 
 1. **Comparação dos snapshots em duas camadas.** CMD × `br-core-composition` e BRSumarioAlta × `br-core-sumarioalta`, elemento a elemento, com FHIR R4, BR-Core 1.3.0 e BR-Core corrigido, registrando a origem de cada restrição. O resultado é o [Mapa de estrutura](mapa-estrutura.html) e a planilha `comparativo/comparativo_sumarioalta_rnds_brcore.xlsx`, cotejada com a planilha anterior do repositório sa-ig.
 2. **Modelo lógico.** Os elementos de dados do Sumário de Alta foram reconstruídos dos perfis do SA-IG no [modelo lógico SumarioAltaML](StructureDefinition-sumario-alta-ml.html), mapeado para o BR-Core e para o SA-IG.
-3. **Perfis do BR-Core, sem perfis próprios.** Cada perfil do SA-IG foi substituído pelo do BR-Core (`br-core-sumarioalta`, `br-core-encounter`, `br-core-condition`, `br-core-allergyintolerance`, `br-core-procedure`, `br-core-medicationrequest`, `br-core-careplan`, `br-core-capacidadefuncional`). Seções sem equivalente foram para o Encounter da internação.
+3. **Perfis do BR-Core, com perfis RNDS só de restrição.** Cada perfil do SA-IG foi substituído pelo do BR-Core (`br-core-sumarioalta`, `br-core-encounter`, `br-core-condition`, `br-core-allergyintolerance`, `br-core-procedure`, `br-core-medicationrequest`, `br-core-careplan`, `br-core-capacidadefuncional`). Seções sem equivalente foram para o Encounter da internação. As regras que o BR-Core não impõe viraram três perfis RNDS derivados e uma declaração de capacidades.
 4. **Documento conforme ao HL7 internacional.** Composition e Bundle seguem também o `clinical-document-composition` e o `clinical-document-bundle` do FHIR Clinical Documents 1.0.1 (categoria LOINC 107903-7, atestador legal, `identifier` e `timestamp` do Bundle).
 5. **Correção do BR-Core.** Branch `fix/sumarioalta-capacidadefuncional` do repositório br.org.hl7.fhir.core: discriminador `pattern` em `section.code`, LOINC `http://loinc.org`, `br-core-capacidadefuncional` revisto e o novo perfil `br-core-bundle-documento`. Com a correção, os exemplos validam sem erro.
 6. **Terminologia.** Status pelos ValueSets do HL7 com suplementos pt-BR; alérgenos em SNOMED CT com CBARA (tipo e substância), manifestações em SNOMED CT com o mapa MedDRA → SNOMED CT; procedimentos pelo `BRProcedimentosNacionais` (Tabela SUS e TUSS 22). Os mapas CBARA → SNOMED CT foram revisados no OCL. As terminologias novas ficam na pasta `terminologia/`, para o OCL e o guia de terminologia (`https://terminologia.saude.gov.br/fhir/...`), não neste guia. Ver [Terminologia](terminologia.html).
@@ -51,6 +55,7 @@ Por isso o código FSH deste guia tem só exemplos (`input/fsh/instances/`) e o 
 
 ## O que este guia contém
 
+- o que os implementadores enviam à RNDS e como validar ([Implementação na RNDS](implementacao-rnds.html));
 - como preencher o Sumário de Alta com os perfis do BR-Core ([Estrutura do documento](estrutura.html));
 - o modelo lógico e o mapa elemento a elemento entre SA-IG, BR-Core e R4 ([Mapa de estrutura](mapa-estrutura.html));
 - onde foi parar cada seção, perfil e extensão do SA-IG ([Mapeamento SA-IG](mapeamento-sa.html));
@@ -59,6 +64,7 @@ Por isso o código FSH deste guia tem só exemplos (`input/fsh/instances/`) e o 
 
 ## Leitura recomendada
 
+1. [Implementação na RNDS](implementacao-rnds.html)
 1. [Estrutura do documento](estrutura.html)
 2. [Mapa de estrutura](mapa-estrutura.html) e [modelo lógico](StructureDefinition-sumario-alta-ml.html)
 3. [Mapeamento SA-IG](mapeamento-sa.html)

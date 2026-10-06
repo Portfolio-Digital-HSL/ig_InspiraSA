@@ -3,7 +3,7 @@
   "id": "internacao-colecistectomia",
   "meta": {
     "profile": [
-      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-encounter"
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-internacao"
     ]
   },
   "text": {

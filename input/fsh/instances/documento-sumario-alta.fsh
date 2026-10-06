@@ -7,12 +7,12 @@ RuleSet: Entrada(tipo, id)
 * entry[=].resource = {id}
 
 Instance: documento-sumario-alta-ic
-InstanceOf: $clindoc-bundle
+InstanceOf: RNDSDocumentoSumarioAlta
 Usage: #example
 Title: "Documento do Sumário de Alta (insuficiência cardíaca)"
 Description: "Exemplo: Documento do Sumário de Alta (insuficiência cardíaca)."
-* identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento"
-* identifier.value = "SA-2026-000789"
+* identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento-instancia"
+* identifier.value = "SA-2026-000789-v1"
 * type = #document
 * timestamp = "2026-09-28T11:30:00-03:00"
 * insert Entrada(Composition, sumario-alta-ic)

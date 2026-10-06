@@ -10,7 +10,7 @@ Este mapa mostra onde cada elemento do Sumário de Alta da RNDS (SA-IG) está no
 | BR-Core | br-core-sumarioalta → br-core-composition → Composition (R4) |
 | Este guia | br-core-sumarioalta, sem perfil próprio; o CMD sai da cadeia. Documento em `clinical-document-bundle` até a publicação do br-core-bundle-documento |
 
-O comparativo tem duas camadas: o **documento-base** (CMD × br-core-composition) e o **Sumário de Alta** (BRSumarioAlta × br-core-sumarioalta, cabeçalho e seções). As colunas trazem a cardinalidade e o binding no FHIR R4, no SA-IG, no BR-Core 1.3.0 publicado e no BR-Core corrigido (branch `fix/sumarioalta-capacidadefuncional`, ainda não publicado).
+O comparativo tem duas camadas: o **documento-base** (CMD × br-core-composition) e o **Sumário de Alta** (BRSumarioAlta × br-core-sumarioalta, cabeçalho e seções). As colunas trazem a cardinalidade e o binding no FHIR R4, no SA-IG, no BR-Core 1.3.0 publicado e no BR-Core corrigido (`main` do HL7-BR, commit 9cf1bc9, ainda sem nova versão do pacote).
 
 ### Legenda
 
@@ -207,7 +207,7 @@ BR-Core: Composition.section:capacidadeFuncional (LOINC 54522-8) → Condition (
 | `custodian` | 0..1 · ref: Organization | 0..0 · ref: Organization | 0..1 · ref: br-core-organization | 0..1 · ref: br-core-organization | Divergente | Alto | CMD | Estabelecimento (CNES) como custodian. |
 | `relatesTo` | 0..* | 0..1 | 0..* | 0..* | Divergente | Baixo | CMD | Retificação por relatesTo (replaces). |
 | `event` | 0..* | 0..0 | 0..* | 0..* | Divergente | Baixo | CMD | Sem ação. |
-| `section` | 0..* | 1..* · slicing profile em entry.resolve() | 7..7 · slicing profile em code | 7..7 · slicing pattern em code | Não conforme | Bloqueante | BRSumarioAlta | Correção no branch fix/sumarioalta-capacidadefuncional do BR-Core: discriminador pattern em code. |
+| `section` | 0..* | 1..* · slicing profile em entry.resolve() | 7..7 · slicing profile em code | 7..7 · slicing pattern em code | Não conforme | Bloqueante | BRSumarioAlta | Corrigido no main do BR-Core (9cf1bc9): discriminador pattern em code. |
 
 ## Sumário de Alta: seções
 
@@ -328,21 +328,21 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 
 | Tema | Planilha anterior | Este comparativo | Situação | Encaminhamento |
 |---|---|---|---|---|
-| Fontes | SA-IG em JSON × FSH do BR-Core (código-fonte do repositório). Sem coluna R4 (declarado no Leia-me). | SA-IG em snapshot × pacote BR-Core 1.3.0 em snapshot × R4 × BR-Core corrigido (branch). | Divergem no método | Snapshot mostra o que o validador usa; o FSH não mostra herança nem o efeito do alias $loinc. |
+| Fontes | SA-IG em JSON × FSH do BR-Core (código-fonte do repositório). Sem coluna R4 (declarado no Leia-me). | SA-IG em snapshot × pacote BR-Core 1.3.0 em snapshot × R4 × BR-Core corrigido (main). | Divergem no método | Snapshot mostra o que o validador usa; o FSH não mostra herança nem o efeito do alias $loinc. |
 | Escopo | Seções do documento, cinco recursos clínicos (Condition, AllergyIntolerance, Procedure, MedicationRequest, CarePlan) e inventário dos 24 perfis. | Cabeçalho da Composition, seções e subelementos, e o nível CMD × br-core-composition. | Complementares | Usar os dois: o anterior para os recursos clínicos, este para o documento. |
 | Camada CMD | Cita que BRSumarioAlta deriva do CMD e que o CMD zera encounter. | Compara o CMD com o br-core-composition elemento a elemento e indica a origem de cada restrição. | Só neste | A maior parte das restrições do cabeçalho vem do CMD. |
 | Cabeçalho da Composition | Não compara (só encounter). | identifier, attester, custodian e confidentiality proibidos; title fixo "Conjunto Mínimo de Dados"; status em ValueSet nacional; category usada para modalidade; subject e author só por identificador. | Só neste | Incluir nos débitos do SA. |
 | Cardinalidade das seções no SA-IG | "Nenhuma das 9 seções tem cardinalidade total fixa"; procedimentosRealizados sem cardinalidade. | section 1..*; informacoesContatoAssistencial 1..1; procedimentosRealizados 1..*; resumoEvolucaoClinica 1..1 (snapshot). | Divergem | O anterior leu só o differential do BRSumarioAlta; o mínimo vem do CMD e aparece no snapshot. Procedimentos é obrigatório no SA-IG. |
 | Fatiamento das seções no SA-IG | Não registra. | Discriminador profile em entry.resolve(); cada seção leva uma entrada e se repete. | Só neste |  |
 | section.code, section.text e emptyReason no SA-IG | Não registra. | Os três proibidos (0..0) em todas as seções: sem código, sem narrativa, sem justificativa de seção vazia. | Só neste | Com o BR-Core corrigido, seção sem code não casa com nenhuma fatia: bloqueante. |
-| br-core-sumarioalta: discriminador e sistema LOINC | Descreve os códigos como "fixos" e recomenda migrar para Parent br-core-sumarioalta. | Discriminador profile em code e system https://loinc.org/: nenhuma instância valida (D-01, D-02). Corrigido no branch. | Divergem | A recomendação anterior só é viável depois da correção do BR-Core. |
+| br-core-sumarioalta: discriminador e sistema LOINC | Descreve os códigos como "fixos" e recomenda migrar para Parent br-core-sumarioalta. | Discriminador profile em code e system https://loinc.org/: nenhuma instância valida (D-01, D-02). Corrigido no main do BR-Core. | Divergem | A recomendação anterior só é viável depois da correção do BR-Core. |
 | Seções 9 → 7 | Mesma correspondência: contato e informações adicionais sem seção; diagnósticos desdobrados; capacidade funcional obrigatória. | Mesma correspondência. | Concordam |  |
 | Grau: contato assistencial e resumo da evolução | Médio e Médio. | Alto e Alto. | Divergem no grau | Ambos zeram/recriam elementos nativos (encounter, Encounter.text); tratado como Alto. |
 | Paciente não identificado | Recomenda CNS provisório no lugar da extensão unidentifiedPatient. | Concorda e acrescenta que o br-core-patient exige CPF (1..1), o que impede o CNS provisório (D-03). | Este completa | Decisão pendente no BR-Core. |
 | Procedure.code | Recompor com SIGTAP, TUSS-22 e CBHPM. | BRProcedimentosNacionais com BRTabelaSUS e TUSS 22; CBHPM fora (AMB, paga). | Superado por decisão | Decisão de 02/10/2026. |
-| Capacidade funcional | Remodelar sobre br-core-condition com ValueSet nacional de capacidade funcional. | br-core-capacidadefuncional corrigido: SNOMED CT Functional finding (BRCapacidadeFuncional), CID-10 adicional, sem subject.identifier e stage obrigatórios. | Superado por decisão | Correção no branch do BR-Core. |
+| Capacidade funcional | Remodelar sobre br-core-condition com ValueSet nacional de capacidade funcional. | br-core-capacidadefuncional corrigido: SNOMED CT Functional finding (BRCapacidadeFuncional), CID-10 adicional, sem subject.identifier e stage obrigatórios. | Superado por decisão | Correção no main do BR-Core do BR-Core. |
 | Alergias e manifestações | SNOMED CT (GPS) no lugar de BRAlergenos/MedDRA. | SNOMED CT + CBARA (152 códigos mapeados no OCL) e MedDRA mapeado (28). | Este completa |  |
 | Perfil próprio do SA | Recomenda migrar BRSumarioAlta para Parent br-core-sumarioalta. | Sem perfil próprio: usa br-core-sumarioalta direto; regras viram preenchimento e propostas ao BR-Core. | Superado por decisão | A RNDS se ajusta ao BR-Core. |
-| Bundle do documento | Não trata. | br-core-bundle-documento criado no branch; segue o clinical-document-bundle. | Só neste |  |
+| Bundle do documento | Não trata. | br-core-bundle-documento criado no main do BR-Core; segue o clinical-document-bundle. | Só neste |  |
 | Recursos clínicos (Condition, AllergyIntolerance, Procedure, MedicationRequest, CarePlan) | Comparação elemento a elemento com débito e recomendação. | Não repete. | Só no anterior | Continua válido; atualizar Procedure.code e capacidade funcional conforme decisões. |
 | Inventário de perfis do SA-IG | 24 perfis com versão, data e equivalente no BR-Core. | Não repete. | Só no anterior |  |

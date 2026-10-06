@@ -2,7 +2,7 @@
 // seções preenchidas.
 
 Instance: internacao-ic
-InstanceOf: br-core-encounter
+InstanceOf: RNDSInternacao
 Usage: #example
 Title: "Internação por insuficiência cardíaca"
 Description: "Exemplo: Internação por insuficiência cardíaca."
@@ -191,12 +191,12 @@ RuleSet: Secao(fatia, codigo, titulo, texto)
 * section[{fatia}].text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>{texto}</p></div>"
 
 Instance: sumario-alta-ic
-InstanceOf: br-core-sumarioalta
+InstanceOf: RNDSSumarioAlta
 Usage: #example
 Title: "Sumário de Alta: insuficiência cardíaca"
 Description: "Exemplo: Sumário de Alta: insuficiência cardíaca."
-// Conforme também ao clinical-document-composition (FHIR Clinical Documents)
-* meta.profile[0] = "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-sumarioalta"
+// Conforme ao rnds-sumarioalta, que deriva do br-core-sumarioalta e impõe o clinical-document-composition
+* meta.profile[0] = Canonical(RNDSSumarioAlta)
 * meta.profile[1] = $clindoc-composition
 * identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento"
 * identifier.value = "SA-2026-000789"

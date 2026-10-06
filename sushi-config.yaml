@@ -4,7 +4,7 @@ id: br.org.hsl.inspirasa
 canonical: http://fhir.hsl.org.br/ig/inspirasa
 name: InspiraSA
 title: Guia de Implementação InspiraSA - Sumário de Alta
-description: Guia de Implementação FHIR R4 do Sumário de Alta hospitalar. Usa os perfis do BR-Core 1.3.0 (br-core-sumarioalta e perfis das seções), sem perfis próprios, e substitui o SA-IG legado da RNDS, documentando os débitos técnicos entre o SA-IG, o BR-Core e o FHIR R4.
+description: Guia de Implementação FHIR R4 do Sumário de Alta hospitalar. Usa os perfis do BR-Core 1.3.0 (br-core-sumarioalta e perfis das seções), com perfis RNDS que só os restringem, e substitui o SA-IG legado da RNDS, documentando os débitos técnicos entre o SA-IG, o BR-Core e o FHIR R4.
 status: draft # draft | active | retired | unknown
 version: 0.1.0
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
@@ -36,6 +36,8 @@ dependencies:
 pages:
   index.md:
     title: Início
+  implementacao-rnds.md:
+    title: Implementação na RNDS
   estrutura.md:
     title: Estrutura do documento
   terminologia.md:
@@ -53,6 +55,7 @@ pages:
 
 menu:
   Início: index.html
+  Implementação na RNDS: implementacao-rnds.html
   Documento:
     Estrutura do documento: estrutura.html
     Terminologia: terminologia.html
@@ -68,3 +71,8 @@ menu:
 
 instanceOptions:
   manualSliceOrdering: true # true | false
+
+# Extensões do IPS-BR usadas pelo br-core-patient (raça/cor). O pacote
+# br.gov.saude.ips.fhir não é dependência do BR-Core 1.3.0 publicado (D-40).
+parameters:
+  extension-domain: https://ips.saude.gov.br/fhir

@@ -6,6 +6,20 @@
       "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-patient"
     ]
   },
+  "extension": [
+    {
+      "url": "https://ips.saude.gov.br/fhir/StructureDefinition/raca-br-ips",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "code": "01",
+            "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRRacaCor",
+            "display": "Branca"
+          }
+        ]
+      }
+    }
+  ],
   "identifier": [
     {
       "use": "official",

@@ -51,7 +51,7 @@ w('| Este guia | br-core-sumarioalta, sem perfil próprio; o CMD sai da cadeia. 
 w('')
 w('O comparativo tem duas camadas: o **documento-base** (CMD × br-core-composition) e o **Sumário de Alta** '
   '(BRSumarioAlta × br-core-sumarioalta, cabeçalho e seções). As colunas trazem a cardinalidade e o binding no '
-  'FHIR R4, no SA-IG, no BR-Core 1.3.0 publicado e no BR-Core corrigido (branch `fix/sumarioalta-capacidadefuncional`, ainda não publicado).\n')
+  'FHIR R4, no SA-IG, no BR-Core 1.3.0 publicado e no BR-Core corrigido (`main` do HL7-BR, commit 9cf1bc9, ainda sem nova versão do pacote).\n')
 
 w('### Legenda\n')
 w('| Conformidade | Significado |\n|---|---|')

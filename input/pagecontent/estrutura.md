@@ -1,15 +1,15 @@
 # Estrutura do documento
 
-Este guia não cria perfis. O Sumário de Alta usa os perfis do **BR-Core 1.3.0** como estão; onde o BR-Core não tem perfil, os do [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/) 1.0.1 (HL7 internacional) e, na falta deles, o recurso canônico do FHIR R4; o guia diz como preenchê-los e registra o que precisa mudar no BR-Core.
+O Sumário de Alta usa os perfis do **BR-Core 1.3.0**, com três perfis RNDS que só os restringem ([Implementação na RNDS](implementacao-rnds.html)); onde o BR-Core não tem perfil, os do [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/) 1.0.1 (HL7 internacional) e, na falta deles, o recurso canônico do FHIR R4; o guia diz como preenchê-los e registra o que precisa mudar no BR-Core.
 
-O documento é enviado como **Bundle `document`** conforme ao `clinical-document-bundle`: a Composition (`br-core-sumarioalta` e `clinical-document-composition`) é a primeira entrada, seguida de todos os recursos referenciados. Ver o exemplo [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.html).
+O documento é enviado como **Bundle `document`** conforme ao `rnds-documento-sumarioalta` (derivado do `clinical-document-bundle`): a Composition (`rnds-sumarioalta`, derivado do `br-core-sumarioalta`, e `clinical-document-composition`) é a primeira entrada, seguida de todos os recursos referenciados. Ver o exemplo [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.html).
 
 ## Perfis usados
 
 | Conteúdo | Perfil BR-Core | Antes, no SA-IG |
 |---|---|---|
-| Documento | `br-core-sumarioalta` (herda de `br-core-composition`) e `clinical-document-composition` | BRSumarioAlta, sobre BRConjuntoMinimoDados (CMD) |
-| Internação | `br-core-encounter` | BRContatoAssistencial-1.0 (seção própria) |
+| Documento | `rnds-sumarioalta` (deriva de `br-core-sumarioalta`, que herda de `br-core-composition`) e `clinical-document-composition` | BRSumarioAlta, sobre BRConjuntoMinimoDados (CMD) |
+| Internação | `rnds-internacao` (deriva de `br-core-encounter`) | BRContatoAssistencial-1.0 (seção própria) |
 | Diagnósticos | `br-core-condition` | BRProblemaDiagnostico |
 | Alergias e intolerâncias | `br-core-allergyintolerance` | BRAlergiaReacaoAdversa-1.0 |
 | Procedimentos | `br-core-procedure` | BRProcedimentoRealizado-1.0 |
@@ -18,7 +18,7 @@ O documento é enviado como **Bundle `document`** conforme ao `clinical-document
 | Capacidade funcional | `br-core-capacidadefuncional` | BRRestricaoFuncionalIncapacidadeSaude-1.0 |
 | Paciente, profissional, estabelecimento | `br-core-patient`, `br-core-practitioner`, `br-core-organization` | BRIndividuo, extensões próprias |
 | Equipe | `br-core-careteam`, quando necessária | BRIdentificacaoEquipe-1.0 (extensão) |
-| Documento para envio | `clinical-document-bundle` (FHIR Clinical Documents) até a publicação do `br-core-bundle-documento`, já criado no branch de correção do BR-Core | — |
+| Documento para envio | `rnds-documento-sumarioalta` (deriva de `clinical-document-bundle`; de `br-core-bundle-documento` quando publicado) | — |
 
 ## Seções
 
@@ -41,7 +41,7 @@ O BR-Core não impõe as regras abaixo; elas são orientação deste guia e est�
 | Elemento | Regra |
 |---|---|
 | `Composition.type` | LOINC 18842-5 Discharge summary |
-| `Composition.meta.profile` | `br-core-sumarioalta` e `clinical-document-composition` |
+| `Composition.meta.profile` | `rnds-sumarioalta` e `clinical-document-composition` |
 | `Composition.category` | LOINC 107903-7 Clinical note (exigido pelo `clinical-document-composition`; o `br-core-sumarioalta` aceita uma categoria) |
 | `Composition.attester` | atestador legal (`mode = legal`) com data, profissional responsável pela alta |
 | `Bundle` | `clinical-document-bundle`: `identifier` (system e value), `timestamp` maior ou igual a `Composition.date`, Composition como primeira entrada |
@@ -64,4 +64,4 @@ O BR-Core não impõe as regras abaixo; elas são orientação deste guia e est�
 
 ## Validação
 
-O `br-core-sumarioalta` 1.3.0 não aceita nenhuma instância válida (débitos [D-01 e D-02](debitos-tecnicos.html)): o discriminador `profile` em `section.code` faz cada seção casar com todas as fatias, e o sistema fixado como `https://loinc.org/` não é o canonical do CodeSystem LOINC (`http://loinc.org`), de onde vêm os códigos do ValueSet `doc-section-codes`. Esse binding é required no `br-core-composition` 1.3.0, e três códigos de seção (42347-5, 8654-6, 54522-8) não estão no ValueSet (D-39); no branch de correção o binding passa a example, como no IPS. Os exemplos de Composition seguem o perfil e acusam esses erros até a correção no BR-Core. A correção está no branch `fix/sumarioalta-capacidadefuncional` do repositório do BR-Core; com ela, e com `http://loinc.org` nas seções, a Composition e o Bundle validam sem erro contra o `br-core-sumarioalta` e o FHIR Clinical Documents. Os demais exemplos validam. No IG Publisher (06/10/2026, BR-Core 1.3.0) são 208 erros, todos nas duas Compositions e no Bundle, e todos causados por D-01 e D-02. Os perfis do FHIR Clinical Documents não acrescentam erros: as Compositions e o Bundle conformam a eles.
+O `br-core-sumarioalta` 1.3.0 não aceita nenhuma instância válida (débitos [D-01 e D-02](debitos-tecnicos.html)): o discriminador `profile` em `section.code` faz cada seção casar com todas as fatias, e o sistema fixado como `https://loinc.org/` não é o canonical do CodeSystem LOINC (`http://loinc.org`), de onde vêm os códigos do ValueSet `doc-section-codes`. Esse binding é required no `br-core-composition` 1.3.0, e três códigos de seção (42347-5, 8654-6, 54522-8) não estão no ValueSet (D-39); no `main` do BR-Core o binding passa a example, como no IPS. Os exemplos de Composition seguem o perfil e acusam esses erros até a correção no BR-Core. A correção está no `main` do repositório do BR-Core (HL7-BR, 9cf1bc9); com ela, e com `http://loinc.org` nas seções, a Composition e o Bundle validam sem erro contra o `br-core-sumarioalta` e o FHIR Clinical Documents. Os demais exemplos validam. No IG Publisher (06/10/2026, BR-Core 1.3.0) são 209 erros, todos nas duas Compositions e no Bundle, e todos causados por D-01 e D-02. Os perfis do FHIR Clinical Documents não acrescentam erros: as Compositions e o Bundle conformam a eles.
