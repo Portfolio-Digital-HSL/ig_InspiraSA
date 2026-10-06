@@ -21,6 +21,23 @@ O próprio `br-core-sumarioalta` 1.3.0 também não aceita instância válida (D
 
 A RNDS se ajusta aos perfis do BR-Core. Onde o BR-Core não tem perfil, usa as especificações internacionais do HL7 (para o documento, o [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/)) e, na falta delas, o recurso canônico do FHIR R4. Perfis próprios da RNDS, como os do SA-IG, deixam de existir.
 
+## Por que este guia não tem perfis
+
+Nenhum perfil, extensão, ValueSet ou CodeSystem precisou ser criado neste guia. O conteúdo do Sumário de Alta é coberto assim:
+
+| Necessidade | Onde está |
+|---|---|
+| Documento e seções | `br-core-sumarioalta` (BR-Core), conforme também ao `clinical-document-composition` (FHIR Clinical Documents) |
+| Envio do documento | `clinical-document-bundle` (FHIR Clinical Documents); `br-core-bundle-documento`, criado no BR-Core |
+| Internação, diagnósticos, alergias, procedimentos, prescrição, plano de cuidados, capacidade funcional | perfis do BR-Core (`br-core-encounter`, `br-core-condition`, `br-core-allergyintolerance`, `br-core-procedure`, `br-core-medicationrequest`, `br-core-careplan`, `br-core-capacidadefuncional`) |
+| Paciente, profissional, estabelecimento | `br-core-patient`, `br-core-practitioner`, `br-core-organization` |
+| Status em português | suplementos pt-BR dos CodeSystems do HL7, no guia de terminologia |
+| Alérgenos, manifestações, procedimentos, capacidade funcional | ValueSets e ConceptMaps no guia de terminologia e no OCL |
+
+O que estava errado ou faltava foi corrigido na origem, no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)): fatiamento e códigos das seções, LOINC, binding de `section.code`, `br-core-capacidadefuncional` e o novo `br-core-bundle-documento`. Um perfil próprio aqui repetiria o erro do SA-IG: uma camada nacional paralela que não recebe as evoluções do BR-Core.
+
+Por isso o código FSH deste guia tem só exemplos (`input/fsh/instances/`) e o modelo lógico (`input/fsh/logicos/`). As regras que o BR-Core ainda não impõe estão em [Estrutura do documento](estrutura.html), como regras de preenchimento, e em [Recomendações](recomendacoes-rnds.html), como mudanças propostas ao BR-Core.
+
 ## Como foi feito
 
 1. **Comparação dos snapshots em duas camadas.** CMD × `br-core-composition` e BRSumarioAlta × `br-core-sumarioalta`, elemento a elemento, com FHIR R4, BR-Core 1.3.0 e BR-Core corrigido, registrando a origem de cada restrição. O resultado é o [Mapa de estrutura](mapa-estrutura.html) e a planilha `comparativo/comparativo_sumarioalta_rnds_brcore.xlsx`, cotejada com a planilha anterior do repositório sa-ig.
