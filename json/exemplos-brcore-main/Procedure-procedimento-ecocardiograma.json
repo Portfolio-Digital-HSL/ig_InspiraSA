@@ -1,0 +1,33 @@
+{
+  "resourceType": "Procedure",
+  "id": "procedimento-ecocardiograma",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-procedure"
+    ]
+  },
+  "performer": [
+    {
+      "actor": {
+        "reference": "Organization/hospital-exemplo"
+      }
+    }
+  ],
+  "status": "completed",
+  "code": {
+    "coding": [
+      {
+        "code": "0205010032",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRTabelaSUS",
+        "display": "ECOCARDIOGRAFIA TRANSTORACICA"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/paciente-joao"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-ic"
+  },
+  "performedDateTime": "2026-09-22"
+}

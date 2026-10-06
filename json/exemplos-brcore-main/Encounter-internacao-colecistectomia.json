@@ -1,0 +1,92 @@
+{
+  "resourceType": "Encounter",
+  "id": "internacao-colecistectomia",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-encounter"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Internação eletiva para colecistectomia videolaparoscópica. Pós-operatório sem intercorrências; alta no 1º dia com dieta oral.</p></div>"
+  },
+  "participant": [
+    {
+      "type": [
+        {
+          "coding": [
+            {
+              "code": "alta",
+              "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRResponsabilidadeParticipante",
+              "display": "Profissional que realizou a alta do indivíduo no Contato Assistencial"
+            }
+          ]
+        }
+      ],
+      "individual": {
+        "reference": "Practitioner/medica-alta"
+      }
+    }
+  ],
+  "period": {
+    "start": "2026-09-24T07:00:00-03:00",
+    "end": "2026-09-25T10:00:00-03:00"
+  },
+  "diagnosis": [
+    {
+      "condition": {
+        "reference": "Condition/diagnostico-colelitiase"
+      },
+      "use": {
+        "coding": [
+          {
+            "code": "AD",
+            "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+            "display": "Admission diagnosis"
+          }
+        ]
+      }
+    }
+  ],
+  "hospitalization": {
+    "admitSource": {
+      "coding": [
+        {
+          "code": "12",
+          "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRProcedencia",
+          "display": "Demanda referenciada"
+        }
+      ]
+    },
+    "dischargeDisposition": {
+      "coding": [
+        {
+          "code": "01",
+          "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRMotivoDesfecho",
+          "display": "Alta"
+        }
+      ]
+    }
+  },
+  "status": "finished",
+  "class": {
+    "code": "IMP",
+    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+    "display": "inpatient encounter"
+  },
+  "priority": {
+    "coding": [
+      {
+        "code": "04",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRCaraterAtendimento",
+        "display": "Consulta agendada programada"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/paciente-lucia"
+  },
+  "serviceProvider": {
+    "reference": "Organization/hospital-exemplo"
+  }
+}

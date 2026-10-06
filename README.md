@@ -69,7 +69,7 @@ Até a publicação, o guia depende do BR-Core **1.3.0**: os exemplos seguem o p
 | `comparativo/` | Planilha `comparativo_sumarioalta_rnds_brcore.xlsx`: as duas camadas elemento a elemento, débitos e cotejo com a planilha anterior do sa-ig. Fonte do Mapa de estrutura |
 | `scripts/` | `gerar_modelo_logico.py` (modelo lógico e `modelo_logico.json`) e `gerar_mapa_estrutura.py` (página Mapa de estrutura). Rodar nessa ordem, na raiz |
 | `terminologia/` | Suplementos pt-BR, ValueSets e ConceptMaps para o OCL e o guia de terminologia (`https://terminologia.saude.gov.br/fhir/...`). Não são publicados por este guia. Ver `terminologia/README.md` |
-| `json/` | Exemplos em JSON (`exemplos/`, `exemplos-inspirasa.zip`) e o modelo lógico (`modelo-logico/`) |
+| `json/` | Exemplos em JSON (`exemplos/`, `exemplos-inspirasa.zip`), o modelo lógico (`modelo-logico/`), os exemplos ajustados ao BR-Core main (`exemplos-brcore-main/`) e `inspirasa-json.zip` (guia publicado, exemplos para o BR-Core main e terminologia). Ver `json/LEIA-ME.md` |
 
 ## Dependências
 

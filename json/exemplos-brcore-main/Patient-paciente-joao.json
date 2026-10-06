@@ -1,0 +1,47 @@
+{
+  "resourceType": "Patient",
+  "id": "paciente-joao",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-patient"
+    ]
+  },
+  "identifier": [
+    {
+      "use": "official",
+      "system": "https://saude.gov.br/fhir/sid/cpf",
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "TAX"
+          }
+        ]
+      },
+      "value": "00000000272"
+    },
+    {
+      "use": "official",
+      "system": "https://saude.gov.br/fhir/sid/cns",
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "HC"
+          }
+        ]
+      },
+      "value": "700000000000013"
+    }
+  ],
+  "name": [
+    {
+      "given": [
+        "João"
+      ],
+      "family": "Pereira"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1954-07-22"
+}

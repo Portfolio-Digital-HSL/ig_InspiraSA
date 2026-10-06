@@ -1,0 +1,39 @@
+{
+  "resourceType": "CarePlan",
+  "id": "plano-cuidados-ic",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-careplan"
+    ]
+  },
+  "period": {
+    "start": "2026-09-28"
+  },
+  "activity": [
+    {
+      "detail": {
+        "code": {
+          "coding": [
+            {
+              "code": "0301",
+              "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRSubgrupoTabelaSUS",
+              "display": "Consultas / Atendimentos / Acompanhamentos"
+            }
+          ]
+        },
+        "status": "scheduled",
+        "scheduledString": "Consulta de cardiologia em até 7 dias",
+        "description": "Retorno com cardiologia para ajuste de diurético e betabloqueador."
+      }
+    }
+  ],
+  "status": "active",
+  "intent": "plan",
+  "description": "Restrição hídrica de 1,5 L/dia, pesagem diária e retorno ambulatorial com cardiologia.",
+  "subject": {
+    "reference": "Patient/paciente-joao"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-ic"
+  }
+}

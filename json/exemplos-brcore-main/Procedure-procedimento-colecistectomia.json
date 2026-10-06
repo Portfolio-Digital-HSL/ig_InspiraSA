@@ -1,0 +1,42 @@
+{
+  "resourceType": "Procedure",
+  "id": "procedimento-colecistectomia",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-procedure"
+    ]
+  },
+  "performer": [
+    {
+      "function": {
+        "coding": [
+          {
+            "code": "304292004",
+            "system": "http://snomed.info/sct",
+            "display": "Surgeon (occupation)"
+          }
+        ]
+      },
+      "actor": {
+        "reference": "Practitioner/medica-alta"
+      }
+    }
+  ],
+  "status": "completed",
+  "code": {
+    "coding": [
+      {
+        "code": "0407030034",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRTabelaSUS",
+        "display": "COLECISTECTOMIA VIDEOLAPAROSCOPICA"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/paciente-lucia"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-colecistectomia"
+  },
+  "performedDateTime": "2026-09-24T09:00:00-03:00"
+}

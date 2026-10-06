@@ -1,0 +1,51 @@
+{
+  "resourceType": "Condition",
+  "id": "diagnostico-colelitiase",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-condition"
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "encounter-diagnosis",
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+        }
+      ]
+    }
+  ],
+  "clinicalStatus": {
+    "coding": [
+      {
+        "code": "resolved",
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+      }
+    ]
+  },
+  "verificationStatus": {
+    "coding": [
+      {
+        "code": "confirmed",
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "K80.2",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRCID10",
+        "display": "Calculose da vesícula biliar sem colecistite"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/paciente-lucia"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-colecistectomia"
+  },
+  "recordedDate": "2026-09-24"
+}

@@ -1,0 +1,45 @@
+{
+  "resourceType": "Procedure",
+  "id": "procedimento-tratamento-ic",
+  "meta": {
+    "profile": [
+      "https://br-core.saude.gov.br/fhir/StructureDefinition/br-core-procedure"
+    ]
+  },
+  "performedPeriod": {
+    "start": "2026-09-20",
+    "end": "2026-09-28"
+  },
+  "performer": [
+    {
+      "function": {
+        "coding": [
+          {
+            "code": "309343006",
+            "system": "http://snomed.info/sct",
+            "display": "Physician (occupation)"
+          }
+        ]
+      },
+      "actor": {
+        "reference": "Practitioner/medica-alta"
+      }
+    }
+  ],
+  "status": "completed",
+  "code": {
+    "coding": [
+      {
+        "code": "0303060212",
+        "system": "https://terminologia.saude.gov.br/fhir/CodeSystem/BRTabelaSUS",
+        "display": "TRATAMENTO DE INSUFICIENCIA CARDIACA"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/paciente-joao"
+  },
+  "encounter": {
+    "reference": "Encounter/internacao-ic"
+  }
+}
