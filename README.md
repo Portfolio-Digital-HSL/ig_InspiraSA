@@ -1,138 +1,108 @@
-# IG InspiraSA
+# IG InspiraSA: Sumário de Alta
 
-Guia de Implementação FHIR **R4 (4.0.1)** do projeto InspiraSA, escrito em
-[FHIR Shorthand (FSH)](https://hl7.org/fhir/uv/shorthand/) e compilado com
-[SUSHI](https://fshschool.org/docs/sushi/) + [IG Publisher](https://github.com/HL7/fhir-ig-publisher).
+Guia de Implementação FHIR **R4 (4.0.1)** do Sumário de Alta hospitalar (Portaria GM/MS nº 701/2022). Refatora o SA-IG legado da RNDS (`br.gov.saude.sa.fhir`) sobre os perfis do **BR-Core**.
 
-## Conteúdo
+Status `draft`, versão 0.1.0. Proposta técnica para deliberação; não é especificação oficial da RNDS.
 
-Sumário de Alta hospitalar com os perfis do BR-Core 1.3.0, substituindo o SA-IG legado da RNDS. O guia não cria perfis: usa `br-core-sumarioalta`, `br-core-encounter`, `br-core-condition`, `br-core-allergyintolerance`, `br-core-procedure`, `br-core-medicationrequest`, `br-core-medication`, `br-core-careplan` e `br-core-capacidadefuncional`, e documenta regras de preenchimento, exemplos, débitos e recomendações. Onde o BR-Core não tem perfil, usa o FHIR Clinical Documents 1.0.1 (`clinical-document-bundle`, `clinical-document-composition`).
+Autoria: Jussara Macedo Pinho Rötzsch (HL7 Brasil / Hospital Sírio-Libanês, projeto INSPIRA, PROADI-SUS).
 
-- `json/`: exemplos em JSON e `exemplos-inspirasa.zip`.
-- `comparativo/`: comparativo BRConjuntoMinimoDados/BRSumarioAlta (SA-IG) × br-core-composition/br-core-sumarioalta × FHIR R4, com cotejo do comparativo anterior. É a fonte da página Mapa de estrutura.
-- `input/fsh/logicos/`: modelo lógico do Sumário de Alta (SumarioAltaML), com mapeamento para o BR-Core e o SA-IG.
-- `scripts/`: `gerar_modelo_logico.py` (gera o modelo lógico e `modelo_logico.json`) e `gerar_mapa_estrutura.py` (gera `input/pagecontent/mapa-estrutura.md` da planilha e do modelo). Rodar nessa ordem, na raiz do repositório.
+## Princípio
 
-Princípio: a RNDS se ajusta aos perfis do BR-Core; onde o BR-Core não tem perfil, especificação internacional do HL7 (FHIR Clinical Documents) e, na falta dela, recurso canônico do FHIR R4.
-- `terminologia/`: suplementos pt-BR, ValueSets e ConceptMap para o OCL e o guia de terminologia (não publicados pelo IG). Ver `terminologia/README.md`.
+A RNDS se ajusta aos perfis do BR-Core. Onde o BR-Core não tem perfil, usa a especificação internacional do HL7 (para o documento, o [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/) 1.0.1) e, na falta dela, o recurso canônico do FHIR R4.
 
-## Pré-requisitos
+Este guia **não cria perfis**. Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)), não contornados aqui.
 
-| Ferramenta | Versão | Para quê |
-|---|---|---|
-| Node.js | >= 20 | rodar o SUSHI |
-| Java (JDK) | **17** | rodar o IG Publisher (testado com Temurin/OpenJDK 17.0.20) |
-| Ruby + Jekyll | Ruby 3.x, Jekyll 4.x | o IG Publisher usa o Jekyll para gerar o site |
+## Por que refatorar
 
-```bash
-# macOS (Homebrew)
-brew install node openjdk@17 ruby
-gem install jekyll
-```
+- O BRSumarioAlta herda do BRConjuntoMinimoDados (CMD), não do BR-Core, sob o canonical `http://www.saude.gov.br/fhir/r4` e sem `dependsOn` do BR-Core.
+- O CMD proíbe identificador, atestação, custodiante e `Composition.encounter`, fixa o título e põe a modalidade assistencial em `category`.
+- As seções não têm `code` nem `text` e são fatiadas por `entry.resolve()`: o documento não valida contra o BR-Core.
+- O SA-IG remodela o que o FHIR já tem (contato assistencial como seção, ClinicalImpression só para texto, Composition intermediária na prescrição, status do HL7 recriados em CodeSystems nacionais, extensões que duplicam elementos nativos).
+- O modelo de informação publicado no SA-IG está vazio.
 
-O `openjdk@17` do Homebrew é *keg-only* — não entra no PATH sozinho. Exporte o
-`JAVA_HOME` antes de buildar (ou fixe no seu `~/.zshrc`):
+## Como foi feito
 
-```bash
-export JAVA_HOME=/opt/homebrew/opt/openjdk@17
-export PATH="$JAVA_HOME/bin:$PATH"
-```
+1. Comparação dos snapshots em duas camadas: CMD × `br-core-composition` e BRSumarioAlta × `br-core-sumarioalta`, com FHIR R4, BR-Core 1.3.0 e BR-Core corrigido.
+2. Modelo lógico SumarioAltaML reconstruído dos perfis do SA-IG, com mapeamento para o BR-Core e para o SA-IG.
+3. Substituição de cada perfil do SA-IG pelo do BR-Core; as seções sem equivalente vão para o Encounter da internação.
+4. Composition e Bundle conformes também ao `clinical-document-composition` e ao `clinical-document-bundle`.
+5. Correção do BR-Core na branch `fix/sumarioalta-capacidadefuncional`.
+6. Terminologia pelos ValueSets do HL7 com suplementos pt-BR, SNOMED CT com CBARA e MedDRA, `BRProcedimentosNacionais` (Tabela SUS e TUSS 22). Mapas revisados no OCL.
+7. Validação com o validador FHIR e o IG Publisher.
 
-Confira com `java -version` — precisa dizer 17.x. Se disser outra coisa, o
-`npm run build` falha com `UnsupportedClassVersionError`.
+## Perfis usados
 
-O SUSHI **não** precisa ser instalado globalmente: a versão usada pelo projeto está
-fixada no `package.json` e é instalada com `npm install`.
+| Conteúdo | Perfil |
+|---|---|
+| Documento | `br-core-sumarioalta` + `clinical-document-composition` |
+| Envio | `clinical-document-bundle` (até a publicação do `br-core-bundle-documento`) |
+| Internação | `br-core-encounter` |
+| Diagnósticos | `br-core-condition` |
+| Alergias e intolerâncias | `br-core-allergyintolerance` |
+| Procedimentos | `br-core-procedure` |
+| Prescrição de alta | `br-core-medicationrequest` + `br-core-medication` |
+| Plano de cuidados | `br-core-careplan` |
+| Capacidade funcional | `br-core-capacidadefuncional` |
+| Paciente, profissional, estabelecimento | `br-core-patient`, `br-core-practitioner`, `br-core-organization` |
 
-## Primeiros passos
+## Correções propostas ao BR-Core
+
+Branch `fix/sumarioalta-capacidadefuncional` do [br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core), sobre a 1.4.1:
+
+| Débito | Correção |
+|---|---|
+| D-01 | `br-core-sumarioalta` e `br-core-registroatendimentoclinico`: discriminador `pattern` em `section.code` (era `profile`, nenhuma instância validava) |
+| D-02 | LOINC com o canonical `http://loinc.org` (era `https://loinc.org/`) |
+| D-04 | `br-core-capacidadefuncional` revisto (`code` com o ValueSet `BRCapacidadeFuncional`; `subject.identifier` e `stage` deixam de ser obrigatórios; `category` sem binding nacional) |
+| D-39 | `br-core-composition`: `section.code` com o ValueSet `doc-section-codes` como example, como no R4 e no IPS; códigos de seção do IPS onde o IPS tem a seção |
+| novo | `br-core-bundle-documento` (Bundle `document`) |
+
+Até a publicação, o guia depende do BR-Core **1.3.0**: os exemplos seguem o perfil publicado e o QA acusa 208 erros, todos causados por D-01 e D-02. Com a branch corrigida, os exemplos validam sem erro.
+
+## Conteúdo do repositório
+
+| Caminho | Conteúdo |
+|---|---|
+| `input/fsh/instances/` | Exemplos: internação por insuficiência cardíaca (documento completo e Bundle) e colecistectomia (seções vazias com `emptyReason`) |
+| `input/fsh/logicos/` | Modelo lógico SumarioAltaML, com mapeamentos para o BR-Core e o SA-IG |
+| `input/pagecontent/` | Páginas: Início, Estrutura do documento, Terminologia, Mapeamento SA-IG, Mapa de estrutura, Débitos técnicos, Recomendações à RNDS, Transição |
+| `comparativo/` | Planilha `comparativo_sumarioalta_rnds_brcore.xlsx`: as duas camadas elemento a elemento, débitos e cotejo com a planilha anterior do sa-ig. Fonte do Mapa de estrutura |
+| `scripts/` | `gerar_modelo_logico.py` (modelo lógico e `modelo_logico.json`) e `gerar_mapa_estrutura.py` (página Mapa de estrutura). Rodar nessa ordem, na raiz |
+| `terminologia/` | Suplementos pt-BR, ValueSets e ConceptMaps para o OCL e o guia de terminologia (`https://terminologia.saude.gov.br/fhir/...`). Não são publicados por este guia. Ver `terminologia/README.md` |
+| `json/` | Exemplos em JSON (`exemplos/`, `exemplos-inspirasa.zip`) e o modelo lógico (`modelo-logico/`) |
+
+## Dependências
+
+| Pacote | Versão |
+|---|---|
+| `br.gov.saude.br-core.fhir` | 1.3.0 |
+| `hl7.fhir.uv.fhir-clinical-document` | 1.0.1 |
+| `hl7.fhir.r4.core` | 4.0.1 |
+
+## Build
+
+Pré-requisitos: Node.js 20 ou superior, Java 17 ou superior, Ruby com Jekyll. O SUSHI (3.20.1) é instalado pelo `npm install`.
 
 ```bash
 npm install
+npm run fsh      # só o SUSHI: fsh-generated/resources
+npm run build    # SUSHI + IG Publisher: output/
 ```
 
-### 1. Compilar só o FSH (rápido, poucos segundos)
+O `publisher.jar` fica em `~/.fhir/tools/publisher/` (baixe com `./_build.sh update` ou da [página de releases](https://github.com/HL7/fhir-ig-publisher/releases/latest)).
 
-Valida a sintaxe FSH e gera os recursos em `fsh-generated/resources/`.
-É o comando do dia a dia enquanto se escreve perfil.
+Para regenerar o modelo lógico e o Mapa de estrutura depois de alterar a planilha ou a lista de elementos:
 
 ```bash
-npm run fsh
+python3 scripts/gerar_modelo_logico.py
+python3 scripts/gerar_mapa_estrutura.py   # requer openpyxl
 ```
 
-### 2. Gerar o guia completo (lento, vários minutos)
+`fsh-generated/`, `output/`, `temp/`, `input-cache/` e `template/` são gerados e não são versionados.
 
-Roda o SUSHI **da versão fixada no `package.json`** e em seguida o IG Publisher,
-produzindo o site navegável em `output/`.
+## Pendências
 
-O publisher também sabe chamar o SUSHI sozinho, mas chamaria o binário **global**
-da máquina de cada um — por isso o script usa `nosushi` e roda o SUSHI fixado
-antes. Assim todo mundo compila com a mesma versão.
-
-Se o `publisher.jar` não estiver em `~/.fhir/tools/publisher/`, baixe-o uma vez
-(~230 MB). O `./_build.sh update` faz isso, mas é interativo e trava em CI;
-o equivalente direto é:
-
-```bash
-mkdir -p ~/.fhir/tools/publisher
-curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
-  -o ~/.fhir/tools/publisher/publisher.jar
-```
-
-```bash
-npm run build
-```
-
-Abra o resultado em **`output/en/index.html`**.
-
-> O `output/index.html` da raiz é só um stub de 544 bytes com o cabeçalho de
-> publicação — o site navegável fica dentro da pasta do idioma.
-
-## Estrutura
-
-```
-sushi-config.yaml          # metadados do IG (id, canonical, versão, dependências)
-ig.ini                     # aponta o IG Publisher para o template
-input/
-  fsh/
-    profiles/              # Profile: ...
-    extensions/            # Extension: ...
-    valuesets/             # ValueSet: ...
-    codesystems/           # CodeSystem: ...
-    instances/             # Instance: ... (exemplos)
-  pagecontent/             # páginas em Markdown do site (index.md, etc.)
-  images/                  # imagens referenciadas nas páginas
-  includes/                # menu.xml customizado, fragmentos HTML
-  ignoreWarnings.txt       # warnings do QA aceitos conscientemente
-fsh-generated/             # GERADO — não versionar, não editar
-output/                    # GERADO — não versionar
-```
-
-Arquivos `.fsh` podem ter qualquer nome e ficar em qualquer subpasta de `input/fsh/`;
-a divisão acima é só convenção para manter o projeto navegável.
-
-## Convenções
-
-- Um artefato por arquivo, nome do arquivo em `kebab-case` refletindo o `Id`.
-- `Id` dos artefatos em `kebab-case` (ex.: `paciente-inspira-rac`).
-- `Name` (nome computável) em `PascalCase` (ex.: `PacienteInspiraSA`).
-- Todo perfil precisa de `Title` e `Description` preenchidos — o QA do IG Publisher reclama sem eles.
-- Todo perfil deve ter pelo menos um exemplo em `input/fsh/instances/`.
-
-## Pendências deste scaffold
-
-Antes do primeiro uso real, confirmar em `sushi-config.yaml`:
-
-- [ ] `id` (`br.org.hsl.inspirasa`) e `canonical` (`http://fhir.hsl.org.br/ig/inspirasa`) — **valores provisórios**, precisam da definição oficial do projeto
-- [ ] `dependencies:` — decidir se o guia vai se apoiar no `hl7.fhir.br.core` e em qual versão
-- [ ] `license:` — está comentado
-- [ ] Apagar `input/fsh/profiles/exemplo-paciente.fsh` quando o primeiro perfil real entrar
-- [ ] `ig.ini` usa `fhir2.base.template#current` (referência móvel); avaliar fixar uma versão quando o guia estabilizar
-
-## Estado do build
-
-Validado em 22/09/2026 com IG Publisher 2.3.4, SUSHI 3.20.1 e JDK 17.0.20.1:
-**0 erros, 0 warnings, 0 links quebrados**, 1204 arquivos em `output/`.
-
-Mantenha esse placar em zero — warning que se acumula vira warning que ninguém lê.
-Quando um warning for legítimo e aceitável, documente o motivo em
-`input/ignoreWarnings.txt` em vez de simplesmente conviver com ele.
+- Publicação da correção do BR-Core e troca da dependência para a nova versão.
+- Decisões no BR-Core: CPF 1..1 no `br-core-patient` (D-03), `dosageInstruction` (D-05), alérgenos sem SNOMED CT (D-06).
+- Hierarquia do CBARA no OCL (D-37) e referências da TUSS 22 na `BRProcedimentosNacionais`.
+- Definição oficial de `id` e `canonical` do guia (hoje `br.org.hsl.inspirasa` e `http://fhir.hsl.org.br/ig/inspirasa`, provisórios).
