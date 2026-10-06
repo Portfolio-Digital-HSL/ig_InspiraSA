@@ -211,7 +211,7 @@ BR-Core: Composition.section:capacidadeFuncional (LOINC 54522-8) → Condition (
 
 ## Sumário de Alta: seções
 
-O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). O binding de `section.code` é o ValueSet `doc-section-codes` (required); os códigos são do CodeSystem LOINC (`http://loinc.org`). Três códigos de seção do BR-Core (42347-5, 8654-6 e 54522-8) não estão nesse ValueSet (D-39).
+O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, e a capacidade funcional usa o código do IPS, 47420-5 (D-39).
 
 | Seção no BR-Core | Seção no SA-IG | SA-IG card. | BR-Core card. | Conformidade | Grau | Observação |
 |---|---|---|---|---|---|---|
@@ -233,7 +233,7 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | Elemento (BR-Core) | Elemento (SA-IG) | SA-IG | BR-Core 1.3.0 | BR-Core corrigido | Conformidade | Grau | Origem no SA-IG |
 |---|---|---|---|---|---|---|---|
 | `section:diagnosticosAdmissao.title` | `section:problemasDiagnosticosAvaliados.title` | 0..1 · fixedString = "Motivo da admissão, diagnósticos relevantes e patologias associadas" | 0..1 | 0..1 | Divergente | Baixo | BRSumarioAlta |
-| `section:diagnosticosAdmissao.code` | `section:problemasDiagnosticosAvaliados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · required: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "42347-5", "system": "http://loinc.org"}]} | Divergente | Bloqueante | CMD |
+| `section:diagnosticosAdmissao.code` | `section:problemasDiagnosticosAvaliados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · example: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "42347-5", "system": "http://loinc.org"}]} | Divergente | Bloqueante | CMD |
 | `section:diagnosticosAdmissao.code.coding.system` | — | — · sem equivalente | 0..1 · patternUri = "https://loinc.org/" | 0..1 | Sem equivalente no SA-IG | Bloqueante | — |
 | `section:diagnosticosAdmissao.code.coding.code` | — | — · sem equivalente | 0..1 · patternCode = "42347-5" | 0..1 | Sem equivalente no SA-IG |  | — |
 | `section:diagnosticosAdmissao.text` | `section:problemasDiagnosticosAvaliados.text` | 0..0 | 0..1 | 0..1 | Divergente | Alto | CMD |
@@ -245,7 +245,7 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | `section:diagnosticosAdmissao.focus` | `section:problemasDiagnosticosAvaliados.focus` | 0..0 | 0..1 | 0..1 | Divergente |  | CMD |
 | `section:diagnosticosAdmissao.section` | `section:problemasDiagnosticosAvaliados.section` | 0..0 | 0..* | 0..* | Divergente |  | CMD |
 | `section:diagnosticosAvaliados.title` | `section:problemasDiagnosticosAvaliados.title` | 0..1 · fixedString = "Motivo da admissão, diagnósticos relevantes e patologias associadas" | 0..1 | 0..1 | Divergente | Baixo | BRSumarioAlta |
-| `section:diagnosticosAvaliados.code` | `section:problemasDiagnosticosAvaliados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · required: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "57852-6", "system": "http://loinc.org"}]} | Divergente | Bloqueante | CMD |
+| `section:diagnosticosAvaliados.code` | `section:problemasDiagnosticosAvaliados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · example: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "57852-6", "system": "http://loinc.org"}]} | Divergente | Bloqueante | CMD |
 | `section:diagnosticosAvaliados.code.coding.system` | — | — · sem equivalente | 0..1 · patternUri = "https://loinc.org/" | 0..1 | Sem equivalente no SA-IG | Bloqueante | — |
 | `section:diagnosticosAvaliados.code.coding.code` | — | — · sem equivalente | 0..1 · patternCode = "57852-6" | 0..1 | Sem equivalente no SA-IG |  | — |
 | `section:diagnosticosAvaliados.text` | `section:problemasDiagnosticosAvaliados.text` | 0..0 | 0..1 | 0..1 | Divergente | Alto | CMD |
@@ -257,7 +257,7 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | `section:diagnosticosAvaliados.focus` | `section:problemasDiagnosticosAvaliados.focus` | 0..0 | 0..1 | 0..1 | Divergente |  | CMD |
 | `section:diagnosticosAvaliados.section` | `section:problemasDiagnosticosAvaliados.section` | 0..0 | 0..* | 0..* | Divergente |  | CMD |
 | `section:alergiasIntolerancias.title` | `section:alergiaReacaoAdversa.title` | 0..1 · fixedString = "Alergias e/ou reações adversas na internação" | 0..1 | 0..1 | Divergente | Baixo | BRSumarioAlta |
-| `section:alergiasIntolerancias.code` | `section:alergiaReacaoAdversa.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · required: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "48765-2", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
+| `section:alergiasIntolerancias.code` | `section:alergiaReacaoAdversa.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · example: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "48765-2", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
 | `section:alergiasIntolerancias.code.coding.system` | — | — · sem equivalente | 0..1 · patternUri = "https://loinc.org/" | 0..1 | Sem equivalente no SA-IG | Bloqueante | — |
 | `section:alergiasIntolerancias.code.coding.code` | — | — · sem equivalente | 0..1 · patternCode = "48765-2" | 0..1 | Sem equivalente no SA-IG |  | — |
 | `section:alergiasIntolerancias.text` | `section:alergiaReacaoAdversa.text` | 0..0 | 0..1 | 0..1 | Divergente | Alto | BRSumarioAlta |
@@ -269,7 +269,7 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | `section:alergiasIntolerancias.focus` | `section:alergiaReacaoAdversa.focus` | 0..0 | 0..1 | 0..1 | Divergente |  | BRSumarioAlta |
 | `section:alergiasIntolerancias.section` | `section:alergiaReacaoAdversa.section` | 0..0 | 0..* | 0..* | Divergente |  | BRSumarioAlta |
 | `section:procedimentosRealizados.title` | `section:procedimentosRealizados.title` | 0..1 · fixedString = "Procedimento(s) realizado(s) ou solicitado(s)" | 0..1 | 0..1 | Divergente | Baixo | BRSumarioAlta |
-| `section:procedimentosRealizados.code` | `section:procedimentosRealizados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · required: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "47519-4", "system": "http://loinc.org"}]} | Divergente | Bloqueante | CMD |
+| `section:procedimentosRealizados.code` | `section:procedimentosRealizados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · example: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "47519-4", "system": "http://loinc.org"}]} | Divergente | Bloqueante | CMD |
 | `section:procedimentosRealizados.code.coding.system` | — | — · sem equivalente | 0..1 · patternUri = "https://loinc.org/" | 0..1 | Sem equivalente no SA-IG | Bloqueante | — |
 | `section:procedimentosRealizados.code.coding.code` | — | — · sem equivalente | 0..1 · patternCode = "47519-4" | 0..1 | Sem equivalente no SA-IG |  | — |
 | `section:procedimentosRealizados.text` | `section:procedimentosRealizados.text` | 0..0 | 0..1 | 0..1 | Divergente | Alto | CMD |
@@ -281,7 +281,7 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | `section:procedimentosRealizados.focus` | `section:procedimentosRealizados.focus` | 0..0 | 0..1 | 0..1 | Divergente |  | CMD |
 | `section:procedimentosRealizados.section` | `section:procedimentosRealizados.section` | 0..0 | 0..* | 0..* | Divergente |  | CMD |
 | `section:prescricaoAlta.title` | `section:prescricaoAlta.title` | 0..1 · fixedString = "Prescrição da Alta" | 0..1 | 0..1 | Divergente | Baixo | BRSumarioAlta |
-| `section:prescricaoAlta.code` | `section:prescricaoAlta.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · required: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "8654-6", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
+| `section:prescricaoAlta.code` | `section:prescricaoAlta.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · example: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "8654-6", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
 | `section:prescricaoAlta.code.coding.system` | — | — · sem equivalente | 0..1 · patternUri = "https://loinc.org/" | 0..1 | Sem equivalente no SA-IG | Bloqueante | — |
 | `section:prescricaoAlta.code.coding.code` | — | — · sem equivalente | 0..1 · patternCode = "8654-6" | 0..1 | Sem equivalente no SA-IG |  | — |
 | `section:prescricaoAlta.text` | `section:prescricaoAlta.text` | 0..0 | 0..1 | 0..1 | Divergente | Alto | BRSumarioAlta |
@@ -293,7 +293,7 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | `section:prescricaoAlta.focus` | `section:prescricaoAlta.focus` | 0..0 | 0..1 | 0..1 | Divergente |  | BRSumarioAlta |
 | `section:prescricaoAlta.section` | `section:prescricaoAlta.section` | 0..0 | 0..* | 0..* | Divergente |  | BRSumarioAlta |
 | `section:planoCuidados.title` | `section:planoCuidados.title` | 0..1 · fixedString = "Plano de cuidados, instruções e recomendações (na alta)" | 0..1 | 0..1 | Divergente | Baixo | BRSumarioAlta |
-| `section:planoCuidados.code` | `section:planoCuidados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · required: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "18776-5", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
+| `section:planoCuidados.code` | `section:planoCuidados.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · example: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "18776-5", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
 | `section:planoCuidados.code.coding.system` | — | — · sem equivalente | 0..1 · patternUri = "https://loinc.org/" | 0..1 | Sem equivalente no SA-IG | Bloqueante | — |
 | `section:planoCuidados.code.coding.code` | — | — · sem equivalente | 0..1 · patternCode = "18776-5" | 0..1 | Sem equivalente no SA-IG |  | — |
 | `section:planoCuidados.text` | `section:planoCuidados.text` | 0..0 | 0..1 | 0..1 | Divergente | Alto | BRSumarioAlta |
@@ -305,7 +305,7 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | `section:planoCuidados.focus` | `section:planoCuidados.focus` | 0..0 | 0..1 | 0..1 | Divergente |  | BRSumarioAlta |
 | `section:planoCuidados.section` | `section:planoCuidados.section` | 0..0 | 0..* | 0..* | Divergente |  | BRSumarioAlta |
 | `section:capacidadeFuncional.title` | `section:restricaoFuncionalIncapacidadeSaude.title` | 0..1 · fixedString = "Restrições funcionais e incapacidades em saúde" | 0..1 | 0..1 | Divergente | Baixo | BRSumarioAlta |
-| `section:capacidadeFuncional.code` | `section:restricaoFuncionalIncapacidadeSaude.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · required: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "54522-8", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
+| `section:capacidadeFuncional.code` | `section:restricaoFuncionalIncapacidadeSaude.code` | 0..0 · example: doc-section-codes | 0..1 · required: doc-section-codes | 1..1 · example: doc-section-codes; patternCodeableConcept = {"coding": [{"code": "47420-5", "system": "http://loinc.org"}]} | Divergente | Bloqueante | BRSumarioAlta |
 | `section:capacidadeFuncional.code.coding.system` | — | — · sem equivalente | 0..1 · patternUri = "https://loinc.org/" | 0..1 | Sem equivalente no SA-IG | Bloqueante | — |
 | `section:capacidadeFuncional.code.coding.code` | — | — · sem equivalente | 0..1 · patternCode = "54522-8" | 0..1 | Sem equivalente no SA-IG |  | — |
 | `section:capacidadeFuncional.text` | `section:restricaoFuncionalIncapacidadeSaude.text` | 0..0 | 0..1 | 0..1 | Divergente | Alto | BRSumarioAlta |

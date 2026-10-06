@@ -117,8 +117,9 @@ h, R = rows('Seções')
 w('## Sumário de Alta: seções\n')
 w('O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). '
   'Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). '
-  'O binding de `section.code` é o ValueSet `doc-section-codes` (required); os códigos são do CodeSystem LOINC (`http://loinc.org`). '
-  'Três códigos de seção do BR-Core (42347-5, 8654-6 e 54522-8) não estão nesse ValueSet (D-39).\n')
+  'O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). '
+  'No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, '
+  'e a capacidade funcional usa o código do IPS, 47420-5 (D-39).\n')
 w('| Seção no BR-Core | Seção no SA-IG | SA-IG card. | BR-Core card. | Conformidade | Grau | Observação |\n|---|---|---|---|---|---|---|')
 secs = [r for r in R if ((r[0] or '—') if (r[0] or '—') != '—' else r[1]).count('.') == 1]
 for r in secs:
