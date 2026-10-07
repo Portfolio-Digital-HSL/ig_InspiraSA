@@ -14,7 +14,7 @@ A mudança de canonical e de estrutura quebra a compatibilidade com o SA-IG. Emi
 2. **Seções novas obrigatórias.** Documentos antigos sem alguma das sete seções recebem a seção com `emptyReason = unavailable`.
 3. **Terminologia.** Alérgenos e manifestações antigos (BRAlergenos, MedDRA) continuam aceitos como coding; SNOMED CT entra como coding adicional quando disponível; MedDRA é convertido pelo ConceptMap.
 4. **Decisões pendentes antes de migrar:**
-   - publicação da nova versão do BR-Core, sem o `br-core-sumarioalta` (D-41);
-   - CPF opcional no br-core-patient (D-03);
+   - publicação da nova versão do BR-Core, sem o `br-core-sumarioalta` (AC-16);
+   - CPF opcional no br-core-patient (AC-03);
    - terminologia de capacidade funcional.
 5. **Medição de perda semântica.** Contar os documentos que não convertem sem ambiguidade, principalmente diagnósticos sem papel definido e prescrições em texto livre.

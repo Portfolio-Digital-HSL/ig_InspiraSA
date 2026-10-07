@@ -25,7 +25,7 @@ Grau do débito: **Bloqueante** impede instância válida; **Alto** quebra confo
 
 ## Modelo lógico → BR-Core → SA-IG
 
-O SA-IG publica uma página de modelo de informação vazia, copiada do modelo do RIA-R (D-38). O [modelo lógico do Sumário de Alta](StructureDefinition-sumario-alta-ml.html) reconstrói os elementos de dados do documento, independentes de tecnologia, e mapeia cada um para o elemento do BR-Core usado neste guia e para o do SA-IG. Os mesmos mapeamentos estão na aba *Mappings* do modelo.
+O SA-IG publica uma página de modelo de informação vazia, copiada do modelo do RIA-R (AC-13). O [modelo lógico do Sumário de Alta](StructureDefinition-sumario-alta-ml.html) reconstrói os elementos de dados do documento, independentes de tecnologia, e mapeia cada um para o elemento do BR-Core usado neste guia e para o do SA-IG. Os mesmos mapeamentos estão na aba *Mappings* do modelo.
 
 ### Documento (`documento`, 1..1)
 
@@ -211,7 +211,7 @@ BR-Core: BRSumarioAlta section:capacidadeFuncional (LOINC 47420-5) → Condition
 
 ## Sumário de Alta: seções
 
-O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, e a capacidade funcional usa o código do IPS, 47420-5 (D-39).
+O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, e a capacidade funcional usa o código do IPS, 47420-5 (AC-14).
 
 | Seção no BR-Core | Seção no SA-IG | SA-IG card. | BR-Core card. | Conformidade | Grau | Observação |
 |---|---|---|---|---|---|---|
@@ -335,10 +335,10 @@ Sem as linhas das três seções que só existem no SA-IG (todas sem equivalente
 | Cardinalidade das seções no SA-IG | "Nenhuma das 9 seções tem cardinalidade total fixa"; procedimentosRealizados sem cardinalidade. | section 1..*; informacoesContatoAssistencial 1..1; procedimentosRealizados 1..*; resumoEvolucaoClinica 1..1 (snapshot). | Divergem | O anterior leu só o differential do BRSumarioAlta; o mínimo vem do CMD e aparece no snapshot. Procedimentos é obrigatório no SA-IG. |
 | Fatiamento das seções no SA-IG | Não registra. | Discriminador profile em entry.resolve(); cada seção leva uma entrada e se repete. | Só neste |  |
 | section.code, section.text e emptyReason no SA-IG | Não registra. | Os três proibidos (0..0) em todas as seções: sem código, sem narrativa, sem justificativa de seção vazia. | Só neste | Com o BR-Core corrigido, seção sem code não casa com nenhuma fatia: bloqueante. |
-| br-core-sumarioalta: discriminador e sistema LOINC | Descreve os códigos como "fixos" e recomenda migrar para Parent br-core-sumarioalta. | Discriminador profile em code e system https://loinc.org/: nenhuma instância valida (D-01, D-02). Corrigido no main do BR-Core. | Divergem | A recomendação anterior só é viável depois da correção do BR-Core. |
+| br-core-sumarioalta: discriminador e sistema LOINC | Descreve os códigos como "fixos" e recomenda migrar para Parent br-core-sumarioalta. | Discriminador profile em code e system https://loinc.org/: nenhuma instância valida (AC-01, AC-02). Corrigido no main do BR-Core. | Divergem | A recomendação anterior só é viável depois da correção do BR-Core. |
 | Seções 9 → 7 | Mesma correspondência: contato e informações adicionais sem seção; diagnósticos desdobrados; capacidade funcional obrigatória. | Mesma correspondência. | Concordam |  |
 | Grau: contato assistencial e resumo da evolução | Médio e Médio. | Alto e Alto. | Divergem no grau | Ambos zeram/recriam elementos nativos (encounter, Encounter.text); tratado como Alto. |
-| Paciente não identificado | Recomenda CNS provisório no lugar da extensão unidentifiedPatient. | Concorda e acrescenta que o br-core-patient exige CPF (1..1), o que impede o CNS provisório (D-03). | Este completa | Decisão pendente no BR-Core. |
+| Paciente não identificado | Recomenda CNS provisório no lugar da extensão unidentifiedPatient. | Concorda e acrescenta que o br-core-patient exige CPF (1..1), o que impede o CNS provisório (AC-03). | Este completa | Decisão pendente no BR-Core. |
 | Procedure.code | Recompor com SIGTAP, TUSS-22 e CBHPM. | BRProcedimentosNacionais com BRTabelaSUS e TUSS 22; CBHPM fora (AMB, paga). | Superado por decisão | Decisão de 02/10/2026. |
 | Capacidade funcional | Remodelar sobre br-core-condition com ValueSet nacional de capacidade funcional. | br-core-capacidadefuncional corrigido: SNOMED CT Functional finding (BRCapacidadeFuncional), CID-10 adicional, sem subject.identifier e stage obrigatórios. | Superado por decisão | Correção no main do BR-Core do BR-Core. |
 | Alergias e manifestações | SNOMED CT (GPS) no lugar de BRAlergenos/MedDRA. | SNOMED CT + CBARA (152 códigos mapeados no OCL) e MedDRA mapeado (28). | Este completa |  |

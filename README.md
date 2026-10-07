@@ -51,10 +51,10 @@ No `main` do [br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.co
 
 | Débito | Correção |
 |---|---|
-| D-41 | `br-core-sumarioalta` e `br-core-registroatendimentoclinico` retirados: documentos são casos de uso da RNDS (D-01 deixa de existir) |
-| D-02 | LOINC com o canonical `http://loinc.org` (era `https://loinc.org/`) |
-| D-04 | `br-core-capacidadefuncional` revisto (`code` com o ValueSet `BRCapacidadeFuncional`; `subject.identifier` e `stage` deixam de ser obrigatórios; `category` sem binding nacional) |
-| D-39 | `br-core-composition`: `section.code` com o ValueSet `doc-section-codes` como example, como no R4 e no IPS; códigos de seção do IPS onde o IPS tem a seção |
+| AC-16 | `br-core-sumarioalta` e `br-core-registroatendimentoclinico` retirados: documentos são casos de uso da RNDS (AC-01 deixa de existir) |
+| AC-02 | LOINC com o canonical `http://loinc.org` (era `https://loinc.org/`) |
+| AC-04 | `br-core-capacidadefuncional` revisto (`code` com o ValueSet `BRCapacidadeFuncional`; `subject.identifier` e `stage` deixam de ser obrigatórios; `category` sem binding nacional) |
+| AC-14 | `br-core-composition`: `section.code` com o ValueSet `doc-section-codes` como example, como no R4 e no IPS; códigos de seção do IPS onde o IPS tem a seção |
 | novo | `br-core-bundle-documento` (Bundle `document`) |
 
 O guia depende do BR-Core **1.3.0** e não usa mais o `br-core-sumarioalta`: o QA do IG Publisher dá 0 erros. Com o `main` do BR-Core, os exemplos também validam sem erro.
@@ -105,6 +105,6 @@ python3 scripts/gerar_mapa_estrutura.py   # requer openpyxl
 ## Pendências
 
 - Publicação da correção do BR-Core e troca da dependência para a nova versão.
-- Decisões no BR-Core: CPF 1..1 no `br-core-patient` (D-03), `dosageInstruction` (D-05), alérgenos sem SNOMED CT (D-06).
-- Hierarquia do CBARA no OCL (D-37) e referências da TUSS 22 na `BRProcedimentosNacionais`.
+- Decisões no BR-Core: CPF 1..1 no `br-core-patient` (AC-03), `dosageInstruction` (AC-05), alérgenos sem SNOMED CT (AC-06).
+- Hierarquia do CBARA no OCL (AC-12) e referências da TUSS 22 na `BRProcedimentosNacionais`.
 - Definição oficial de `id` e `canonical` do guia (hoje `br.org.hsl.inspirasa` e `http://fhir.hsl.org.br/ig/inspirasa`, provisórios).

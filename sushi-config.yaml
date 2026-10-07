@@ -73,6 +73,6 @@ instanceOptions:
   manualSliceOrdering: true # true | false
 
 # Extensões do IPS-BR usadas pelo br-core-patient (raça/cor). O pacote
-# br.gov.saude.ips.fhir não é dependência do BR-Core 1.3.0 publicado (D-40).
+# br.gov.saude.ips.fhir não é dependência do BR-Core 1.3.0 publicado (AC-15).
 parameters:
   extension-domain: https://ips.saude.gov.br/fhir

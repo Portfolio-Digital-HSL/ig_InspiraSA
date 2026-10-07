@@ -65,7 +65,7 @@ w('Grau do débito: **Bloqueante** impede instância válida; **Alto** quebra co
 
 # 1. Modelo lógico
 w('## Modelo lógico → BR-Core → SA-IG\n')
-w('O SA-IG publica uma página de modelo de informação vazia, copiada do modelo do RIA-R (D-38). '
+w('O SA-IG publica uma página de modelo de informação vazia, copiada do modelo do RIA-R (AC-13). '
   'O [modelo lógico do Sumário de Alta](StructureDefinition-sumario-alta-ml.html) reconstrói os elementos de dados '
   'do documento, independentes de tecnologia, e mapeia cada um para o elemento do BR-Core usado neste guia e para o '
   'do SA-IG. Os mesmos mapeamentos estão na aba *Mappings* do modelo.\n')
@@ -119,7 +119,7 @@ w('O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Co
   'Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). '
   'O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). '
   'No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, '
-  'e a capacidade funcional usa o código do IPS, 47420-5 (D-39).\n')
+  'e a capacidade funcional usa o código do IPS, 47420-5 (AC-14).\n')
 w('| Seção no BR-Core | Seção no SA-IG | SA-IG card. | BR-Core card. | Conformidade | Grau | Observação |\n|---|---|---|---|---|---|---|')
 secs = [r for r in R if ((r[0] or '—') if (r[0] or '—') != '—' else r[1]).count('.') == 1]
 for r in secs:

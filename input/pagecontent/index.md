@@ -15,7 +15,7 @@ O SA-IG da RNDS foi construído como um modelo próprio, à parte do BR-Core:
 - **Terminologia fechada e não resolvível.** Manifestação de alergia só em MedDRA, função do executante em CBO, URLs `www.saude.gov.br` que não resolvem.
 - **Sem modelo lógico.** A página de modelo de informação do SA-IG está vazia, copiada do RIA-R.
 
-O próprio `br-core-sumarioalta` 1.3.0 não aceita instância válida (D-01, D-02). A solução foi tirar o documento do BR-Core: a composição do Sumário de Alta passa ao perfil RNDS, sobre o `br-core-composition`.
+O próprio `br-core-sumarioalta` 1.3.0 não aceita instância válida (AC-01, AC-02). A solução foi tirar o documento do BR-Core: a composição do Sumário de Alta passa ao perfil RNDS, sobre o `br-core-composition`.
 
 ## Princípio
 

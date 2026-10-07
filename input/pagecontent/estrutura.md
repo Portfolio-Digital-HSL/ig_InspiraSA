@@ -64,4 +64,4 @@ O BR-Core não impõe as regras abaixo; elas são orientação deste guia e est�
 
 ## Validação
 
-O `br-core-sumarioalta` 1.3.0 não aceitava instância válida ([D-01 e D-02](recomendacoes-rnds.html#achados-no-br-core-e-em-outros-artefatos)) e foi retirado do `main` do BR-Core. Com o `BRSumarioAlta` sobre o `br-core-composition`, seções fatiadas por `pattern` em `code` e LOINC `http://loinc.org`, os exemplos validam sem erro contra o BR-Core 1.3.0 publicado (IG Publisher, 07/10/2026: 0 erros), contra o `main` do BR-Core e contra o FHIR Clinical Documents.
+O `br-core-sumarioalta` 1.3.0 não aceitava instância válida ([AC-01 e AC-02](recomendacoes-rnds.html#achados-no-br-core-e-em-outros-artefatos)) e foi retirado do `main` do BR-Core. Com o `BRSumarioAlta` sobre o `br-core-composition`, seções fatiadas por `pattern` em `code` e LOINC `http://loinc.org`, os exemplos validam sem erro contra o BR-Core 1.3.0 publicado (IG Publisher, 07/10/2026: 0 erros), contra o `main` do BR-Core e contra o FHIR Clinical Documents.
