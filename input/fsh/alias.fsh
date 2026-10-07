@@ -58,3 +58,4 @@ Alias: $inspirasa = http://fhir.hsl.org.br/ig/inspirasa
 // IPS-BR (extensões usadas pelo br-core-patient)
 Alias: $raca-br-ips = https://ips.saude.gov.br/fhir/StructureDefinition/raca-br-ips
 Alias: $BRRacaCor = https://terminologia.saude.gov.br/fhir/CodeSystem/BRRacaCor
+Alias: $imposeProfile = http://hl7.org/fhir/StructureDefinition/structuredefinition-imposeProfile
