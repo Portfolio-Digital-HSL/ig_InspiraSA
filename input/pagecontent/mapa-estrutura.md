@@ -21,7 +21,7 @@ O comparativo tem duas camadas: o **documento-base** (CMD × br-core-composition
 | Conforme | Mesma cardinalidade e mesmas restrições |
 | Sem equivalente | O elemento existe só em um dos modelos |
 
-Grau do débito: **Bloqueante** impede instância válida; **Alto** quebra conformidade ou interoperabilidade; **Médio** gera ambiguidade; **Baixo** é ajuste de documentação. A lista completa está em [Débitos técnicos](debitos-tecnicos.html).
+Grau do débito: **Bloqueante** impede instância válida; **Alto** quebra conformidade ou interoperabilidade; **Médio** gera ambiguidade; **Baixo** é ajuste de documentação. Os débitos do `BRSumarioAlta` e a correção feita estão em [Débitos técnicos](debitos-tecnicos.html); os achados do BR-Core e de outros artefatos, em [Recomendações](recomendacoes-rnds.html#achados-no-br-core-e-em-outros-artefatos).
 
 ## Modelo lógico → BR-Core → SA-IG
 

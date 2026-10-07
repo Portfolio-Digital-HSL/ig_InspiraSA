@@ -47,8 +47,8 @@ O guia para implementadores está em [Implementação na RNDS](implementacao-rnd
 4. **Documento conforme ao HL7 internacional.** Composition e Bundle seguem também o `clinical-document-composition` e o `clinical-document-bundle` do FHIR Clinical Documents 1.0.1 (categoria LOINC 107903-7, atestador legal, `identifier` e `timestamp` do Bundle).
 5. **Correção do BR-Core.** Branch `fix/sumarioalta-capacidadefuncional` do repositório br.org.hl7.fhir.core: discriminador `pattern` em `section.code`, LOINC `http://loinc.org`, `br-core-capacidadefuncional` revisto e o novo perfil `br-core-bundle-documento`. Com a correção, os exemplos validam sem erro.
 6. **Terminologia.** Status pelos ValueSets do HL7 com suplementos pt-BR; alérgenos em SNOMED CT com CBARA (tipo e substância), manifestações em SNOMED CT com o mapa MedDRA → SNOMED CT; procedimentos pelo `BRProcedimentosNacionais` (Tabela SUS e TUSS 22). Os mapas CBARA → SNOMED CT foram revisados no OCL. As terminologias novas ficam na pasta `terminologia/`, para o OCL e o guia de terminologia (`https://terminologia.saude.gov.br/fhir/...`), não neste guia. Ver [Terminologia](terminologia.html).
-7. **Validação.** Exemplos validados com o validador FHIR e o IG Publisher contra o BR-Core 1.3.0, o BR-Core corrigido e o FHIR Clinical Documents. Os erros restantes vêm só de D-01 e D-02 do BR-Core 1.3.0 (ver [Estrutura do documento](estrutura.html)).
-8. **Débitos e recomendações.** Cada divergência virou um débito técnico com grau e tratamento ([Débitos técnicos](debitos-tecnicos.html)) e as mudanças propostas à RNDS e ao BR-Core ([Recomendações](recomendacoes-rnds.html)).
+7. **Validação.** Exemplos validados com o validador FHIR e o IG Publisher contra o BR-Core 1.3.0, o BR-Core corrigido e o FHIR Clinical Documents. Resultado: 0 erros (ver [Estrutura do documento](estrutura.html)).
+8. **Débitos e recomendações.** Cada divergência do `BRSumarioAlta` virou um débito técnico com grau e a correção feita ([Débitos técnicos](debitos-tecnicos.html)) e as mudanças propostas à RNDS e ao BR-Core ([Recomendações](recomendacoes-rnds.html)).
 
 ## O que este guia contém
 
