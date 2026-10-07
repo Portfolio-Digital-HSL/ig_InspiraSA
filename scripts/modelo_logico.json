@@ -5,7 +5,7 @@
 "BackboneElement",
 "Documento",
 "Dados do documento Sumário de Alta como um todo.",
-"Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition)",
+"Bundle (BRDocumentoSumarioAlta) + Composition (BRSumarioAlta, sobre br-core-composition)",
 "Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1)"
 ],
 [

@@ -2,7 +2,7 @@
 // seções preenchidas.
 
 Instance: internacao-ic
-InstanceOf: RNDSInternacao
+InstanceOf: BRInternacao
 Usage: #example
 Title: "Internação por insuficiência cardíaca"
 Description: "Exemplo: Internação por insuficiência cardíaca."

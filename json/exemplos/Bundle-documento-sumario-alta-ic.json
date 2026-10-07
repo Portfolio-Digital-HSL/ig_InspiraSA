@@ -3,7 +3,7 @@
   "id": "documento-sumario-alta-ic",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-documento-sumarioalta"
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/BRDocumentoSumarioAlta"
     ]
   },
   "identifier": {
@@ -294,7 +294,7 @@
         "id": "internacao-ic",
         "meta": {
           "profile": [
-            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-internacao"
+            "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/BRInternacao"
           ]
         },
         "text": {

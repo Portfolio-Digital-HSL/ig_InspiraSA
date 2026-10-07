@@ -1,6 +1,6 @@
 # (caminho, card, tipo, nome, definição, mapa BR-Core, mapa SA-IG)
 E=[
-('documento','1..1','BackboneElement','Documento','Dados do documento Sumário de Alta como um todo.','Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition)','Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1)'),
+('documento','1..1','BackboneElement','Documento','Dados do documento Sumário de Alta como um todo.','Bundle (BRDocumentoSumarioAlta) + Composition (BRSumarioAlta, sobre br-core-composition)','Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1)'),
 ('documento.identificador','1..1','Identifier','Identificador do documento','Identificador persistente do documento, igual em todas as transmissões.','Bundle.identifier; Composition.identifier','não existe (Composition.identifier 0..0 no CMD)'),
 ('documento.dataHora','1..1','dateTime','Data e hora do documento','Momento de emissão do documento.','Composition.date; Bundle.timestamp','Composition.date'),
 ('documento.situacao','1..1','code','Situação do documento','final, retificado ou anulado.','Composition.status (composition-status)','Composition.status (BREstadoDocumento-1.0)'),

@@ -1,11 +1,11 @@
-// Perfil RNDS do contato assistencial da internação (RNDSInternacao).
+// Perfil RNDS do contato assistencial da internação (BRInternacao).
 // Deriva do br-core-encounter.
 // Autoria: Jussara Macedo Pinho Rötzsch.
 
-Profile: RNDSInternacao
+Profile: BRInternacao
 Parent: br-core-encounter
-Id: rnds-internacao
-Title: "RNDS Internação (Sumário de Alta)"
+Id: BRInternacao
+Title: "BRInternacao: Internação (Sumário de Alta)"
 Description: "Encounter da internação referenciado pelo Sumário de Alta enviado à RNDS. Restringe o br-core-encounter; carrega o contato assistencial e o resumo da evolução clínica, que no SA-IG eram seções próprias."
 * ^status = #draft
 * ^experimental = true

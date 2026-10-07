@@ -2,14 +2,14 @@
 
 O Sumário de Alta usa os perfis do **BR-Core 1.3.0**, com três perfis RNDS que só os restringem ([Implementação na RNDS](implementacao-rnds.html)); onde o BR-Core não tem perfil, os do [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/) 1.0.1 (HL7 internacional) e, na falta deles, o recurso canônico do FHIR R4; o guia diz como preenchê-los e registra o que precisa mudar no BR-Core.
 
-O documento é enviado como **Bundle `document`** conforme ao `rnds-documento-sumarioalta` (derivado do `clinical-document-bundle`): a Composition (`BRSumarioAlta`, derivado do `br-core-composition`, e `clinical-document-composition`) é a primeira entrada, seguida de todos os recursos referenciados. Ver o exemplo [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.html).
+O documento é enviado como **Bundle `document`** conforme ao `BRDocumentoSumarioAlta` (derivado do `clinical-document-bundle`): a Composition (`BRSumarioAlta`, derivado do `br-core-composition`, e `clinical-document-composition`) é a primeira entrada, seguida de todos os recursos referenciados. Ver o exemplo [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.html).
 
 ## Perfis usados
 
 | Conteúdo | Perfil BR-Core | Antes, no SA-IG |
 |---|---|---|
 | Documento | `BRSumarioAlta` (deriva de `br-core-composition`) e `clinical-document-composition` | BRSumarioAlta, sobre BRConjuntoMinimoDados (CMD) |
-| Internação | `rnds-internacao` (deriva de `br-core-encounter`) | BRContatoAssistencial-1.0 (seção própria) |
+| Internação | `BRInternacao` (deriva de `br-core-encounter`) | BRContatoAssistencial-1.0 (seção própria) |
 | Diagnósticos | `br-core-condition` | BRProblemaDiagnostico |
 | Alergias e intolerâncias | `br-core-allergyintolerance` | BRAlergiaReacaoAdversa-1.0 |
 | Procedimentos | `br-core-procedure` | BRProcedimentoRealizado-1.0 |
@@ -18,7 +18,7 @@ O documento é enviado como **Bundle `document`** conforme ao `rnds-documento-su
 | Capacidade funcional | `br-core-capacidadefuncional` | BRRestricaoFuncionalIncapacidadeSaude-1.0 |
 | Paciente, profissional, estabelecimento | `br-core-patient`, `br-core-practitioner`, `br-core-organization` | BRIndividuo, extensões próprias |
 | Equipe | `br-core-careteam`, quando necessária | BRIdentificacaoEquipe-1.0 (extensão) |
-| Documento para envio | `rnds-documento-sumarioalta` (deriva de `clinical-document-bundle`; de `br-core-bundle-documento` quando publicado) | — |
+| Documento para envio | `BRDocumentoSumarioAlta` (deriva de `clinical-document-bundle`; de `br-core-bundle-documento` quando publicado) | — |
 
 ## Seções
 

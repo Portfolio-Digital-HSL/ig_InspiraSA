@@ -30,8 +30,8 @@ O perfil do documento mantém o nome do SA-IG, `BRSumarioAlta`; muda só a heran
 | Perfil RNDS | Deriva de | O que define |
 |---|---|---|
 | [BRSumarioAlta](StructureDefinition-BRSumarioAlta.html) (Composition) | `br-core-composition`, impondo `clinical-document-composition` | O documento: as sete seções (LOINC, perfis do BR-Core nas entradas) e as regras do Sumário de Alta |
-| [rnds-internacao](StructureDefinition-rnds-internacao.html) (Encounter) | `br-core-encounter` | A internação encerrada, com resumo da evolução e alta |
-| [rnds-documento-sumarioalta](StructureDefinition-rnds-documento-sumarioalta.html) (Bundle) | `clinical-document-bundle`; `br-core-bundle-documento` quando publicado | O documento para envio |
+| [BRInternacao](StructureDefinition-BRInternacao.html) (Encounter) | `br-core-encounter` | A internação encerrada, com resumo da evolução e alta |
+| [BRDocumentoSumarioAlta](StructureDefinition-BRDocumentoSumarioAlta.html) (Bundle) | `clinical-document-bundle`; `br-core-bundle-documento` quando publicado | O documento para envio |
 
 Os perfis RNDS não criam elementos, extensões, ValueSets nem CodeSystems. Diagnósticos, alergias, procedimentos, prescrição, plano de cuidados, capacidade funcional, paciente, profissional e estabelecimento usam os perfis do BR-Core sem restrição adicional. A [declaração de capacidades](CapabilityStatement-rnds-servidor-sumarioalta.html) do servidor da RNDS aponta o perfil do Bundle aceito.
 

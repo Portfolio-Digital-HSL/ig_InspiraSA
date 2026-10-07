@@ -7,7 +7,7 @@ RuleSet: Entrada(tipo, id)
 * entry[=].resource = {id}
 
 Instance: documento-sumario-alta-ic
-InstanceOf: RNDSDocumentoSumarioAlta
+InstanceOf: BRDocumentoSumarioAlta
 Usage: #example
 Title: "Documento do Sumário de Alta (insuficiência cardíaca)"
 Description: "Exemplo: Documento do Sumário de Alta (insuficiência cardíaca)."

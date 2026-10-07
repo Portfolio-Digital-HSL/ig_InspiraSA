@@ -8,7 +8,7 @@ Este mapa mostra onde cada elemento do Sumário de Alta da RNDS (SA-IG) está no
 |---|---|
 | SA-IG da RNDS | BRSumarioAlta → BRConjuntoMinimoDados-1.1 (CMD) → Composition (R4); canonical `http://www.saude.gov.br/fhir/r4`, sem dependência do BR-Core |
 | BR-Core 1.3.0 | br-core-sumarioalta → br-core-composition → Composition (R4); o br-core-sumarioalta foi retirado do `main` do BR-Core |
-| Este guia | BRSumarioAlta → br-core-composition → Composition (R4); o CMD sai da cadeia. Documento em rnds-documento-sumarioalta |
+| Este guia | BRSumarioAlta → br-core-composition → Composition (R4); o CMD sai da cadeia. Documento em BRDocumentoSumarioAlta |
 
 O comparativo tem duas camadas: o **documento-base** (CMD × br-core-composition) e o **Sumário de Alta** (BRSumarioAlta × br-core-sumarioalta, cabeçalho e seções). As colunas trazem a cardinalidade e o binding no FHIR R4, no SA-IG, no BR-Core 1.3.0 publicado e no BR-Core corrigido (`main` do HL7-BR, commit 9cf1bc9, ainda sem nova versão do pacote).
 
@@ -29,7 +29,7 @@ O SA-IG publica uma página de modelo de informação vazia, copiada do modelo d
 
 ### Documento (`documento`, 1..1)
 
-BR-Core: Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition). SA-IG: Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1).
+BR-Core: Bundle (BRDocumentoSumarioAlta) + Composition (BRSumarioAlta, sobre br-core-composition). SA-IG: Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1).
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|

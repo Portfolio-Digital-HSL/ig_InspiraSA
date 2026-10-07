@@ -23,7 +23,7 @@ Description: "Exemplo: Paciente Lúcia Ramos."
 * birthDate = "1979-02-05"
 
 Instance: internacao-colecistectomia
-InstanceOf: RNDSInternacao
+InstanceOf: BRInternacao
 Usage: #example
 Title: "Internação para colecistectomia"
 Description: "Exemplo: Internação para colecistectomia."

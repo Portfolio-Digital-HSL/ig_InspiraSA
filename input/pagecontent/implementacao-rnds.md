@@ -4,7 +4,7 @@ Esta página é para quem implementa o envio do Sumário de Alta à RNDS: sistem
 
 ## O que enviar
 
-Um **Bundle `document`** conforme ao [RNDS Documento do Sumário de Alta](StructureDefinition-rnds-documento-sumarioalta.html), com:
+Um **Bundle `document`** conforme ao [BRDocumentoSumarioAlta](StructureDefinition-BRDocumentoSumarioAlta.html), com:
 
 1. a Composition conforme ao [RNDS Sumário de Alta](StructureDefinition-BRSumarioAlta.html) como primeira entrada;
 2. todos os recursos que a Composition referencia, cada um com `fullUrl`.
@@ -17,9 +17,9 @@ Os perfis RNDS derivam de perfis do BR-Core e do FHIR Clinical Documents. Não c
 
 | Recurso | Perfil RNDS | Deriva de | O que acrescenta |
 |---|---|---|---|
-| Bundle | [rnds-documento-sumarioalta](StructureDefinition-rnds-documento-sumarioalta.html) | `clinical-document-bundle` (`br-core-bundle-documento` quando publicado) | `identifier` e `timestamp` obrigatórios; Composition RNDS como primeira entrada; `timestamp` ≥ `Composition.date` |
+| Bundle | [BRDocumentoSumarioAlta](StructureDefinition-BRDocumentoSumarioAlta.html) | `clinical-document-bundle` (`br-core-bundle-documento` quando publicado) | `identifier` e `timestamp` obrigatórios; Composition RNDS como primeira entrada; `timestamp` ≥ `Composition.date` |
 | Composition | [BRSumarioAlta](StructureDefinition-BRSumarioAlta.html) | `br-core-composition`; impõe `clinical-document-composition` | as sete seções (LOINC, perfis do BR-Core nas entradas); `identifier`, `subject`, `encounter`, `custodian` e atestador legal obrigatórios; `type` 18842-5; `category` 107903-7; toda seção com `entry` ou `emptyReason` |
-| Encounter | [rnds-internacao](StructureDefinition-rnds-internacao.html) | `br-core-encounter` | internação encerrada (`status = finished`, `class = IMP`); resumo da evolução em `text`; data da alta; profissional da alta; `hospitalization` |
+| Encounter | [BRInternacao](StructureDefinition-BRInternacao.html) | `br-core-encounter` | internação encerrada (`status = finished`, `class = IMP`); resumo da evolução em `text`; data da alta; profissional da alta; `hospitalization` |
 
 Os demais recursos usam os perfis do BR-Core sem restrição adicional:
 
@@ -39,13 +39,13 @@ Os demais recursos usam os perfis do BR-Core sem restrição adicional:
 | Regra | Onde |
 |---|---|
 | Composition.identifier com `system` e `value`, estável entre versões do documento | BRSumarioAlta |
-| Bundle.identifier com `system` e `value`, novo a cada emissão | rnds-documento-sumarioalta |
-| `Composition.encounter` aponta a internação conforme ao rnds-internacao | BRSumarioAlta |
+| Bundle.identifier com `system` e `value`, novo a cada emissão | BRDocumentoSumarioAlta |
+| `Composition.encounter` aponta a internação conforme ao BRInternacao | BRSumarioAlta |
 | `Composition.custodian`: estabelecimento (CNES) | BRSumarioAlta |
 | Atestador legal com data e profissional (rnds-sa-1) | BRSumarioAlta |
 | Seção com `entry` ou `emptyReason` (rnds-sa-2) | BRSumarioAlta, em cada seção |
-| Internação encerrada, com data da alta e profissional da alta (rnds-int-1) | rnds-internacao |
-| Composition RNDS na primeira entrada (rnds-doc-1); `timestamp` ≥ `Composition.date` (rnds-doc-3) | rnds-documento-sumarioalta |
+| Internação encerrada, com data da alta e profissional da alta (rnds-int-1) | BRInternacao |
+| Composition RNDS na primeira entrada (rnds-doc-1); `timestamp` ≥ `Composition.date` (rnds-doc-3) | BRDocumentoSumarioAlta |
 | Sete seções e seus códigos LOINC | BRSumarioAlta |
 | Terminologias dos recursos | perfis do BR-Core |
 
@@ -67,7 +67,7 @@ Antes de enviar, valide o Bundle com o validador FHIR:
 ```bash
 java -jar validator_cli.jar documento.json -version 4.0.1 \
   -ig br.org.hsl.inspirasa#current \
-  -profile http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-documento-sumarioalta
+  -profile http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/BRDocumentoSumarioAlta
 ```
 
 Exemplo completo: [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.html). Exemplo com seções vazias: [sumario-alta-colecistectomia](Composition-sumario-alta-colecistectomia.html).

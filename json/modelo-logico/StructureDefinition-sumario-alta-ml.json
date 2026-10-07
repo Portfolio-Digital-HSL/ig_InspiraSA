@@ -90,7 +90,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition)"
+        "map" : "Bundle (BRDocumentoSumarioAlta) + Composition (BRSumarioAlta, sobre br-core-composition)"
       },
       {
         "identity" : "sa-ig",
@@ -3180,7 +3180,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition)"
+        "map" : "Bundle (BRDocumentoSumarioAlta) + Composition (BRSumarioAlta, sobre br-core-composition)"
       },
       {
         "identity" : "sa-ig",

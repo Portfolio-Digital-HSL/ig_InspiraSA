@@ -10,7 +10,7 @@ Autoria: Jussara Macedo Pinho Rötzsch (HL7 Brasil / Hospital Sírio-Libanês, p
 
 A RNDS se ajusta aos perfis do BR-Core. Onde o BR-Core não tem perfil, usa a especificação internacional do HL7 (para o documento, o [FHIR Clinical Documents](https://hl7.org/fhir/uv/fhir-clinical-document/STU1.0.1/) 1.0.1) e, na falta dela, o recurso canônico do FHIR R4.
 
-Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)), não contornados aqui. Para os implementadores da RNDS, o guia tem três perfis RNDS que só restringem o BR-Core e o FHIR Clinical Documents (`rnds-documento-sumarioalta`, `BRSumarioAlta`, `rnds-internacao`) e a declaração de capacidades do servidor da RNDS (`rnds-servidor-sumarioalta`).
+Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.core)), não contornados aqui. Para os implementadores da RNDS, o guia tem três perfis RNDS que só restringem o BR-Core e o FHIR Clinical Documents (`BRDocumentoSumarioAlta`, `BRSumarioAlta`, `BRInternacao`) e a declaração de capacidades do servidor da RNDS (`rnds-servidor-sumarioalta`).
 
 ## Por que refatorar
 
@@ -35,8 +35,8 @@ Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.h
 | Conteúdo | Perfil |
 |---|---|
 | Documento | `BRSumarioAlta` (deriva de `br-core-composition`, impõe `clinical-document-composition`; define as sete seções) |
-| Envio | `rnds-documento-sumarioalta` (deriva de `clinical-document-bundle`; de `br-core-bundle-documento` quando publicado) |
-| Internação | `rnds-internacao` (deriva de `br-core-encounter`) |
+| Envio | `BRDocumentoSumarioAlta` (deriva de `clinical-document-bundle`; de `br-core-bundle-documento` quando publicado) |
+| Internação | `BRInternacao` (deriva de `br-core-encounter`) |
 | Diagnósticos | `br-core-condition` |
 | Alergias e intolerâncias | `br-core-allergyintolerance` |
 | Procedimentos | `br-core-procedure` |
@@ -63,7 +63,7 @@ O guia depende do BR-Core **1.3.0** e não usa mais o `br-core-sumarioalta`: o Q
 
 | Caminho | Conteúdo |
 |---|---|
-| `input/fsh/profiles/` | Perfis RNDS (`rnds-documento-sumarioalta`, `BRSumarioAlta`, `rnds-internacao`): só restrições sobre o BR-Core e o FHIR Clinical Documents |
+| `input/fsh/profiles/` | Perfis RNDS (`BRDocumentoSumarioAlta`, `BRSumarioAlta`, `BRInternacao`): só restrições sobre o BR-Core e o FHIR Clinical Documents |
 | `input/fsh/capacidades/` | CapabilityStatement do servidor da RNDS (`rnds-servidor-sumarioalta`) |
 | `input/fsh/instances/` | Exemplos: internação por insuficiência cardíaca (documento completo e Bundle) e colecistectomia (seções vazias com `emptyReason`) |
 | `input/fsh/logicos/` | Modelo lógico SumarioAltaML, com mapeamentos para o BR-Core e o SA-IG |

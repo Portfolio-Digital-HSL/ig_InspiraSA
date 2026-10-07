@@ -6,7 +6,7 @@ Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/S
 
 | SA-IG (9 seções) | Este guia (`BRSumarioAlta`, entradas com perfis do BR-Core) |
 |---|---|
-| informacoesContatoAssistencial (BRContatoAssistencial-1.0) | `Composition.encounter` → rnds-internacao (sobre br-core-encounter) |
+| informacoesContatoAssistencial (BRContatoAssistencial-1.0) | `Composition.encounter` → BRInternacao (sobre br-core-encounter) |
 | problemasDiagnosticosAvaliados (BRProblemaDiagnostico) | duas seções: diagnosticosAdmissao (42347-5) e diagnosticosAvaliados (57852-6) |
 | resumoEvolucaoClinica (BRResumoEvolucaoClinica, ClinicalImpression) | `Encounter.text` |
 | alergiaReacaoAdversa (BRAlergiaReacaoAdversa-1.0) | alergiasIntolerancias → br-core-allergyintolerance |
@@ -21,7 +21,7 @@ Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/S
 | SA-IG | Este guia | Ação |
 |---|---|---|
 | BRSumarioAlta, sobre BRConjuntoMinimoDados-1.1 | BRSumarioAlta, sobre br-core-composition | mantém o nome; muda a herança; o CMD sai da cadeia |
-| BRContatoAssistencial-1.0 | rnds-internacao, sobre br-core-encounter | substitui |
+| BRContatoAssistencial-1.0 | BRInternacao, sobre br-core-encounter | substitui |
 | BRProblemaDiagnostico | br-core-condition | substitui |
 | BRAlergiaReacaoAdversa-1.0 | br-core-allergyintolerance | substitui |
 | BRProcedimentoRealizado-1.0 | br-core-procedure | substitui |

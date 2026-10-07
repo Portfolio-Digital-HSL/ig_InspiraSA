@@ -1,11 +1,11 @@
-// Perfil RNDS do Bundle do documento Sumário de Alta (RNDSDocumentoSumarioAlta).
+// Perfil RNDS do Bundle do documento Sumário de Alta (BRDocumentoSumarioAlta).
 // Deriva do Bundle do FHIR Clinical Documents.
 // Autoria: Jussara Macedo Pinho Rötzsch.
 
-Profile: RNDSDocumentoSumarioAlta
+Profile: BRDocumentoSumarioAlta
 Parent: $clindoc-bundle
-Id: rnds-documento-sumarioalta
-Title: "RNDS Documento do Sumário de Alta"
+Id: BRDocumentoSumarioAlta
+Title: "BRDocumentoSumarioAlta: Documento do Sumário de Alta"
 Description: "Bundle document com que o Sumário de Alta é enviado à RNDS. Restringe o clinical-document-bundle (FHIR Clinical Documents); passa a derivar do br-core-bundle-documento quando ele for publicado."
 * ^status = #draft
 * ^experimental = true

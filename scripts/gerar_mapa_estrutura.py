@@ -47,7 +47,7 @@ w('## Herança comparada\n')
 w('| Modelo | Cadeia |\n|---|---|')
 w('| SA-IG da RNDS | BRSumarioAlta → BRConjuntoMinimoDados-1.1 (CMD) → Composition (R4); canonical `http://www.saude.gov.br/fhir/r4`, sem dependência do BR-Core |')
 w('| BR-Core 1.3.0 | br-core-sumarioalta → br-core-composition → Composition (R4); o br-core-sumarioalta foi retirado do `main` do BR-Core |')
-w('| Este guia | BRSumarioAlta → br-core-composition → Composition (R4); o CMD sai da cadeia. Documento em rnds-documento-sumarioalta |')
+w('| Este guia | BRSumarioAlta → br-core-composition → Composition (R4); o CMD sai da cadeia. Documento em BRDocumentoSumarioAlta |')
 w('')
 w('O comparativo tem duas camadas: o **documento-base** (CMD × br-core-composition) e o **Sumário de Alta** '
   '(BRSumarioAlta × br-core-sumarioalta, cabeçalho e seções). As colunas trazem a cardinalidade e o binding no '

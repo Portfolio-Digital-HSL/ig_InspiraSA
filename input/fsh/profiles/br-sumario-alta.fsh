@@ -22,7 +22,7 @@ Description: "Composition do Sumário de Alta hospitalar enviado à RNDS (Portar
 * category = $loinc#107903-7
 * subject 1..1 MS
 * encounter 1..1 MS
-* encounter only Reference(RNDSInternacao)
+* encounter only Reference(BRInternacao)
 * encounter ^short = "Internação a que o sumário se refere (substitui a seção de contato assistencial do SA-IG)"
 * custodian 1..1 MS
 * custodian ^short = "Estabelecimento (CNES) responsável pela guarda do documento"

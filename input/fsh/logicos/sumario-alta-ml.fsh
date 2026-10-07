@@ -90,7 +90,7 @@ Target: "https://br-core.saude.gov.br/fhir"
 Id: br-core
 Title: "BR-Core (refatoração)"
 Description: "Elemento FHIR do BR-Core 1.3.0 usado neste guia."
-* documento -> "Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition)"
+* documento -> "Bundle (BRDocumentoSumarioAlta) + Composition (BRSumarioAlta, sobre br-core-composition)"
 * documento.identificador -> "Bundle.identifier; Composition.identifier"
 * documento.dataHora -> "Composition.date; Bundle.timestamp"
 * documento.situacao -> "Composition.status (composition-status)"
