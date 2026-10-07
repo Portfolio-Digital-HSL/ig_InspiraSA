@@ -38,14 +38,6 @@
   ],
   "section": [
     {
-      "code": {
-        "coding": [
-          {
-            "system": "https://loinc.org/",
-            "code": "42347-5"
-          }
-        ]
-      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Insuficiência cardíaca congestiva (I50.0).</p></div>"
@@ -55,17 +47,17 @@
           "reference": "Condition/diagnostico-ic"
         }
       ],
-      "title": "Diagnósticos da admissão"
-    },
-    {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "48765-2"
+            "code": "42347-5",
+            "system": "http://loinc.org"
           }
         ]
       },
+      "title": "Diagnósticos da admissão"
+    },
+    {
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Amoxicilina: angioedema (grave). Soja: urticária (leve).</p></div>"
@@ -78,17 +70,17 @@
           "reference": "AllergyIntolerance/alergia-soja"
         }
       ],
-      "title": "Alergias e intolerâncias"
-    },
-    {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "57852-6"
+            "code": "48765-2",
+            "system": "http://loinc.org"
           }
         ]
       },
+      "title": "Alergias e intolerâncias"
+    },
+    {
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Pneumonia (J18.9) resolvida.</p></div>"
@@ -98,17 +90,17 @@
           "reference": "Condition/diagnostico-pneumonia"
         }
       ],
-      "title": "Diagnósticos avaliados"
-    },
-    {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "47519-4"
+            "code": "57852-6",
+            "system": "http://loinc.org"
           }
         ]
       },
+      "title": "Diagnósticos avaliados"
+    },
+    {
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Tratamento de insuficiência cardíaca; ecocardiografia transtorácica.</p></div>"
@@ -121,17 +113,17 @@
           "reference": "Procedure/procedimento-ecocardiograma"
         }
       ],
-      "title": "Procedimentos realizados"
-    },
-    {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "8654-6"
+            "code": "47519-4",
+            "system": "http://loinc.org"
           }
         ]
       },
+      "title": "Procedimentos realizados"
+    },
+    {
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Losartana 100 mg 1 comprimido pela manhã.</p></div>"
@@ -141,17 +133,17 @@
           "reference": "MedicationRequest/prescricao-losartana"
         }
       ],
-      "title": "Prescrição de alta"
-    },
-    {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "18776-5"
+            "code": "8654-6",
+            "system": "http://loinc.org"
           }
         ]
       },
+      "title": "Prescrição de alta"
+    },
+    {
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Restrição hídrica e retorno com cardiologia em até 7 dias.</p></div>"
@@ -161,17 +153,17 @@
           "reference": "CarePlan/plano-cuidados-ic"
         }
       ],
-      "title": "Plano de cuidados"
-    },
-    {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "54522-8"
+            "code": "18776-5",
+            "system": "http://loinc.org"
           }
         ]
       },
+      "title": "Plano de cuidados"
+    },
+    {
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Deambula com auxílio.</p></div>"
@@ -181,6 +173,14 @@
           "reference": "Condition/capacidade-funcional-ic"
         }
       ],
+      "code": {
+        "coding": [
+          {
+            "code": "47420-5",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
       "title": "Capacidade funcional"
     }
   ],

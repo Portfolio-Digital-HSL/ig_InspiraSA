@@ -1,7 +1,7 @@
 # Recomendações à RNDS
 
-1. **Publicar a nova versão do pacote BR-Core** com a correção já no `main` do repositório br.org.hl7.fhir.core (HL7-BR, commit 9cf1bc9): discriminador `pattern` em `section.code` e `http://loinc.org` no `br-core-sumarioalta` e no `br-core-registroatendimentoclinico` (D-01, D-02), e o `br-core-capacidadefuncional` revisto (D-04). O binding de `section.code` volta a example, como no IPS, com os códigos de seção do IPS onde o IPS tem a seção (D-39). Com a correção, os exemplos deste guia validam sem erro também contra o `clinical-document-composition`.
-2. **A RNDS se ajusta ao BR-Core, não o contrário.** Usar o `br-core-sumarioalta` e os perfis do BR-Core; onde não houver perfil BR-Core, o FHIR Clinical Documents e, na falta dele, o recurso canônico do FHIR R4. Perfis RNDS só como restrição de perfis do BR-Core (`rnds-sumarioalta`, `rnds-internacao`, `rnds-documento-sumarioalta`), sem elementos, extensões ou terminologias próprias, e uma declaração de capacidades do servidor. Abandonar o SA-IG (canonical `www.saude.gov.br/fhir/r4`, herança do CMD) e publicar o guia com `dependsOn` do pacote BR-Core.
+1. **Publicar a nova versão do pacote BR-Core** com o que já está no `main` do repositório br.org.hl7.fhir.core (HL7-BR): `br-core-sumarioalta` e `br-core-registroatendimentoclinico` retirados (documentos são casos de uso da RNDS), LOINC `http://loinc.org`, `br-core-capacidadefuncional` revisto (D-04) e o novo `br-core-bundle-documento`. O binding de `section.code` volta a example, como no IPS, com os códigos de seção do IPS onde o IPS tem a seção (D-39). Com a correção, os exemplos deste guia validam sem erro também contra o `clinical-document-composition`.
+2. **A RNDS se ajusta ao BR-Core nos recursos e é dona dos documentos.** Documentos normatizados (Sumário de Alta, RAC, RIA) como perfis da RNDS sobre o `br-core-composition`; os recursos pelos perfis do BR-Core; onde não houver perfil BR-Core, o FHIR Clinical Documents e, na falta dele, o recurso canônico do FHIR R4. Perfis RNDS sempre derivados do BR-Core (`rnds-sumarioalta`, `rnds-internacao`, `rnds-documento-sumarioalta`), sem elementos, extensões ou terminologias próprias, e uma declaração de capacidades do servidor. Abandonar o SA-IG (canonical `www.saude.gov.br/fhir/r4`, herança do CMD) e publicar o guia com `dependsOn` do pacote BR-Core.
 3. **Usar elementos nativos**: `Composition.encounter` para o contato assistencial, `Encounter.text` para o resumo da evolução, `Timing` para turno e intervalo, `participant`/CareTeam para a equipe.
 4. **Permitir paciente sem CPF** no br-core-patient (D-03), com a regra "CPF ou CNS", para que o CNS provisório substitua a extensão unidentifiedPatient.
 5. **Status do HL7 com tradução por suplemento.** Descontinuar os CodeSystems nacionais que copiam códigos do HL7 e publicar suplementos pt-BR no guia de terminologia.
@@ -18,7 +18,8 @@ Regras que este guia hoje só consegue dar como orientação de preenchimento:
 
 | Perfil | Mudança |
 |---|---|
-| br-core-sumarioalta | `encounter` 1..1; `custodian` 1..1; `type` = LOINC 18842-5; invariante "seção com `entry` ou `emptyReason`"; discriminador `pattern` em `code` e `http://loinc.org` (D-01, D-02); binding de `section.code` example e capacidade funcional 47420-5, código do IPS (D-39) |
+| br-core-sumarioalta, br-core-registroatendimentoclinico | retirados no `main` do BR-Core: documentos são casos de uso da RNDS (D-41) |
+| br-core-composition | binding de `section.code` example, como no R4 e no IPS (D-39), feito no `main` |
 | br-core-composition | compatibilidade declarada com o `clinical-document-composition` (FHIR Clinical Documents): categoria 107903-7 Clinical note, fatias de atestador legal e profissional, extensões de versão e destinatário |
 | br-core-bundle-documento (novo) | criado no `main` do BR-Core: Bundle `document` com identifier, timestamp ≥ Composition.date, br-core-composition como primeira entrada e fullUrl em todas as entradas, nas regras do `clinical-document-bundle` |
 | br-core-encounter | invariante "internação encerrada tem `period.end`" para uso no Sumário de Alta |
@@ -38,13 +39,13 @@ Na pasta `terminologia/` deste repositório, para importação no OCL (org MS) e
 
 ## Perfis e extensões
 
-Nenhuma extensão: tudo o que o SA-IG fazia com extensão tem elemento nativo. Três perfis RNDS, só de restrição:
+Nenhuma extensão: tudo o que o SA-IG fazia com extensão tem elemento nativo. Três perfis RNDS, derivados do BR-Core e do FHIR Clinical Documents:
 
 | Restrição | Perfil RNDS | Destino |
 |---|---|---|
-| `type` = LOINC 18842-5 | rnds-sumarioalta | BR-Core (sai do perfil RNDS quando publicado) |
-| `subject`, `encounter` e `custodian` 1..1 | rnds-sumarioalta | BR-Core |
-| Seção com `entry` ou `emptyReason` (rnds-sa-2) | rnds-sumarioalta | BR-Core |
+| Sete seções fatiadas pelo LOINC, com os perfis do BR-Core nas entradas | rnds-sumarioalta | RNDS |
+| `type` = LOINC 18842-5; `subject`, `encounter` e `custodian` 1..1 | rnds-sumarioalta | RNDS |
+| Seção com `entry` ou `emptyReason` (rnds-sa-2) | rnds-sumarioalta | RNDS |
 | `identifier` 1..1 com `system` e `value` | rnds-sumarioalta | RNDS |
 | `category` = LOINC 107903-7; conformidade ao `clinical-document-composition` | rnds-sumarioalta | RNDS |
 | Atestador legal com data e profissional (rnds-sa-1) | rnds-sumarioalta | RNDS |

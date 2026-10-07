@@ -86,7 +86,7 @@ Description: "Exemplo: Plano de cuidados pós-colecistectomia."
 
 RuleSet: SecaoVazia(fatia, codigo, titulo, motivo, texto)
 * section[{fatia}].title = "{titulo}"
-* section[{fatia}].code.coding[0].system = "https://loinc.org/"
+* section[{fatia}].code.coding[0].system = "http://loinc.org"
 * section[{fatia}].code.coding[0].code = #{codigo}
 * section[{fatia}].text.status = #generated
 * section[{fatia}].text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>{texto}</p></div>"
@@ -97,7 +97,7 @@ InstanceOf: RNDSSumarioAlta
 Usage: #example
 Title: "Sumário de Alta com seções vazias justificadas"
 Description: "Exemplo: Sumário de Alta com seções vazias justificadas."
-// Conforme ao rnds-sumarioalta, que deriva do br-core-sumarioalta e impõe o clinical-document-composition
+// Conforme ao rnds-sumarioalta, que deriva do br-core-composition e impõe o clinical-document-composition
 * meta.profile[0] = Canonical(RNDSSumarioAlta)
 * meta.profile[1] = $clindoc-composition
 * identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento"
@@ -125,4 +125,4 @@ Description: "Exemplo: Sumário de Alta com seções vazias justificadas."
 * insert SecaoVazia(prescricaoAlta, 8654-6, Prescrição de alta, nilknown, Sem medicamentos de uso contínuo.)
 * insert Secao(planoCuidados, 18776-5, Plano de cuidados, Curativo diário e retorno em 10 dias.)
 * section[planoCuidados].entry[0] = Reference(plano-cuidados-colecistectomia)
-* insert SecaoVazia(capacidadeFuncional, 54522-8, Capacidade funcional, notasked, Não avaliada.)
+* insert SecaoVazia(capacidadeFuncional, 47420-5, Capacidade funcional, notasked, Não avaliada.)

@@ -1,21 +1,15 @@
 # IG InspiraSA: recursos em JSON
 
-Gerado em 06/10/2026 do repositório Portfolio-Digital-HSL/ig_InspiraSA (main), com SUSHI 3.20.1 e IG Publisher 2.3.4.
+Gerado em 07/10/2026 do repositório Portfolio-Digital-HSL/ig_InspiraSA (main), com SUSHI 3.20.1 e IG Publisher 2.3.4.
 
-## guia/ (28 arquivos)
-Recursos publicados pelo guia, como saem do IG Publisher (com narrativa):
-- ImplementationGuide-br.org.hsl.inspirasa.json
-- StructureDefinition-sumario-alta-ml.json: modelo lógico do Sumário de Alta, com snapshot e mapeamentos para o BR-Core e o SA-IG.
-- os três perfis RNDS e o CapabilityStatement (também em perfis-rnds/);
-- 22 exemplos: Bundle document, duas Compositions (internação por insuficiência cardíaca e colecistectomia com seções vazias) e os recursos referenciados.
-
-Os exemplos declaram os perfis RNDS, que derivam do BR-Core 1.3.0 e do FHIR Clinical Documents 1.0.1. Os pacientes trazem raça/cor (extensão do IPS-BR, 1..1 no br-core-patient, D-40). Contra o BR-Core 1.3.0, as Compositions e o Bundle acusam os defeitos D-01 e D-02 do br-core-sumarioalta publicado.
+## exemplos/ (22 arquivos)
+Exemplos do guia: Bundle document, duas Compositions (internação por insuficiência cardíaca e colecistectomia com seções vazias) e os recursos referenciados. Declaram os perfis RNDS e os perfis do BR-Core. Validam com 0 erros contra o BR-Core 1.3.0 publicado e contra o main do BR-Core (HL7-BR), e conformam ao FHIR Clinical Documents 1.0.1. `exemplos-inspirasa.zip` traz os mesmos arquivos.
 
 ## perfis-rnds/ (4 arquivos)
-Os três perfis RNDS (rnds-documento-sumarioalta, rnds-sumarioalta, rnds-internacao), que só restringem o BR-Core e o FHIR Clinical Documents, e o CapabilityStatement do servidor da RNDS (rnds-servidor-sumarioalta). Com snapshot, como saem do IG Publisher.
+rnds-sumarioalta (Composition sobre br-core-composition, com as sete seções), rnds-internacao (Encounter sobre br-core-encounter), rnds-documento-sumarioalta (Bundle sobre clinical-document-bundle) e o CapabilityStatement do servidor da RNDS (rnds-servidor-sumarioalta). Com snapshot, como saem do IG Publisher.
 
-## exemplos-brcore-main/ (22 arquivos)
-Os mesmos exemplos ajustados ao BR-Core corrigido (HL7-BR main 9cf1bc9): LOINC http://loinc.org nas seções e capacidade funcional 47420-5. Validam com 0 erros, com os perfis RNDS aplicados, contra o main do BR-Core e o FHIR Clinical Documents (sem servidor de terminologia). Viram os exemplos do guia quando a dependência mudar para a nova versão do BR-Core.
+## modelo-logico/
+StructureDefinition-sumario-alta-ml.json: modelo lógico do Sumário de Alta, com mapeamentos para o BR-Core/RNDS e o SA-IG.
 
-## terminologia/ (23 arquivos)
-Artefatos para o OCL e o guia de terminologia (https://terminologia.saude.gov.br/fhir/...), não publicados por este guia: 17 suplementos pt-BR, 4 ValueSets (BRAlergenosSNOMEDNacional, BRManifestacaoReacaoSNOMED, BRCapacidadeFuncional, BRProcedimentosNacionais) e 2 ConceptMaps (BRMedDRAParaSNOMED, BRAlergenosCBARAParaSNOMED).
+## inspirasa-json.zip
+Guia publicado (ImplementationGuide, perfis RNDS, CapabilityStatement, modelo lógico e exemplos, com narrativa), perfis RNDS e terminologia (17 suplementos pt-BR, 4 ValueSets e 2 ConceptMaps para o OCL e o guia de terminologia, não publicados por este guia).

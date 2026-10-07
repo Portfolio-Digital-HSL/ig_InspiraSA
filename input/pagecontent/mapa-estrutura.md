@@ -7,8 +7,8 @@ Este mapa mostra onde cada elemento do Sumário de Alta da RNDS (SA-IG) está no
 | Modelo | Cadeia |
 |---|---|
 | SA-IG da RNDS | BRSumarioAlta → BRConjuntoMinimoDados-1.1 (CMD) → Composition (R4); canonical `http://www.saude.gov.br/fhir/r4`, sem dependência do BR-Core |
-| BR-Core | br-core-sumarioalta → br-core-composition → Composition (R4) |
-| Este guia | br-core-sumarioalta, sem perfil próprio; o CMD sai da cadeia. Documento em `clinical-document-bundle` até a publicação do br-core-bundle-documento |
+| BR-Core 1.3.0 | br-core-sumarioalta → br-core-composition → Composition (R4); o br-core-sumarioalta foi retirado do `main` do BR-Core |
+| Este guia | rnds-sumarioalta → br-core-composition → Composition (R4); o CMD sai da cadeia. Documento em rnds-documento-sumarioalta |
 
 O comparativo tem duas camadas: o **documento-base** (CMD × br-core-composition) e o **Sumário de Alta** (BRSumarioAlta × br-core-sumarioalta, cabeçalho e seções). As colunas trazem a cardinalidade e o binding no FHIR R4, no SA-IG, no BR-Core 1.3.0 publicado e no BR-Core corrigido (`main` do HL7-BR, commit 9cf1bc9, ainda sem nova versão do pacote).
 
@@ -29,7 +29,7 @@ O SA-IG publica uma página de modelo de informação vazia, copiada do modelo d
 
 ### Documento (`documento`, 1..1)
 
-BR-Core: Bundle (br-core-bundle-documento) + Composition (br-core-sumarioalta). SA-IG: Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1).
+BR-Core: Bundle (rnds-documento-sumarioalta) + Composition (rnds-sumarioalta, sobre br-core-composition). SA-IG: Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1).
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|
@@ -73,7 +73,7 @@ BR-Core: Composition.encounter (br-core-encounter). SA-IG: seção informacoesCo
 
 ### Diagnóstico da admissão (`diagnosticoAdmissao`, 0..*)
 
-BR-Core: Composition.section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition). SA-IG: seção problemasDiagnosticosAvaliados (BRProblemaDiagnostico).
+BR-Core: rnds-sumarioalta section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition). SA-IG: seção problemasDiagnosticosAvaliados (BRProblemaDiagnostico).
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|
@@ -83,7 +83,7 @@ BR-Core: Composition.section:diagnosticosAdmissao (LOINC 42347-5) → Condition 
 
 ### Diagnóstico avaliado (`diagnosticoAvaliado`, 0..*)
 
-BR-Core: Composition.section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use. SA-IG: seção problemasDiagnosticosAvaliados; Encounter.diagnosis:problemAndDiagnosis.
+BR-Core: rnds-sumarioalta section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use. SA-IG: seção problemasDiagnosticosAvaliados; Encounter.diagnosis:problemAndDiagnosis.
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|
@@ -93,7 +93,7 @@ BR-Core: Composition.section:diagnosticosAvaliados (LOINC 57852-6) → Condition
 
 ### Alergia ou reação adversa (`alergia`, 0..*)
 
-BR-Core: Composition.section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance). SA-IG: seção alergiaReacaoAdversa (BRAlergiaReacaoAdversa-1.0).
+BR-Core: rnds-sumarioalta section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance). SA-IG: seção alergiaReacaoAdversa (BRAlergiaReacaoAdversa-1.0).
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|
@@ -108,7 +108,7 @@ BR-Core: Composition.section:alergiasIntolerancias (LOINC 48765-2) → AllergyIn
 
 ### Procedimento realizado (`procedimento`, 0..*)
 
-BR-Core: Composition.section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure). SA-IG: seção procedimentosRealizados (BRProcedimentoRealizado-1.0); Encounter.diagnosis:procedure.
+BR-Core: rnds-sumarioalta section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure). SA-IG: seção procedimentosRealizados (BRProcedimentoRealizado-1.0); Encounter.diagnosis:procedure.
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|
@@ -124,7 +124,7 @@ BR-Core: Composition.section:procedimentosRealizados (LOINC 47519-4) → Procedu
 
 ### Prescrição de alta (`prescricao`, 0..*)
 
-BR-Core: Composition.section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest). SA-IG: seção prescricaoAlta → BRRegistroPrescricaoMedicamento → BRPrescricaoMedicamento.
+BR-Core: rnds-sumarioalta section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest). SA-IG: seção prescricaoAlta → BRRegistroPrescricaoMedicamento → BRPrescricaoMedicamento.
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|
@@ -142,7 +142,7 @@ BR-Core: Composition.section:prescricaoAlta (LOINC 8654-6) → MedicationRequest
 
 ### Plano de cuidados (`planoCuidados`, 0..*)
 
-BR-Core: Composition.section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan). SA-IG: seção planoCuidados (BRPlanoCuidados-1.0).
+BR-Core: rnds-sumarioalta section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan). SA-IG: seção planoCuidados (BRPlanoCuidados-1.0).
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|
@@ -152,7 +152,7 @@ BR-Core: Composition.section:planoCuidados (LOINC 18776-5) → CarePlan (br-core
 
 ### Capacidade funcional (`capacidadeFuncional`, 0..*)
 
-BR-Core: Composition.section:capacidadeFuncional (LOINC 54522-8) → Condition (br-core-capacidadefuncional). SA-IG: seção restricaoFuncionalIncapacidadeSaude (BRRestricaoFuncionalIncapacidadeSaude-1.0).
+BR-Core: rnds-sumarioalta section:capacidadeFuncional (LOINC 47420-5) → Condition (br-core-capacidadefuncional). SA-IG: seção restricaoFuncionalIncapacidadeSaude (BRRestricaoFuncionalIncapacidadeSaude-1.0).
 
 | Elemento | Card. | Tipo | Nome | BR-Core (este guia) | SA-IG (legado) |
 |---|---|---|---|---|---|

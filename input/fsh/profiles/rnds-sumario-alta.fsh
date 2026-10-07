@@ -1,50 +1,72 @@
 // Perfis RNDS do Sumário de Alta.
-// Só restringem perfis do BR-Core e do FHIR Clinical Documents: não criam elementos,
-// extensões nem terminologia. Cada restrição está classificada como
-// [BR-Core] (proposta ao BR-Core; sai daqui quando o BR-Core publicar) ou
-// [RNDS] (regra operacional da RNDS, fica aqui).
+// Derivam de perfis do BR-Core e do FHIR Clinical Documents: não criam elementos,
+// extensões nem terminologia. O Sumário de Alta é um documento de caso de uso da
+// RNDS (Portaria SAES/MS nº 701/2022): a composição do documento fica aqui, sobre o
+// br-core-composition; o BR-Core não tem mais perfil de Sumário de Alta.
 // Autoria: Jussara Macedo Pinho Rötzsch.
 
 Alias: $imposeProfile = http://hl7.org/fhir/StructureDefinition/structuredefinition-imposeProfile
 
 // ---------------------------------------------------------------------------
 Profile: RNDSSumarioAlta
-Parent: br-core-sumarioalta
+Parent: br-core-composition
 Id: rnds-sumarioalta
 Title: "RNDS Sumário de Alta"
-Description: "Composition do Sumário de Alta enviado à RNDS. Restringe o br-core-sumarioalta e exige conformidade ao clinical-document-composition (FHIR Clinical Documents). Não acrescenta elementos."
+Description: "Composition do Sumário de Alta hospitalar enviado à RNDS (Portaria SAES/MS nº 701/2022). Deriva do br-core-composition e exige conformidade ao clinical-document-composition (FHIR Clinical Documents). Define as sete seções do documento; os recursos de cada seção usam os perfis do BR-Core."
 * ^status = #draft
 * ^experimental = true
 * ^extension[0].url = $imposeProfile
 * ^extension[0].valueCanonical = $clindoc-composition
-// [RNDS] identificador do documento, igual em todas as transmissões e na retificação
+// identificador do documento, igual em todas as transmissões e na retificação
 * identifier 1..1 MS
 * identifier ^short = "Identificador do documento (estável entre versões)"
 * identifier.system 1..1 MS
 * identifier.value 1..1 MS
-// [BR-Core] tipo de documento
 * type = $loinc#18842-5
-// [RNDS] categoria do FHIR Clinical Documents
 * category 1..1 MS
 * category = $loinc#107903-7
-// [BR-Core] paciente, internação e custodiante obrigatórios
 * subject 1..1 MS
 * encounter 1..1 MS
 * encounter only Reference(RNDSInternacao)
 * encounter ^short = "Internação a que o sumário se refere (substitui a seção de contato assistencial do SA-IG)"
 * custodian 1..1 MS
 * custodian ^short = "Estabelecimento (CNES) responsável pela guarda do documento"
-// [RNDS] atestador legal: profissional responsável pela alta
 * attester 1..* MS
 * obeys rnds-sa-1
-// [BR-Core] toda seção com entradas ou com justificativa de ausência
-* section[diagnosticosAdmissao] obeys rnds-sa-2
-* section[alergiasIntolerancias] obeys rnds-sa-2
-* section[diagnosticosAvaliados] obeys rnds-sa-2
-* section[procedimentosRealizados] obeys rnds-sa-2
-* section[prescricaoAlta] obeys rnds-sa-2
-* section[planoCuidados] obeys rnds-sa-2
-* section[capacidadeFuncional] obeys rnds-sa-2
+// Seções: fatiadas pelo código LOINC (pattern), uma de cada.
+// Códigos do IPS onde o IPS tem a seção (alergias 48765-2, procedimentos 47519-4,
+// plano de cuidados 18776-5, capacidade funcional 47420-5).
+* section 7..7 MS
+* section ^slicing.discriminator.type = #pattern
+* section ^slicing.discriminator.path = "code"
+* section ^slicing.rules = #open
+* section ^short = "Seções do Sumário de Alta"
+* section contains
+    diagnosticosAdmissao 1..1 MS and
+    alergiasIntolerancias 1..1 MS and
+    diagnosticosAvaliados 1..1 MS and
+    procedimentosRealizados 1..1 MS and
+    prescricaoAlta 1..1 MS and
+    planoCuidados 1..1 MS and
+    capacidadeFuncional 1..1 MS
+* insert SecaoRNDS(diagnosticosAdmissao, 42347-5, Diagnósticos da admissão, br-core-condition)
+* insert SecaoRNDS(alergiasIntolerancias, 48765-2, Alergias e intolerâncias, br-core-allergyintolerance)
+* insert SecaoRNDS(diagnosticosAvaliados, 57852-6, Diagnósticos avaliados, br-core-condition)
+* insert SecaoRNDS(procedimentosRealizados, 47519-4, Procedimentos realizados, br-core-procedure)
+* insert SecaoRNDS(prescricaoAlta, 8654-6, Prescrição de alta, br-core-medicationrequest)
+* insert SecaoRNDS(planoCuidados, 18776-5, Plano de cuidados, br-core-careplan)
+* insert SecaoRNDS(capacidadeFuncional, 47420-5, Capacidade funcional, br-core-capacidadefuncional)
+
+RuleSet: SecaoRNDS(fatia, codigo, nome, perfil)
+* section[{fatia}] ^short = "{nome}"
+* section[{fatia}].title 1..1 MS
+* section[{fatia}].code 1..1 MS
+* section[{fatia}].code = $loinc#{codigo}
+* section[{fatia}].text 1..1 MS
+* section[{fatia}].entry MS
+* section[{fatia}].entry only Reference({perfil})
+* section[{fatia}].emptyReason MS
+* section[{fatia}] obeys rnds-sa-2
 
 Invariant: rnds-sa-1
 Description: "O documento DEVE ter um atestador legal (attester.mode = legal) com data e profissional."

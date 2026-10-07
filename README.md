@@ -34,7 +34,7 @@ Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.h
 
 | Conteúdo | Perfil |
 |---|---|
-| Documento | `rnds-sumarioalta` (deriva de `br-core-sumarioalta`, impõe `clinical-document-composition`) |
+| Documento | `rnds-sumarioalta` (deriva de `br-core-composition`, impõe `clinical-document-composition`; define as sete seções) |
 | Envio | `rnds-documento-sumarioalta` (deriva de `clinical-document-bundle`; de `br-core-bundle-documento` quando publicado) |
 | Internação | `rnds-internacao` (deriva de `br-core-encounter`) |
 | Diagnósticos | `br-core-condition` |
@@ -51,13 +51,13 @@ No `main` do [br.org.hl7.fhir.core](https://github.com/HL7-BR/br.org.hl7.fhir.co
 
 | Débito | Correção |
 |---|---|
-| D-01 | `br-core-sumarioalta` e `br-core-registroatendimentoclinico`: discriminador `pattern` em `section.code` (era `profile`, nenhuma instância validava) |
+| D-41 | `br-core-sumarioalta` e `br-core-registroatendimentoclinico` retirados: documentos são casos de uso da RNDS (D-01 deixa de existir) |
 | D-02 | LOINC com o canonical `http://loinc.org` (era `https://loinc.org/`) |
 | D-04 | `br-core-capacidadefuncional` revisto (`code` com o ValueSet `BRCapacidadeFuncional`; `subject.identifier` e `stage` deixam de ser obrigatórios; `category` sem binding nacional) |
 | D-39 | `br-core-composition`: `section.code` com o ValueSet `doc-section-codes` como example, como no R4 e no IPS; códigos de seção do IPS onde o IPS tem a seção |
 | novo | `br-core-bundle-documento` (Bundle `document`) |
 
-Até a publicação, o guia depende do BR-Core **1.3.0**: os exemplos seguem o perfil publicado e o QA acusa 209 erros, todos causados por D-01 e D-02. Com o `main` do BR-Core, os exemplos validam sem erro.
+O guia depende do BR-Core **1.3.0** e não usa mais o `br-core-sumarioalta`: o QA do IG Publisher dá 0 erros. Com o `main` do BR-Core, os exemplos também validam sem erro.
 
 ## Conteúdo do repositório
 
@@ -71,7 +71,7 @@ Até a publicação, o guia depende do BR-Core **1.3.0**: os exemplos seguem o p
 | `comparativo/` | Planilha `comparativo_sumarioalta_rnds_brcore.xlsx`: as duas camadas elemento a elemento, débitos e cotejo com a planilha anterior do sa-ig. Fonte do Mapa de estrutura |
 | `scripts/` | `gerar_modelo_logico.py` (modelo lógico e `modelo_logico.json`) e `gerar_mapa_estrutura.py` (página Mapa de estrutura). Rodar nessa ordem, na raiz |
 | `terminologia/` | Suplementos pt-BR, ValueSets e ConceptMaps para o OCL e o guia de terminologia (`https://terminologia.saude.gov.br/fhir/...`). Não são publicados por este guia. Ver `terminologia/README.md` |
-| `json/` | Exemplos em JSON (`exemplos/`, `exemplos-inspirasa.zip`), o modelo lógico (`modelo-logico/`), os exemplos ajustados ao BR-Core main (`exemplos-brcore-main/`) e `inspirasa-json.zip` (guia publicado, exemplos para o BR-Core main e terminologia). Ver `json/LEIA-ME.md` |
+| `json/` | Exemplos em JSON (`exemplos/`, `exemplos-inspirasa.zip`), o modelo lógico (`modelo-logico/`), os perfis RNDS em JSON (`perfis-rnds/`) e `inspirasa-json.zip` (guia publicado e terminologia). Ver `json/LEIA-ME.md` |
 
 ## Dependências
 

@@ -5,7 +5,7 @@
 "BackboneElement",
 "Documento",
 "Dados do documento Sumário de Alta como um todo.",
-"Bundle (br-core-bundle-documento) + Composition (br-core-sumarioalta)",
+"Bundle (rnds-documento-sumarioalta) + Composition (rnds-sumarioalta, sobre br-core-composition)",
 "Bundle + Composition (BRSumarioAlta / BRConjuntoMinimoDados-1.1)"
 ],
 [
@@ -257,7 +257,7 @@
 "BackboneElement",
 "Diagnóstico da admissão",
 "Diagnósticos ou problemas na admissão.",
-"Composition.section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)",
+"rnds-sumarioalta section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)",
 "seção problemasDiagnosticosAvaliados (BRProblemaDiagnostico)"
 ],
 [
@@ -293,7 +293,7 @@
 "BackboneElement",
 "Diagnóstico avaliado",
 "Diagnósticos ou problemas avaliados durante a internação.",
-"Composition.section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use",
+"rnds-sumarioalta section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use",
 "seção problemasDiagnosticosAvaliados; Encounter.diagnosis:problemAndDiagnosis"
 ],
 [
@@ -329,7 +329,7 @@
 "BackboneElement",
 "Alergia ou reação adversa",
 "Alergias e intolerâncias conhecidas ou ocorridas.",
-"Composition.section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)",
+"rnds-sumarioalta section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)",
 "seção alergiaReacaoAdversa (BRAlergiaReacaoAdversa-1.0)"
 ],
 [
@@ -410,7 +410,7 @@
 "BackboneElement",
 "Procedimento realizado",
 "Procedimentos realizados na internação.",
-"Composition.section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)",
+"rnds-sumarioalta section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)",
 "seção procedimentosRealizados (BRProcedimentoRealizado-1.0); Encounter.diagnosis:procedure"
 ],
 [
@@ -500,7 +500,7 @@
 "BackboneElement",
 "Prescrição de alta",
 "Medicamentos prescritos na alta.",
-"Composition.section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)",
+"rnds-sumarioalta section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)",
 "seção prescricaoAlta → BRRegistroPrescricaoMedicamento → BRPrescricaoMedicamento"
 ],
 [
@@ -608,7 +608,7 @@
 "BackboneElement",
 "Plano de cuidados",
 "Instruções e recomendações para depois da alta.",
-"Composition.section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)",
+"rnds-sumarioalta section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)",
 "seção planoCuidados (BRPlanoCuidados-1.0)"
 ],
 [
@@ -644,7 +644,7 @@
 "BackboneElement",
 "Capacidade funcional",
 "Restrições funcionais e incapacidades na alta.",
-"Composition.section:capacidadeFuncional (LOINC 54522-8) → Condition (br-core-capacidadefuncional)",
+"rnds-sumarioalta section:capacidadeFuncional (LOINC 47420-5) → Condition (br-core-capacidadefuncional)",
 "seção restricaoFuncionalIncapacidadeSaude (BRRestricaoFuncionalIncapacidadeSaude-1.0)"
 ],
 [

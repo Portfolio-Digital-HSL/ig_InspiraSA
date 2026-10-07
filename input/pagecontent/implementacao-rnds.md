@@ -13,12 +13,12 @@ O servidor da RNDS aceita o documento conforme a [declaração de capacidades](C
 
 ## Perfis
 
-Os perfis RNDS só restringem perfis do BR-Core e do FHIR Clinical Documents. Não criam elementos, extensões nem terminologia.
+Os perfis RNDS derivam de perfis do BR-Core e do FHIR Clinical Documents. Não criam elementos, extensões nem terminologia.
 
 | Recurso | Perfil RNDS | Deriva de | O que acrescenta |
 |---|---|---|---|
 | Bundle | [rnds-documento-sumarioalta](StructureDefinition-rnds-documento-sumarioalta.html) | `clinical-document-bundle` (`br-core-bundle-documento` quando publicado) | `identifier` e `timestamp` obrigatórios; Composition RNDS como primeira entrada; `timestamp` ≥ `Composition.date` |
-| Composition | [rnds-sumarioalta](StructureDefinition-rnds-sumarioalta.html) | `br-core-sumarioalta`; impõe `clinical-document-composition` | `identifier`, `subject`, `encounter`, `custodian` e atestador legal obrigatórios; `type` 18842-5; `category` 107903-7; toda seção com `entry` ou `emptyReason` |
+| Composition | [rnds-sumarioalta](StructureDefinition-rnds-sumarioalta.html) | `br-core-composition`; impõe `clinical-document-composition` | as sete seções (LOINC, perfis do BR-Core nas entradas); `identifier`, `subject`, `encounter`, `custodian` e atestador legal obrigatórios; `type` 18842-5; `category` 107903-7; toda seção com `entry` ou `emptyReason` |
 | Encounter | [rnds-internacao](StructureDefinition-rnds-internacao.html) | `br-core-encounter` | internação encerrada (`status = finished`, `class = IMP`); resumo da evolução em `text`; data da alta; profissional da alta; `hospitalization` |
 
 Os demais recursos usam os perfis do BR-Core sem restrição adicional:
@@ -46,7 +46,8 @@ Os demais recursos usam os perfis do BR-Core sem restrição adicional:
 | Seção com `entry` ou `emptyReason` (rnds-sa-2) | rnds-sumarioalta, em cada seção |
 | Internação encerrada, com data da alta e profissional da alta (rnds-int-1) | rnds-internacao |
 | Composition RNDS na primeira entrada (rnds-doc-1); `timestamp` ≥ `Composition.date` (rnds-doc-3) | rnds-documento-sumarioalta |
-| Sete seções, códigos LOINC das seções, terminologias | br-core-sumarioalta e perfis das seções |
+| Sete seções e seus códigos LOINC | rnds-sumarioalta |
+| Terminologias dos recursos | perfis do BR-Core |
 
 As regras de uso que o validador não tem como aplicar estão em [Estrutura do documento](estrutura.html).
 
@@ -73,6 +74,6 @@ Exemplo completo: [documento-sumario-alta-ic](Bundle-documento-sumario-alta-ic.h
 
 ## Estado da validação
 
-Contra o BR-Core 1.3.0 publicado, os exemplos acusam os defeitos D-01 e D-02 do `br-core-sumarioalta`. Contra o BR-Core corrigido (HL7-BR, `main`), os 22 exemplos validam sem erro, com os perfis RNDS aplicados. Ver [Débitos técnicos](debitos-tecnicos.html).
+Os 22 exemplos validam sem erro contra o BR-Core 1.3.0 publicado (IG Publisher, 07/10/2026) e contra o `main` do BR-Core, com os perfis RNDS aplicados. Ver [Débitos técnicos](debitos-tecnicos.html).
 
 O canonical deste guia (`http://fhir.hsl.org.br/ig/inspirasa`) é provisório. Na publicação pela RNDS, os perfis passam para o canonical da RNDS.

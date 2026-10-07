@@ -38,14 +38,6 @@
   ],
   "section": [
     {
-      "code": {
-        "coding": [
-          {
-            "system": "https://loinc.org/",
-            "code": "42347-5"
-          }
-        ]
-      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Calculose da vesícula biliar (K80.2).</p></div>"
@@ -55,14 +47,22 @@
           "reference": "Condition/diagnostico-colelitiase"
         }
       ],
+      "code": {
+        "coding": [
+          {
+            "code": "42347-5",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
       "title": "Diagnósticos da admissão"
     },
     {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "48765-2"
+            "code": "48765-2",
+            "system": "http://loinc.org"
           }
         ]
       },
@@ -81,14 +81,6 @@
       }
     },
     {
-      "code": {
-        "coding": [
-          {
-            "system": "https://loinc.org/",
-            "code": "57852-6"
-          }
-        ]
-      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Calculose da vesícula biliar (K80.2) tratada.</p></div>"
@@ -98,17 +90,17 @@
           "reference": "Condition/diagnostico-colelitiase"
         }
       ],
-      "title": "Diagnósticos avaliados"
-    },
-    {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "47519-4"
+            "code": "57852-6",
+            "system": "http://loinc.org"
           }
         ]
       },
+      "title": "Diagnósticos avaliados"
+    },
+    {
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Colecistectomia videolaparoscópica.</p></div>"
@@ -118,14 +110,22 @@
           "reference": "Procedure/procedimento-colecistectomia"
         }
       ],
+      "code": {
+        "coding": [
+          {
+            "code": "47519-4",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
       "title": "Procedimentos realizados"
     },
     {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "8654-6"
+            "code": "8654-6",
+            "system": "http://loinc.org"
           }
         ]
       },
@@ -144,14 +144,6 @@
       }
     },
     {
-      "code": {
-        "coding": [
-          {
-            "system": "https://loinc.org/",
-            "code": "18776-5"
-          }
-        ]
-      },
       "text": {
         "status": "generated",
         "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Curativo diário e retorno em 10 dias.</p></div>"
@@ -161,14 +153,22 @@
           "reference": "CarePlan/plano-cuidados-colecistectomia"
         }
       ],
+      "code": {
+        "coding": [
+          {
+            "code": "18776-5",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
       "title": "Plano de cuidados"
     },
     {
       "code": {
         "coding": [
           {
-            "system": "https://loinc.org/",
-            "code": "54522-8"
+            "code": "47420-5",
+            "system": "http://loinc.org"
           }
         ]
       },
