@@ -1,10 +1,10 @@
 # Mapeamento SA-IG
 
-Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/StructureDefinition/...`) e os perfis usados por este guia: o documento é o `rnds-sumarioalta`, sobre o `br-core-composition` (não mais sobre o CMD), e os recursos usam os perfis de base do BR-Core. Fonte: comparativo SA-IG x BR-Core (planilha `comparativo_sabr-core.xlsx`).
+Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/StructureDefinition/...`) e os perfis usados por este guia: o documento é o `BRSumarioAlta`, sobre o `br-core-composition` (não mais sobre o CMD), e os recursos usam os perfis de base do BR-Core. Fonte: comparativo SA-IG x BR-Core (planilha `comparativo_sabr-core.xlsx`).
 
 ## Seções do documento
 
-| SA-IG (9 seções) | Este guia (`rnds-sumarioalta`, entradas com perfis do BR-Core) |
+| SA-IG (9 seções) | Este guia (`BRSumarioAlta`, entradas com perfis do BR-Core) |
 |---|---|
 | informacoesContatoAssistencial (BRContatoAssistencial-1.0) | `Composition.encounter` → rnds-internacao (sobre br-core-encounter) |
 | problemasDiagnosticosAvaliados (BRProblemaDiagnostico) | duas seções: diagnosticosAdmissao (42347-5) e diagnosticosAvaliados (57852-6) |
@@ -20,7 +20,7 @@ Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/S
 
 | SA-IG | Este guia | Ação |
 |---|---|---|
-| BRSumarioAlta, BRConjuntoMinimoDados-1.1 | rnds-sumarioalta, sobre br-core-composition | substitui; o CMD sai da cadeia |
+| BRSumarioAlta, sobre BRConjuntoMinimoDados-1.1 | BRSumarioAlta, sobre br-core-composition | mantém o nome; muda a herança; o CMD sai da cadeia |
 | BRContatoAssistencial-1.0 | rnds-internacao, sobre br-core-encounter | substitui |
 | BRProblemaDiagnostico | br-core-condition | substitui |
 | BRAlergiaReacaoAdversa-1.0 | br-core-allergyintolerance | substitui |

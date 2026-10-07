@@ -3,7 +3,7 @@
   "id": "sumario-alta-colecistectomia",
   "meta": {
     "profile": [
-      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-sumarioalta",
+      "http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/BRSumarioAlta",
       "http://hl7.org/fhir/uv/fhir-clinical-document/StructureDefinition/clinical-document-composition"
     ]
   },

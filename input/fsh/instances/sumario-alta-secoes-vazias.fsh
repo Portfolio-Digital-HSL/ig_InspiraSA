@@ -93,12 +93,12 @@ RuleSet: SecaoVazia(fatia, codigo, titulo, motivo, texto)
 * section[{fatia}].emptyReason = $list-empty-reason#{motivo}
 
 Instance: sumario-alta-colecistectomia
-InstanceOf: RNDSSumarioAlta
+InstanceOf: BRSumarioAlta
 Usage: #example
 Title: "Sumário de Alta com seções vazias justificadas"
 Description: "Exemplo: Sumário de Alta com seções vazias justificadas."
-// Conforme ao rnds-sumarioalta, que deriva do br-core-composition e impõe o clinical-document-composition
-* meta.profile[0] = Canonical(RNDSSumarioAlta)
+// Conforme ao BRSumarioAlta, que deriva do br-core-composition e impõe o clinical-document-composition
+* meta.profile[0] = Canonical(BRSumarioAlta)
 * meta.profile[1] = $clindoc-composition
 * identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento"
 * identifier.value = "SA-2026-000790"

@@ -189,12 +189,12 @@ RuleSet: Secao(fatia, codigo, titulo, texto)
 * section[{fatia}].text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>{texto}</p></div>"
 
 Instance: sumario-alta-ic
-InstanceOf: RNDSSumarioAlta
+InstanceOf: BRSumarioAlta
 Usage: #example
 Title: "Sumário de Alta: insuficiência cardíaca"
 Description: "Exemplo: Sumário de Alta: insuficiência cardíaca."
-// Conforme ao rnds-sumarioalta, que deriva do br-core-composition e impõe o clinical-document-composition
-* meta.profile[0] = Canonical(RNDSSumarioAlta)
+// Conforme ao BRSumarioAlta, que deriva do br-core-composition e impõe o clinical-document-composition
+* meta.profile[0] = Canonical(BRSumarioAlta)
 * meta.profile[1] = $clindoc-composition
 * identifier.system = "http://fhir.hsl.org.br/ig/inspirasa/sid/documento"
 * identifier.value = "SA-2026-000789"

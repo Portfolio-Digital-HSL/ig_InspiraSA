@@ -11,7 +11,7 @@
   "title" : "Modelo lógico do Sumário de Alta",
   "status" : "draft",
   "experimental" : true,
-  "date" : "2026-10-07T15:04:25-03:00",
+  "date" : "2026-10-07T16:04:11-03:00",
   "publisher" : "Hospital Sírio-Libanês",
   "contact" : [{
     "name" : "Hospital Sírio-Libanês",
@@ -90,7 +90,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "Bundle (rnds-documento-sumarioalta) + Composition (rnds-sumarioalta, sobre br-core-composition)"
+        "map" : "Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition)"
       },
       {
         "identity" : "sa-ig",
@@ -1157,7 +1157,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)"
+        "map" : "BRSumarioAlta section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)"
       },
       {
         "identity" : "sa-ig",
@@ -1381,7 +1381,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use"
+        "map" : "BRSumarioAlta section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use"
       },
       {
         "identity" : "sa-ig",
@@ -1605,7 +1605,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)"
+        "map" : "BRSumarioAlta section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)"
       },
       {
         "identity" : "sa-ig",
@@ -1949,7 +1949,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)"
+        "map" : "BRSumarioAlta section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)"
       },
       {
         "identity" : "sa-ig",
@@ -2319,7 +2319,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)"
+        "map" : "BRSumarioAlta section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)"
       },
       {
         "identity" : "sa-ig",
@@ -2737,7 +2737,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)"
+        "map" : "BRSumarioAlta section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)"
       },
       {
         "identity" : "sa-ig",
@@ -2961,7 +2961,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:capacidadeFuncional (LOINC 47420-5) → Condition (br-core-capacidadefuncional)"
+        "map" : "BRSumarioAlta section:capacidadeFuncional (LOINC 47420-5) → Condition (br-core-capacidadefuncional)"
       },
       {
         "identity" : "sa-ig",
@@ -3180,7 +3180,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "Bundle (rnds-documento-sumarioalta) + Composition (rnds-sumarioalta, sobre br-core-composition)"
+        "map" : "Bundle (rnds-documento-sumarioalta) + Composition (BRSumarioAlta, sobre br-core-composition)"
       },
       {
         "identity" : "sa-ig",
@@ -3723,7 +3723,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)"
+        "map" : "BRSumarioAlta section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)"
       },
       {
         "identity" : "sa-ig",
@@ -3799,7 +3799,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use"
+        "map" : "BRSumarioAlta section:diagnosticosAvaliados (LOINC 57852-6) → Condition (br-core-condition); papel em Encounter.diagnosis.use"
       },
       {
         "identity" : "sa-ig",
@@ -3875,7 +3875,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)"
+        "map" : "BRSumarioAlta section:alergiasIntolerancias (LOINC 48765-2) → AllergyIntolerance (br-core-allergyintolerance)"
       },
       {
         "identity" : "sa-ig",
@@ -4046,7 +4046,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)"
+        "map" : "BRSumarioAlta section:procedimentosRealizados (LOINC 47519-4) → Procedure (br-core-procedure)"
       },
       {
         "identity" : "sa-ig",
@@ -4238,7 +4238,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)"
+        "map" : "BRSumarioAlta section:prescricaoAlta (LOINC 8654-6) → MedicationRequest (br-core-medicationrequest)"
       },
       {
         "identity" : "sa-ig",
@@ -4468,7 +4468,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)"
+        "map" : "BRSumarioAlta section:planoCuidados (LOINC 18776-5) → CarePlan (br-core-careplan)"
       },
       {
         "identity" : "sa-ig",
@@ -4544,7 +4544,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "rnds-sumarioalta section:capacidadeFuncional (LOINC 47420-5) → Condition (br-core-capacidadefuncional)"
+        "map" : "BRSumarioAlta section:capacidadeFuncional (LOINC 47420-5) → Condition (br-core-capacidadefuncional)"
       },
       {
         "identity" : "sa-ig",

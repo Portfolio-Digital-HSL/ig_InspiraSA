@@ -8,11 +8,11 @@
 Alias: $imposeProfile = http://hl7.org/fhir/StructureDefinition/structuredefinition-imposeProfile
 
 // ---------------------------------------------------------------------------
-Profile: RNDSSumarioAlta
+Profile: BRSumarioAlta
 Parent: br-core-composition
-Id: rnds-sumarioalta
-Title: "RNDS Sumário de Alta"
-Description: "Composition do Sumário de Alta hospitalar enviado à RNDS (Portaria SAES/MS nº 701/2022). Deriva do br-core-composition e exige conformidade ao clinical-document-composition (FHIR Clinical Documents). Define as sete seções do documento; os recursos de cada seção usam os perfis do BR-Core."
+Id: BRSumarioAlta
+Title: "BRSumarioAlta: Sumário de Alta"
+Description: "Composition do Sumário de Alta hospitalar enviado à RNDS (Portaria SAES/MS nº 701/2022). Mantém o nome do perfil do SA-IG (BRSumarioAlta) e muda a herança: deriva do br-core-composition, não mais do BRConjuntoMinimoDados (CMD) e exige conformidade ao clinical-document-composition (FHIR Clinical Documents). Define as sete seções do documento; os recursos de cada seção usam os perfis do BR-Core."
 * ^status = #draft
 * ^experimental = true
 * ^extension[0].url = $imposeProfile
@@ -121,9 +121,9 @@ Description: "Bundle document com que o Sumário de Alta é enviado à RNDS. Res
 * obeys rnds-doc-1 and rnds-doc-3
 
 Invariant: rnds-doc-1
-Description: "A primeira entrada DEVE ser a Composition conforme ao rnds-sumarioalta."
+Description: "A primeira entrada DEVE ser a Composition conforme ao BRSumarioAlta."
 Severity: #error
-Expression: "entry.first().resource.is(Composition) and entry.first().resource.conformsTo('http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/rnds-sumarioalta')"
+Expression: "entry.first().resource.is(Composition) and entry.first().resource.conformsTo('http://fhir.hsl.org.br/ig/inspirasa/StructureDefinition/BRSumarioAlta')"
 
 Invariant: rnds-doc-3
 Description: "Bundle.timestamp DEVE ser maior ou igual a Composition.date."
