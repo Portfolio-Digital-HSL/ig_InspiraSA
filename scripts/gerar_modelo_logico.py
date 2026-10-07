@@ -27,7 +27,7 @@ E=[
 ('contatoAssistencial.estabelecimento','1..1','Reference','Estabelecimento','Estabelecimento (CNES) do atendimento.','Encounter.serviceProvider (br-core-organization)','Encounter.serviceProvider.identifier'),
 ('contatoAssistencial.contatoAnterior','0..1','Reference','Contato assistencial anterior','Atendimento que originou este.','Encounter.partOf','Encounter.partOf'),
 ('contatoAssistencial.resumoEvolucao','1..1','string','Resumo da evolução clínica','Narrativa da evolução durante a internação.','Encounter.text','seção resumoEvolucaoClinica (ClinicalImpression.summary)'),
-('contatoAssistencial.informacoesAdicionais','0..1','string','Informações adicionais','Informações complementares.','Encounter.text ou Composition.section.text','seção informacoesAdicionais (BRObservacaoDescritiva-1.0) e extensão otherInformations'),
+('contatoAssistencial.informacoesAdicionais','0..1','string','Informações adicionais','Informações complementares.','Encounter.text','seção informacoesAdicionais (BRObservacaoDescritiva-1.0) e extensão otherInformations'),
 ('diagnosticoAdmissao','0..*','BackboneElement','Diagnóstico da admissão','Diagnósticos ou problemas na admissão.','BRSumarioAlta section:diagnosticosAdmissao (LOINC 42347-5) → Condition (br-core-condition)','seção problemasDiagnosticosAvaliados (BRProblemaDiagnostico)'),
 ('diagnosticoAdmissao.codigo','1..1','CodeableConcept','Diagnóstico ou problema','CID-10.','Condition.code (BRCID10)','Condition.code (BRProblemaDiagnostico)'),
 ('diagnosticoAdmissao.situacao','1..1','CodeableConcept','Estado da resolução','Ativo, resolvido etc.','Condition.clinicalStatus (condition-clinical + suplemento pt-BR)','Condition.clinicalStatus (BREstadoResolucaoDiagnosticoProblema-1.0)'),

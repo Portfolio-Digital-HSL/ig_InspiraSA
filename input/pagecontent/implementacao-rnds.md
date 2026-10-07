@@ -6,7 +6,7 @@ Esta página é para quem implementa o envio do Sumário de Alta à RNDS: sistem
 
 Um **Bundle `document`** conforme ao [BRDocumentoSumarioAlta](StructureDefinition-BRDocumentoSumarioAlta.html), com:
 
-1. a Composition conforme ao [RNDS Sumário de Alta](StructureDefinition-BRSumarioAlta.html) como primeira entrada;
+1. a Composition conforme ao [BRSumarioAlta](StructureDefinition-BRSumarioAlta.html) como primeira entrada;
 2. todos os recursos que a Composition referencia, cada um com `fullUrl`.
 
 O servidor da RNDS aceita o documento conforme a [declaração de capacidades](CapabilityStatement-rnds-servidor-sumarioalta.html): `POST [base]/Bundle`. Endpoint, certificado, autenticação e autorização seguem a documentação operacional da RNDS.

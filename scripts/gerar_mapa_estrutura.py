@@ -116,7 +116,7 @@ w('')
 h, R = rows('Seções')
 w('## Sumário de Alta: seções\n')
 w('O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). '
-  'Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). '
+  'Três seções do SA-IG não têm equivalente no BR-Core (contato assistencial, resumo da evolução, informações adicionais); o conteúdo delas vai para o Encounter referenciado em `Composition.encounter`, que não é seção. '
   'O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). '
   'No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, '
   'e a capacidade funcional usa o código do IPS, 47420-5 (AC-14).\n')

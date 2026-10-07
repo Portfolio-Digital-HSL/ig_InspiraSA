@@ -1125,7 +1125,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "Encounter.text ou Composition.section.text"
+        "map" : "Encounter.text"
       },
       {
         "identity" : "sa-ig",
@@ -3704,7 +3704,7 @@
       }],
       "mapping" : [{
         "identity" : "br-core",
-        "map" : "Encounter.text ou Composition.section.text"
+        "map" : "Encounter.text"
       },
       {
         "identity" : "sa-ig",

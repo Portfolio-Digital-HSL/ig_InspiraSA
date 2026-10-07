@@ -69,7 +69,7 @@ BR-Core: Composition.encounter (br-core-encounter). SA-IG: seção informacoesCo
 | `contatoAssistencial.estabelecimento` | 1..1 | Reference | Estabelecimento | Encounter.serviceProvider (br-core-organization) | Encounter.serviceProvider.identifier |
 | `contatoAssistencial.contatoAnterior` | 0..1 | Reference | Contato assistencial anterior | Encounter.partOf | Encounter.partOf |
 | `contatoAssistencial.resumoEvolucao` | 1..1 | string | Resumo da evolução clínica | Encounter.text | seção resumoEvolucaoClinica (ClinicalImpression.summary) |
-| `contatoAssistencial.informacoesAdicionais` | 0..1 | string | Informações adicionais | Encounter.text ou Composition.section.text | seção informacoesAdicionais (BRObservacaoDescritiva-1.0) e extensão otherInformations |
+| `contatoAssistencial.informacoesAdicionais` | 0..1 | string | Informações adicionais | Encounter.text | seção informacoesAdicionais (BRObservacaoDescritiva-1.0) e extensão otherInformations |
 
 ### Diagnóstico da admissão (`diagnosticoAdmissao`, 0..*)
 
@@ -211,7 +211,7 @@ BR-Core: BRSumarioAlta section:capacidadeFuncional (LOINC 47420-5) → Condition
 
 ## Sumário de Alta: seções
 
-O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). Três seções do SA-IG não têm equivalente no BR-Core e vão para o Encounter da internação (`Composition.encounter`). O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, e a capacidade funcional usa o código do IPS, 47420-5 (AC-14).
+O SA-IG tem nove seções, fatiadas pelo perfil de `entry.resolve()`; o BR-Core tem sete, fatiadas por `code` (LOINC). Três seções do SA-IG não têm equivalente no BR-Core (contato assistencial, resumo da evolução, informações adicionais); o conteúdo delas vai para o Encounter referenciado em `Composition.encounter`, que não é seção. O binding de `section.code` é o ValueSet `doc-section-codes`, com códigos do CodeSystem LOINC (`http://loinc.org`). No BR-Core 1.3.0 é required e três códigos de seção (42347-5, 8654-6 e 54522-8) não estão no ValueSet; no BR-Core corrigido é example, como no R4 e no IPS, e a capacidade funcional usa o código do IPS, 47420-5 (AC-14).
 
 | Seção no BR-Core | Seção no SA-IG | SA-IG card. | BR-Core card. | Conformidade | Grau | Observação |
 |---|---|---|---|---|---|---|

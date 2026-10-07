@@ -24,7 +24,7 @@ Defeitos do BR-Core são corrigidos no repositório do BR-Core ([HL7-BR/br.org.h
 
 1. Comparação dos snapshots em duas camadas: CMD × `br-core-composition` e BRSumarioAlta × `br-core-sumarioalta`, com FHIR R4, BR-Core 1.3.0 e BR-Core corrigido.
 2. Modelo lógico SumarioAltaML reconstruído dos perfis do SA-IG, com mapeamento para o BR-Core e para o SA-IG.
-3. Substituição de cada perfil do SA-IG pelo do BR-Core; as seções sem equivalente vão para o Encounter da internação.
+3. Substituição de cada perfil do SA-IG pelo do BR-Core; o conteúdo das três seções do SA-IG sem equivalente (contato assistencial, resumo da evolução, informações adicionais) vai para o Encounter referenciado em `Composition.encounter`.
 4. Composition e Bundle conformes também ao `clinical-document-composition` e ao `clinical-document-bundle`.
 5. Correção do BR-Core no `main` do repositório do HL7 Brasil (commit 9cf1bc9).
 6. Terminologia pelos ValueSets do HL7 com suplementos pt-BR, SNOMED CT com CBARA e MedDRA, `BRProcedimentosNacionais` (Tabela SUS e TUSS 22). Mapas revisados no OCL.
