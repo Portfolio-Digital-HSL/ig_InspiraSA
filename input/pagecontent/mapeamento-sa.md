@@ -1,12 +1,12 @@
 # Mapeamento SA-IG
 
-Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/StructureDefinition/...`) e os perfis do BR-Core usados por este guia. Fonte: comparativo SA-IG x BR-Core (planilha `comparativo_sabr-core.xlsx`).
+Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/StructureDefinition/...`) e os perfis usados por este guia: o documento é o `rnds-sumarioalta`, sobre o `br-core-composition` (não mais sobre o CMD), e os recursos usam os perfis de base do BR-Core. Fonte: comparativo SA-IG x BR-Core (planilha `comparativo_sabr-core.xlsx`).
 
 ## Seções do documento
 
-| SA-IG (9 seções) | BR-Core (`br-core-sumarioalta`) |
+| SA-IG (9 seções) | Este guia (`rnds-sumarioalta`, entradas com perfis do BR-Core) |
 |---|---|
-| informacoesContatoAssistencial (BRContatoAssistencial-1.0) | `Composition.encounter` → br-core-encounter |
+| informacoesContatoAssistencial (BRContatoAssistencial-1.0) | `Composition.encounter` → rnds-internacao (sobre br-core-encounter) |
 | problemasDiagnosticosAvaliados (BRProblemaDiagnostico) | duas seções: diagnosticosAdmissao (42347-5) e diagnosticosAvaliados (57852-6) |
 | resumoEvolucaoClinica (BRResumoEvolucaoClinica, ClinicalImpression) | `Encounter.text` |
 | alergiaReacaoAdversa (BRAlergiaReacaoAdversa-1.0) | alergiasIntolerancias → br-core-allergyintolerance |
@@ -18,10 +18,10 @@ Correspondência entre os artefatos do SA-IG (`http://www.saude.gov.br/fhir/r4/S
 
 ## Perfis e extensões
 
-| SA-IG | BR-Core | Ação |
+| SA-IG | Este guia | Ação |
 |---|---|---|
-| BRSumarioAlta, BRConjuntoMinimoDados-1.1 | br-core-sumarioalta | substitui |
-| BRContatoAssistencial-1.0 | br-core-encounter | substitui |
+| BRSumarioAlta, BRConjuntoMinimoDados-1.1 | rnds-sumarioalta, sobre br-core-composition | substitui; o CMD sai da cadeia |
+| BRContatoAssistencial-1.0 | rnds-internacao, sobre br-core-encounter | substitui |
 | BRProblemaDiagnostico | br-core-condition | substitui |
 | BRAlergiaReacaoAdversa-1.0 | br-core-allergyintolerance | substitui |
 | BRProcedimentoRealizado-1.0 | br-core-procedure | substitui |
