@@ -1,6 +1,6 @@
 # Guia de Implementação InspiraSA - Sumário de Alta
 
-Guia de Implementação FHIR **R4 (4.0.1)** do Sumário de Alta hospitalar (Portaria GM/MS nº 701/2022). Substitui o SA-IG legado da RNDS (`br.gov.saude.sa.fhir`, canonical `http://www.saude.gov.br/fhir/r4/...`), que herda do CMD, pelo uso direto dos perfis do **BR-Core 1.3.0**.
+Guia de Implementação FHIR **R4 (4.0.1)** do Sumário de Alta hospitalar (Portaria SAES/MS nº 701/2022). Substitui o SA-IG legado da RNDS (`br.gov.saude.sa.fhir`, canonical `http://www.saude.gov.br/fhir/r4/...`), que herda do CMD, pelo uso direto dos perfis do **BR-Core 1.3.0**.
 
 > Status `draft`. Proposta técnica para deliberação; não é especificação oficial da RNDS.
 

@@ -1,6 +1,6 @@
 # IG InspiraSA: Sumário de Alta
 
-Guia de Implementação FHIR **R4 (4.0.1)** do Sumário de Alta hospitalar (Portaria GM/MS nº 701/2022). Refatora o SA-IG legado da RNDS (`br.gov.saude.sa.fhir`) sobre os perfis do **BR-Core**.
+Guia de Implementação FHIR **R4 (4.0.1)** do Sumário de Alta hospitalar (Portaria SAES/MS nº 701/2022). Refatora o SA-IG legado da RNDS (`br.gov.saude.sa.fhir`) sobre os perfis do **BR-Core**.
 
 Status `draft`, versão 0.1.0. Proposta técnica para deliberação; não é especificação oficial da RNDS.
 

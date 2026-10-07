@@ -77,7 +77,7 @@ E=[
 ('capacidadeFuncional.grau','0..1','CodeableConcept','Grau','Grau da incapacidade, com a escala aplicada.','Condition.stage','não existe'),
 ]
 esc=lambda s:s.replace('"','\\"')
-o=['// Modelo lógico do Sumário de Alta (Portaria GM/MS nº 701/2022), derivado do','// SA-IG da RNDS (o modelo de informação publicado no SA-IG está vazio) e','// mapeado para o BR-Core e para o SA-IG. Gerado por scripts/gerar_modelo_logico.py.','',
+o=['// Modelo lógico do Sumário de Alta (Portaria SAES/MS nº 701/2022), derivado do','// SA-IG da RNDS (o modelo de informação publicado no SA-IG está vazio) e','// mapeado para o BR-Core e para o SA-IG. Gerado por scripts/gerar_modelo_logico.py.','',
 'Logical: SumarioAltaML','Id: sumario-alta-ml','Title: "Modelo lógico do Sumário de Alta"',
 'Description: "Modelo de informação do Sumário de Alta hospitalar, independente de tecnologia, com o mapeamento de cada elemento para o BR-Core (refatoração) e para o SA-IG da RNDS (legado)."',
 '* ^status = #draft','* ^experimental = true']

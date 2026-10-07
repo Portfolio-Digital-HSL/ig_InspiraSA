@@ -1,4 +1,4 @@
-// Modelo lógico do Sumário de Alta (Portaria GM/MS nº 701/2022), derivado do
+// Modelo lógico do Sumário de Alta (Portaria SAES/MS nº 701/2022), derivado do
 // SA-IG da RNDS (o modelo de informação publicado no SA-IG está vazio) e
 // mapeado para o BR-Core e para o SA-IG. Gerado por scripts/gerar_modelo_logico.py.
 
