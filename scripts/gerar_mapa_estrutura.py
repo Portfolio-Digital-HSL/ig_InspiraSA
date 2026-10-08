@@ -61,7 +61,7 @@ w('| Conforme | Mesma cardinalidade e mesmas restrições |')
 w('| Sem equivalente | O elemento existe só em um dos modelos |')
 w('')
 w('Grau do débito: **Bloqueante** impede instância válida; **Alto** quebra conformidade ou interoperabilidade; '
-  '**Médio** gera ambiguidade; **Baixo** é ajuste de documentação. A lista completa está em [Débitos técnicos](debitos-tecnicos.html).\n')
+  '**Médio** gera ambiguidade; **Baixo** é ajuste de documentação. Os débitos do `BRSumarioAlta` e a correção feita estão em [Débitos técnicos](debitos-tecnicos.html); os achados do BR-Core e de outros artefatos, em [Recomendações](recomendacoes-rnds.html#achados-no-br-core-e-em-outros-artefatos).\n')
 
 # 1. Modelo lógico
 w('## Modelo lógico → BR-Core → SA-IG\n')
